@@ -1,22 +1,24 @@
 import pygame
+from player_assets import *
 
-x_1=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_1.png")
-x_2=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_2.png")
-player_idle=[x_1,x_2] ; player_idle_flip=[]
-for idx,num in enumerate(player_idle): pygame.transform.scale(num,(100,100))
-for idx,num in enumerate(player_idle[:]): player_idle_flip.append(pygame.transform.flip(num,True,False))
 
-run_1=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_1.png") ; run_2=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_2.png") ; run_3=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_3.png") ; run_4=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_4.png") ; run_5=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_5.png")
-run_6=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_6.png") ; run_7=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_7.png") ; run_8=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_8.png") ; run_9=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_9.png") ; run_10=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_10.png")
-player_run=[run_1,run_2,run_3,run_4,run_5,run_6,run_7,run_8,run_9,run_10] ; player_run_flip=[] ; player_run_number=[0]
-for idx,num in enumerate(player_run): pygame.transform.scale(num,(100,100)) 
-for idx,num in enumerate(player_run[:]): player_run_flip.append(pygame.transform.flip(num,True,False))
+class Menu:
+    def __init__(self):
+        self.WHITE=(205,205,205)
 
-player_x_movement=[0]
-player_y_movement=[0]
+    def backround(self,SCREEN):
+        SCREEN.fill(self.WHITE)
+
+class Level():
+    def __init__(self):
+        super().__init__(player_x,player_y,player_width,player_height,player_rect)
+        self.camera_x_y=camera_x_y
+
+    def level_one(self):
+        self.camera_x_y[0]+=self.player_rect.x-self.camera_x_y[0]
+        self.camera_x_y[1]+=self.player_rect,y-self.camera_x_y[1]
 
 class Player():
-
     def __init__(self,player_x,player_y,player_width,player_height,player_rect):
         self.player_x=player_x ; self.player_y=player_y ; self.player_width=player_width ; self.player_height=player_height
         self.player_rect=pygame.Rect(self.player_x,self.player_y,self.player_width,self.player_height)
