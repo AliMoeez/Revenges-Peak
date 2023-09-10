@@ -1,5 +1,8 @@
 import pygame
 
+player_x=100; player_y=100; player_width=100 ; player_height=100
+player_rect=pygame.Rect(player_x,player_y,player_width,player_height)
+
 x_1=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_1.png")
 x_2=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_2.png")
 player_idle=[x_1,x_2] ; player_idle_flip=[]
