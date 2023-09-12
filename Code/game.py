@@ -5,10 +5,12 @@ from player_assets import *
 from boss_assets import *
 from enemy_assets import *
 
+pygame.init()
+
 class Menu:
     def __init__(self,level_screen,level_1):
-        self.WHITE=(205,205,205) ; self.level_screen=level_screen ; self.level_1=level_1
-        self.backround_tile_set=backround_tile_set
+        self.WHITE=(255,255,255) ; self.level_screen=level_screen ; self.level_1=level_1 ; self.LIGHT_GREEN=(196,164,132)
+        self.backround_tile_set=backround_tile_set ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"
 
     def main_menu(self):
         if not self.level_screen and not any([self.level_1]):
@@ -16,6 +18,27 @@ class Menu:
                 for tile in layer.tiles():
                     x_val=tile[0]*32 ; y_val=tile[1]*32
                     SCREEN.blit(tile[2],(x_val,y_val))
+            self.font_title=pygame.font.Font(self.font,52)
+            self.font_title_render=self.font_title.render("Revenge's Peak",True,self.WHITE) 
+            SCREEN.blit(self.font_title_render,(SCREEN_WIDTH//2-170,SCREEN_HEIGHT-700))  
+
+    def main_menu_buttons(self):
+        if not self.level_screen and not any([self.level_1]):
+            self.font_play=pygame.font.Font(self.font,34)
+            self.font_play_redner=self.font_play.render("Play",True,self.WHITE)
+            self.font_play_surface=pygame.Surface((80,50)) ; self.font_play_surface.set_alpha(175) ; self.font_play_surface.fill(self.LIGHT_GREEN)
+            self.font_play_surface_blit=SCREEN.blit(self.font_play_surface,(SCREEN_WIDTH//2-210,SCREEN_HEIGHT-405))
+            SCREEN.blit(self.font_play_redner,(SCREEN_WIDTH//2-200,SCREEN_HEIGHT-400))
+    
+    def level_screen_blit(self):
+        for event in pygame.event.get():
+            if event.type==pygame.MOUSEBUTTONDOWN:
+                if self.font_play_surface_blit.collidepoint(event.pos):
+                    self.level_screen= not self.level_screen
+        if self.level_screen:
+            SCREEN.fill((10,110,10))
+        print(self.level_screen)
+            
 
 class LevelOne(Menu):
     def __init__(self,camera_x_y):
@@ -78,7 +101,6 @@ class Player(LevelOne):
 while run:
     SCREEN.fill((0,0,0))
   #  x=clock.tick(FPS)
-    
     key=pygame.key.get_pressed()
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
@@ -87,6 +109,8 @@ while run:
 
     menu=Menu(level_screen,level_1)
     menu.main_menu()
+    menu.main_menu_buttons()
+    menu.level_screen_blit()
 
     levelone=LevelOne(camera_x_y)
     levelone.level_one()
