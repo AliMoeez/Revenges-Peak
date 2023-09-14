@@ -2,39 +2,44 @@ import pygame
 
 SCREEN_WIDTH=1200 ; SCREEN_HEIGHT=800 ; SCREEN=pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
+player_image=pygame.image.load(r"Assets\Player\swordman_1.png").convert_alpha()
 
+def func(images,frame,w,h):    #set 0 value to 0 for idle, 64 for run , 128 for fall and 192 for attack
+    image=pygame.Surface((w,h),pygame.SRCALPHA)
+    image.blit(images,(0,0),((frame*w),0,w,h))
+    image=pygame.transform.scale(image,(w*2,h*2))
+    return image
 
-class Test:
-    def __init__(self):
-        self.clicked=False
+test_1=func(player_image,0,64,64) ; test_2=func(player_image,1,64,64) ; test_3=func(player_image,2,64,64) ; test_4=func(player_image,3,64,64)
+test_5=func(player_image,4,64,64) ; test_6=func(player_image,5,64,64)
 
-    def update(self,event_list):
-        self.original_image = pygame.Surface((50, 50), pygame.SRCALPHA)
-        pygame.draw.circle(self.original_image, (100,100,100), (25, 25), 25)
-        self.click_image = pygame.Surface((50, 50), pygame.SRCALPHA)
-        pygame.draw.circle(self.click_image, (100,100,100), (25, 25), 25)
-        pygame.draw.circle(self.click_image, (255, 255, 255), (25, 25), 25, 4)
-        self.image = self.original_image 
-        self.rect = self.image.get_rect(center = (25, 25))
-        for event in event_list:
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.rect.collidepoint(event.pos):
-                    self.clicked = not self.clicked
-        print(self.clicked)
+list_test=[test_1,test_2,test_3,test_4,test_5,test_6]
 
-run = True
+test=func(player_image,140,64,64)
+
+number=[0]
+
+run=True
 
 while run:
-    SCREEN.fill((0,0,0))
+    SCREEN.fill((100,0,0))
     event_list = pygame.event.get()
     for event in event_list:
         if event.type == pygame.QUIT:
             run = False 
 
-    test=Test()
-    test.update(event_list)
+    SCREEN.blit(test,(400,200))
+    SCREEN.blit(list_test[int(number[0])//2],(100,200))
+    
+    number[0]+=0.02
+    if number[0]>7:
+        number[0]=0
 
-    pygame.display.flip()
+
+
+    SCREEN.blit(player_image,(100,400))
+
+    pygame.display.update()
 
 pygame.quit()
 exit()

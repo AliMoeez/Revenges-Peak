@@ -19,3 +19,7 @@ for idx,num in enumerate(player_run): pygame.transform.scale(num,(100,100))
 for idx,num in enumerate(player_run[:]): player_run_flip.append(pygame.transform.flip(num,True,False))
 
 player_x_movement=[0] ; player_y_movement=[0]
+
+player_image=pygame.image.load(r"Assets\Player\swordman_1.png")
+
+
