@@ -1,9 +1,7 @@
 import pygame,sys
 from pytmx.util_pygame import load_pygame
-from Game_Asset_Code.general_assets import *
-from Game_Asset_Code.player_assets import *
-from Game_Asset_Code.boss_assets import *
-from Game_Asset_Code.enemy_assets import *
+
+from Game_Asset_Code import *
 
 pygame.init()
 
@@ -62,7 +60,6 @@ class LevelOne(Menu):
                 for tile in layer.tiles():
                     x_val=tile[0]*32 ; y_val=tile[1]*32
                     SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
-
 
 class Player(LevelOne):
     def __init__(self,player_x,player_y,player_width,player_height,player_rect):
