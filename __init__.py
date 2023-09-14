@@ -1,9 +1,9 @@
 import pygame,sys
 from pytmx.util_pygame import load_pygame
-from general_assets import *
-from player_assets import *
-from boss_assets import *
-from enemy_assets import *
+from Code.general_assets import *
+from Code.player_assets import *
+from Code.boss_assets import *
+from Code.enemy_assets import *
 
 pygame.init()
 
