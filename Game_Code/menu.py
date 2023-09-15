@@ -33,8 +33,7 @@ class Menu:
             self.font_help_game=pygame.font.Font(self.font,28) ; self.font_help_game_redner=self.font_help_game.render("Tip: When in Game Press 'Q' To Return To The Level Selection Menu and 'P' To Pause",True,self.WHITE)  ; SCREEN.blit(self.font_help_game_redner,(SCREEN_WIDTH//2-525,SCREEN_HEIGHT-500))              
             self.font_level_1=pygame.font.Font(self.font,50) ; self.font_level_1_render=self.font_level_1.render("1",True,self.WHITE) ; SCREEN.blit(self.font_level_1_render,(SCREEN_WIDTH//2-350,SCREEN_HEIGHT-400))
    
-    def level_screen_blit_backround(self,event):
-        global level_1
+    def level_screen_blit_backround(self):
         if level_screen:
             self.font_play_bg_1=pygame.Surface((450,50)) ; self.font_play_bg_1.set_alpha(85) ; self.font_play_bg_1.fill(self.LIGHT_BROWN) ; self.font_play_bg_1_blit=SCREEN.blit(self.font_play_bg_1,(SCREEN_WIDTH//2-210,SCREEN_HEIGHT-705))
             self.font_play_bg_2=pygame.Surface((550,33)) ; self.font_play_bg_2.set_alpha(85) ; self.font_play_bg_2.fill(self.LIGHT_BROWN) ; self.font_play_bg_2_blit=SCREEN.blit(self.font_play_bg_2,(SCREEN_WIDTH//2-255,SCREEN_HEIGHT-605))
@@ -42,3 +41,7 @@ class Menu:
             self.font_play_bg_level_1=pygame.Surface((50,60)) ; self.font_play_bg_level_1.set_alpha(85) ; self.font_play_bg_level_1.fill(self.LIGHT_BROWN) ; self.font_play_bg_level_1_blit=SCREEN.blit(self.font_play_bg_level_1,(SCREEN_WIDTH//2-363,SCREEN_HEIGHT-405))      
             if self.font_play_bg_level_1_blit.collidepoint(pygame.mouse.get_pos()) and event.type==pygame.MOUSEBUTTONDOWN:
                 level_1=True
+            
+    def level_change_condition(self):
+        if self.font_play_bg_level_1_blit.collidepoint(pygame.mouse.get_pos()) and event.type==pygame.MOUSEBUTTONDOWN:
+            self.level_1=True
