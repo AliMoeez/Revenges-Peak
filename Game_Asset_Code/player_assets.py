@@ -4,22 +4,37 @@ import pygame
 player_x=100; player_y=100; player_width=100 ; player_height=100
 player_rect=pygame.Rect(player_x,player_y,player_width,player_height)
 
-idle_1=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_1.png") ; idle_2=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_2.png") ; idle_3=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_3.png") ; idle_4=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_4.png") ; idle_5=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_5.png") ; idle_6=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_6.png")
-idle_7=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_7.png") ; idle_8=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_8.png") ; idle_9=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_9.png") ; idle_10=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_10.png") ; idle_11=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_11.png") ; idle_12=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\idle\idle_12.png")
-player_idle=[idle_1,idle_2,idle_3,idle_4,idle_5,idle_6,idle_7,idle_7,idle_8,idle_9,idle_10,idle_11,idle_12] ; player_idle_flip=[] ; player_idle_loading_screen=[]
-for idx,num in enumerate(player_idle): pygame.transform.scale(num,(100,100))
-for idx,num in enumerate(player_idle[:]): player_idle_flip.append(pygame.transform.flip(num,True,False))
-for idx,num in enumerate(player_idle[:]): player_idle_loading_screen.append(pygame.transform.scale(num,(200,200)))
-
-
-run_1=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_1.png") ; run_2=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_2.png") ; run_3=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_3.png") ; run_4=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_4.png") ; run_5=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_5.png")
-run_6=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_6.png") ; run_7=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_7.png") ; run_8=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_8.png") ; run_9=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_9.png") ; run_10=pygame.image.load(r"Assets\Player\Player Assets\animations\PNG\run\run_10.png")
-player_run=[run_1,run_2,run_3,run_4,run_5,run_6,run_7,run_8,run_9,run_10] ; player_run_flip=[] ; player_run_number=[0]
-for idx,num in enumerate(player_run): pygame.transform.scale(num,(100,100)) 
-for idx,num in enumerate(player_run[:]): player_run_flip.append(pygame.transform.flip(num,True,False))
-
 player_x_movement=[0] ; player_y_movement=[0]
 
 player_image=pygame.image.load(r"Assets\Player\swordman_1.png")
+
+def player_idle(images,frame,width,height):    #set 0 value to 0 for idle, 64 for run , 128 for fall and 192 for attack
+    image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),0,width,height)) ; image=pygame.transform.scale(image,(width*2,height*2))
+    return image
+idle_1=player_idle(player_image,0,64,64) ; idle_2=player_idle(player_image,1,64,64) ; idle_3=player_idle(player_image,2,64,64) ; idle_4=player_idle(player_image,3,64,64) ; idle_5=player_idle(player_image,4,64,64) ; idle_6=player_idle(player_image,5,64,64)
+player_idle_list=[idle_1,idle_2,idle_3,idle_4,idle_5,idle_6] ; player_idle_list_flip=[] ; player_idle_number=[0]
+for idx,num in enumerate(player_idle_list[:]): player_idle_list_flip.append(pygame.transform.flip(num,True,False))
+
+def player_run(images,frame,width,height):
+    image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),64,width,height)) ; image=pygame.transform.scale(image,(width*2,height*2))
+    return image
+run_1=player_run(player_image,0,64,64) ; run_2=player_run(player_image,1,64,64) ; run_3=player_run(player_image,2,64,64) ; run_4=player_run(player_image,3,64,64) ; run_5=player_run(player_image,4,64,64) ; run_6=player_run(player_image,5,64,64)
+player_run_list=[run_1,run_2,run_3,run_4,run_5,run_6] ; player_run_list_flip=[] ; player_run_number=[0]
+for idx,num in enumerate(player_run_list[:]): player_run_list_flip.append(pygame.transform.flip(num,True,False))
+
+def player_fall(images,frame,width,height):
+    image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),128,width,height)) ; image=pygame.transform.scale(image,(width*2,height*2))
+    return image
+fall_1=player_fall(player_image,0,64,64) ; fall_2=player_fall(player_image,1,64,64) ; fall_3=player_fall(player_image,2,64,64) ; fall_4=player_fall(player_image,3,64,64) ; fall_5=player_fall(player_image,4,64,64) ; fall_6=player_fall(player_image,5,64,64)
+player_fall_list=[fall_1,fall_2,fall_3,fall_4,fall_5,fall_6] ; player_fall_list_flip=[] ; player_fall_number=[0]
+for idx,num in enumerate(player_fall_list[:]): player_fall_list_flip.append(pygame.transform.flip(num,True,False))
+
+def player_attack(images,frame,width,height): 
+    image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),192,width,height)) ; image=pygame.transform.scale(image,(width*2,height*2))
+    return image
+attack_1=player_attack(player_image,0,64,64) ; attack_2=player_attack(player_image,1,64,64) ; attack_3=player_attack(player_image,2,64,64) ; attack_4=player_attack(player_image,3,64,64) ; attack_5=player_attack(player_image,4,64,64) ; attack_6=player_attack(player_image,5,64,64)
+player_attack_list=[attack_1,attack_2,attack_3,attack_4,attack_5,attack_6] ; player_attack_list_flip=[] ; player_attack_number=[0]
+for idx,num in enumerate(player_attack_list[:]): player_attack_list_flip.append(pygame.transform.flip(num,True,False))
+
 
 

@@ -1,4 +1,5 @@
-import pygame,sys
+import pygame
+import sys
 from pytmx.util_pygame import load_pygame
 
 pygame.init()
@@ -24,6 +25,9 @@ while run:
                 if event.type==pygame.MOUSEBUTTONDOWN and menu.level_screen_blit_background().collidepoint(event.pos):
                     level_screen=False
                     level_1=True
+        if level_1:
+            if key[pygame.K_q]:
+                level_1=False ; level_screen=True
 
     menu=Menu(level_screen,level_1)
     menu.main_menu()

@@ -6,7 +6,6 @@ from .menu import Menu
 
 class LevelOne(Menu):
     def __init__(self,camera_x_y,level_1,level_screen):
-      #  super().__init__(level_screen,level_1)
         self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.test_tile_set=test_tile_set ; self.level_1=level_1
         self.level_screen=level_screen
 
