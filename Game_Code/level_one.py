@@ -5,14 +5,13 @@ from Game_Asset_Code import *
 from .menu import Menu
 
 class LevelOne(Menu):
-    def __init__(self,camera_x_y):
-        super().__init__()
-        self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.test_tile_set=test_tile_set
+    def __init__(self,camera_x_y,level_1,level_screen):
+      #  super().__init__(level_screen,level_1)
+        self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.test_tile_set=test_tile_set ; self.level_1=level_1
+        self.level_screen=level_screen
 
     def level_one(self):
-        global level_1
-        if level_1:
-            print("HERE")
+        if self.level_1:
             self.camera_x_y[0]+=self.player_rect.x-self.camera_x_y[0]
             self.camera_x_y[1]+=self.player_rect.y-self.camera_x_y[1]
             for layer in self.test_tile_set:
