@@ -9,7 +9,7 @@ from Game_Asset_Code import *
 from Game_Code import Menu,LevelOne,Player
 
 while run:
-    level_1_tile_set_rect=[]
+    level_1_tile_set_rect.clear()
     SCREEN.fill((0,0,0))
     key=pygame.key.get_pressed()
     event_list=pygame.event.get()
