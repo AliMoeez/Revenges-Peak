@@ -1,5 +1,6 @@
 import pygame
 import sys
+import math
 from pytmx.util_pygame import load_pygame
 
 pygame.init()
@@ -8,6 +9,7 @@ from Game_Asset_Code import *
 from Game_Code import Menu,LevelOne,Player
 
 while run:
+    level_1_tile_set_rect=[]
     SCREEN.fill((0,0,0))
     key=pygame.key.get_pressed()
     event_list=pygame.event.get()
@@ -41,6 +43,7 @@ while run:
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1)
     player.idle(key)
     player.move(key)
-    player.collision()
+    player.collision_with_object()
+    player.collision_with_object_logic()
 
     pygame.display.update()

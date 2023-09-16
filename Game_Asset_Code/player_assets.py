@@ -1,10 +1,10 @@
 import pygame
 
 
-player_x=100; player_y=100; player_width=100 ; player_height=100
+player_x=100; player_y=100; player_width=15 ; player_height=64
 player_rect=pygame.Rect(player_x,player_y,player_width,player_height)
 
-player_x_movement=[0] ; player_y_movement=[0]
+player_x_movement=[0] ; player_y_movement=[0] ; player_key=[0]
 
 player_image=pygame.image.load(r"Assets\Player\swordman_1.png")
 
