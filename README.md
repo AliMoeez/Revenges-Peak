@@ -1,4 +1,4 @@
-# Revenges-Peak
+# Game Assets
 
 Asset Credits:
 
