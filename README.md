@@ -1,5 +1,7 @@
 # Game Assets
 
+The Game is still a work in progress!!
+
 Asset Credits:
 
 Tileset : https://pixivan.itch.io/top-down-forest-tileset 
