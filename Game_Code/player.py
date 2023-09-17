@@ -83,7 +83,7 @@ class Player(LevelOne):
 
     def health_power_cooldown_icons(self):
         self.maximum_health=1000 ; self.health_bar_length=500 ; self.health_bar_ratio=self.maximum_health/self.health_bar_length ; self.health_icon=health_icon
-        self.maxium_attacks=4 ; self.sword_icon=sword_icon
+        self.sword_icon=sword_icon ; self.potion_icon=potion_icon
         if any([self.level_1]):
             
             self.health_icons=pygame.draw.rect(SCREEN,(178,34,34),pygame.Rect(20,10,self.player_health[0]/self.health_bar_ratio,25))
@@ -91,6 +91,11 @@ class Player(LevelOne):
 
             self.attack_cool_down_icon=pygame.draw.rect(SCREEN,(30,144,255),pygame.Rect(20,40,((self.player_attack_cooldown[0]*100)/2)*2.5,25))
             SCREEN.blit(self.sword_icon,(32,44)) ; self.attack_cool_down_border=pygame.draw.rect(SCREEN,(220,220,220),pygame.Rect(20,40,500,25),4)
+
+            self.control_icon=pygame.draw.rect(SCREEN,(148,0,211),pygame.Rect(20,70,(1000/2),25))
+            SCREEN.blit(self.potion_icon,(32,74)) ; self.control_border=pygame.draw.rect(SCREEN,(220,220,220),pygame.Rect(20,70,500,25),4)
+
+
 
 
     def fall(self):
