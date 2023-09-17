@@ -4,9 +4,10 @@ import pygame
 player_x=100; player_y=100; player_width=15 ; player_height=64
 player_rect=pygame.Rect(player_x,player_y,player_width,player_height)
 
-player_x_movement=[0] ; player_y_movement=[0] ; player_key=[0]
+player_x_movement=[0] ; player_y_movement=[0] ; player_key=[0] ; player_health=[1000]
 
-player_image=pygame.image.load(r"Assets\Player\swordman_1.png")
+player_image=pygame.image.load(r"Assets\Player\swordman_1.png") ; health_icon=pygame.image.load(r"Assets\Player\health_icon.png") ; health_icon=pygame.transform.scale(health_icon,(17,17))
+sword_icon=pygame.image.load(r"Assets\Player\sword.png") ; sword_icon=pygame.transform.scale(sword_icon,(13,13))
 
 def player_idle(images,frame,width,height):    #set 0 value to 0 for idle, 64 for run , 128 for fall and 192 for attack
     image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),0,width,height)) ; image=pygame.transform.scale(image,(width*2,height*2))
@@ -33,7 +34,7 @@ def player_attack(images,frame,width,height):
     image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),192,width,height)) ; image=pygame.transform.scale(image,(width*2,height*2))
     return image
 attack_1=player_attack(player_image,0,64,64) ; attack_2=player_attack(player_image,1,64,64) ; attack_3=player_attack(player_image,2,64,64) ; attack_4=player_attack(player_image,3,64,64) ; attack_5=player_attack(player_image,4,64,64) ; attack_6=player_attack(player_image,5,64,64)
-player_attack_list=[attack_1,attack_2,attack_3,attack_4,attack_5,attack_6] ; player_attack_list_flip=[] ; player_attack_number=[0]
+player_attack_list=[attack_1,attack_2,attack_3,attack_4,attack_5,attack_6] ; player_attack_list_flip=[] ; player_attack_number=[0] ; player_attack_cooldown=[4]
 for idx,num in enumerate(player_attack_list[:]): player_attack_list_flip.append(pygame.transform.flip(num,True,False))
 
 

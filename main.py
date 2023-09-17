@@ -18,7 +18,7 @@ while run:
         if event.type==pygame.QUIT:
             pygame.quit() 
             sys.exit()
-        if not level_screen:
+        if not level_screen and not any([level_1]):
             if event.type==pygame.MOUSEBUTTONDOWN and menu.main_menu_buttons().collidepoint(event.pos):
                 level_screen= not level_screen
         if level_screen:
@@ -43,7 +43,11 @@ while run:
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1)
     player.idle(key)
     player.move(key)
+    player.attack(key)
+    player.fall()
     player.collision_with_object()
     player.collision_with_object_logic()
+
+    player.health_power_cooldown_icons()
 
     pygame.display.update()

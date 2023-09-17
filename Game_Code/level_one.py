@@ -11,6 +11,7 @@ class LevelOne(Menu):
 
     def level_one(self):
         if self.level_1:
+            self.level_screen=False
             self.camera_x_y[0]+=self.player_rect.x-self.camera_x_y[0]-525
             self.camera_x_y[1]+=self.player_rect.y-self.camera_x_y[1]-300
             for layer in self.test_tile_set:
@@ -23,4 +24,4 @@ class LevelOne(Menu):
                         x_val=tile[0]*32 ; y_val=tile[1]*32
                         SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
                         self.level_1_tile_set_rect.append(pygame.Rect(x_val,y_val,32,32))
-                        pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect((x_val-self.camera_x_y[0],y_val-self.camera_x_y[1],32,32)),width=1)
+                      #  pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect((x_val-self.camera_x_y[0],y_val-self.camera_x_y[1],32,32)),width=1)
