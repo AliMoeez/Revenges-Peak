@@ -24,4 +24,4 @@ class LevelOne(Menu):
                         x_val=tile[0]*32 ; y_val=tile[1]*32
                         SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
                         self.level_1_tile_set_rect.append(pygame.Rect(x_val,y_val,32,32))
-                      #  pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect((x_val-self.camera_x_y[0],y_val-self.camera_x_y[1],32,32)),width=1)
+                        pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect((x_val-self.camera_x_y[0],y_val-self.camera_x_y[1],32,32)),width=1)
