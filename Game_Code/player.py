@@ -12,7 +12,7 @@ class Player(LevelOne):
 
     def idle(self,key):
         self.player_idle_list=player_idle_list ; self.player_idle_list_flip=player_idle_list_flip ; self.player_idle_number=player_idle_number
-        if self.level_1 and not key[pygame.K_e] or self.player_attack_cooldown[0]<0:
+        if self.level_1 and not key[pygame.K_e] or self.player_attack_cooldown[0]<0 or self.player_control:
            # pygame.draw.rect(SCREEN,(200,200,200),pygame.Rect(self.player_rect.x-self.camera_x_y[0],self.player_rect.y-self.camera_x_y[1],32,64))
             if (not key[pygame.K_a] and not key[pygame.K_d] and not key[pygame.K_w] and not key[pygame.K_s])  or (key[pygame.K_a] and key[pygame.K_d]) or (key[pygame.K_w] and key[pygame.K_s]):
                 if self.player_key[-1]=="d":
@@ -30,7 +30,7 @@ class Player(LevelOne):
 
     def move(self,key):
         self.player_run_list=player_run_list ; self.player_run_list_flip=player_run_list_flip ; self.player_run_number=player_run_number
-        if any([self.level_1]) and not key[pygame.K_e] or self.player_attack_cooldown[0]<=0:
+        if any([self.level_1]) and not key[pygame.K_e] or self.player_attack_cooldown[0]<=0 and not self.player_control:
             if key[pygame.K_d] and not key[pygame.K_a]:
                 SCREEN.blit(self.player_run_list[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
                 self.player_x_movement[0]=3 ; self.player_key.append("d")
@@ -84,7 +84,9 @@ class Player(LevelOne):
     def control(self,key):
         if any([self.level_1]):
             if self.player_control and self.player_control_cooldown[0]>0:
-                self.player_control_cooldown[0]-=0.01/2
+                self.player_control_cooldown[0]-=0.01/2 #0.01/2
+                self.player_x_movement[0]=0
+                self.player_y_movement[0]=0
 
             if not self.player_control:
                self.player_control_cooldown[0]+=0.001/2 #0.001/2

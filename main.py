@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,Player,EnemyOne
+from Game_Code import Menu,LevelOne,Player,EnemyOne,Control
 
 while run:
     level_1_tile_set_rect.clear()
@@ -31,7 +31,10 @@ while run:
             if key[pygame.K_q]:
                 level_1=False ; level_screen=True
             if key[pygame.K_f] and player_control_cooldown[0]==1:
-                player_control=True
+                for idx,distance in enumerate(control.distance()):
+                    if distance<100:
+                        print(idx)
+                        player_control=True
             if player_control_cooldown[0]==0:
                 player_control=False
 
@@ -55,6 +58,11 @@ while run:
 
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect)
     enemy_one.idle()
+
+    control=Control(level_1,player_control)
+    control.distance()
+    control.mechanic_walk(key)
+    control.print_statement()
 
     player.health_power_cooldown_icons()
 
