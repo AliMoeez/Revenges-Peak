@@ -4,7 +4,7 @@ import pygame
 player_x=100; player_y=100; player_width=15 ; player_height=64 ; player_control=False
 player_rect=pygame.Rect(player_x,player_y,player_width,player_height)
 
-player_x_movement=[0] ; player_y_movement=[0] ; player_key=[0] ; player_health=[1000] ; player_control_cooldown=[1]
+player_x_movement=[0] ; player_y_movement=[0] ; player_key=[0] ; player_health=[1000] ; player_control_cooldown=[1] ; player_control_index=[]
 
 player_image=pygame.image.load(r"Assets\Player\swordman_1.png") 
 health_icon=pygame.image.load(r"Assets\Player\health_icon.png") ; health_icon=pygame.transform.scale(health_icon,(17,17))

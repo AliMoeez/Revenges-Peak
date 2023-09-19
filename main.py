@@ -33,10 +33,11 @@ while run:
             if key[pygame.K_f] and player_control_cooldown[0]==1:
                 for idx,distance in enumerate(control.distance()):
                     if distance<100:
-                        print(idx)
+                        player_control_index.append(idx)
                         player_control=True
             if player_control_cooldown[0]==0:
                 player_control=False
+                player_control_index.clear()
 
     menu=Menu(level_screen,level_1)
     menu.main_menu()
@@ -59,9 +60,10 @@ while run:
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect)
     enemy_one.idle()
 
-    control=Control(level_1,player_control)
+    control=Control(level_1,player_control,player_control_index)
     control.distance()
     control.mechanic_walk(key)
+    control.mechanic_attack(key)
     control.print_statement()
 
     player.health_power_cooldown_icons()
