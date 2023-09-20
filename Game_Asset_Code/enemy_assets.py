@@ -14,10 +14,12 @@ for i,skeleton in enumerate(skeleton_run[:]): skeleton_run_flip.append(pygame.tr
 skeleton_1_attack_1=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\attack1_1.png") ; skeleton_1_attack_2=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\attack1_2.png") ; skeleton_1_attack_3=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\attack1_3.png")
 skeleton_1_attack_4=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\attack1_4.png") ; skeleton_1_attack_5=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\attack1_5.png") ; skeleton_1_attack_6=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\attack1_6.png")
 skeleton_attack=[skeleton_1_attack_1,skeleton_1_attack_2,skeleton_1_attack_3,skeleton_1_attack_4,skeleton_1_attack_5,skeleton_1_attack_6] ; skeleton_attack_flip=[] ; skeleton_attack_number=[]
-for i,skeleton in enumerate(skeleton_attack): skeleton_attack[i]=pygame.transform.scale(skeleton_attack[i],(50*1.8,48*1.8))
+for i,skeleton in enumerate(skeleton_attack): skeleton_attack[i]=pygame.transform.scale(skeleton_attack[i],(100*1.8,65*1.8))
 for i,skeleton in enumerate(skeleton_attack[:]): skeleton_attack_flip.append(pygame.transform.flip(skeleton_attack[i],True,False))
 
 enemy_1_level_1_x=[400,800] ; enemy_1_level_2_y=[200,200]
+
+enemy_1_x_movement=[] ; enemy_1_y_movement=[] ; enemy_run_number=[0] ; enemy_idle_number=[0]
 
 enemy_1_level_1_rect=[]
 

@@ -33,11 +33,13 @@ while run:
             if key[pygame.K_f] and player_control_cooldown[0]==1:
                 for idx,distance in enumerate(control.distance()):
                     if distance<100:
+                        player_control_index.clear()
                         player_control_index.append(idx)
                         player_control=True
             if player_control_cooldown[0]==0:
                 player_control=False
-                player_control_index.clear()
+                player_control_index[0]="placeholder"
+
 
     menu=Menu(level_screen,level_1)
     menu.main_menu()
@@ -58,10 +60,16 @@ while run:
     player.collision_with_object_logic()
 
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect)
+    enemy_one.distance()
     enemy_one.idle()
+    enemy_one.run()
+    enemy_one.attack()
+    enemy_one.collision()
 
     control=Control(level_1,player_control,player_control_index)
     control.distance()
+    control.enemy_definition()
+    control.mechanic_idle(key)
     control.mechanic_walk(key)
     control.mechanic_attack(key)
     control.print_statement()
