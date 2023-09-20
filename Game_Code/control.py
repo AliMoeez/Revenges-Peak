@@ -26,9 +26,12 @@ class Control(EnemyOne):
     def enemy_definition(self):
         if any([self.level_1]):
             for idx,enemy in enumerate(self.enemy_rects):
-                if self.player_control_index[0]==idx:
-                    self.enemy_walk=skeleton_run ; self.enemy_walk_flip=skeleton_run_flip
-                    self.enemy_idle=skeleton_idle
+                for idy,enemy in enumerate(self.enemy_rects_type):
+                    if self.player_control_index[0]==idx:
+                        if idx==idy:
+                            if self.enemy_rects_type[idy]=="Enemy_1":
+                                self.enemy_walk=skeleton_run ; self.enemy_walk_flip=skeleton_run_flip
+                                self.enemy_idle=skeleton_idle
 
     def mechanic_idle(self,key):
         if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0:
