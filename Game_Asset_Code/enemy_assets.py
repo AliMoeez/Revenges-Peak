@@ -17,10 +17,38 @@ skeleton_attack=[skeleton_1_attack_1,skeleton_1_attack_2,skeleton_1_attack_3,ske
 for i,skeleton in enumerate(skeleton_attack): skeleton_attack[i]=pygame.transform.scale(skeleton_attack[i],(100*1.8,65*1.8))
 for i,skeleton in enumerate(skeleton_attack[:]): skeleton_attack_flip.append(pygame.transform.flip(skeleton_attack[i],True,False))
 
-enemy_1_level_1_x=[400,800] ; enemy_1_level_2_y=[200,200]
+enemy_1_level_1_x=[400,800] ; enemy_1_level_1_y=[200,200]
 
-enemy_1_x_movement=[] ; enemy_1_y_movement=[] ; enemy_run_number=[0] ; enemy_idle_number=[0]
+enemy_1_x_movement=[] ; enemy_1_y_movement=[] 
 
 enemy_1_level_1_rect=[]
 
-for i,num in enumerate(enemy_1_level_1_x): enemy_1_level_1_rect.append(pygame.Rect(enemy_1_level_1_x[i],enemy_1_level_2_y[i],40,70))
+for i,num in enumerate(enemy_1_level_1_x): enemy_1_level_1_rect.append(pygame.Rect(enemy_1_level_1_x[i],enemy_1_level_1_y[i],40,70))
+
+
+brute_1_idle_1=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_1.png")
+brute_1_idle_2=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_2.png")
+brute_1_idle_3=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_3.png")
+brute_1_idle_4=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_4.png")
+brute_1_idle_5=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_5.png")
+brute_1_idle_6=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_6.png")
+
+brute_1_idle=[brute_1_idle_1,brute_1_idle_2,brute_1_idle_3,brute_1_idle_4,brute_1_idle_5,brute_1_idle_6]
+brute_1_idle_flip=[] ; brute_1_idle_number=[]
+
+for i,brute in enumerate(brute_1_idle): brute_1_idle[i]=pygame.transform.scale(brute_1_idle[i],(50*1.8,48*1.8))
+for i,brtue in enumerate(brute_1_idle[:]): brute_1_idle_flip.append(pygame.transform.flip(brute_1_idle[i],True,False))
+
+enemy_2_level_1_x=[600] ; enemy_2_level_1_y=[200]
+
+enemy_2_rects=[]
+
+
+
+
+
+
+
+
+enemy_run_number=[0] ; enemy_idle_number=[0] ; enemy_attack_number=[0]
+

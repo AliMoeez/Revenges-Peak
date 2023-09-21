@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,Player,EnemyOne,Control
+from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control
 
 while run:
     level_1_tile_set_rect.clear()
@@ -36,9 +36,9 @@ while run:
                         player_control_index.clear()
                         player_control_index.append(idx)
                         player_control=True
-            if player_control_cooldown[0]==0:
-                player_control=False
-                player_control_index[0]="placeholder"
+    if player_control_cooldown[0]<=0:
+        player_control=False
+        player_control_index[0]="placeholder"
 
 
     menu=Menu(level_screen,level_1)
@@ -65,6 +65,10 @@ while run:
     enemy_one.run()
     enemy_one.attack()
     enemy_one.collision()
+
+    enemy_two=EnemyTwo(level_1,enemy_2_rects)
+    enemy_two.distance()
+    enemy_two.idle()
 
     control=Control(level_1,player_control,player_control_index)
     control.distance()
