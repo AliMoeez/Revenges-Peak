@@ -40,7 +40,6 @@ while run:
         player_control=False
         player_control_index[0]="placeholder"
 
-
     menu=Menu(level_screen,level_1)
     menu.main_menu()
     menu.main_menu_buttons()
@@ -48,7 +47,7 @@ while run:
     menu.level_screen_blit()
 
     levelone=LevelOne(camera_x_y,level_1,level_screen)
-    levelone.level_one()
+    levelone.level_one(player_control,player_control_cooldown)
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control)
     player.idle(key)
@@ -69,6 +68,9 @@ while run:
     enemy_two=EnemyTwo(level_1,enemy_2_rects)
     enemy_two.distance()
     enemy_two.idle()
+    enemy_two.run()
+    enemy_two.attack()
+    enemy_two.collision()
 
     control=Control(level_1,player_control,player_control_index)
     control.distance()

@@ -26,29 +26,32 @@ enemy_1_level_1_rect=[]
 for i,num in enumerate(enemy_1_level_1_x): enemy_1_level_1_rect.append(pygame.Rect(enemy_1_level_1_x[i],enemy_1_level_1_y[i],40,70))
 
 
-brute_1_idle_1=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_1.png")
-brute_1_idle_2=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_2.png")
-brute_1_idle_3=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_3.png")
-brute_1_idle_4=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_4.png")
-brute_1_idle_5=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_5.png")
-brute_1_idle_6=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_6.png")
-
+brute_1_idle_1=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_1.png") ; brute_1_idle_2=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_2.png") ; brute_1_idle_3=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_3.png")
+brute_1_idle_4=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_4.png") ; brute_1_idle_5=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_5.png") ; brute_1_idle_6=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_6.png")
 brute_1_idle=[brute_1_idle_1,brute_1_idle_2,brute_1_idle_3,brute_1_idle_4,brute_1_idle_5,brute_1_idle_6]
 brute_1_idle_flip=[] ; brute_1_idle_number=[]
-
 for i,brute in enumerate(brute_1_idle): brute_1_idle[i]=pygame.transform.scale(brute_1_idle[i],(50*1.8,48*1.8))
 for i,brtue in enumerate(brute_1_idle[:]): brute_1_idle_flip.append(pygame.transform.flip(brute_1_idle[i],True,False))
 
+brute_1_run_1=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\run_1.png") ; brute_1_run_2=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\run_2.png") ; brute_1_run_3=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\run_3.png")
+brute_1_run_4=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\run_4.png") ; brute_1_run_5=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\run_5.png") ; brute_1_run_6=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\run_6.png")
+brute_1_run=[brute_1_run_1,brute_1_run_2,brute_1_run_3,brute_1_run_4,brute_1_run_5,brute_1_run_6]
+brute_1_run_flip=[] ; brute_1_run_number=[]
+for i,brute in enumerate(brute_1_run): brute_1_run[i]=pygame.transform.scale(brute_1_run[i],(50*1.8,48*1.8))
+for i,brtue in enumerate(brute_1_run[:]): brute_1_run_flip.append(pygame.transform.flip(brute_1_run[i],True,False))
+
+brute_1_attack_1_1=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\attack1_1.png") ; brute_1_attack_1_2=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\attack1_2.png")  ; brute_1_attack_1_3=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\attack1_3.png")
+brute_1_attack_1_4=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\attack1_4.png") ; brute_1_attack_1_5=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\attack1_5.png") ; brute_1_attack_1_6=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\attack1_6.png")
+brute_1_attack_1=[brute_1_attack_1_1,brute_1_attack_1_2,brute_1_attack_1_3,brute_1_attack_1_4,brute_1_attack_1_5,brute_1_attack_1_6]
+brute_1_attack_flip_1=[] ; brute_1_attack_number=[0]
+for i,brute in enumerate(brute_1_attack_1): brute_1_attack_1[i]=pygame.transform.scale(brute_1_attack_1[i],(100*1.8,65*1.8))
+for i,brute in enumerate(brute_1_attack_1[:]) : brute_1_attack_flip_1.append(pygame.transform.flip(brute_1_attack_1[i],True,False))
+
 enemy_2_level_1_x=[600] ; enemy_2_level_1_y=[200]
 
+enemy_2_x_movement=[] ; enemy_2_y_movement=[]
+
 enemy_2_rects=[]
-
-
-
-
-
-
-
 
 enemy_run_number=[0] ; enemy_idle_number=[0] ; enemy_attack_number=[0]
 

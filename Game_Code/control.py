@@ -34,21 +34,31 @@ class Control(EnemyOne):
                     if self.player_control_index[0]==idx:
                         if idx==idy:
                             if self.enemy_rects_type[idy]=="Enemy_1":
-                                self.enemy_walk=skeleton_run ; self.enemy_walk_flip=skeleton_run_flip ; self.enemy_idle=skeleton_idle  ; self.enemy_idle_flip=skeleton_idle_flip ; self.enemy_attack=skeleton_attack ; self.enemy_attack_flip=skeleton_attack_flip
+                                self.enemy_walk=skeleton_run ; self.enemy_walk_flip=skeleton_run_flip 
+                                self.enemy_idle=skeleton_idle  ; self.enemy_idle_flip=skeleton_idle_flip 
+                                self.enemy_attack=skeleton_attack ; self.enemy_attack_flip=skeleton_attack_flip
                             if self.enemy_rects_type[idy]=="Enemy_2":
                                 self.enemy_idle=brute_1_idle  ; self.enemy_idle_flip=brute_1_idle
-                                self.enemy_walk=brute_1_idle ; self.enemy_walk_flip=brute_1_idle
-                                self.enemy_attack=brute_1_idle ; self.enemy_attack_flip=brute_1_idle
+                                self.enemy_walk=brute_1_run ; self.enemy_walk_flip=brute_1_run_flip
+                                self.enemy_attack=brute_1_attack_1 ; self.enemy_attack_flip=brute_1_attack_flip_1
+
+    def enemy_camera(self):
+        if any([self.level_1]):
+            for idx,enemy in enumerate(self.enemy_rects):
+                if self.player_control_index[0]==idx:
+                    return self.enemy_rects[idx]
 
     def mechanic_idle(self,key):
         if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0:
-            if not any(pygame.key.get_pressed()) or (key[pygame.K_d] and key[pygame.K_a]) or (key[pygame.K_w] and key[pygame.K_s]):
+            if  ((not key[pygame.K_d] and not key[pygame.K_a]  and not key[pygame.K_w]  and not key[pygame.K_s] and not key[pygame.K_e]) or 
+                 (key[pygame.K_d] and key[pygame.K_a]) or (key[pygame.K_w] and key[pygame.K_s])):
                 if self.player_key[-1]=='d':
                     SCREEN.blit(self.enemy_idle[int(self.enemy_idle_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
                 else:
                     SCREEN.blit(self.enemy_idle_flip[int(self.enemy_idle_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
+                
                 self.enemy_idle_number[0]+=0.15
-                if self.enemy_idle_number[0]>len(self.enemy_idle)+1:
+                if self.enemy_idle_number[0]>len(self.enemy_idle)-1:
                     self.enemy_idle_number[0]=0
 
     def mechanic_walk(self,key):
