@@ -84,12 +84,12 @@ class Player(LevelOne):
     def control(self,key):
         if any([self.level_1]):
             if self.player_control and self.player_control_cooldown[0]>0:
-                self.player_control_cooldown[0]-=0.01/2 #0.01/2
+                self.player_control_cooldown[0]-=0.001/2 #0.01/2
                 self.player_x_movement[0]=0
                 self.player_y_movement[0]=0
 
             if not self.player_control:
-               self.player_control_cooldown[0]+=2 #0.001/2
+               self.player_control_cooldown[0]+=0.001/2 #0.001/2
 
         
             if self.player_control_cooldown[0]<=0: self.player_control_cooldown[0]=0

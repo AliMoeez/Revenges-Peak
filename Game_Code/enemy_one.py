@@ -8,8 +8,10 @@ class EnemyOne:
         self.level_1=level_1 ; self.camera_x_y=camera_x_y ; self.enemy_1_level_1_rect=enemy_1_level_1_rect ; self.skeleton_idle_number=skeleton_idle_number
         self.skeleton_run_number=skeleton_run_number ; self.skeleton_attack_number=skeleton_attack_number ; self.player_rect=player_rect
         self.enemy_1_x_movement=enemy_1_x_movement ; self.enemy_1_y_movement=enemy_1_y_movement ; self.player_control_index=player_control_index
+        self.level_1_tile_set_rect=level_1_tile_set_rect
         if level_1:
             self.enemy_1_rects=enemy_1_level_1_rect
+            self.tile_level=self.level_1_tile_set_rect
             for idx,skeleton in enumerate(self.enemy_1_rects):
                 self.skeleton_idle_number.append(0) ; self.skeleton_run_number.append(0) ; self.skeleton_attack_number.append(0)
                 self.enemy_1_x_movement.append(0) ; self.enemy_1_y_movement.append(0)
@@ -74,10 +76,33 @@ class EnemyOne:
                     self.skeleton_attack_number[idx]+=0.10
                     if self.skeleton_attack_number[idx]>7: self.skeleton_attack_number[idx]=0
 
-    def collision(self):
+    def collision_with_object(self):
+        if any([self.level_1]):
+            self.tile_hit=[]
+            for tile in self.tile_level:
+                for idx,enemy_1 in enumerate(self.enemy_1_level_1_rect):
+                    if enemy_1.colliderect(tile):
+                        self.tile_hit.append(tile)
+            return self.tile_hit
+
+    def collision_with_object_logic(self):
         if any([self.level_1]):
             for idx,skeleton in enumerate(self.enemy_1_rects):
                 self.enemy_1_rects[idx].x+=self.enemy_1_x_movement[idx]
+                self.collision=EnemyOne.collision_with_object(self)
+                for tile in self.collision:
+                    if self.enemy_1_x_movement[idx]>0:
+                        self.enemy_1_level_1_rect[idx].right=tile.left
+                    if self.enemy_1_x_movement[idx]<0:
+                        self.enemy_1_level_1_rect[idx].left=tile.right
                 self.enemy_1_rects[idx].y+=self.enemy_1_y_movement[idx]
+                self.collision=EnemyOne.collision_with_object(self)
+                for tile in self.collision:
+                    if self.enemy_1_y_movement[idx]>0:
+                        self.enemy_1_level_1_rect[idx].bottom=tile.top
+                    if self.enemy_1_y_movement[idx]<0:
+                        self.enemy_1_level_1_rect[idx].top=tile.bottom
+
+                
 
         

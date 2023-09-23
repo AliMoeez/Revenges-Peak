@@ -36,6 +36,9 @@ while run:
                         player_control_index.clear()
                         player_control_index.append(idx)
                         player_control=True
+            if key[pygame.K_v] and player_control:
+                player_control_cooldown[0]=-0.05
+                    
     if player_control_cooldown[0]<=0:
         player_control=False
         player_control_index[0]="placeholder"
@@ -63,14 +66,16 @@ while run:
     enemy_one.idle()
     enemy_one.run()
     enemy_one.attack()
-    enemy_one.collision()
+    enemy_one.collision_with_object()
+    enemy_one.collision_with_object_logic()
 
     enemy_two=EnemyTwo(level_1,enemy_2_rects)
     enemy_two.distance()
     enemy_two.idle()
     enemy_two.run()
     enemy_two.attack()
-    enemy_two.collision()
+    enemy_two.collision_with_object()
+    enemy_two.collision_with_object_logic()
 
     control=Control(level_1,player_control,player_control_index)
     control.distance()
@@ -78,7 +83,8 @@ while run:
     control.mechanic_idle(key)
     control.mechanic_walk(key)
     control.mechanic_attack(key)
-    control.print_statement()
+    control.mechanic_collision()
+    control.mechanic_collision_logic()
 
     player.health_power_cooldown_icons()
 

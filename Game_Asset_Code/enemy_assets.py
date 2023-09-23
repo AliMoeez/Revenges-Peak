@@ -53,5 +53,5 @@ enemy_2_x_movement=[] ; enemy_2_y_movement=[]
 
 enemy_2_rects=[]
 
-enemy_run_number=[0] ; enemy_idle_number=[0] ; enemy_attack_number=[0]
+enemy_run_number=[0] ; enemy_idle_number=[0] ; enemy_attack_number=[0] ; enemy_x_movement=[0] ; enemy_y_movement=[0]
 
