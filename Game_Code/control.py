@@ -81,43 +81,35 @@ class Control(EnemyOne):
                     
                     if key[pygame.K_d] and not key[pygame.K_a]:
                         self.enemy_x_movement[0]=1
-                      #  self.enemy_rects[self.player_control_index[0]].x+=1
                         SCREEN.blit(self.enemy_walk[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
                     
                     if key[pygame.K_a] and not key[pygame.K_d]:
-                      #  self.enemy_rects[self.player_control_index[0]].x-=1
                         self.enemy_x_movement[0]=-1
                         SCREEN.blit(self.enemy_walk_flip[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
                     
                     if key[pygame.K_w] and not key[pygame.K_s]: 
                         self.enemy_y_movement[0]=-1
-                      #  self.enemy_rects[self.player_control_index[0]].y-=1
                         if key[pygame.K_d] or self.player_key[-1]=='d':
                             SCREEN.blit(self.enemy_walk[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
                             if key[pygame.K_e]: 
                                 self.enemy_x_movement[0]=0.5
-                                #self.enemy_rects[self.player_control_index[0]].x+=0.5
 
-                        if key[pygame.K_a] or self.player_key[-1]!='d':
+                        if key[pygame.K_a] or self.player_key[-1]=='a':
                             SCREEN.blit(self.enemy_walk_flip[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
                             if key[pygame.K_a]: 
-                                self.enemy_x_movement[0]=-0.5
-                                #self.enemy_rects[self.player_control_index[0]].x-=0.5
+                                self.enemy_x_movement[0]=-1
 
                     if key[pygame.K_s] and not key[pygame.K_w]:
                         self.enemy_y_movement[0]=1
-                      #  self.enemy_rects[self.player_control_index[0]].y+=1
                         if key[pygame.K_d] or self.player_key[-1]=='d':
                             SCREEN.blit(self.enemy_walk[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
                             if key[pygame.K_d]: 
                                 self.enemy_x_movement[0]=0.5
-                                #self.enemy_rects[self.player_control_index[0]].x+=0.5
-                        
-                        if key[pygame.K_a] or self.player_key[-1]!='d':
+
+                        if key[pygame.K_a] or self.player_key[-1]=='a':
                             SCREEN.blit(self.enemy_walk_flip[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
                             if key[pygame.K_a]: 
-                                self.enemy_x_movement[0]=-0.5
-                                #self.enemy_rects[self.player_control_index[0]].x-=0.5
+                                self.enemy_x_movement[0]=-1
 
                     self.enemy_run_number[0]+=0.15
                     if self.enemy_run_number[0]>len(self.enemy_walk)+1: self.enemy_run_number[0]=0
@@ -133,7 +125,6 @@ class Control(EnemyOne):
                     SCREEN.blit(self.enemy_attack_flip[int(self.enemy_attack_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0]-55,self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]-30))
                 self.enemy_attack_number[0]+=0.15
                 if self.enemy_attack_number[0]>len(self.enemy_attack)+1: self.enemy_attack_number[0]=0
-
                
     def mechanic_collision(self):
         if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0:

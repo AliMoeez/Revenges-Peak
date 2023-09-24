@@ -50,7 +50,8 @@ while run:
     menu.level_screen_blit()
 
     levelone=LevelOne(camera_x_y,level_1,level_screen)
-    levelone.level_one(player_control,player_control_cooldown)
+    levelone.border()
+    levelone.tile_set()
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control)
     player.idle(key)
