@@ -54,6 +54,7 @@ while run:
     levelone.tile_set()
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control)
+    player.idle_condition(key)
     player.idle(key)
     player.move(key)
     player.attack(key)
@@ -67,8 +68,7 @@ while run:
     enemy_one.idle()
     enemy_one.run()
     enemy_one.attack()
-    enemy_one.hit_condition()
-    enemy_one.hit()
+    enemy_one.player_hit()
     enemy_one.collision_with_object()
     enemy_one.collision_with_object_logic()
 

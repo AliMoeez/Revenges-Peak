@@ -77,24 +77,17 @@ class EnemyOne:
                     self.skeleton_attack_number[idx]+=0.10
                     if self.skeleton_attack_number[idx]>7: self.skeleton_attack_number[idx]=0
 
-    def hit_condition(self):
+    def player_hit(self):
         if any([self.level_1]):
+            self.font_hit=pygame.font.Font(self.font,15) 
+            self.font_hit_render=self.font_hit.render("-25",True,self.red) 
             for idx,distance in enumerate(self.enemy_1_distance):
                 if self.player_attack_number[0]>6.0 and distance<100:
-                    print(self.player_rect.x,self.enemy_1_rects[idx].x ,self.player_key[-1])
-                    if (self.player_rect.x<=self.enemy_1_rects[idx].x and self.player_key[-1]=="d") or (self.player_rect.x<=self.enemy_1_rects[idx].x and self.player_key[-1]=="a"):
-                            return True 
-                    return False
+                    if (self.player_rect.x<=self.enemy_1_rects[idx].x and self.player_key[-1]=="d"):
+                        SCREEN.blit(self.font_hit_render,(self.enemy_1_rects[idx].x-self.camera_x_y[0]+25,self.enemy_1_rects[idx].y-self.camera_x_y[1]))
+                    if (self.player_rect.x>=self.enemy_1_rects[idx].x and self.player_key[-1]=="a"):
+                        SCREEN.blit(self.font_hit_render,(self.enemy_1_rects[idx].x-self.camera_x_y[0]+25,self.enemy_1_rects[idx].y-self.camera_x_y[1]))
     
-    def hit(self):
-        self.did_hit=EnemyOne.hit_condition(self)
-        if any([self.level_1]):
-            for idx,distance in enumerate(self.enemy_1_distance):
-                if self.player_attack_number[0]>6.0 and distance<100 and self.did_hit:
-                    self.font_hit=pygame.font.Font(self.font,15) 
-                    self.font_hit_render=self.font_hit.render("-25",True,self.red) 
-                    SCREEN.blit(self.font_hit_render,(self.enemy_1_rects[idx].x-self.camera_x_y[0]+25,self.enemy_1_rects[idx].y-self.camera_x_y[1]))
-
     def collision_with_object(self):
         if any([self.level_1]):
             self.tile_hit=[]
