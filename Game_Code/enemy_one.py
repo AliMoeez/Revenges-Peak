@@ -8,7 +8,8 @@ class EnemyOne:
         self.level_1=level_1 ; self.camera_x_y=camera_x_y ; self.enemy_1_level_1_rect=enemy_1_level_1_rect ; self.skeleton_idle_number=skeleton_idle_number
         self.skeleton_run_number=skeleton_run_number ; self.skeleton_attack_number=skeleton_attack_number ; self.player_rect=player_rect
         self.enemy_1_x_movement=enemy_1_x_movement ; self.enemy_1_y_movement=enemy_1_y_movement ; self.player_control_index=player_control_index
-        self.level_1_tile_set_rect=level_1_tile_set_rect
+        self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_attack_number=player_attack_number ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"
+        self.red=(178,34,34) ; self.player_key=player_key
         if level_1:
             self.enemy_1_rects=enemy_1_level_1_rect
             self.tile_level=self.level_1_tile_set_rect
@@ -75,6 +76,24 @@ class EnemyOne:
                     pygame.draw.rect(SCREEN,(100,200,200),pygame.Rect(self.enemy_1_rects[idx].x-self.camera_x_y[0]+20,self.enemy_1_rects[idx].y-self.camera_x_y[1]+12,40,70),width=1)
                     self.skeleton_attack_number[idx]+=0.10
                     if self.skeleton_attack_number[idx]>7: self.skeleton_attack_number[idx]=0
+
+    def hit_condition(self):
+        if any([self.level_1]):
+            for idx,distance in enumerate(self.enemy_1_distance):
+                if self.player_attack_number[0]>6.0 and distance<100:
+                    print(self.player_rect.x,self.enemy_1_rects[idx].x ,self.player_key[-1])
+                    if (self.player_rect.x<=self.enemy_1_rects[idx].x and self.player_key[-1]=="d") or (self.player_rect.x<=self.enemy_1_rects[idx].x and self.player_key[-1]=="a"):
+                            return True 
+                    return False
+    
+    def hit(self):
+        self.did_hit=EnemyOne.hit_condition(self)
+        if any([self.level_1]):
+            for idx,distance in enumerate(self.enemy_1_distance):
+                if self.player_attack_number[0]>6.0 and distance<100 and self.did_hit:
+                    self.font_hit=pygame.font.Font(self.font,15) 
+                    self.font_hit_render=self.font_hit.render("-25",True,self.red) 
+                    SCREEN.blit(self.font_hit_render,(self.enemy_1_rects[idx].x-self.camera_x_y[0]+25,self.enemy_1_rects[idx].y-self.camera_x_y[1]))
 
     def collision_with_object(self):
         if any([self.level_1]):

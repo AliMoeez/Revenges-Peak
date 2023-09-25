@@ -67,6 +67,8 @@ while run:
     enemy_one.idle()
     enemy_one.run()
     enemy_one.attack()
+    enemy_one.hit_condition()
+    enemy_one.hit()
     enemy_one.collision_with_object()
     enemy_one.collision_with_object_logic()
 
