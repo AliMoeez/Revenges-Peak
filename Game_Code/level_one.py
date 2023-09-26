@@ -31,7 +31,7 @@ class LevelOne(Menu):
             if (self.rect_camera.y<self.min_y_border or self.rect_camera.y>self.max_y_border) and (self.rect_camera.x<self.min_x_border or self.rect_camera.x>self.max_x_border):
                 LevelOne.border_logic_x_y_axis(self)
                 
-    def tile_set(self):
+    def tile_set(self): #3200,3200
         if self.level_1:
             self.level_screen=False
             for layer in self.test_tile_set:

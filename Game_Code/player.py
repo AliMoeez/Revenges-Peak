@@ -10,52 +10,39 @@ class Player(LevelOne):
         self.camera_x_y=camera_x_y  ; self.level_1=level_1 ;  self.level_screen=level_screen ; self.player_key=player_key ; self.player_attack_cooldown=player_attack_cooldown ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_health=player_health
         self.player_control_cooldown=player_control_cooldown ; self.player_control=player_control
 
-    def idle_condition(self,key):
-        if any([self.level_1]):
-               if (key[pygame.K_a] and key[pygame.K_s] and key[pygame.K_d]) or (key[pygame.K_w] and key[pygame.K_a] and key[pygame.K_s]) or (key[pygame.K_w] and key[pygame.K_d] and key[pygame.K_s]):
-                   return False
-               return True
-            
-
     def idle(self,key):
         self.player_idle_list=player_idle_list ; self.player_idle_list_flip=player_idle_list_flip ; self.player_idle_number=player_idle_number
-        if self.level_1 and not key[pygame.K_e] or self.player_attack_cooldown[0]<0:
-           # pygame.draw.rect(SCREEN,(200,200,200),pygame.Rect(self.player_rect.x-self.camera_x_y[0],self.player_rect.y-self.camera_x_y[1],32,64))
-            if (not key[pygame.K_a] and not key[pygame.K_d] and not key[pygame.K_w] and not key[pygame.K_s])  or (key[pygame.K_a] and key[pygame.K_d]) or (key[pygame.K_w] and key[pygame.K_s]) or not Player.idle_condition(self,key):
-                if self.player_key[-1]=="d":
-                    SCREEN.blit(self.player_idle_list[int(self.player_idle_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
-                else: 
-                    SCREEN.blit(self.player_idle_list_flip[int(self.player_idle_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-60,self.player_rect.y-self.camera_x_y[1]-40))
-            
-            if len(self.player_key)>5: del self.player_key[0]
-            
-            self.player_idle_number[0]+=0.15
-            if self.player_idle_number[0]>7: self.player_idle_number[0]=0
+        
+        if self.player_key[-1]=="d": SCREEN.blit(self.player_idle_list[int(self.player_idle_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
+        else: SCREEN.blit(self.player_idle_list_flip[int(self.player_idle_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-60,self.player_rect.y-self.camera_x_y[1]-40))
 
-            self.player_attack_cooldown[0]+=0.02/2
-            if self.player_attack_cooldown[0]>4: self.player_attack_cooldown[0]=4
+        if len(self.player_key)>5: del self.player_key[0]
+        
+        self.player_idle_number[0]+=0.15
+        if self.player_idle_number[0]>7: self.player_idle_number[0]=0
+
+        self.player_attack_cooldown[0]+=0.02/2
+        if self.player_attack_cooldown[0]>4: self.player_attack_cooldown[0]=4
 
     def move(self,key):
         self.player_run_list=player_run_list ; self.player_run_list_flip=player_run_list_flip ; self.player_run_number=player_run_number
         if any([self.level_1]) and not key[pygame.K_e] or self.player_attack_cooldown[0]<=0:
             if key[pygame.K_d] and not key[pygame.K_a]:
                 SCREEN.blit(self.player_run_list[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
-                self.player_x_movement[0]=3  #3
-                self.player_key.append("d")
+                self.player_x_movement[0]=3  ; self.player_key.append("d")
                 if key[pygame.K_w]:
                     self.player_x_movement[0]=math.sqrt(3) ; self.player_y_movement[0]=-math.sqrt(3)
                 elif key[pygame.K_s]:
                     self.player_x_movement[0]=math.sqrt(3) ; self.player_y_movement[0]=math.sqrt(3)
 
-            elif key[pygame.K_w] and not key[pygame.K_s]: 
+            elif key[pygame.K_w] and not key[pygame.K_s] : 
                 self.player_y_movement[0]=-3
                 if self.player_key[-1]=="d": SCREEN.blit(self.player_run_list[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
                 else: SCREEN.blit(self.player_run_list_flip[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-60,self.player_rect.y-self.camera_x_y[1]-40))
 
             elif key[pygame.K_a] and not key[pygame.K_d]:
                 SCREEN.blit(self.player_run_list_flip[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-60,self.player_rect.y-self.camera_x_y[1]-40))
-                self.player_x_movement[0]=-3 #-3
-                self.player_key.append("a")
+                self.player_x_movement[0]=-3  ; self.player_key.append("a")
                 if key[pygame.K_w]:
                     self.player_x_movement[0]=-math.sqrt(3); self.player_y_movement[0]=-math.sqrt(3)
                 elif key[pygame.K_s]:
@@ -67,7 +54,7 @@ class Player(LevelOne):
                 else: SCREEN.blit(self.player_run_list_flip[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-60,self.player_rect.y-self.camera_x_y[1]-40))
             
             else: 
-                self.player_x_movement[0]=0 ; self.player_y_movement[0]=0
+                Player.idle(self,key) ; self.player_x_movement[0]=0 ; self.player_y_movement[0]=0
     
             self.player_run_number[0]+=0.15
             if self.player_run_number[0]>7:self.player_run_number[0]=0
@@ -94,13 +81,11 @@ class Player(LevelOne):
         if any([self.level_1]):
             if self.player_control and self.player_control_cooldown[0]>0:
                 self.player_control_cooldown[0]-=0.01/2 #0.01/2
-                self.player_x_movement[0]=0
-                self.player_y_movement[0]=0
+                self.player_x_movement[0]=0 ; self.player_y_movement[0]=0
 
             if not self.player_control:
                self.player_control_cooldown[0]+=0.1/2 #0.001/2
 
-        
             if self.player_control_cooldown[0]<=0: self.player_control_cooldown[0]=0
             if self.player_control_cooldown[0]>=1: self.player_control_cooldown[0]=1
 

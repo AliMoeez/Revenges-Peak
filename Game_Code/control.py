@@ -59,61 +59,51 @@ class Control(EnemyOne):
                                 return idy
         
     def mechanic_idle(self,key):
-        if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0:
-            if  ((not key[pygame.K_d] and not key[pygame.K_a]  and not key[pygame.K_w]  and not key[pygame.K_s] and not key[pygame.K_e]) or 
-                 (key[pygame.K_d] and key[pygame.K_a]) or (key[pygame.K_w] and key[pygame.K_s])):
-                self.enemy_x_movement[0]=0
-                self.enemy_y_movement[0]=0
-                if self.player_key[-1]=='d':
-                    SCREEN.blit(self.enemy_idle[int(self.enemy_idle_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
-                else:
-                    SCREEN.blit(self.enemy_idle_flip[int(self.enemy_idle_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
-                
-                self.enemy_idle_number[0]+=0.15
-                if self.enemy_idle_number[0]>len(self.enemy_idle)-1:
-                    self.enemy_idle_number[0]=0
+        if self.player_key[-1]=='d':
+            SCREEN.blit(self.enemy_idle[int(self.enemy_idle_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
+        else:
+            SCREEN.blit(self.enemy_idle_flip[int(self.enemy_idle_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
+        
+        self.enemy_idle_number[0]+=0.07
+        if self.enemy_idle_number[0]>len(self.enemy_idle)-1:
+            self.enemy_idle_number[0]=0
 
     def mechanic_walk(self,key):
         self.distance_player=Control.distance(self)
-        if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0:
+        if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0 and not key[pygame.K_e]:
             for idx,enemy in enumerate(self.enemy_rects):
-                if not key[pygame.K_e]:
-                    
-                    if key[pygame.K_d] and not key[pygame.K_a]:
-                        self.enemy_x_movement[0]=1
-                        SCREEN.blit(self.enemy_walk[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
-                    
-                    if key[pygame.K_a] and not key[pygame.K_d]:
-                        self.enemy_x_movement[0]=-1
-                        SCREEN.blit(self.enemy_walk_flip[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
-                    
-                    if key[pygame.K_w] and not key[pygame.K_s]: 
-                        self.enemy_y_movement[0]=-1
-                        if key[pygame.K_d] or self.player_key[-1]=='d':
-                            SCREEN.blit(self.enemy_walk[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
-                            if key[pygame.K_e]: 
-                                self.enemy_x_movement[0]=0.5
+                if key[pygame.K_d] and not key[pygame.K_a]:
+                    SCREEN.blit(self.enemy_walk[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
+                    self.enemy_x_movement[0]=2  ; self.player_key.append("d")
+                    if key[pygame.K_w]:
+                        self.enemy_x_movement[0]=math.sqrt(2) ; self.enemy_y_movement[0]=-math.sqrt(2)
+                    elif key[pygame.K_s]:
+                        self.enemy_x_movement[0]=math.sqrt(2) ; self.enemy_y_movement[0]=math.sqrt(2)
 
-                        if key[pygame.K_a] or self.player_key[-1]=='a':
-                            SCREEN.blit(self.enemy_walk_flip[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
-                            if key[pygame.K_a]: 
-                                self.enemy_x_movement[0]=-1
+                elif key[pygame.K_w] and not key[pygame.K_s] : 
+                    self.enemy_y_movement[0]=-2
+                    if self.player_key[-1]=="d": SCREEN.blit(self.enemy_walk[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
+                    else:  SCREEN.blit(self.enemy_walk_flip[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
 
-                    if key[pygame.K_s] and not key[pygame.K_w]:
-                        self.enemy_y_movement[0]=1
-                        if key[pygame.K_d] or self.player_key[-1]=='d':
-                            SCREEN.blit(self.enemy_walk[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
-                            if key[pygame.K_d]: 
-                                self.enemy_x_movement[0]=0.5
+                elif key[pygame.K_a] and not key[pygame.K_d]:
+                    SCREEN.blit(self.enemy_walk_flip[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
+                    self.enemy_x_movement[0]=-2  ; self.player_key.append("a")
+                    if key[pygame.K_w]:
+                        self.enemy_x_movement[0]=-math.sqrt(2); self.enemy_y_movement[0]=-math.sqrt(2)
+                    elif key[pygame.K_s]:
+                        self.enemy_x_movement[0]=-math.sqrt(2) ; self.enemy_y_movement[0]=math.sqrt(2)
 
-                        if key[pygame.K_a] or self.player_key[-1]=='a':
-                            SCREEN.blit(self.enemy_walk_flip[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
-                            if key[pygame.K_a]: 
-                                self.enemy_x_movement[0]=-1
-
-                    self.enemy_run_number[0]+=0.15
-                    if self.enemy_run_number[0]>len(self.enemy_walk)+1: self.enemy_run_number[0]=0
-
+                elif key[pygame.K_s] and not key[pygame.K_w]: 
+                    self.enemy_y_movement[0]=2
+                    if self.player_key[-1]=="d": SCREEN.blit(self.enemy_walk[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
+                    else:  SCREEN.blit(self.enemy_walk_flip[int(self.enemy_run_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
+                
+                else: 
+                    Control.mechanic_idle(self,key) ; self.enemy_x_movement[0]=0 ; self.enemy_y_movement[0]=0
+        
+                self.enemy_run_number[0]+=0.15
+                if self.enemy_run_number[0]>len(self.enemy_walk)+1: self.enemy_run_number[0]=0
+   
     def mechanic_attack(self,key):
         if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0:
             if key[pygame.K_e]:

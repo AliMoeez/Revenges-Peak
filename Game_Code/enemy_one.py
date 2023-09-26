@@ -87,7 +87,7 @@ class EnemyOne:
                         SCREEN.blit(self.font_hit_render,(self.enemy_1_rects[idx].x-self.camera_x_y[0]+25,self.enemy_1_rects[idx].y-self.camera_x_y[1]))
                     if (self.player_rect.x>=self.enemy_1_rects[idx].x and self.player_key[-1]=="a"):
                         SCREEN.blit(self.font_hit_render,(self.enemy_1_rects[idx].x-self.camera_x_y[0]+25,self.enemy_1_rects[idx].y-self.camera_x_y[1]))
-    
+     
     def collision_with_object(self):
         if any([self.level_1]):
             self.tile_hit=[]

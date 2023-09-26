@@ -54,8 +54,6 @@ while run:
     levelone.tile_set()
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control)
-    player.idle_condition(key)
-    player.idle(key)
     player.move(key)
     player.attack(key)
     player.control(key)
@@ -83,7 +81,6 @@ while run:
     control=Control(level_1,player_control,player_control_index)
     control.distance()
     control.enemy_definition()
-    control.mechanic_idle(key)
     control.mechanic_walk(key)
     control.mechanic_attack(key)
     control.mechanic_collision()
