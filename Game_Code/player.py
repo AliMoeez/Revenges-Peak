@@ -106,8 +106,8 @@ class Player(LevelOne):
             SCREEN.blit(self.potion_icon,(32,74)) ; self.control_border=pygame.draw.rect(SCREEN,(220,220,220),pygame.Rect(20,70,500,25),4)
 
     def fall(self):
-        if any([self.level_1]):
-            SCREEN.blit(frost_brute_idle_1,(200-self.camera_x_y[0],200-self.camera_x_y[1]))
+        if any([self.level_1]): pass
+          #  SCREEN.blit(frost_brute_idle_1,(200-self.camera_x_y[0],200-self.camera_x_y[1]))
 
     def collision_with_object(self):
         if self.level_1:

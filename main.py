@@ -10,10 +10,10 @@ from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control
 
 while run:
     level_1_tile_set_rect.clear()
-    SCREEN.fill((0,0,0))
     key=pygame.key.get_pressed()
     event_list=pygame.event.get()
-
+    if level_1:
+        SCREEN.fill((131,164,72))
     for event in event_list:
         if event.type==pygame.QUIT:
             pygame.quit() 
@@ -52,6 +52,7 @@ while run:
     levelone=LevelOne(camera_x_y,level_1,level_screen)
     levelone.border()
     levelone.tile_set()
+    levelone.tile_set_level_direction()
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control)
     player.move(key)
@@ -78,6 +79,7 @@ while run:
     enemy_two.collision_with_object()
     enemy_two.collision_with_object_logic()
 
+
     control=Control(level_1,player_control,player_control_index)
     control.distance()
     control.enemy_definition()
@@ -85,6 +87,8 @@ while run:
     control.mechanic_attack(key)
     control.mechanic_collision()
     control.mechanic_collision_logic()
+
+    levelone.tile_set_tree_top()
 
     player.health_power_cooldown_icons()
 

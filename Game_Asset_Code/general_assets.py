@@ -17,4 +17,4 @@ level_1=False
 
 backround_tile_set=load_pygame(r"Assets\Tileset\backround_tile_set_file\backround_tile_set.tmx")
 
-test_tile_set=load_pygame(r"Assets\Tileset\Test_2\untitled.tmx") ; level_1_tile_set_rect=[]
+level_1_tile_set=load_pygame(r"Assets\Tileset\Level_1_Tile_Set_Sheet.tmx") ; level_1_tile_set_rect=[]
