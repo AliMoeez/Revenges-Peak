@@ -1,14 +1,10 @@
-
-
-def func(x:int,y:int):
-    if x<y:
+def func():
+    for i in range(0,10):
         print("YES")
-    else:
-        print("NO")
 
 
-def func_2():
-    func(1,2)
-    
 
-func_2()
+
+for y in range(10000):
+   
+        print("YES")

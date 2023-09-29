@@ -2,14 +2,34 @@ import pygame
 import math
 
 from Game_Asset_Code import *
-from .level_one import LevelOne
 
-class Player(LevelOne):
-    def __init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control):
+class Player:
+    def __init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition):
         self.player_x=player_x ; self.player_y=player_y ; self.player_width=player_width ; self.player_height=player_height ; self.player_rect=player_rect ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement
         self.camera_x_y=camera_x_y  ; self.level_1=level_1 ;  self.level_screen=level_screen ; self.player_key=player_key ; self.player_attack_cooldown=player_attack_cooldown ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_health=player_health
-        self.player_control_cooldown=player_control_cooldown ; self.player_control=player_control
+        self.player_control_cooldown=player_control_cooldown ; self.player_control=player_control ; self.object_rect=object_rect ; self.dialogue_condition=dialogue_condition
 
+    def distance_level_object(self):
+        self.tile_interact_rect_distance=[]
+        for idx,tile in enumerate(self.object_rect):
+            self.tile_interact_rect_distance.append(math.hypot(self.player_rect.x-self.object_rect[idx].x,self.player_rect.y-self.object_rect[idx].y))
+        return self.tile_interact_rect_distance
+
+    def level_object_interaction(self):
+        Player.distance_level_object(self)
+        self.left_mouse_button_icon=left_mouse_button_icon
+        if any([self.level_1]):
+            for idx,distance in enumerate(self.tile_interact_rect_distance):
+                if distance<100: 
+                    SCREEN.blit(self.left_mouse_button_icon,(self.object_rect[idx].x-self.camera_x_y[0]-15,self.object_rect[idx].y-self.camera_x_y[1]-100))
+                    return True
+
+    def level_dialogue_condition(self,event,event_list):
+        for event in event_list:
+            if event.type==pygame.MOUSEBUTTONDOWN:
+                self.dialogue_condition=True
+            print(self.dialogue_condition)
+    
     def idle(self,key):
         self.player_idle_list=player_idle_list ; self.player_idle_list_flip=player_idle_list_flip ; self.player_idle_number=player_idle_number
         
@@ -88,8 +108,6 @@ class Player(LevelOne):
 
             if self.player_control_cooldown[0]<=0: self.player_control_cooldown[0]=0
             if self.player_control_cooldown[0]>=1: self.player_control_cooldown[0]=1
-
-     #   print(self.player_control)
 
     def health_power_cooldown_icons(self):
         self.maximum_health=1000 ; self.health_bar_length=500 ; self.health_bar_ratio=self.maximum_health/self.health_bar_length ; self.health_icon=health_icon

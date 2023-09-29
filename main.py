@@ -10,11 +10,19 @@ from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control
 
 while run:
     level_1_tile_set_rect.clear()
+    object_rect.clear()
     key=pygame.key.get_pressed()
     event_list=pygame.event.get()
     if level_1:
         SCREEN.fill((131,164,72))
+
+    player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition)
+
+
     for event in event_list:
+       ## if event.type==pygame.MOUSEBUTTONDOWN:
+        #    dialogue_condition=True
+        player.level_dialogue_condition(event,event_list)
         if event.type==pygame.QUIT:
             pygame.quit() 
             sys.exit()
@@ -38,6 +46,7 @@ while run:
                         player_control=True
             if key[pygame.K_v] and player_control:
                 player_control_cooldown[0]=-0.05
+        
                     
     if player_control_cooldown[0]<=0:
         player_control=False
@@ -51,10 +60,10 @@ while run:
 
     levelone=LevelOne(camera_x_y,level_1,level_screen)
     levelone.border()
-    levelone.tile_set()
     levelone.tile_set_level_direction()
+    levelone.tile_set()
 
-    player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control)
+    player.level_object_interaction()
     player.move(key)
     player.attack(key)
     player.control(key)
@@ -91,5 +100,7 @@ while run:
     levelone.tile_set_tree_top()
 
     player.health_power_cooldown_icons()
+
+    levelone.dialogue()
 
     pygame.display.update()

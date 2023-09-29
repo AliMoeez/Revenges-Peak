@@ -4,21 +4,25 @@ import pygame
 from Game_Asset_Code import *
 from .menu import Menu
 from .control import Control
+from .player import Player
 
 class LevelOne(Menu):
     def __init__(self,camera_x_y,level_1,level_screen):
         self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.level_1_tile_set=level_1_tile_set ; self.level_1=level_1
-        self.level_screen=level_screen ; self.level_1_tile_set_rect=level_1_tile_set_rect
+        self.level_screen=level_screen ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.object_rect=object_rect
+        self.dialogue_condition=dialogue_condition
 
-
+    def dialogue(self):
+        if self.dialogue_condition:
+            print("YES")
+    
+    
     def border(self):
         self.player_control=player_control ; self.player_control_cooldown=player_control_cooldown ; self.enemy_rects=enemy_1_level_1_rect+enemy_2_rects  ; self.player_control_index=player_control_index
         self.enemy_rects_camera=Control.enemy_camera(self) 
         self.max_x_border=4000 ; self.max_y_border=2000 ; self.min_x_border=530 ; self.min_y_border=300
         self.max_x_player=4590 ; self.max_y_player=2415; self.min_x_player=50 ; self.min_y_player=25
-
-        #dif_max_y=-415 diff_min_y=275
-        
+      
         if self.player_control and self.player_control_cooldown[0]>0: self.rect_camera=self.enemy_rects_camera
         else: self.rect_camera=self.player_rect
 
@@ -32,8 +36,21 @@ class LevelOne(Menu):
                 LevelOne.border_logic_x_axis(self)
             if (self.rect_camera.y<self.min_y_border or self.rect_camera.y>self.max_y_border) and (self.rect_camera.x<self.min_x_border or self.rect_camera.x>self.max_x_border):
                 LevelOne.border_logic_x_y_axis(self)
-                
-    def tile_set(self): #3200,3200
+
+    def tile_set_function(self,layers:str):
+        if self.level_1:
+            self.level_screen=False
+            for layer in self.level_1_tile_set:
+                if layer.name in [layers]:
+                    for tile in layer.tiles():
+                        x_val=tile[0]*32 ; y_val=tile[1]*32
+                        SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
+                        self.object_rect.append(pygame.Rect(x_val,y_val,32,32))
+
+    def tile_set_level_direction(self):
+        LevelOne.tile_set_function(self,"Tile Layer 5")
+
+    def tile_set(self):
         if self.level_1:
             self.level_screen=False
             for layer in self.level_1_tile_set:
@@ -47,21 +64,8 @@ class LevelOne(Menu):
                         SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
                         self.level_1_tile_set_rect.append(pygame.Rect(x_val,y_val,32,32))
 
-    def tile_set_function(self,layers:str):
-        if self.level_1:
-            self.level_screen=False
-            for layer in self.level_1_tile_set:
-                if layer.name in [layers]:
-                    for tile in layer.tiles():
-                        x_val=tile[0]*32 ; y_val=tile[1]*32
-                        SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
-
     def tile_set_tree_top(self):
         LevelOne.tile_set_function(self,"Tile Layer 4")
-
-    def tile_set_level_direction(self):
-        LevelOne.tile_set_function(self,"Tile Layer 5")
-
 
     def border_logic_total(self):
         self.camera_x_y[0]+=self.rect_camera.x-self.camera_x_y[0]-525
