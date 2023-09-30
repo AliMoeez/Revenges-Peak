@@ -8,6 +8,7 @@ class Player:
         self.player_x=player_x ; self.player_y=player_y ; self.player_width=player_width ; self.player_height=player_height ; self.player_rect=player_rect ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement
         self.camera_x_y=camera_x_y  ; self.level_1=level_1 ;  self.level_screen=level_screen ; self.player_key=player_key ; self.player_attack_cooldown=player_attack_cooldown ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_health=player_health
         self.player_control_cooldown=player_control_cooldown ; self.player_control=player_control ; self.object_rect=object_rect ; self.dialogue_condition=dialogue_condition
+        self.mouse_button_blit_list=mouse_button_blit_list
 
     def distance_level_object(self):
         self.tile_interact_rect_distance=[]
@@ -19,17 +20,18 @@ class Player:
         Player.distance_level_object(self)
         self.left_mouse_button_icon=left_mouse_button_icon
         if any([self.level_1]):
+            self.mouse_button_blit_list.clear()
             for idx,distance in enumerate(self.tile_interact_rect_distance):
-                if distance<100: 
+                if self.tile_interact_rect_distance[idx]<100: 
                     SCREEN.blit(self.left_mouse_button_icon,(self.object_rect[idx].x-self.camera_x_y[0]-15,self.object_rect[idx].y-self.camera_x_y[1]-100))
-                    return True
-
+                    self.mouse_button_blit_list.append("Mouse Button Blitted")
+                    return self.object_rect[idx]
+        
     def level_dialogue_condition(self,event,event_list):
-        for event in event_list:
-            if event.type==pygame.MOUSEBUTTONDOWN:
-                self.dialogue_condition=True
-            print(self.dialogue_condition)
-    
+        if any([self.level_1]):
+            if event.type==pygame.MOUSEBUTTONDOWN and len(self.mouse_button_blit_list)>0:
+                return True 
+
     def idle(self,key):
         self.player_idle_list=player_idle_list ; self.player_idle_list_flip=player_idle_list_flip ; self.player_idle_number=player_idle_number
         

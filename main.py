@@ -2,11 +2,10 @@ import pygame
 import sys
 import math
 from pytmx.util_pygame import load_pygame
-
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control
+from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge
 
 while run:
     level_1_tile_set_rect.clear()
@@ -18,17 +17,17 @@ while run:
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition)
 
-
     for event in event_list:
-       ## if event.type==pygame.MOUSEBUTTONDOWN:
-        #    dialogue_condition=True
-        player.level_dialogue_condition(event,event_list)
+        if player.level_dialogue_condition(event,event_list): dialogue_condition= not dialogue_condition
+
         if event.type==pygame.QUIT:
             pygame.quit() 
             sys.exit()
+       
         if not level_screen and not any([level_1]):
             if event.type==pygame.MOUSEBUTTONDOWN and menu.main_menu_buttons().collidepoint(event.pos):
                 level_screen= not level_screen
+       
         if level_screen:
             if key[pygame.K_q]:level_screen=False
             if menu.level_screen_blit_background() is not None:
@@ -101,6 +100,7 @@ while run:
 
     player.health_power_cooldown_icons()
 
-    levelone.dialogue()
+    dialogue=Dialouge(level_1,dialogue_condition)
+    dialogue.show()
 
     pygame.display.update()

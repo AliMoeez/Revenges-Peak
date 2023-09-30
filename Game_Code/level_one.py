@@ -12,11 +12,6 @@ class LevelOne(Menu):
         self.level_screen=level_screen ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.object_rect=object_rect
         self.dialogue_condition=dialogue_condition
 
-    def dialogue(self):
-        if self.dialogue_condition:
-            print("YES")
-    
-    
     def border(self):
         self.player_control=player_control ; self.player_control_cooldown=player_control_cooldown ; self.enemy_rects=enemy_1_level_1_rect+enemy_2_rects  ; self.player_control_index=player_control_index
         self.enemy_rects_camera=Control.enemy_camera(self) 
@@ -45,7 +40,8 @@ class LevelOne(Menu):
                     for tile in layer.tiles():
                         x_val=tile[0]*32 ; y_val=tile[1]*32
                         SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
-                        self.object_rect.append(pygame.Rect(x_val,y_val,32,32))
+                        if layer.name=="Tile Layer 5":
+                            self.object_rect.append(pygame.Rect(x_val,y_val,32,32))
 
     def tile_set_level_direction(self):
         LevelOne.tile_set_function(self,"Tile Layer 5")
