@@ -16,9 +16,19 @@ while run:
         SCREEN.fill((131,164,72))
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition)
+    
+    dialogue=Dialouge(level_1,dialogue_condition)
+    
 
     for event in event_list:
-        if player.level_dialogue_condition(event,event_list): dialogue_condition= not dialogue_condition
+        if player.level_dialogue_condition(event,event_list): 
+            dialogue_condition=True
+            if pygame.MOUSEBUTTONDOWN:
+                dialogue_click_list[0]+=1
+
+        if dialogue_condition and dialogue.end_dialouge(event,event_list): 
+            print("ERUHUKEJDHSKLDHKSJHDHSD")
+            dialogue_condition=False
 
         if event.type==pygame.QUIT:
             pygame.quit() 
@@ -100,7 +110,10 @@ while run:
 
     player.health_power_cooldown_icons()
 
-    dialogue=Dialouge(level_1,dialogue_condition)
+    dialogue.text_type()
+
     dialogue.show()
+    
+   # dialogue.end_dialouge(event_list)
 
     pygame.display.update()

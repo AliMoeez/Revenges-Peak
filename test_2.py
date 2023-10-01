@@ -1,10 +1,5 @@
-def func():
-    for i in range(0,10):
-        print("YES")
+list=[1,2,3]
 
+del list[1:]
 
-
-
-for y in range(10000):
-   
-        print("YES")
+print(list)

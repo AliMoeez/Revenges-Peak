@@ -26,4 +26,6 @@ left_mouse_button_icon=pygame.transform.scale(left_mouse_button_icon,(40,40))
 
 tile_interact_rect_distance=[]
 
-dialogue_condition=False  ; mouse_button_blit_list=[]
+dialogue_condition=False  ; mouse_button_blit_list=[] 
+
+dialogue_click_list=[-1] ; dialouge_list=[]
