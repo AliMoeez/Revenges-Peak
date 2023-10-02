@@ -24,6 +24,9 @@ object_rect=[]
 left_mouse_button_icon=pygame.image.load(r"Assets\Keys\Buttons Pack\Buttons Pack\MOUSE\MOUSEBUTTONLEFT.png")
 left_mouse_button_icon=pygame.transform.scale(left_mouse_button_icon,(40,40))
 
+abyss_icon=pygame.image.load(r"Assets\Misc\Icons\Abyss_Icon.png")
+abyss_icon=pygame.transform.scale(abyss_icon,(100,150))
+
 tile_interact_rect_distance=[]
 
 dialogue_condition=False  ; mouse_button_blit_list=[] 

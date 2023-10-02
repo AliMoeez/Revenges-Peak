@@ -1,5 +1,12 @@
-list=[1,2,3]
+list=[("TEXT",1,2),
+     ("TEXT 2",3,4),
+      ("TEXT 3",5,6) ]
 
-del list[1:]
+list_2=[]
 
-print(list)
+list_2.append(list)
+
+for x in list_2:
+    for idx,num in enumerate(x):
+        if idx==0:
+            print(num[0])

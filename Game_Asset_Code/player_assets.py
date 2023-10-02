@@ -7,6 +7,7 @@ player_rect=pygame.Rect(player_x,player_y,player_width,player_height)
 player_x_movement=[0] ; player_y_movement=[0] ; player_key=[0] ; player_health=[1000] ; player_control_cooldown=[1] ; player_control_index=["placeholder"]
 
 player_image=pygame.image.load(r"Assets\Player\swordman_1.png") 
+player_icon=pygame.image.load(r"Assets\Player\player_icon.png") ; player_icon=pygame.transform.scale(player_icon,(100,100))
 health_icon=pygame.image.load(r"Assets\Player\health_icon.png") ; health_icon=pygame.transform.scale(health_icon,(17,17))
 sword_icon=pygame.image.load(r"Assets\Player\sword.png") ; sword_icon=pygame.transform.scale(sword_icon,(13,13)) ; 
 potion_icon=pygame.image.load(r"Assets\Player\potion.png") ; potion_icon=pygame.transform.scale(potion_icon,(13,13))
