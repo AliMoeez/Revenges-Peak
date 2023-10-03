@@ -23,6 +23,7 @@ while run:
             dialogue_condition=True
             if pygame.MOUSEBUTTONDOWN:
                 dialogue_click_list[0]+=1
+                text_position[0]=0
 
         if dialogue_condition and dialogue.end_dialouge(event,event_list): 
             dialogue_condition=False

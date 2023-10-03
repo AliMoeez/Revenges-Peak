@@ -1,12 +1,19 @@
-list=[("TEXT",1,2),
-     ("TEXT 2",3,4),
-      ("TEXT 3",5,6) ]
+test=" sidfhsidfj jfjsdof;jsdl;k j;sdlkfjsd;lkfj sdefljsdf shjifalskd sdlkjasldj lsdjfsald sdljas  asdfjnaksd slfndl"
 
-list_2=[]
+x=test.split("\n")
 
-list_2.append(list)
+print(x)
 
-for x in list_2:
-    for idx,num in enumerate(x):
-        if idx==0:
-            print(num[0])
+for i,y in enumerate(x):
+    print(i)
+
+
+list=[]
+
+x=0
+
+for i in range(10):
+    x+=1
+    list.append(x)
+
+print(list)
