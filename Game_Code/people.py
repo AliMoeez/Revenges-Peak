@@ -14,13 +14,13 @@ class People:
         if self.level_1:
             for idx,person in enumerate(self.people_level_1_rect):
                 SCREEN.blit(self.elder_idle_list[int(self.elder_idle_number[0])//2],(self.people_level_1_rect[idx].x-self.camera_x_y[0],self.people_level_1_rect[idx].y-self.camera_x_y[1]))
-        self.elder_idle_number[0]+=0.15
+        self.elder_idle_number[0]+=0.10
         if self.elder_idle_number[0]>4: self.elder_idle_number[0]=0
 
     def run(self):
         if self.level_1:
             for idx,person in enumerate(self.people_level_1_rect):
-                self.people_level_1_rect[idx].y+=2
+                self.people_level_1_rect[idx].y+=0
 
 
             
