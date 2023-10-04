@@ -2,6 +2,7 @@ import pygame
 import sys
 import math
 from pytmx.util_pygame import load_pygame
+
 pygame.init()
 
 from Game_Asset_Code import *
@@ -103,7 +104,7 @@ while run:
     control.mechanic_attack(key)
     control.mechanic_collision()
     control.mechanic_collision_logic()
-    
+
     people=People(level_1)
     people.idle()
     people.run()
