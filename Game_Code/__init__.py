@@ -5,3 +5,4 @@ from .enemy_one import EnemyOne
 from .enemy_two import EnemyTwo
 from .control import Control
 from .dialogue import Dialouge
+from .people import People

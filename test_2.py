@@ -1,19 +1,16 @@
-test=" sidfhsidfj jfjsdof;jsdl;k j;sdlkfjsd;lkfj sdefljsdf shjifalskd sdlkjasldj lsdjfsald sdljas  asdfjnaksd slfndl"
+test=" sidfhsidfj jfjsdof;jsdl;k \n j;sdlkfjsd;lkfj sdefljsdf shjifalskd  \n sdlkjasldj lsdjfsald sdljas  asdfjnaksd slfndl"
 
 x=test.split("\n")
 
-print(x)
-
-for i,y in enumerate(x):
-    print(i)
+text_position=[0]
+message_speed=2
 
 
-list=[]
+while True:
+    for i,y in enumerate(x):
+        if text_position[0]<message_speed*len(x[i]):
+            text_position[0]+=2
 
-x=0
-
-for i in range(10):
-    x+=1
-    list.append(x)
-
-print(list)
+    for idx,text in enumerate(x):
+        
+        print(x[idx][0:int(text_position[0])//message_speed],idx)

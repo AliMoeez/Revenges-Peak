@@ -16,7 +16,7 @@ class Dialouge:
 
             self.test_level_2_dialogue=[
                 ("The Sun is very bright like it was never ever this bright yesterday \n did you know that. I also had a tuna sandwhich yesterday which was very good.",self.player_icon,"You"),
-                ("Ok what I am supposed to do with that information. I have better things to do.",self.abyss_icon,"The Abyss"),
+                ("Ok what I am supposed to do with that information. I have better  \n things to do.",self.abyss_icon,"The Abyss"),
                 ("work",self.player_icon,"You"),
                 ("Nice ",self.abyss_icon,"The Abyss"),
                 ("Nices work",self.player_icon,"You")
@@ -63,15 +63,18 @@ class Dialouge:
                     self.new_dialogue_list=self.dialogue_show[idx][0].split("\n")
             
                     for show_dialogue in self.new_dialogue_list:
-                        self.dialogue_offset_length[0]+=200
+                        self.dialogue_offset_length[0]+=50
                         self.dialogue_offset.append(self.dialogue_offset_length[0])
+                        if len(self.dialogue_offset)>len(self.new_dialogue_list): del self.dialogue_offset[-1]
+                    
+
                     
                     for i,text in enumerate(self.new_dialogue_list):
                         self.font_title=pygame.font.Font(self.font,30) 
                         self.font_title_render=self.font_title.render(self.new_dialogue_list[i][0:int(self.text_position[0])//self.message_speed],True,self.WHITE)
-                        SCREEN.blit(self.font_title_render,(SCREEN_WIDTH//2-350,SCREEN_HEIGHT-self.dialogue_offset[i]))  
-                    
-        
+                        SCREEN.blit(self.font_title_render,(SCREEN_WIDTH//2-350,self.dialogue_offset[i]))  
+
+                  
                     
                     self.icon_blit=SCREEN.blit(self.dialogue_show[idx][1],(SCREEN_WIDTH//2-550,SCREEN_HEIGHT-200))
 

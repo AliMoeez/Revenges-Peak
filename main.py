@@ -5,7 +5,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge
+from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge,People
 
 while run:
     level_1_tile_set_rect.clear()
@@ -103,6 +103,10 @@ while run:
     control.mechanic_attack(key)
     control.mechanic_collision()
     control.mechanic_collision_logic()
+    
+    people=People(level_1)
+    people.idle()
+    people.run()
 
     levelone.tile_set_tree_top()
 
