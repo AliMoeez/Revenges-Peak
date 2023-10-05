@@ -20,12 +20,19 @@ while run:
     dialogue=Dialouge(level_1,dialogue_condition)
     
     for event in event_list:
-        if player.level_dialogue_condition(event,event_list): 
+        if player.level_dialogue_condition(event,event_list):
             dialogue_condition=True
             if pygame.MOUSEBUTTONDOWN:
                 dialogue_click_list[0]+=1
                 text_position[0]=0
 
+        if player.level_dialogue_story(event,event_list):
+            dialogue_story_condition=True
+            print("HERERE")
+            if pygame.MOUSEBUTTONDOWN:
+                dialogue_click_list[0]+=1
+                text_position[0]=0
+     
         if dialogue_condition and dialogue.end_dialouge(event,event_list): 
             dialogue_condition=False
 

@@ -43,8 +43,14 @@ class Dialouge:
                 return self.dialogue_show
         if len(self.dialouge_list)>1:
             del self.dialouge_list[1:]
-
     
+    def text_story(self):
+        if self.level_1:
+            self.test_level_1_dialogue=[("TEST",self.player_icon,"You"),
+                                    ("THIS WORKS",self.abyss_icon,"The Abyss")]
+
+
+
     def scrolling_text(self):
         self.message_speed=2
         if self.dialogue_condition:
@@ -80,7 +86,6 @@ class Dialouge:
 
                     self.font_name=pygame.font.Font(self.font,30)  ; self.font_name_render=self.font_name.render(self.dialogue_show[idx][2],True,self.WHITE)
                     SCREEN.blit(self.font_name_render,(SCREEN_WIDTH//2-550,SCREEN_HEIGHT-75))  
-
     
     def end_dialouge(self,event,event_list):
         Dialouge.text_type(self)
