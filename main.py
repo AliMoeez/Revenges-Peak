@@ -16,25 +16,28 @@ while run:
     if level_1:
         SCREEN.fill((131,164,72))
 
-    player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition)
-    dialogue=Dialouge(level_1,dialogue_condition)
+    menu=Menu(level_screen,level_1)
+    player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition)
+    dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
     
     for event in event_list:
-        if player.level_dialogue_condition(event,event_list):
+        if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True
             if pygame.MOUSEBUTTONDOWN:
                 dialogue_click_list[0]+=1
                 text_position[0]=0
 
-        if player.level_dialogue_story(event,event_list):
+        if dialogue.level_dialogue_story(event,event_list):
             dialogue_story_condition=True
-            print("HERERE")
-            if pygame.MOUSEBUTTONDOWN:
+            if event.type==pygame.MOUSEBUTTONDOWN:
                 dialogue_click_list[0]+=1
                 text_position[0]=0
      
-        if dialogue_condition and dialogue.end_dialouge(event,event_list): 
+        if (dialogue_condition or dialogue_story_condition) and dialogue.end_dialouge(event,event_list): 
             dialogue_condition=False
+            dialogue_story_condition=False
+            if level_1_wizard_talk: level_1_wizard_talk=False
+       
 
         if event.type==pygame.QUIT:
             pygame.quit() 
@@ -67,7 +70,6 @@ while run:
         player_control=False
         player_control_index[0]="placeholder"
 
-    menu=Menu(level_screen,level_1)
     menu.main_menu()
     menu.main_menu_buttons()
     menu.level_screen_blit_background()
@@ -78,7 +80,6 @@ while run:
     levelone.tile_set_level_direction()
     levelone.tile_set()
 
-    player.level_object_interaction()
     player.move(key)
     player.attack(key)
     player.control(key)
@@ -112,7 +113,7 @@ while run:
     control.mechanic_collision()
     control.mechanic_collision_logic()
 
-    people=People(level_1)
+    people=People(level_1,level_1_wizard_talk)
     people.idle()
     people.run()
 
@@ -120,7 +121,9 @@ while run:
 
     player.health_power_cooldown_icons()
 
+    dialogue.level_object_interaction()
     dialogue.text_type()
+    dialogue.text_type_story()
     dialogue.show()
     
 

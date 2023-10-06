@@ -5,52 +5,19 @@ from Game_Asset_Code import *
 from .people import People
 
 class Player:
-    def __init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition):
-        People.__init__(self,level_1)
+    def __init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition):
         self.player_x=player_x ; self.player_y=player_y ; self.player_width=player_width ; self.player_height=player_height ; self.player_rect=player_rect ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement
         self.camera_x_y=camera_x_y  ; self.level_1=level_1 ;  self.level_screen=level_screen ; self.player_key=player_key ; self.player_attack_cooldown=player_attack_cooldown ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_health=player_health
         self.player_control_cooldown=player_control_cooldown ; self.player_control=player_control ; self.object_rect=object_rect ; self.dialogue_condition=dialogue_condition
-        self.mouse_button_blit_list=mouse_button_blit_list
-
-
-
-    def distance_level_object(self):
-        self.tile_interact_rect_distance=[]
-        for idx,tile in enumerate(self.object_rect):
-            self.tile_interact_rect_distance.append(math.hypot(self.player_rect.x-self.object_rect[idx].x,self.player_rect.y-self.object_rect[idx].y))
-        return self.tile_interact_rect_distance
-
-    def level_object_interaction(self):
-        Player.distance_level_object(self)
-        self.player_person_distance=People.distance(self)
-        self.left_mouse_button_icon=left_mouse_button_icon
-        if any([self.level_1]):
-            self.mouse_button_blit_list.clear()
-            for idx,distance in enumerate(self.tile_interact_rect_distance):
-                if self.tile_interact_rect_distance[idx]<100: 
-                    SCREEN.blit(self.left_mouse_button_icon,(self.object_rect[idx].x-self.camera_x_y[0]-15,self.object_rect[idx].y-self.camera_x_y[1]-100))
-                    self.mouse_button_blit_list.append("Mouse Button Blitted")
-                    return self.object_rect[idx]
-            for idx,distance in enumerate(self.player_person_distance):
-                if distance<200:
-                    self.mouse_button_blit_list.append("Mouse Button Blitted")
-            
-        
-    def level_dialogue_condition(self,event,event_list):
-        if any([self.level_1]):
-            if event.type==pygame.MOUSEBUTTONDOWN and len(self.mouse_button_blit_list)>0:
-                return True 
-            
-    def level_dialogue_story(self,event,event_list):
-        if any([self.level_1]):
-            if len(self.mouse_button_blit_list)>0:
-                return True
+        self.dialogue_story_condition=dialogue_story_condition
 
     def idle(self,key):
         self.player_idle_list=player_idle_list ; self.player_idle_list_flip=player_idle_list_flip ; self.player_idle_number=player_idle_number
         
         if self.player_key[-1]=="d": SCREEN.blit(self.player_idle_list[int(self.player_idle_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
         else: SCREEN.blit(self.player_idle_list_flip[int(self.player_idle_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-60,self.player_rect.y-self.camera_x_y[1]-40))
+
+        self.player_x_movement[0]=0 ; self.player_y_movement[0]=0
 
         if len(self.player_key)>5: del self.player_key[0]
         
@@ -62,7 +29,7 @@ class Player:
 
     def move(self,key):
         self.player_run_list=player_run_list ; self.player_run_list_flip=player_run_list_flip ; self.player_run_number=player_run_number
-        if any([self.level_1]) and not key[pygame.K_e] and not self.dialogue_condition or self.player_attack_cooldown[0]<=0:
+        if any([self.level_1]) and not key[pygame.K_e] and not self.dialogue_condition and not self.dialogue_story_condition or self.player_attack_cooldown[0]<=0 :
             if key[pygame.K_d] and not key[pygame.K_a]:
                 SCREEN.blit(self.player_run_list[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
                 self.player_x_movement[0]=3  ; self.player_key.append("d")
@@ -100,7 +67,7 @@ class Player:
 
     def attack(self,key):
         self.player_attack_list=player_attack_list ; self.player_attack_list_flip=player_attack_list_flip ; self.player_attack_number=player_attack_number
-        if any([self.level_1]) and key[pygame.K_e] and self.player_attack_cooldown[0]>0 and not self.dialogue_condition :
+        if any([self.level_1]) and key[pygame.K_e] and self.player_attack_cooldown[0]>0 and not self.dialogue_condition and not self.dialogue_story_condition :
             self.player_x_movement[0]=0 ; self.player_y_movement[0]=0
 
             if self.player_key[-1]=="d":
@@ -126,7 +93,7 @@ class Player:
             if self.player_control_cooldown[0]>=1: self.player_control_cooldown[0]=1
 
     def dialouge_state(self,key):
-        if any([self.level_1]) and self.dialogue_condition:
+        if any([self.level_1]) and (self.dialogue_condition or self.dialogue_story_condition):
             Player.idle(self,key)
 
     def health_power_cooldown_icons(self):
