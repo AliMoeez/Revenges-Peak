@@ -94,8 +94,8 @@ class Dialouge:
                 self.dialogue_show=self.test_level_1_dialogue
                 self.dialouge_list.append(self.test_level_1_dialogue)
     
-        if len(self.dialouge_list)>1:
-            del self.dialouge_list[1:]
+        #    if len(self.dialouge_list)>1:
+        #        del self.dialouge_list[1:]
    
     def scrolling_text(self):
         self.message_speed=2

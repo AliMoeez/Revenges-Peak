@@ -27,6 +27,10 @@ left_mouse_button_icon=pygame.transform.scale(left_mouse_button_icon,(40,40))
 abyss_icon=pygame.image.load(r"Assets\Misc\Icons\Abyss_Icon.png")
 abyss_icon=pygame.transform.scale(abyss_icon,(100,150))
 
+red_arrow_icon=pygame.image.load(r"Assets\Misc\Icons\up-arrow.png")
+red_arrow_icon=pygame.transform.scale(red_arrow_icon,(100,150))
+red_arrow_icon_flip=pygame.transform.flip(red_arrow_icon,False,True)
+
 tile_interact_rect_distance=[]
 
 dialogue_condition=False  ; mouse_button_blit_list=[] 

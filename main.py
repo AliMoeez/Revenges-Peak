@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge,People
+from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives
 
 while run:
     level_1_tile_set_rect.clear()
@@ -121,6 +121,9 @@ while run:
 
     player.health_power_cooldown_icons()
 
+    objectives=Objectives(level_1,level_1_wizard_talk)
+    objectives.level_one_objectives()
+    objectives.show_objectives()
     dialogue.level_object_interaction()
     dialogue.text_type()
     dialogue.text_type_story()
