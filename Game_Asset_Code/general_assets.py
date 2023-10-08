@@ -28,8 +28,7 @@ abyss_icon=pygame.image.load(r"Assets\Misc\Icons\Abyss_Icon.png")
 abyss_icon=pygame.transform.scale(abyss_icon,(100,150))
 
 red_arrow_icon=pygame.image.load(r"Assets\Misc\Icons\up-arrow.png")
-red_arrow_icon=pygame.transform.scale(red_arrow_icon,(100,150))
-red_arrow_icon_flip=pygame.transform.flip(red_arrow_icon,False,True)
+red_arrow_icon=pygame.transform.scale(red_arrow_icon,(50,50))
 
 tile_interact_rect_distance=[]
 

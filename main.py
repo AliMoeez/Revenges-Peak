@@ -37,8 +37,8 @@ while run:
             dialogue_condition=False
             dialogue_story_condition=False
             if level_1_wizard_talk: level_1_wizard_talk=False
+            if talk_to_abyss_level_one and not level_1_wizard_talk: talk_to_abyss_level_one=False
        
-
         if event.type==pygame.QUIT:
             pygame.quit() 
             sys.exit()
@@ -121,7 +121,7 @@ while run:
 
     player.health_power_cooldown_icons()
 
-    objectives=Objectives(level_1,level_1_wizard_talk)
+    objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_obeject_level_one)
     objectives.level_one_objectives()
     objectives.show_objectives()
     dialogue.level_object_interaction()

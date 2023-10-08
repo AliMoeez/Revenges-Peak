@@ -29,8 +29,10 @@ class Dialouge:
                 if self.tile_interact_rect_distance[idx]<100: 
                     SCREEN.blit(self.left_mouse_button_icon,(self.object_rect[idx].x-self.camera_x_y[0]-15,self.object_rect[idx].y-self.camera_x_y[1]-100))
                     self.mouse_button_blit_list.append("Mouse Button Blitted")
+                    print(self.object_rect[idx])
                     return self.object_rect[idx]
-                
+                    print(self.object_rect[idx])
+    
     def level_dialogue_condition(self,event,event_list):
         if any([self.level_1]):
             if event.type==pygame.MOUSEBUTTONDOWN and len(self.mouse_button_blit_list)>0:
@@ -77,11 +79,9 @@ class Dialouge:
         if any([self.level_1]):
             for idx,distance in enumerate(People.distance_dialogue(self)):
                 if distance<200:
-                     if self.level_1_wizard_talk:
-                        return True
-                     else:
-                         return False
-    
+                     if self.level_1_wizard_talk: return True
+                     else: return False
+
     def text_story(self):
         if self.level_1:
             self.test_level_1_dialogue=[("TEST",self.player_icon,"You"),
@@ -136,6 +136,7 @@ class Dialouge:
     def end_dialouge(self,event,event_list):
         Dialouge.text_type(self)
         if self.dialogue_condition or self.dialogue_story_condition:
+           # print(self.dialogue_click_list[0],self.dialouge_list[0])
             if self.dialogue_click_list[0]>=len(self.dialouge_list[0]):
                 self.dialogue_click_list[0]=-1
                 return True
