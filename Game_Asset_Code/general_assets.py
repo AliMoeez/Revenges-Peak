@@ -34,4 +34,6 @@ tile_interact_rect_distance=[]
 
 dialogue_condition=False  ; mouse_button_blit_list=[] 
 
-dialogue_click_list=[0] ; dialouge_list=[] ; text_position=[0] ; dialogue_offset=[600] ; dialogue_offset_length=[600]
+dialogue_click_list=[0] ; dialouge_list=[0] ; text_position=[0] ; dialogue_offset=[600] ; dialogue_offset_length=[600]
+
+dialogue_objective_list=[0]

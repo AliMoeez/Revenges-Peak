@@ -12,7 +12,7 @@ class Dialouge:
         self.dialogue_condition=dialogue_condition ; self.object_rect=object_rect ; self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.level_1=level_1 ; self.mouse_button_blit_list=mouse_button_blit_list
         self.dialogue_click_list=dialogue_click_list ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.WHITE=(255,55,55) ; self.dialouge_list=dialouge_list ; self.dialogue_story_condition=dialogue_story_condition
         self.player_icon=player_icon ; self.abyss_icon=abyss_icon ; self.text_position=text_position ; self.dialogue_offset=dialogue_offset ; self.dialogue_offset_length=dialogue_offset_length
-        self.level_1_wizard_talk=level_1_wizard_talk ; self.mouse_button_blit_list=mouse_button_blit_list
+        self.level_1_wizard_talk=level_1_wizard_talk ; self.mouse_button_blit_list=mouse_button_blit_list 
 
     def distance_level_object(self):
         self.tile_interact_rect_distance=[]
@@ -29,13 +29,12 @@ class Dialouge:
                 if self.tile_interact_rect_distance[idx]<100: 
                     SCREEN.blit(self.left_mouse_button_icon,(self.object_rect[idx].x-self.camera_x_y[0]-15,self.object_rect[idx].y-self.camera_x_y[1]-100))
                     self.mouse_button_blit_list.append("Mouse Button Blitted")
-                    print(self.object_rect[idx])
                     return self.object_rect[idx]
-                    print(self.object_rect[idx])
     
     def level_dialogue_condition(self,event,event_list):
         if any([self.level_1]):
             if event.type==pygame.MOUSEBUTTONDOWN and len(self.mouse_button_blit_list)>0:
+                print("HEREREererereRERE")
                 return True 
 
     def text(self):
@@ -52,6 +51,13 @@ class Dialouge:
                 ("Nice ",self.abyss_icon,"The Abyss"),
                 ("Nices work",self.player_icon,"You")
             ]
+
+            self.test_level_3_dialogue=[
+                ("The part three diaglue of lebel 1",self.player_icon,"You"),
+                ("What what what yes yes yes.",self.abyss_icon,"The Abyss"),
+                ("this is working as indedned",self.player_icon,"You"),
+ 
+            ]
     
     def get_index_object(self):
         if self.dialogue_condition:
@@ -66,14 +72,16 @@ class Dialouge:
             self.object_index=Dialouge.get_index_object(self)
             if self.object_index==1:
                 self.dialogue_show=self.test_level_1_dialogue
-                self.dialouge_list.append(self.test_level_1_dialogue)
-                return self.dialogue_show
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
             elif self.object_index==2:
                 self.dialogue_show=self.test_level_2_dialogue
-                self.dialouge_list.append(self.test_level_2_dialogue)
-                return self.dialogue_show
-        if len(self.dialouge_list)>1:
-            del self.dialouge_list[1:]
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+            elif self.object_index==3:
+                self.dialogue_show=self.test_level_3_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
 
     def level_dialogue_story(self,event,event_list):
         if any([self.level_1]):
@@ -90,13 +98,11 @@ class Dialouge:
     def text_type_story(self):
         if self.dialogue_story_condition:
             Dialouge.text_story(self)
-            if self.level_1_wizard_talk:
+            if  self.level_1_wizard_talk:
                 self.dialogue_show=self.test_level_1_dialogue
-                self.dialouge_list.append(self.test_level_1_dialogue)
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
     
-        #    if len(self.dialouge_list)>1:
-        #        del self.dialouge_list[1:]
-   
     def scrolling_text(self):
         self.message_speed=2
         if self.dialogue_condition or self.dialogue_story_condition:
@@ -110,23 +116,24 @@ class Dialouge:
         if self.dialogue_condition or self.dialogue_story_condition:
             self.screen_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT))  ; self.screen_fade.set_alpha(50) ; self.screen_fade.fill((0,0,0)) ; SCREEN.blit(self.screen_fade,(0,0))
             self.text_bgackround_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT-250))  ; self.text_bgackround_fade.set_alpha(50) ; self.text_bgackround_fade.fill((100,100,100)) ; SCREEN.blit(self.text_bgackround_fade,(0,550))
+            
             for idx,dialouge in enumerate(self.dialogue_show):
+              #  print(self.dialogue_show,"DIALIUGE SHOW")
                 if self.dialogue_click_list[0]==idx:
                     self.new_dialogue_list=self.dialogue_show[idx][0].split("\n")
-            
+               #     print(self.new_dialogue_list,"NEW LIST")
+
                     for show_dialogue in self.new_dialogue_list:
                         self.dialogue_offset_length[0]+=50
                         self.dialogue_offset.append(self.dialogue_offset_length[0])
                         if len(self.dialogue_offset)>len(self.new_dialogue_list): del self.dialogue_offset[-1]
                     
-
                     
                     for i,text in enumerate(self.new_dialogue_list):
+    
                         self.font_title=pygame.font.Font(self.font,30) 
                         self.font_title_render=self.font_title.render(self.new_dialogue_list[i][0:int(self.text_position[0])//self.message_speed],True,self.WHITE)
                         SCREEN.blit(self.font_title_render,(SCREEN_WIDTH//2-350,self.dialogue_offset[i]))  
-
-                  
                     
                     self.icon_blit=SCREEN.blit(self.dialogue_show[idx][1],(SCREEN_WIDTH//2-550,SCREEN_HEIGHT-200))
 
@@ -136,11 +143,11 @@ class Dialouge:
     def end_dialouge(self,event,event_list):
         Dialouge.text_type(self)
         if self.dialogue_condition or self.dialogue_story_condition:
-           # print(self.dialogue_click_list[0],self.dialouge_list[0])
-            if self.dialogue_click_list[0]>=len(self.dialouge_list[0]):
-                self.dialogue_click_list[0]=-1
-                return True
-
-        
-
-            
+            try:
+                print(self.dialogue_click_list[0],self.dialouge_list[0])
+                if self.dialogue_click_list[0]>=self.dialouge_list[0]:
+                    print("HERE")
+                    self.dialogue_click_list[0]=0
+                    return True
+            except IndexError:
+                print(self.dialogue_click_list[0],self.dialouge_list[0],"IDNEXEORR")

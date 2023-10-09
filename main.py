@@ -23,21 +23,29 @@ while run:
     for event in event_list:
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True
-            if pygame.MOUSEBUTTONDOWN:
+            dialogue_story_condition=False
+            if event.type==pygame.MOUSEBUTTONDOWN :
+                print("WRONG PLUS")
                 dialogue_click_list[0]+=1
                 text_position[0]=0
 
         if dialogue.level_dialogue_story(event,event_list):
+            mouse_button_blit_list.clear()
             dialogue_story_condition=True
+            dialogue_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN:
+                print("RIGHT PLUS")
                 dialogue_click_list[0]+=1
                 text_position[0]=0
      
         if (dialogue_condition or dialogue_story_condition) and dialogue.end_dialouge(event,event_list): 
+            mouse_button_blit_list.clear()
             dialogue_condition=False
             dialogue_story_condition=False
-            if level_1_wizard_talk: level_1_wizard_talk=False
-            if talk_to_abyss_level_one and not level_1_wizard_talk: talk_to_abyss_level_one=False
+            if dialogue_objective_list[0]==1:
+                level_1_wizard_talk=False
+            if dialogue_objective_list[0]==2:
+                talk_to_abyss_level_one=False
        
         if event.type==pygame.QUIT:
             pygame.quit() 
@@ -64,8 +72,7 @@ while run:
                         player_control=True
             if key[pygame.K_v] and player_control:
                 player_control_cooldown[0]=-0.05
-        
-                    
+              
     if player_control_cooldown[0]<=0:
         player_control=False
         player_control_index[0]="placeholder"
@@ -121,7 +128,7 @@ while run:
 
     player.health_power_cooldown_icons()
 
-    objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_obeject_level_one)
+    objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_obeject_level_one,dialogue_objective_list)
     objectives.level_one_objectives()
     objectives.show_objectives()
     dialogue.level_object_interaction()
