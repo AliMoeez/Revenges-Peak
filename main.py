@@ -25,7 +25,6 @@ while run:
             dialogue_condition=True
             dialogue_story_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN :
-                print("WRONG PLUS")
                 dialogue_click_list[0]+=1
                 text_position[0]=0
 
@@ -34,7 +33,6 @@ while run:
             dialogue_story_condition=True
             dialogue_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN:
-                print("RIGHT PLUS")
                 dialogue_click_list[0]+=1
                 text_position[0]=0
      
@@ -46,7 +44,9 @@ while run:
                 level_1_wizard_talk=False
             if dialogue_objective_list[0]==2:
                 talk_to_abyss_level_one=False
-       
+            if dialogue_objective_list[0]==3:
+                investigate_object_level_one=False
+                
         if event.type==pygame.QUIT:
             pygame.quit() 
             sys.exit()
@@ -128,7 +128,7 @@ while run:
 
     player.health_power_cooldown_icons()
 
-    objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_obeject_level_one,dialogue_objective_list)
+    objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,dialogue_objective_list)
     objectives.level_one_objectives()
     objectives.show_objectives()
     dialogue.level_object_interaction()

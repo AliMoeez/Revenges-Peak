@@ -1,14 +1,21 @@
-def func(x,y):
-    return x+y, x,y
+"""if dialogue_objective_list[0]==1:
+level_1_wizard_talk=False
+if dialogue_objective_list[0]==2:
+talk_to_abyss_level_one=False
+if dialogue_objective_list[0]==3:
+investigate_object_level_one=False"""
 
+x=True
+y=True
+z=True
 
-def func_2():
-    return func(2,3)
+list_bool=[x,y,z]
 
-def func_3():
-    x=func_2()[1:]
-    print(x[1])
+num=0
 
+for i in range(len(list_bool)):
+    num+=1
+    if num==list_bool[i]:
+        i=False
+    print(list_bool)
 
-
-func_3()

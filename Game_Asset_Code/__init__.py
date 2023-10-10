@@ -4,3 +4,4 @@ from .general_assets import *
 from .player_assets import *
 from .dialogue_assets import *
 from .people_assets import * 
+from .diagloue_text import level_1_dialogue,level_1_dialogue_walk_up

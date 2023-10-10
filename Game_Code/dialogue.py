@@ -34,31 +34,14 @@ class Dialouge:
     def level_dialogue_condition(self,event,event_list):
         if any([self.level_1]):
             if event.type==pygame.MOUSEBUTTONDOWN and len(self.mouse_button_blit_list)>0:
-                print("HEREREererereRERE")
                 return True 
 
     def text(self):
         if self.level_1:    
-            self.test_level_1_dialogue=[
-                ("This is a test of the dialogue system",self.player_icon,"You"),
-                ("This shoul work and it if does it will be autoamted",self.abyss_icon,"The Abyss"),
-            ]
+            self.test_level_1_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[0]
+            self.test_level_2_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[1]
+            self.test_level_3_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[2]
 
-            self.test_level_2_dialogue=[
-                ("The Sun is very bright like it was never ever this bright yesterday \n did you know that. I also had a tuna sandwhich yesterday which was very good.",self.player_icon,"You"),
-                ("Ok what I am supposed to do with that information. I have better  \n things to do.",self.abyss_icon,"The Abyss"),
-                ("work",self.player_icon,"You"),
-                ("Nice ",self.abyss_icon,"The Abyss"),
-                ("Nices work",self.player_icon,"You")
-            ]
-
-            self.test_level_3_dialogue=[
-                ("The part three diaglue of lebel 1",self.player_icon,"You"),
-                ("What what what yes yes yes.",self.abyss_icon,"The Abyss"),
-                ("this is working as indedned",self.player_icon,"You"),
- 
-            ]
-    
     def get_index_object(self):
         if self.dialogue_condition:
             self.object_rect_idx=Dialouge.level_object_interaction(self)
@@ -92,9 +75,8 @@ class Dialouge:
 
     def text_story(self):
         if self.level_1:
-            self.test_level_1_dialogue=[("TEST",self.player_icon,"You"),
-                                    ("THIS WORKS",self.abyss_icon,"The Abyss")]
-       
+            self.test_level_1_dialogue=level_1_dialogue_walk_up(self.player_icon,self.abyss_icon)
+
     def text_type_story(self):
         if self.dialogue_story_condition:
             Dialouge.text_story(self)
@@ -118,10 +100,8 @@ class Dialouge:
             self.text_bgackround_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT-250))  ; self.text_bgackround_fade.set_alpha(50) ; self.text_bgackround_fade.fill((100,100,100)) ; SCREEN.blit(self.text_bgackround_fade,(0,550))
             
             for idx,dialouge in enumerate(self.dialogue_show):
-              #  print(self.dialogue_show,"DIALIUGE SHOW")
                 if self.dialogue_click_list[0]==idx:
                     self.new_dialogue_list=self.dialogue_show[idx][0].split("\n")
-               #     print(self.new_dialogue_list,"NEW LIST")
 
                     for show_dialogue in self.new_dialogue_list:
                         self.dialogue_offset_length[0]+=50
@@ -144,10 +124,8 @@ class Dialouge:
         Dialouge.text_type(self)
         if self.dialogue_condition or self.dialogue_story_condition:
             try:
-                print(self.dialogue_click_list[0],self.dialouge_list[0])
                 if self.dialogue_click_list[0]>=self.dialouge_list[0]:
-                    print("HERE")
                     self.dialogue_click_list[0]=0
                     return True
             except IndexError:
-                print(self.dialogue_click_list[0],self.dialouge_list[0],"IDNEXEORR")
+                pass

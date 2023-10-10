@@ -7,13 +7,13 @@ from .player import Player
 from .dialogue import Dialouge
 
 class Objectives:
-    def __init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_obeject_level_one,dialogue_objective_list):
+    def __init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,dialogue_objective_list):
         People.__init__(self,level_1,level_1_wizard_talk)
         Player.__init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition)
         Dialouge.__init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
         self.level_1=level_1 ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.RED=(255,55,55) ; self.level_1_wizard_talk=level_1_wizard_talk
         self.player_rect=player_rect ; self.people_level_1_rect=people_level_1_rect ; self.camera_x_y=camera_x_y ; self.red_arrow_icon=red_arrow_icon
-        self.WHITE=(255,255,255) ; self.talk_to_abyss_level_one=talk_to_abyss_level_one ; self.investigate_obeject_level_one=investigate_obeject_level_one
+        self.WHITE=(255,255,255) ; self.talk_to_abyss_level_one=talk_to_abyss_level_one ; self.investigate_object_level_one=investigate_object_level_one
         self.dialogue_objective_list=dialogue_objective_list
     
     def distance(self,place_x:int,place_y:int):
@@ -33,18 +33,22 @@ class Objectives:
                     self.dialogue_objective_list[0]=1
                 return self.objectives_distance[0],self.people_level_1_rect[0].x,self.people_level_1_rect[0].y
             
-           
             if self.talk_to_abyss_level_one and not self.level_1_wizard_talk:
                 self.objectives_distance=Objectives.distance(self,384,384)
                 if self.objectives_distance[0]<200:
                     self.dialogue_objective_list[0]=2
                 return self.objectives_distance[0],384,384
             
-            if self.investigate_obeject_level_one and not self.talk_to_abyss_level_one:
+            if self.investigate_object_level_one and not self.talk_to_abyss_level_one:
                 self.objectives_distance=Objectives.distance(self,4224,1952)
                 if self.objectives_distance[0]<200:
                     self.dialogue_objective_list[0]=3
                 return self.objectives_distance[0],4224,1952
+        
+            if not self.investigate_object_level_one:
+                self.objectives_distance=Objectives.distance(self,4512,160)
+                return self.objectives_distance[0],4512,160
+       
             
     def rotation_angle(self):
         if any([self.level_1]):
