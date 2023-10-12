@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives
+from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives,Lose
 
 while run:
     level_1_tile_set_rect.clear()
@@ -19,27 +19,21 @@ while run:
     menu=Menu(level_screen,level_1)
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
+    lose=Lose(level_1,player_lose_condition)
     
     for event in event_list:
         if dialogue.level_dialogue_condition(event,event_list):
-            dialogue_condition=True
-            dialogue_story_condition=False
+            dialogue_condition=True ; dialogue_story_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN :
-                dialogue_click_list[0]+=1
-                text_position[0]=0
+                dialogue_click_list[0]+=1 ; text_position[0]=0
 
         if dialogue.level_dialogue_story(event,event_list):
-            mouse_button_blit_list.clear()
-            dialogue_story_condition=True
-            dialogue_condition=False
+            mouse_button_blit_list.clear() ; dialogue_story_condition=True ; dialogue_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN:
-                dialogue_click_list[0]+=1
-                text_position[0]=0
+                dialogue_click_list[0]+=1 ; text_position[0]=0
      
         if (dialogue_condition or dialogue_story_condition) and dialogue.end_dialouge(event,event_list): 
-            mouse_button_blit_list.clear()
-            dialogue_condition=False
-            dialogue_story_condition=False
+            mouse_button_blit_list.clear() ; dialogue_condition=False ; dialogue_story_condition=False
             if dialogue_objective_list[0]==1:
                 level_1_wizard_talk=False
             if dialogue_objective_list[0]==2:
@@ -72,6 +66,15 @@ while run:
                         player_control=True
             if key[pygame.K_v] and player_control:
                 player_control_cooldown[0]=-0.05
+
+        if lose.retry(event):
+            player_lose_condition=False
+
+        if lose.back_to_menu(event):
+            player_lose_condition=False
+
+    if lose.condition():
+        player_lose_condition=True
               
     if player_control_cooldown[0]<=0:
         player_control=False
@@ -131,10 +134,12 @@ while run:
     objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,dialogue_objective_list)
     objectives.level_one_objectives()
     objectives.show_objectives()
+    
     dialogue.level_object_interaction()
     dialogue.text_type()
     dialogue.text_type_story()
     dialogue.show()
-    
+
+    lose.show_loss()
 
     pygame.display.update()

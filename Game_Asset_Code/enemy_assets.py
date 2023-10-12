@@ -17,7 +17,7 @@ skeleton_attack=[skeleton_1_attack_1,skeleton_1_attack_2,skeleton_1_attack_3,ske
 for i,skeleton in enumerate(skeleton_attack): skeleton_attack[i]=pygame.transform.scale(skeleton_attack[i],(100*1.8,65*1.8))
 for i,skeleton in enumerate(skeleton_attack[:]): skeleton_attack_flip.append(pygame.transform.flip(skeleton_attack[i],True,False))
 
-enemy_1_level_1_x=[400,800] ; enemy_1_level_1_y=[200,200]
+enemy_1_level_1_x=[400,450] ; enemy_1_level_1_y=[2000,2000] #400,200  800,200
 
 enemy_1_x_movement=[] ; enemy_1_y_movement=[] 
 
@@ -47,7 +47,7 @@ brute_1_attack_flip_1=[] ; brute_1_attack_number=[0]
 for i,brute in enumerate(brute_1_attack_1): brute_1_attack_1[i]=pygame.transform.scale(brute_1_attack_1[i],(100*1.8,65*1.8))
 for i,brute in enumerate(brute_1_attack_1[:]) : brute_1_attack_flip_1.append(pygame.transform.flip(brute_1_attack_1[i],True,False))
 
-enemy_2_level_1_x=[600] ; enemy_2_level_1_y=[200]
+enemy_2_level_1_x=[500] ; enemy_2_level_1_y=[2000]  #600,200
 
 enemy_2_x_movement=[] ; enemy_2_y_movement=[]
 

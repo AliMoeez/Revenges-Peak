@@ -9,7 +9,7 @@ class EnemyOne:
         self.skeleton_run_number=skeleton_run_number ; self.skeleton_attack_number=skeleton_attack_number ; self.player_rect=player_rect
         self.enemy_1_x_movement=enemy_1_x_movement ; self.enemy_1_y_movement=enemy_1_y_movement ; self.player_control_index=player_control_index
         self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_attack_number=player_attack_number ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"
-        self.red=(178,34,34) ; self.player_key=player_key
+        self.red=(178,34,34) ; self.player_key=player_key ; self.player_health=player_health
         if level_1:
             self.enemy_1_rects=enemy_1_level_1_rect
             self.tile_level=self.level_1_tile_set_rect
@@ -75,7 +75,9 @@ class EnemyOne:
                         SCREEN.blit(self.skeleton_attack_flip[int(self.skeleton_attack_number[idx]//2)],(self.enemy_1_rects[idx].x-self.camera_x_y[0]-55,self.enemy_1_rects[idx].y-self.camera_x_y[1]-30))
                     pygame.draw.rect(SCREEN,(100,200,200),pygame.Rect(self.enemy_1_rects[idx].x-self.camera_x_y[0]+20,self.enemy_1_rects[idx].y-self.camera_x_y[1]+12,40,70),width=1)
                     self.skeleton_attack_number[idx]+=0.10
-                    if self.skeleton_attack_number[idx]>7: self.skeleton_attack_number[idx]=0
+                    if self.skeleton_attack_number[idx]>7:
+                        self.skeleton_attack_number[idx]=0
+                        self.player_health[0]-=200
 
     def player_hit(self):
         if any([self.level_1]):

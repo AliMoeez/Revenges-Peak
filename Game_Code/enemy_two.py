@@ -11,6 +11,8 @@ class EnemyTwo:
         self.player_rect=player_rect ; self.player_control_index=player_control_index ; self.enemy_2_rects=enemy_2_rects ; self.brute_1_attack_number=brute_1_attack_number
         self.enemy_2_level_1_x=enemy_2_level_1_x ; self.enemy_2_level_1_y=enemy_2_level_1_y ; self.enemy_2_x_movement=enemy_2_x_movement ; self.enemy_2_y_movement=enemy_2_y_movement
         self.enemy_rects=enemy_1_level_1_rect+enemy_2_rects ; self.enemy_index=Control.enemy_index(self) ; self.level_1_tile_set_rect=level_1_tile_set_rect
+        self.player_health=player_health
+
         if self.level_1:
             self.tile_level=self.level_1_tile_set_rect
             for i,num in enumerate(self.enemy_2_level_1_x): 
@@ -76,7 +78,11 @@ class EnemyTwo:
                     else:
                         SCREEN.blit(self.brute_1_attack_flip_1[int(self.brute_1_attack_number[idx]//2)],(self.enemy_2_rects[idx].x-self.camera_x_y[0]-55,self.enemy_2_rects[idx].y-self.camera_x_y[1]-30))
                     self.brute_1_attack_number[idx]+=0.10
-                    if self.brute_1_attack_number[idx]>7: self.brute_1_attack_number[idx]=0
+                    if self.brute_1_attack_number[idx]>7: 
+                        self.brute_1_attack_number[idx]=0
+                        self.player_health[0]-=100
+
+
 
     def collision_with_object(self):
         if any([self.level_1]):
