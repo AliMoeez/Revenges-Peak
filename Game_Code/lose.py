@@ -3,8 +3,9 @@ import pygame
 from Game_Asset_Code import *
 
 class Lose:
-    def __init__(self,level_1,player_lose_condition):
+    def __init__(self,level_1,player_lose_condition,reset_locations):
         self.level_1=level_1 
+        self.reset_locations=reset_locations
         self.player_health=player_health ; self.player_lose_condition=player_lose_condition
         self.font=r"Assets\Misc\Fonts\Pixellari.ttf" 
         self.RED=(220,20,60) ; self.WHITE=(255,255,255)
@@ -62,5 +63,16 @@ class Lose:
                 self.player_health[0]=1000
                 return True
 
-    def reset_positions(self):
-        pass 
+    def reset_positions(self,object,x_pos:int,y_pos:int):
+        if self.reset_locations:
+            object.x=x_pos
+            object.y=y_pos
+            return object
+        
+    def reset_positions_multiple(self,object:list,x_pos:list,y_pos:list):
+        if self.reset_locations:
+            for idx,charactor in enumerate(object):
+                object[idx].x=x_pos[idx]
+                object[idx].y=y_pos[idx]
+            return object
+

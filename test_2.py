@@ -11,11 +11,11 @@ z=True
 
 list_bool=[x,y,z]
 
-num=0
 
-for i in range(len(list_bool)):
-    num+=1
-    if num==list_bool[i]:
-        i=False
-    print(list_bool)
+print(list_bool)
 
+for i in list_bool:
+    x=False
+
+
+print(list_bool)

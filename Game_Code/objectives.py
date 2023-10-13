@@ -9,7 +9,7 @@ from .dialogue import Dialouge
 class Objectives:
     def __init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,dialogue_objective_list):
         People.__init__(self,level_1,level_1_wizard_talk)
-        Player.__init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition)
+        Player.__init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition,reset_locations)
         Dialouge.__init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
         self.level_1=level_1 ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.RED=(255,55,55) ; self.level_1_wizard_talk=level_1_wizard_talk
         self.player_rect=player_rect ; self.people_level_1_rect=people_level_1_rect ; self.camera_x_y=camera_x_y ; self.red_arrow_icon=red_arrow_icon

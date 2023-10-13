@@ -2,14 +2,15 @@ import pygame
 import math
 
 from Game_Asset_Code import *
-from .people import People
+from .lose import Lose
 
 class Player:
-    def __init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition):
+    def __init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition,reset_locations):
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations)
         self.player_x=player_x ; self.player_y=player_y ; self.player_width=player_width ; self.player_height=player_height ; self.player_rect=player_rect ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement
         self.camera_x_y=camera_x_y  ; self.level_1=level_1 ;  self.level_screen=level_screen ; self.player_key=player_key ; self.player_attack_cooldown=player_attack_cooldown ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_health=player_health
         self.player_control_cooldown=player_control_cooldown ; self.player_control=player_control ; self.object_rect=object_rect ; self.dialogue_condition=dialogue_condition
-        self.dialogue_story_condition=dialogue_story_condition
+        self.dialogue_story_condition=dialogue_story_condition ; self.reset_locations=reset_locations
 
     def idle(self,key):
         self.player_idle_list=player_idle_list ; self.player_idle_list_flip=player_idle_list_flip ; self.player_idle_number=player_idle_number
@@ -121,7 +122,12 @@ class Player:
                 self.player_fall_number[0]+=0.15
                 if self.player_fall_number[0]>7:
                     self.player_fall_number[0]=7
-                    
+
+    def reset_position(self):
+        if self.reset_locations:
+            if self.level_1:
+                Lose.reset_positions(self,player_rect,500,700)
+
     def collision_with_object(self):
         if self.level_1:
             self.tile_hit=[]

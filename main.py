@@ -17,9 +17,9 @@ while run:
         SCREEN.fill((131,164,72))
 
     menu=Menu(level_screen,level_1)
-    player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition)
+    player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition,reset_locations)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
-    lose=Lose(level_1,player_lose_condition)
+    lose=Lose(level_1,player_lose_condition,reset_locations)
     
     for event in event_list:
         if dialogue.level_dialogue_condition(event,event_list):
@@ -69,16 +69,23 @@ while run:
 
         if lose.retry(event):
             player_lose_condition=False
+            reset_locations=True
 
         if lose.back_to_menu(event):
             player_lose_condition=False
+            reset_locations=True
+            level_1=False
+    
+   # print(reset_locations)
 
     if lose.condition():
         player_lose_condition=True
+
               
     if player_control_cooldown[0]<=0:
         player_control=False
         player_control_index[0]="placeholder"
+
 
     menu.main_menu()
     menu.main_menu_buttons()
@@ -90,11 +97,14 @@ while run:
     levelone.tile_set_level_direction()
     levelone.tile_set()
 
+   # lose.reset_positions(1,2)
+
     player.move(key)
     player.attack(key)
     player.control(key)
     player.dialouge_state(key)
     player.fall()
+    player.reset_position()
     player.collision_with_object()
     player.collision_with_object_logic()
 
