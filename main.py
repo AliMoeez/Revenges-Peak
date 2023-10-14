@@ -18,6 +18,9 @@ while run:
 
     menu=Menu(level_screen,level_1)
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition,reset_locations)
+    enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations)
+    enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations)
+    people=People(level_1,level_1_wizard_talk,reset_locations)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations)
     
@@ -75,18 +78,19 @@ while run:
             player_lose_condition=False
             reset_locations=True
             level_1=False
-    
-   # print(reset_locations)
-
+           
     if lose.condition():
         player_lose_condition=True
-
               
     if player_control_cooldown[0]<=0:
         player_control=False
         player_control_index[0]="placeholder"
 
+    if player.reset_position() and enemy_one.reset_position() and enemy_two.reset_position() and people.reset_position():
+        level_1_wizard_talk=True
+        reset_locations=False
 
+    
     menu.main_menu()
     menu.main_menu_buttons()
     menu.level_screen_blit_background()
@@ -97,27 +101,23 @@ while run:
     levelone.tile_set_level_direction()
     levelone.tile_set()
 
-   # lose.reset_positions(1,2)
-
     player.move(key)
     player.attack(key)
     player.control(key)
     player.dialouge_state(key)
     player.fall()
-    player.reset_position()
     player.collision_with_object()
     player.collision_with_object_logic()
 
-    enemy_one=EnemyOne(level_1,enemy_1_level_1_rect)
     enemy_one.distance()
     enemy_one.idle()
     enemy_one.run()
     enemy_one.attack()
     enemy_one.player_hit()
+    enemy_one.fall()
     enemy_one.collision_with_object()
     enemy_one.collision_with_object_logic()
 
-    enemy_two=EnemyTwo(level_1,enemy_2_rects)
     enemy_two.distance()
     enemy_two.idle()
     enemy_two.run()
@@ -133,7 +133,6 @@ while run:
     control.mechanic_collision()
     control.mechanic_collision_logic()
 
-    people=People(level_1,level_1_wizard_talk)
     people.idle()
     people.run()
 

@@ -115,6 +115,7 @@ class Player:
         self.player_fall_list=player_fall_list ; self.player_fall_list_flip=player_fall_list_flip ; self.player_fall_number=player_fall_number
         if any([self.level_1]): 
             if self.player_health[0]<=0:
+                self.player_x_movement[0]=0 ; self.player_y_movement[0]=0
                 if self.player_key[-1]=='d':
                     SCREEN.blit(self.player_fall_list[int(self.player_fall_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
                 else:
@@ -126,7 +127,9 @@ class Player:
     def reset_position(self):
         if self.reset_locations:
             if self.level_1:
-                Lose.reset_positions(self,player_rect,500,700)
+                Lose.reset_positions(self,player_rect,self.player_x,self.player_y)
+                return True
+                
 
     def collision_with_object(self):
         if self.level_1:

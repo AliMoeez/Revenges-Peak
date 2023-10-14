@@ -2,6 +2,7 @@ import pygame
 
 from Game_Asset_Code import *
 
+
 class Lose:
     def __init__(self,level_1,player_lose_condition,reset_locations):
         self.level_1=level_1 
@@ -10,6 +11,7 @@ class Lose:
         self.font=r"Assets\Misc\Fonts\Pixellari.ttf" 
         self.RED=(220,20,60) ; self.WHITE=(255,255,255)
         self.screen_fade_number=screen_fade_number
+        self.reset_length=reset_length
 
     def condition(self):
         if any([self.level_1]):
@@ -75,4 +77,5 @@ class Lose:
                 object[idx].x=x_pos[idx]
                 object[idx].y=y_pos[idx]
             return object
+        
 

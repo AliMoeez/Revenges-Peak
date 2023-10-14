@@ -40,5 +40,5 @@ dialogue_click_list=[0] ; dialouge_list=[0] ; text_position=[0] ; dialogue_offse
 
 dialogue_objective_list=[0]
 
-player_lose_condition=False ; reset_locations=False
+player_lose_condition=False ; reset_locations=False ; reset_length=[0]
 

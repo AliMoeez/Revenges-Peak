@@ -6,7 +6,7 @@ from .enemy_one import EnemyOne
 
 class Control(EnemyOne):
     def __init__(self,level_1,player_control,player_control_index):
-        super().__init__(level_1,enemy_1_level_1_rect)
+        super().__init__(level_1,enemy_1_level_1_rect,reset_locations)
         self.player_rect=player_rect ; self.enemy_1_level_1_rect=enemy_1_level_1_rect ; self.level_1=level_1 ; self.player_control_index=player_control_index
         self.player_control=player_control ; self.player_control_cooldown=player_control_cooldown ; self.enemy_1_level_1_rect=enemy_1_level_1_rect 
         self.camera_x_y=camera_x_y ; self.enemy_run_number=enemy_run_number ; self.enemy_idle_number=enemy_idle_number ; self.player_key=player_key

@@ -2,13 +2,18 @@ import pygame
 import math
 
 from Game_Asset_Code import * 
+from .lose import Lose
 
 class People:
-    def __init__(self,level_1,level_1_wizard_talk):
+    def __init__(self,level_1,level_1_wizard_talk,reset_locations):
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations)
         self.level_1=level_1 ; self.people_level_1_rect=people_level_1_rect ; self.player_rect=player_rect
         self.people_level_x_movement=people_level_x_movement ; self.people_level_y_movement=people_level_y_movement
         self.camera_x_y=camera_x_y ; self.elder_idle_number=elder_idle_number ; self.elder_run_number=elder_run_number
-        self.level_1_wizard_talk=level_1_wizard_talk
+        self.level_1_wizard_talk=level_1_wizard_talk ; self.reset_locations=reset_locations
+
+        self.people_level_1_x=people_level_1_x ; self.people_level_1_y=people_level_1_y
+        
         if self.level_1:
             self.people_rect=self.people_level_1_rect
         if any([self.level_1]):
@@ -38,6 +43,8 @@ class People:
         self.elder_idle_list=elder_idle_list ; self.elder_idle_list_flip=elder_idle_list_flip
         if any([self.level_1]):
             for idx,person in enumerate(self.people_rect):
+                if self.level_1_wizard_talk:
+                    self.people_level_x_movement[idx]=0
                 if self.people_level_x_movement[idx]==0 and self.people_level_y_movement[idx]==0:
                     SCREEN.blit(self.elder_idle_list[int(self.elder_idle_number[idx])//2],(self.people_rect[idx].x-self.camera_x_y[0],self.people_rect[idx].y-self.camera_x_y[1]))
             self.elder_idle_number[idx]+=0.10
@@ -52,9 +59,17 @@ class People:
                 self.people_rect[idx].x+=self.people_level_x_movement[idx]
                 self.people_rect[idx].y+=self.people_level_y_movement[idx]
                 if self.people_level_x_movement[idx]!=0 or self.people_level_y_movement[idx]!=0:
-                        SCREEN.blit(self.elder_run_list_flip[int(self.elder_run_number[idx])//2],(self.people_rect[idx].x-self.camera_x_y[0],self.people_rect[idx].y-self.camera_x_y[1]))
+                    SCREEN.blit(self.elder_run_list_flip[int(self.elder_run_number[idx])//2],(self.people_rect[idx].x-self.camera_x_y[0],self.people_rect[idx].y-self.camera_x_y[1]))
             self.elder_run_number[idx]+=0.20
             if self.elder_run_number[idx]>9: self.elder_run_number[idx]=0
+
+    def reset_position(self):
+        if self.level_1:
+            if self.reset_locations:
+                for idx,person in enumerate(self.people_rect):
+                    self.people_level_x_movement[idx]=0
+                Lose.reset_positions_multiple(self,self.people_rect,self.people_level_1_x,self.people_level_1_y)
+                return True
 
 
 
