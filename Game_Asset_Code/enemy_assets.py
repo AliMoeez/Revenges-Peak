@@ -20,7 +20,7 @@ for i,skeleton in enumerate(skeleton_attack[:]): skeleton_attack_flip.append(pyg
 skeleton_1_fall_1=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\dead_far_1.png") ; skeleton_1_fall_2=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\dead_far_2.png") ; skeleton_1_fall_3=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\dead_far_3.png")
 skeleton_1_fall_4=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\dead_far_4.png") ; skeleton_1_fall_5=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\dead_far_5.png") ; skeleton_1_fall_6=pygame.image.load(r"Assets\Enemies\Skeleton Enemy\Skeleton Assets\dead_far_6.png")
 skeleton_fall=[skeleton_1_fall_1,skeleton_1_fall_2,skeleton_1_fall_3,skeleton_1_fall_4,skeleton_1_fall_5,skeleton_1_fall_6] ; skeleton_fall_flip=[] ; skeleton_fall_number=[]
-for i,skeleton in enumerate(skeleton_fall): skeleton_fall[i]=pygame.transform.scale(skeleton_fall[i],(100*1.8,65*1.8))
+for i,skeleton in enumerate(skeleton_fall): skeleton_fall[i]=pygame.transform.scale(skeleton_fall[i],(75*1.8,40*1.8))
 for i,skeleton in enumerate(skeleton_fall[:]): skeleton_fall_flip.append(pygame.transform.flip(skeleton_fall[i],True,False))
 
 enemy_1_level_1_x=[400,450] ; enemy_1_level_1_y=[2000,1700] #400,200  800,200
@@ -29,7 +29,7 @@ enemy_1_x_movement=[] ; enemy_1_y_movement=[]
 
 enemy_1_level_1_rect=[]
 
-enemy_1_health=[]
+enemy_1_health=[] ; enemy_1_fall_type=[]
 
 for i,num in enumerate(enemy_1_level_1_x): enemy_1_level_1_rect.append(pygame.Rect(enemy_1_level_1_x[i],enemy_1_level_1_y[i],40,70))
 
@@ -58,15 +58,15 @@ for i,brute in enumerate(brute_1_attack_1[:]) : brute_1_attack_flip_1.append(pyg
 brute_1_fall_1_1=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\fall_back_1.png") ; brute_1_fall_1_2=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\fall_back_2.png")  ; brute_1_fall_1_3=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\fall_back_3.png")
 brute_1_fall_1_4=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\fall_back_4.png") ; brute_1_fall_1_5=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\fall_back_5.png") 
 brute_1_fall_1=[brute_1_fall_1_1,brute_1_fall_1_2,brute_1_fall_1_3,brute_1_fall_1_4,brute_1_fall_1_5]
-brute_1_fall_flip_1=[] ; brute_1_fall_number=[0]
-for i,brute in enumerate(brute_1_fall_1): brute_1_fall_1[i]=pygame.transform.scale(brute_1_fall_1[i],(100*1.8,65*1.8))
+brute_1_fall_flip_1=[] ; brute_1_fall_number=[]
+for i,brute in enumerate(brute_1_fall_1): brute_1_fall_1[i]=pygame.transform.scale(brute_1_fall_1[i],(59*1.8,35*1.8))
 for i,brute in enumerate(brute_1_fall_1[:]) : brute_1_fall_flip_1.append(pygame.transform.flip(brute_1_fall_1[i],True,False))
 
 enemy_2_level_1_x=[500] ; enemy_2_level_1_y=[2000]  #600,200
 
 enemy_2_x_movement=[] ; enemy_2_y_movement=[]
 
-enemy_2_rects=[]
+enemy_2_rects=[] ; enemy_2_fall_type=[]  ; enemy_2_health=[]
 
 enemy_run_number=[0] ; enemy_idle_number=[0] ; enemy_attack_number=[0] ; enemy_x_movement=[0] ; enemy_y_movement=[0]
 

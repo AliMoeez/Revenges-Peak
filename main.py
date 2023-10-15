@@ -122,6 +122,8 @@ while run:
     enemy_two.idle()
     enemy_two.run()
     enemy_two.attack()
+    enemy_two.player_hit()
+    enemy_two.fall()
     enemy_two.collision_with_object()
     enemy_two.collision_with_object_logic()
 

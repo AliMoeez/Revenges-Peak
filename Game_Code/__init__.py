@@ -8,3 +8,4 @@ from .dialogue import Dialouge
 from .people import People
 from .objectives import Objectives
 from .lose import Lose
+from .enemy_general_functions import EnemyGeneralFunctions
