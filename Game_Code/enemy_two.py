@@ -51,38 +51,19 @@ class EnemyTwo:
         self.enemy_2_distance=EnemyTwo.distance(self)
         self.brute_1_attack_1=brute_1_attack_1 ; self.brute_1_attack_flip_1=brute_1_attack_flip_1
         if any([self.level_1]):
-            for idx,distance in enumerate(self.enemy_2_distance):
-                if not self.enemy_index==idx and distance<100 and self.enemy_2_health[idx]>0:
-                    self.enemy_2_x_movement[idx]=0 ; self.enemy_2_y_movement[idx]=0
-                    if self.player_rect.x>=self.enemy_2_rects[idx].x:
-                        SCREEN.blit(self.brute_1_attack_1[int(self.brute_1_attack_number[idx]//2)],(self.enemy_2_rects[idx].x-self.camera_x_y[0]-25,self.enemy_2_rects[idx].y-self.camera_x_y[1]-30))
-                        self.enemy_2_fall_type[idx]==1
-                    else:
-                        SCREEN.blit(self.brute_1_attack_flip_1[int(self.brute_1_attack_number[idx]//2)],(self.enemy_2_rects[idx].x-self.camera_x_y[0]-55,self.enemy_2_rects[idx].y-self.camera_x_y[1]-30))
-                        self.enemy_2_fall_type[idx]=2
-                    self.brute_1_attack_number[idx]+=0.10
-                    if self.brute_1_attack_number[idx]>7: 
-                        self.brute_1_attack_number[idx]=0
-                        self.player_health[0]-=10
+            EnemyGeneralFunctions.attack(self,self.enemy_2_distance,self.enemy_2_health,self.player_control_index,self.enemy_2_x_movement,self.enemy_2_y_movement,
+                self.brute_1_attack_1,self.brute_1_attack_flip_1,self.brute_1_attack_number,self.enemy_2_rects,self.enemy_2_fall_type,
+                0.10,7,25,55,30,30,self.player_health,20)
         
     def player_hit(self):
         if any([self.level_1]):
-            self.font_hit=pygame.font.Font(self.font,15) 
-            self.font_hit_render=self.font_hit.render("-25",True,self.red) 
-            for idx,distance in enumerate(self.enemy_2_distance):
-                if self.player_attack_number[0]>6.0 and distance<100 and self.enemy_2_health[idx]>0:
-                    if (self.player_rect.x<=self.enemy_2_rects[idx].x and self.player_key[-1]=="d"):
-                        SCREEN.blit(self.font_hit_render,(self.enemy_2_rects[idx].x-self.camera_x_y[0]+25,self.enemy_2_rects[idx].y-self.camera_x_y[1]))
-                        self.enemy_2_health[idx]-=50
-                    if (self.player_rect.x>=self.enemy_2_rects[idx].x and self.player_key[-1]=="a"):
-                        SCREEN.blit(self.font_hit_render,(self.enemy_2_rects[idx].x-self.camera_x_y[0]+25,self.enemy_2_rects[idx].y-self.camera_x_y[1]))
-                        self.enemy_2_health[idx]-=50
+                EnemyGeneralFunctions.player_hit(self,self.font,self.red,self.enemy_2_distance,player_attack_number,self.enemy_2_health,self.enemy_2_rects,self.player_key,25)
 
     def fall(self):
         self.brute_1_fall_1=brute_1_fall_1 ; self.brute_1_fall_flip_1=brute_1_fall_flip_1
         if any([self.level_1]):
             EnemyGeneralFunctions.fall(self,enemy_2_rects,self.enemy_2_fall_type,self.brute_1_fall_1,self.brute_1_fall_flip_1,
-                                       self.brute_1_fall_number,self.enemy_2_health,0.25,7,0,-10)
+                                       self.brute_1_fall_number,self.enemy_2_health,0.25,7,0,-10,self.enemy_2_x_movement,self.enemy_2_y_movement)
 
     def reset_position(self):
         if self.reset_locations:
@@ -92,27 +73,9 @@ class EnemyTwo:
 
     def collision_with_object(self):
         if any([self.level_1]):
-            self.tile_hit=[]
-            for tile in self.tile_level:
-                for idx,enemy_2 in enumerate(self.enemy_2_rects):
-                    if enemy_2.colliderect(tile):
-                        self.tile_hit.append(tile)
-            return self.tile_hit
+            return EnemyGeneralFunctions.collision_with_object(self,self.tile_level,self.enemy_2_rects)
 
     def collision_with_object_logic(self):
         if any([self.level_1]):
-            for idx,brute in enumerate(self.enemy_2_rects):
-                self.enemy_2_rects[idx].x+=self.enemy_2_x_movement[idx]
-                self.collision=EnemyTwo.collision_with_object(self)
-                for tile in self.collision:
-                    if self.enemy_2_x_movement[idx]>0:
-                        self.enemy_2_rects[idx].right=tile.left
-                    if self.enemy_2_x_movement[idx]<0:
-                        self.enemy_2_rects[idx].left=tile.right
-                self.enemy_2_rects[idx].y+=self.enemy_2_y_movement[idx]
-                self.collision=EnemyTwo.collision_with_object(self)
-                for tile in self.collision:
-                    if self.enemy_2_y_movement[idx]>0:
-                        self.enemy_2_rects[idx].bottom=tile.top
-                    if self.enemy_2_y_movement[idx]<0:
-                        self.enemy_2_rects[idx].top=tile.bottom
+            self.collision=EnemyTwo.collision_with_object(self)
+            EnemyGeneralFunctions.collision_with_object_logic(self,self.enemy_2_rects,self.enemy_2_x_movement,self.enemy_2_y_movement,self.collision)

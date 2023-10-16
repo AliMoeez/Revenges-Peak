@@ -50,40 +50,19 @@ class EnemyOne:
         self.enemy_1_distance=EnemyOne.distance(self)
         self.skeleton_attack=skeleton_attack; self.skeleton_attack_flip=skeleton_attack_flip
         if any([self.level_1]):
-            for idx,distance in enumerate(self.enemy_1_distance):
-                if distance<100 and self.enemy_1_health[idx]>0 and not self.player_control_index[0]==idx:
-                    self.enemy_1_x_movement[idx]=0
-                    self.enemy_1_y_movement[idx]=0
-                    if self.player_rect.x>=self.enemy_1_rects[idx].x:
-                        SCREEN.blit(self.skeleton_attack[int(self.skeleton_attack_number[idx]//2)],(self.enemy_1_rects[idx].x-self.camera_x_y[0]-25,self.enemy_1_rects[idx].y-self.camera_x_y[1]-30))
-                        self.enemy_1_fall_type[idx]=1
-                    else:
-                        SCREEN.blit(self.skeleton_attack_flip[int(self.skeleton_attack_number[idx]//2)],(self.enemy_1_rects[idx].x-self.camera_x_y[0]-55,self.enemy_1_rects[idx].y-self.camera_x_y[1]-30))
-                        self.enemy_1_fall_type[idx]=2
-                    pygame.draw.rect(SCREEN,(100,200,200),pygame.Rect(self.enemy_1_rects[idx].x-self.camera_x_y[0]+20,self.enemy_1_rects[idx].y-self.camera_x_y[1]+12,40,70),width=1)
-                    self.skeleton_attack_number[idx]+=0.10
-                    if self.skeleton_attack_number[idx]>7:
-                        self.skeleton_attack_number[idx]=0
-                        self.player_health[0]-=20
+            EnemyGeneralFunctions.attack(self,self.enemy_1_distance,self.enemy_1_health,self.player_control_index,self.enemy_1_x_movement,self.enemy_1_y_movement,
+                                         self.skeleton_attack,self.skeleton_attack_flip,self.skeleton_attack_number,self.enemy_1_rects,self.enemy_1_fall_type,
+                                         0.10,7,25,55,30,30,self.player_health,20)
 
     def player_hit(self):
         if any([self.level_1]):
-            self.font_hit=pygame.font.Font(self.font,15) 
-            self.font_hit_render=self.font_hit.render("-25",True,self.red) 
-            for idx,distance in enumerate(self.enemy_1_distance):
-                if self.player_attack_number[0]>6.0 and distance<100 and self.enemy_1_health[idx]>0:
-                    if (self.player_rect.x<=self.enemy_1_rects[idx].x and self.player_key[-1]=="d"):
-                        SCREEN.blit(self.font_hit_render,(self.enemy_1_rects[idx].x-self.camera_x_y[0]+25,self.enemy_1_rects[idx].y-self.camera_x_y[1]))
-                        self.enemy_1_health[idx]-=50
-                    if (self.player_rect.x>=self.enemy_1_rects[idx].x and self.player_key[-1]=="a"):
-                        SCREEN.blit(self.font_hit_render,(self.enemy_1_rects[idx].x-self.camera_x_y[0]+25,self.enemy_1_rects[idx].y-self.camera_x_y[1]))
-                        self.enemy_1_health[idx]-=50
+            EnemyGeneralFunctions.player_hit(self,self.font,self.red,self.enemy_1_distance,player_attack_number,self.enemy_1_health,self.enemy_1_rects,self.player_key,25)
      
     def fall(self):
         self.skeleton_fall=skeleton_fall  ; self.skeleton_fall_flip=skeleton_fall_flip
         if any([self.level_1]):
             EnemyGeneralFunctions.fall(self,self.enemy_1_rects,self.enemy_1_fall_type,self.skeleton_fall,self.skeleton_fall_flip,
-                                    self.skeleton_fall_number,self.enemy_1_health,0.25,7,0,0)
+                                    self.skeleton_fall_number,self.enemy_1_health,0.25,7,0,0,self.enemy_1_x_movement,self.enemy_1_y_movement)
 
     def reset_position(self):
         if self.reset_locations:
@@ -93,31 +72,10 @@ class EnemyOne:
 
     def collision_with_object(self):
         if any([self.level_1]):
-            self.tile_hit=[]
-            for tile in self.tile_level:
-                for idx,enemy_1 in enumerate(self.enemy_1_level_1_rect):
-                    if enemy_1.colliderect(tile):
-                        self.tile_hit.append(tile)
-            return self.tile_hit
+            return EnemyGeneralFunctions.collision_with_object(self,self.tile_level,self.enemy_1_rects)
+
 
     def collision_with_object_logic(self):
         if any([self.level_1]):
-            for idx,skeleton in enumerate(self.enemy_1_rects):
-                self.enemy_1_rects[idx].x+=self.enemy_1_x_movement[idx]
-                self.collision=EnemyOne.collision_with_object(self)
-                for tile in self.collision:
-                    if self.enemy_1_x_movement[idx]>0:
-                        self.enemy_1_level_1_rect[idx].right=tile.left
-                    if self.enemy_1_x_movement[idx]<0:
-                        self.enemy_1_level_1_rect[idx].left=tile.right
-                self.enemy_1_rects[idx].y+=self.enemy_1_y_movement[idx]
-                self.collision=EnemyOne.collision_with_object(self)
-                for tile in self.collision:
-                    if self.enemy_1_y_movement[idx]>0:
-                        self.enemy_1_level_1_rect[idx].bottom=tile.top
-                    if self.enemy_1_y_movement[idx]<0:
-                        self.enemy_1_level_1_rect[idx].top=tile.bottom
-
-                
-
-        
+            self.collision=EnemyOne.collision_with_object(self)
+            EnemyGeneralFunctions.collision_with_object_logic(self,self.enemy_1_rects,self.enemy_1_x_movement,self.enemy_1_y_movement,self.collision)
