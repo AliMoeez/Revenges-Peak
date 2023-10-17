@@ -52,7 +52,7 @@ class EnemyOne:
         if any([self.level_1]):
             EnemyGeneralFunctions.attack(self,self.enemy_1_distance,self.enemy_1_health,self.player_control_index,self.enemy_1_x_movement,self.enemy_1_y_movement,
                                          self.skeleton_attack,self.skeleton_attack_flip,self.skeleton_attack_number,self.enemy_1_rects,self.enemy_1_fall_type,
-                                         0.10,7,25,55,30,30,self.player_health,20)
+                                         0.10,7,25,55,30,30,self.player_health,200)
 
     def player_hit(self):
         if any([self.level_1]):
@@ -67,7 +67,7 @@ class EnemyOne:
     def reset_position(self):
         if self.reset_locations:
             if self.level_1:
-                Lose.reset_positions_multiple(self,self.enemy_1_rects,self.enemy_1_level_1_x,self.enemy_1_level_1_y)
+                Lose.reset_positions_multiple(self,self.enemy_1_rects,self.enemy_1_level_1_x,self.enemy_1_level_1_y,self.enemy_1_health,100)
                 return True
 
     def collision_with_object(self):

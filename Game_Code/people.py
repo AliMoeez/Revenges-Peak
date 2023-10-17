@@ -10,7 +10,7 @@ class People:
         self.level_1=level_1 ; self.people_level_1_rect=people_level_1_rect ; self.player_rect=player_rect
         self.people_level_x_movement=people_level_x_movement ; self.people_level_y_movement=people_level_y_movement
         self.camera_x_y=camera_x_y ; self.elder_idle_number=elder_idle_number ; self.elder_run_number=elder_run_number
-        self.level_1_wizard_talk=level_1_wizard_talk ; self.reset_locations=reset_locations
+        self.level_1_wizard_talk=level_1_wizard_talk ; self.reset_locations=reset_locations ; self.people_health_list=people_health_list
 
         self.people_level_1_x=people_level_1_x ; self.people_level_1_y=people_level_1_y
         
@@ -19,8 +19,9 @@ class People:
         if any([self.level_1]):
             for idx,person in enumerate(self.people_rect):
                 self.people_level_x_movement.append(0) ; self.people_level_y_movement.append(0) ; self.elder_idle_number.append(0) ; self.elder_run_number.append(0)
+                self.people_health_list.append(100)
             if len(self.people_level_x_movement)>len(self.people_rect):
-                del self.people_level_x_movement[-1], self.people_level_y_movement[-1],self.elder_idle_number[-1], self.elder_run_number[-1]
+                del self.people_level_x_movement[-1], self.people_level_y_movement[-1],self.elder_idle_number[-1], self.elder_run_number[-1] , self.people_health_list[-1]
 
     def distance(self):
         if any([self.level_1]):
@@ -68,7 +69,7 @@ class People:
             if self.reset_locations:
                 for idx,person in enumerate(self.people_rect):
                     self.people_level_x_movement[idx]=0
-                Lose.reset_positions_multiple(self,self.people_rect,self.people_level_1_x,self.people_level_1_y)
+                Lose.reset_positions_multiple(self,self.people_rect,self.people_level_1_x,self.people_level_1_y,self.people_health_list,100)
                 return True
 
 

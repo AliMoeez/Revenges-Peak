@@ -90,7 +90,6 @@ while run:
         level_1_wizard_talk=True
         reset_locations=False
 
-    
     menu.main_menu()
     menu.main_menu_buttons()
     menu.level_screen_blit_background()

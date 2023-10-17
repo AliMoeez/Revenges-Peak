@@ -55,10 +55,10 @@ class EnemyGeneralFunctions:
                 else:
                     SCREEN.blit(enemy_attack_left[int(enemy_attack_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_left,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_left))
                     enemy_fall_type[idx]=2
-            enemy_attack_number[idx]+=attack_number_increment
-            if enemy_attack_number[idx]>attack_number_max:
-                enemy_attack_number[idx]=0
-                player_health[0]-=health_reduction
+                enemy_attack_number[idx]+=attack_number_increment
+                if enemy_attack_number[idx]>attack_number_max:
+                    enemy_attack_number[idx]=0
+                    player_health[0]-=health_reduction
                 
 
     def player_hit(self,font,colour:tuple,distance_list:list,player_attack_length:list,enemy_health:list,enemy_rects:list,player_key_list:list,offset_x:int):

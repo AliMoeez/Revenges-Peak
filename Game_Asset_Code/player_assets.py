@@ -1,16 +1,17 @@
 import pygame
 
+from .general_assets import *
 
 player_x=450; player_y=2000; player_width=15 ; player_height=64 ; player_control=False
 player_rect=pygame.Rect(player_x,player_y,player_width,player_height)
 
 player_x_movement=[0] ; player_y_movement=[0] ; player_key=[0] ; player_health=[1000] ; player_control_cooldown=[1] ; player_control_index=["placeholder"]
 
-player_image=pygame.image.load(r"Assets\Player\swordman_1.png") 
-player_icon=pygame.image.load(r"Assets\Player\player_icon.png") ; player_icon=pygame.transform.scale(player_icon,(100,100))
-health_icon=pygame.image.load(r"Assets\Player\health_icon.png") ; health_icon=pygame.transform.scale(health_icon,(17,17))
-sword_icon=pygame.image.load(r"Assets\Player\sword.png") ; sword_icon=pygame.transform.scale(sword_icon,(13,13)) ; 
-potion_icon=pygame.image.load(r"Assets\Player\potion.png") ; potion_icon=pygame.transform.scale(potion_icon,(13,13))
+player_image=pygame.image.load(r"Assets\Player\swordman_1.png").convert_alpha() 
+player_icon=pygame.image.load(r"Assets\Player\player_icon.png").convert_alpha() ; player_icon=pygame.transform.scale(player_icon,(100,100))
+health_icon=pygame.image.load(r"Assets\Player\health_icon.png").convert_alpha() ; health_icon=pygame.transform.scale(health_icon,(17,17))
+sword_icon=pygame.image.load(r"Assets\Player\sword.png").convert_alpha() ; sword_icon=pygame.transform.scale(sword_icon,(13,13)) ; 
+potion_icon=pygame.image.load(r"Assets\Player\potion.png").convert_alpha() ; potion_icon=pygame.transform.scale(potion_icon,(13,13))
 
 def player_idle(images,frame,width,height):    #set 0 value to 0 for idle, 64 for run , 128 for fall and 192 for attack
     image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),0,width,height)) ; image=pygame.transform.scale(image,(width*2,height*2))

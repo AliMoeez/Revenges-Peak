@@ -71,11 +71,12 @@ class Lose:
             object.y=y_pos
             return object
         
-    def reset_positions_multiple(self,object:list,x_pos:list,y_pos:list):
+    def reset_positions_multiple(self,object:list,x_pos:list,y_pos:list,health_list:int,health_number:int):
         if self.reset_locations:
             for idx,charactor in enumerate(object):
                 object[idx].x=x_pos[idx]
                 object[idx].y=y_pos[idx]
+                health_list[idx]=health_number
             return object
         
 
