@@ -20,10 +20,13 @@ def level_1_dialogue(player_icon,abyss_icon):
         ]
     return test_level_1_dialogue,test_level_2_dialogue,test_level_3_dialogue
 
-def level_1_dialogue_walk_up(player_icon,abyss_icon):
+def level_1_dialogue_walk_up(player_icon,elder_icon):
     test_level_1_dialogue=[
-        ("TEST",player_icon,"You"),
-        ("THIS WORKS",abyss_icon,"The Abyss")
+        ("Your time to ensure the safety of \n your people has arrived.",elder_icon,"Wizard"),
+        ("He is to powerful for me to fight on my own! I cant do this...",player_icon,"You"),
+        ("You musnt'n doubt yourself. That will be your defeat. Go straight ahead \n and meet the Abyss.",elder_icon,"Wizard"),
+        ("It isn't safe beyond these borders. His men are everywhere.",player_icon,"You"),
+        ("Your power exceeds theres.....Now go!.",elder_icon,"Wizard"),
         ]
     return test_level_1_dialogue
        

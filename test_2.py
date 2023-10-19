@@ -1,21 +1,8 @@
-"""if dialogue_objective_list[0]==1:
-level_1_wizard_talk=False
-if dialogue_objective_list[0]==2:
-talk_to_abyss_level_one=False
-if dialogue_objective_list[0]==3:
-investigate_object_level_one=False"""
-
-x=True
-y=True
-z=True
-
-list_bool=[x,y,z]
+text=[1,2,3,4]
 
 
-print(list_bool)
-
-for i in list_bool:
-    x=False
-
-
-print(list_bool)
+for i,y in enumerate(text):
+    text[i]+=1
+    if text[i]>5:
+        text[i]=5
+    print(text)

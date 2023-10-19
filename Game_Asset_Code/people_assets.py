@@ -13,16 +13,6 @@ idle_4=elder_idles(elder_idle,3,231,231) ; idle_5=elder_idles(elder_idle,4,231,2
 elder_idle_list=[idle_1,idle_2,idle_3,idle_4,idle_5,idle_6] ; elder_idle_list_flip=[] ; elder_idle_number=[]
 for idx,num in enumerate(elder_idle_list[:]): elder_idle_list_flip.append(pygame.transform.flip(num,True,False))
 
-
-people_level_1_x=[390]
-people_level_1_y=[1500]
-people_level_x_movement=[]
-people_level_y_movement=[]
-people_level_1_rect=[]
-people_health_list=[]
-
-for i,y in enumerate(people_level_1_x): people_level_1_rect.append(pygame.Rect(people_level_1_x[i],people_level_1_y[i],231,231))
-
 elder_run=pygame.image.load(r"Assets\People\Wizard Pack\Run.png")
 
 def elder_runs(images,frame,width,height):
@@ -33,6 +23,19 @@ run_1=elder_runs(elder_run,0,231,231); run_2=elder_runs(elder_run,1,231,231); ru
 run_5=elder_runs(elder_run,4,231,231) ; run_6=elder_runs(elder_run,5,231,231) ; run_7=elder_runs(elder_run,6,231,231) ; run_8=elder_runs(elder_run,7,231,231)
 elder_run_list=[run_1,run_2,run_3,run_4,run_5,run_6,run_7,run_8] ; elder_run_list_flip=[] ; elder_run_number=[]
 for idx,num in enumerate(elder_run_list[:]): elder_run_list_flip.append(pygame.transform.flip(num,True,False))
+
+elder_icon=pygame.image.load(r"Assets\People\Wizard Pack\Icon.png")
+elder_icon=pygame.transform.scale(elder_icon,(150,120))
+
+
+people_level_1_x=[390]
+people_level_1_y=[1500]
+people_level_x_movement=[]
+people_level_y_movement=[]
+people_level_1_rect=[]
+people_health_list=[]
+
+for i,y in enumerate(people_level_1_x): people_level_1_rect.append(pygame.Rect(people_level_1_x[i],people_level_1_y[i],231,231))
 
 
 

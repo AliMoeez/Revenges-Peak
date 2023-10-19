@@ -22,7 +22,5 @@ while run:
             pygame.quit()
             sys.exit()
 
-    if key[p]
-
 
     pygame.display.update()

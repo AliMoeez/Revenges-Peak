@@ -12,7 +12,7 @@ class Dialouge:
         self.dialogue_condition=dialogue_condition ; self.object_rect=object_rect ; self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.level_1=level_1 ; self.mouse_button_blit_list=mouse_button_blit_list
         self.dialogue_click_list=dialogue_click_list ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.WHITE=(255,55,55) ; self.dialouge_list=dialouge_list ; self.dialogue_story_condition=dialogue_story_condition
         self.player_icon=player_icon ; self.abyss_icon=abyss_icon ; self.text_position=text_position ; self.dialogue_offset=dialogue_offset ; self.dialogue_offset_length=dialogue_offset_length
-        self.level_1_wizard_talk=level_1_wizard_talk ; self.mouse_button_blit_list=mouse_button_blit_list 
+        self.level_1_wizard_talk=level_1_wizard_talk ; self.mouse_button_blit_list=mouse_button_blit_list ; self.elder_icon=elder_icon
 
     def distance_level_object(self):
         self.tile_interact_rect_distance=[]
@@ -75,7 +75,7 @@ class Dialouge:
 
     def text_story(self):
         if self.level_1:
-            self.test_level_1_dialogue=level_1_dialogue_walk_up(self.player_icon,self.abyss_icon)
+            self.test_level_1_dialogue=level_1_dialogue_walk_up(self.player_icon,self.elder_icon,self.WHITE)
 
     def text_type_story(self):
         if self.dialogue_story_condition:
@@ -91,7 +91,13 @@ class Dialouge:
             for idx,dialouge in enumerate(self.dialogue_show):
                 if self.dialogue_click_list[0]==idx:
                     if self.text_position[0]<self.message_speed*len(self.dialogue_show[idx][0]):
-                        self.text_position[0]+=0.75
+                        self.text_position[0]+=0.75 #0.75
+
+
+                    
+    def dialogue_line_function(self):
+        pass
+        
         
     def show(self):
         Dialouge.scrolling_text(self)
@@ -101,24 +107,23 @@ class Dialouge:
             
             for idx,dialouge in enumerate(self.dialogue_show):
                 if self.dialogue_click_list[0]==idx:
-                    self.new_dialogue_list=self.dialogue_show[idx][0].split("\n")
-
-                    for show_dialogue in self.new_dialogue_list:
-                        self.dialogue_offset_length[0]+=50
-                        self.dialogue_offset.append(self.dialogue_offset_length[0])
-                        if len(self.dialogue_offset)>len(self.new_dialogue_list): del self.dialogue_offset[-1]
                     
                     
-                    for i,text in enumerate(self.new_dialogue_list):
-    
-                        self.font_title=pygame.font.Font(self.font,30) 
-                        self.font_title_render=self.font_title.render(self.new_dialogue_list[i][0:int(self.text_position[0])//self.message_speed],True,self.WHITE)
-                        SCREEN.blit(self.font_title_render,(SCREEN_WIDTH//2-350,self.dialogue_offset[i]))  
+                    
+                    
+                    self.font_title=pygame.font.Font(self.font,30) 
+                    self.font_title_render=self.font_title.render(self.dialogue_show[idx][0][0:int(self.text_position[0])//self.message_speed],True,self.WHITE)                             
+                    
+                    pygame.draw(self.font_title,(SCREEN_WIDTH//2-350,600),self.WHITE) 
+        
+                    
+                    
+                    
                     
                     self.icon_blit=SCREEN.blit(self.dialogue_show[idx][1],(SCREEN_WIDTH//2-550,SCREEN_HEIGHT-200))
 
                     self.font_name=pygame.font.Font(self.font,30)  ; self.font_name_render=self.font_name.render(self.dialogue_show[idx][2],True,self.WHITE)
-                    SCREEN.blit(self.font_name_render,(SCREEN_WIDTH//2-550,SCREEN_HEIGHT-75))  
+                    SCREEN.blit(self.font_name_render,(SCREEN_WIDTH//2-550,SCREEN_HEIGHT-75))
     
     def end_dialouge(self,event,event_list):
         Dialouge.text_type(self)
