@@ -42,3 +42,6 @@ dialogue_objective_list=[0]
 
 player_lose_condition=False ; reset_locations=False ; reset_length=[0]
 
+tutorial_one=True
+tutorial_two=True
+

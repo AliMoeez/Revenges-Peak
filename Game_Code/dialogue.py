@@ -75,7 +75,7 @@ class Dialouge:
 
     def text_story(self):
         if self.level_1:
-            self.test_level_1_dialogue=level_1_dialogue_walk_up(self.player_icon,self.elder_icon,self.WHITE)
+            self.test_level_1_dialogue=level_1_dialogue_walk_up(self.player_icon,self.elder_icon)
 
     def text_type_story(self):
         if self.dialogue_story_condition:
@@ -91,13 +91,24 @@ class Dialouge:
             for idx,dialouge in enumerate(self.dialogue_show):
                 if self.dialogue_click_list[0]==idx:
                     if self.text_position[0]<self.message_speed*len(self.dialogue_show[idx][0]):
-                        self.text_position[0]+=0.75 #0.75
-
-
+                        self.text_position[0]+=0.55 #0.75
                     
-    def dialogue_line_function(self):
-        pass
-        
+    def line_function(self,screen,text,position,font,colour):
+        self.words=[i.split(' ') for i in text.splitlines()]
+        self.space=font.size(' ')[0]
+        self.width_max,self.height_max=screen.get_size()
+        self.x_pos,self.y_pos=position
+        for lines in self.words:
+            for words in lines:
+                self.word_to_surface=font.render(words,0,colour)
+                self.word_w,self.word_h=self.word_to_surface.get_size()
+                if self.x_pos +self.word_w>=self.width_max:
+                    self.x_pos=position[0]
+                    self.y_pos+=self.word_h
+                screen.blit(self.word_to_surface,(self.x_pos,self.y_pos))
+                self.x_pos+=self.word_w+self.space
+            self.x_pos=position[0]
+            self.y_pos+=self.word_h
         
     def show(self):
         Dialouge.scrolling_text(self)
@@ -107,21 +118,9 @@ class Dialouge:
             
             for idx,dialouge in enumerate(self.dialogue_show):
                 if self.dialogue_click_list[0]==idx:
-                    
-                    
-                    
-                    
                     self.font_title=pygame.font.Font(self.font,30) 
-                    self.font_title_render=self.font_title.render(self.dialogue_show[idx][0][0:int(self.text_position[0])//self.message_speed],True,self.WHITE)                             
-                    
-                    pygame.draw(self.font_title,(SCREEN_WIDTH//2-350,600),self.WHITE) 
-        
-                    
-                    
-                    
-                    
+                    Dialouge.line_function(self,SCREEN,self.dialogue_show[idx][0][0:int(self.text_position[0])//self.message_speed],(SCREEN_WIDTH//2-350,600),self.font_title,self.WHITE)
                     self.icon_blit=SCREEN.blit(self.dialogue_show[idx][1],(SCREEN_WIDTH//2-550,SCREEN_HEIGHT-200))
-
                     self.font_name=pygame.font.Font(self.font,30)  ; self.font_name_render=self.font_name.render(self.dialogue_show[idx][2],True,self.WHITE)
                     SCREEN.blit(self.font_name_render,(SCREEN_WIDTH//2-550,SCREEN_HEIGHT-75))
     
