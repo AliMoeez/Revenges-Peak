@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives,Lose
+from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives,Lose,Tutorial
 
 while run:
     level_1_tile_set_rect.clear()
@@ -17,12 +17,14 @@ while run:
         SCREEN.fill((131,164,72))
 
     menu=Menu(level_screen,level_1)
-    player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition,reset_locations)
+    player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
+                  player_control,dialogue_condition,dialogue_story_condition,reset_locations,tutorial_one,tutorial_two)
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations)
     people=People(level_1,level_1_wizard_talk,reset_locations)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations)
+    tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     
     for event in event_list:
         if dialogue.level_dialogue_condition(event,event_list):
@@ -61,6 +63,11 @@ while run:
         if level_1:
             if key[pygame.K_q]:
                 level_1=False ; level_screen=True
+            if tutorial.skip(event,event_list):
+                text_position[0]=0
+                if tutorial_one: tutorial_one=False
+                if tutorial_two: tutorial_two=False
+            if tutorial.begin_tutorial(event,event_list): tutorial_two=True
             if key[pygame.K_f] and player_control_cooldown[0]==1:
                 for idx,distance in enumerate(control.distance()):
                     if distance<100:
@@ -137,6 +144,8 @@ while run:
     people.idle()
     people.run()
 
+    tutorial.player_idle_show()
+
     levelone.tile_set_tree_top()
 
     player.health_power_cooldown_icons()
@@ -149,6 +158,8 @@ while run:
     dialogue.text_type()
     dialogue.text_type_story()
     dialogue.show()
+
+    tutorial.show()
 
     lose.show_loss()
 

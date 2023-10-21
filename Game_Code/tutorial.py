@@ -2,40 +2,62 @@ import pygame
 
 from Game_Asset_Code import *
 from .dialogue import Dialouge
+from .player import Player
+from .enemy_one import EnemyOne
 
 class Tutorial:
     def __init__(self,level_1,tutorial_one,tutorial_two):
         Dialouge.__init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
-        self.tutorial_one=tutorial_one ; self.tutorial_two=tutorial_two
+        EnemyOne.__init__(self,level_1,enemy_1_level_1_rect,reset_locations)
+        self.tutorial_one=tutorial_one ; self.tutorial_two=tutorial_two 
         self.level_1=level_1 ; self.player_rect=self.player_rect ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.WHITE=(255,55,55) 
+        self.text_position=text_position ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement ; self.tutorial_two_list=tutorial_two_list
 
-    def begin_tutorial(self):
-        pass
+    def begin_tutorial(self,event,event_list):
+        if any([self.level_1]) and not self.tutorial_one:
+             self.enemy_one_distance_list=EnemyOne.distance(self)
+             for idx,distance in enumerate(self.enemy_one_distance_list):
+                 if distance<300 and self.tutorial_two_list[0]>=1:
+                     self.tutorial_two_list[0]-=1
+                     return True
 
     def backround(self):
-        if self.tutorial_one or (self.tutorial_two and not self.tutorial_one):
-            self.screen_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT))  ; self.screen_fade.set_alpha(50) ; self.screen_fade.fill((0,0,0)) ; SCREEN.blit(self.screen_fade,(0,0))
-            self.text_bgackround_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT-250))  ; self.text_bgackround_fade.set_alpha(50) ; self.text_bgackround_fade.fill((100,100,100)) ; SCREEN.blit(self.text_bgackround_fade,(0,550))
+        self.screen_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT))  ; self.screen_fade.set_alpha(50) ; self.screen_fade.fill((0,0,0)) ; SCREEN.blit(self.screen_fade,(0,0))
+        self.text_bgackround_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT-250))  ; self.text_bgackround_fade.set_alpha(50) ; self.text_bgackround_fade.fill((100,100,100)) ; SCREEN.blit(self.text_bgackround_fade,(0,550))
   
     def escape_button(self):
         pass
 
     def text(self):
         if self.tutorial_one:
-            self.tutorial_text="XYZ"
+            self.tutorial_text="Welcome To Revenge's Peak. To Move use the W,A,S,D keys. The objective arrow is at the top and helps you get to the next objective for each level."
         if self.tutorial_two and not self.tutorial_one:
-            self.tutorial_text="QWE"
-        
-    def line_movment(self):
-        if self.tutorial_one or (self.tutorial_two and not self.tutorial_one):
-            return Dialouge.line_function(self,SCREEN,self.tutorial_text,(SCREEN_WIDTH//2-350,600),self.font,self.WHITE)
-        
+            self.tutorial_text="Quick, enemies are nearby. Use the E key to attack and the F key to control one of your enemies for a short period of time."
+
     def text_movement(self):
-        pass
-        
-    def blit(self):
-        pass
-        
-    def skip(self):
+        self.message_speed=2
+        Tutorial.text(self)
+        if self.text_position[0]<self.message_speed*len(self.tutorial_text):
+            self.text_position[0]+=0.55
+                
+    def line_movment(self):
+        Tutorial.text_movement(self)
         if self.tutorial_one or (self.tutorial_two and not self.tutorial_one):
-            return True
+            self.font_title=pygame.font.Font(self.font,30)
+            return Dialouge.line_function(self,SCREEN,self.tutorial_text[0:int(self.text_position[0])//self.message_speed],(SCREEN_WIDTH//2-550,600),self.font_title,self.WHITE)
+        
+    def player_idle_show(self):
+        if self.level_1 and self.tutorial_one or (self.tutorial_two and not self.tutorial_one):
+            Player.idle(self,pygame.key.get_pressed())
+            self.player_x_movement[0]=0 
+            self.player_y_movement[0]=0
+
+    def show(self):
+        if self.level_1 and self.tutorial_one or (self.tutorial_two and not self.tutorial_one):
+            Tutorial.backround(self)
+            Tutorial.line_movment(self)
+
+    def skip(self,event,event_list):
+        if self.level_1 and self.tutorial_one or (self.tutorial_two and not self.tutorial_one):
+            if event.type==pygame.MOUSEBUTTONDOWN:
+                return True

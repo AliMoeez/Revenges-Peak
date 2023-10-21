@@ -5,12 +5,15 @@ from Game_Asset_Code import *
 from .lose import Lose
 
 class Player:
-    def __init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,dialogue_story_condition,reset_locations):
+    def __init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,
+                 dialogue_story_condition,reset_locations,tutorial_one,tutorial_two):
         Lose.__init__(self,level_1,player_lose_condition,reset_locations)
         self.player_x=player_x ; self.player_y=player_y ; self.player_width=player_width ; self.player_height=player_height ; self.player_rect=player_rect ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement
         self.camera_x_y=camera_x_y  ; self.level_1=level_1 ;  self.level_screen=level_screen ; self.player_key=player_key ; self.player_attack_cooldown=player_attack_cooldown ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_health=player_health
         self.player_control_cooldown=player_control_cooldown ; self.player_control=player_control ; self.object_rect=object_rect ; self.dialogue_condition=dialogue_condition
-        self.dialogue_story_condition=dialogue_story_condition ; self.reset_locations=reset_locations
+        self.dialogue_story_condition=dialogue_story_condition ; self.reset_locations=reset_locations ; self.tutorial_one=tutorial_one ; self.tutorial_two=tutorial_two
+
+  #      print(self.player_rect.x,self.player_rect.y)
 
     def idle(self,key):
         self.player_idle_list=player_idle_list ; self.player_idle_list_flip=player_idle_list_flip ; self.player_idle_number=player_idle_number
@@ -30,7 +33,8 @@ class Player:
 
     def move(self,key):
         self.player_run_list=player_run_list ; self.player_run_list_flip=player_run_list_flip ; self.player_run_number=player_run_number
-        if any([self.level_1]) and not key[pygame.K_e] and not self.dialogue_condition and not self.dialogue_story_condition and not self.player_health[0]<=0 or self.player_attack_cooldown[0]<=0 :
+        if (any([self.level_1]) and not (self.tutorial_one or self.tutorial_two) and not key[pygame.K_e] and not self.dialogue_condition and not self.dialogue_story_condition
+             and not self.player_health[0]<=0 or self.player_attack_cooldown[0]<=0) :
             if key[pygame.K_d] and not key[pygame.K_a]:
                 SCREEN.blit(self.player_run_list[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
                 self.player_x_movement[0]=3  ; self.player_key.append("d")
@@ -68,7 +72,7 @@ class Player:
 
     def attack(self,key):
         self.player_attack_list=player_attack_list ; self.player_attack_list_flip=player_attack_list_flip ; self.player_attack_number=player_attack_number
-        if any([self.level_1]) and key[pygame.K_e] and self.player_attack_cooldown[0]>0 and not self.dialogue_condition and not self.dialogue_story_condition and not self.player_health[0]<=0 :
+        if any([self.level_1]) and not (self.tutorial_one or self.tutorial_two) and key[pygame.K_e] and self.player_attack_cooldown[0]>0 and not self.dialogue_condition and not self.dialogue_story_condition and not self.player_health[0]<=0 :
             self.player_x_movement[0]=0 ; self.player_y_movement[0]=0
 
             if self.player_key[-1]=="d":
