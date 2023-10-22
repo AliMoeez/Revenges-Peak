@@ -12,6 +12,7 @@ class Tutorial:
         self.tutorial_one=tutorial_one ; self.tutorial_two=tutorial_two 
         self.level_1=level_1 ; self.player_rect=self.player_rect ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.WHITE=(255,55,55) 
         self.text_position=text_position ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement ; self.tutorial_two_list=tutorial_two_list
+        self.left_mouse_button_icon=left_mouse_button_icon
 
     def begin_tutorial(self,event,event_list):
         if any([self.level_1]) and not self.tutorial_one:
@@ -24,7 +25,15 @@ class Tutorial:
     def backround(self):
         self.screen_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT))  ; self.screen_fade.set_alpha(50) ; self.screen_fade.fill((0,0,0)) ; SCREEN.blit(self.screen_fade,(0,0))
         self.text_bgackround_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT-250))  ; self.text_bgackround_fade.set_alpha(50) ; self.text_bgackround_fade.fill((100,100,100)) ; SCREEN.blit(self.text_bgackround_fade,(0,550))
-  
+
+        self.font_title=pygame.font.Font(self.font,25) 
+        self.font_title_render=self.font_title.render("To Continue",True,self.WHITE) 
+        SCREEN.blit(self.font_title_render,(SCREEN_WIDTH//2+450,SCREEN_HEIGHT-45))
+
+
+        SCREEN.blit(self.left_mouse_button_icon,(SCREEN_WIDTH//2+400,SCREEN_HEIGHT-55))
+
+
     def escape_button(self):
         pass
 

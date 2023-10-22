@@ -7,10 +7,10 @@ from .control import Control
 from .player import Player
 
 class LevelOne(Menu):
-    def __init__(self,camera_x_y,level_1,level_screen):
+    def __init__(self,camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one):
         self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.level_1_tile_set=level_1_tile_set ; self.level_1=level_1
         self.level_screen=level_screen ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.object_rect=object_rect
-        self.dialogue_condition=dialogue_condition
+        self.dialogue_condition=dialogue_condition ; self.level_1_wizard_talk=level_1_wizard_talk ; self.talk_to_abyss_level_one=talk_to_abyss_level_one ; self.investigate_object_level_one=investigate_object_level_one 
 
     def border(self):
         self.player_control=player_control ; self.player_control_cooldown=player_control_cooldown ; self.enemy_rects=enemy_1_level_1_rect+enemy_2_rects  ; self.player_control_index=player_control_index
@@ -63,6 +63,14 @@ class LevelOne(Menu):
     def tile_set_tree_top(self):
         LevelOne.tile_set_function(self,"Tile Layer 4")
 
+    def win_condition(self):
+        if not self.level_1_wizard_talk and not self.talk_to_abyss_level_one and not self.investigate_object_level_one:
+            print(self.level_1_wizard_talk,self.talk_to_abyss_level_one,self.investigate_object_level_one,"HERE")
+            return True
+        else:
+            print("NFOSONDOS")
+            return False
+            
     def border_logic_total(self):
         self.camera_x_y[0]+=self.rect_camera.x-self.camera_x_y[0]-525
         self.camera_x_y[1]+=self.rect_camera.y-self.camera_x_y[1]-self.min_y_border

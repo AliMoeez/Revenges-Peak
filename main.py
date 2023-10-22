@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives,Lose,Tutorial
+from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives,Lose,Tutorial,Win
 
 while run:
     level_1_tile_set_rect.clear()
@@ -17,14 +17,18 @@ while run:
         SCREEN.fill((131,164,72))
 
     menu=Menu(level_screen,level_1)
+    levelone=LevelOne(camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
+
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
                   player_control,dialogue_condition,dialogue_story_condition,reset_locations,tutorial_one,tutorial_two)
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations)
     people=People(level_1,level_1_wizard_talk,reset_locations)
+    
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
+    win=Win(level_1)
     
     for event in event_list:
         if dialogue.level_dialogue_condition(event,event_list):
@@ -85,6 +89,20 @@ while run:
             player_lose_condition=False
             reset_locations=True
             level_1=False
+        
+        if win.back_to_menu(event):
+            reset_locations=True
+            level_1=False
+        #    level_1_wizard_talk=True
+        #    talk_to_abyss_level_one=True
+        #    investigate_object_level_one=True
+
+    print(level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
+
+    if win.story_reset_conditions():
+        level_1_wizard_talk=True
+        talk_to_abyss_level_one=True
+        investigate_object_level_one=True
            
     if lose.condition():
         player_lose_condition=True
@@ -102,10 +120,10 @@ while run:
     menu.level_screen_blit_background()
     menu.level_screen_blit()
 
-    levelone=LevelOne(camera_x_y,level_1,level_screen)
     levelone.border()
     levelone.tile_set_level_direction()
     levelone.tile_set()
+ #   levelone.win_condition()
 
     player.move(key)
     player.attack(key)
@@ -160,6 +178,9 @@ while run:
     dialogue.show()
 
     tutorial.show()
+
+    win.condition() 
+    win.blit()
 
     lose.show_loss()
 

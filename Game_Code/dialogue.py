@@ -92,7 +92,7 @@ class Dialouge:
             for idx,dialouge in enumerate(self.dialogue_show):
                 if self.dialogue_click_list[0]==idx:
                     if self.text_position[0]<self.message_speed*len(self.dialogue_show[idx][0]):
-                        self.text_position[0]+=0.55 #0.75
+                        self.text_position[0]+=4 #0.75
                     
     def line_function(self,screen,text,position,font,colour):
         self.words=[i.split(' ') for i in text.splitlines()]
@@ -116,7 +116,10 @@ class Dialouge:
         if self.dialogue_condition or self.dialogue_story_condition:
             self.screen_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT))  ; self.screen_fade.set_alpha(50) ; self.screen_fade.fill((0,0,0)) ; SCREEN.blit(self.screen_fade,(0,0))
             self.text_bgackround_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT-250))  ; self.text_bgackround_fade.set_alpha(50) ; self.text_bgackround_fade.fill((100,100,100)) ; SCREEN.blit(self.text_bgackround_fade,(0,550))
-            
+            self.font_title=pygame.font.Font(self.font,25) 
+            self.font_title_render=self.font_title.render("To Continue",True,self.WHITE) 
+            SCREEN.blit(self.font_title_render,(SCREEN_WIDTH//2+450,SCREEN_HEIGHT-45))
+            SCREEN.blit(self.left_mouse_button_icon,(SCREEN_WIDTH//2+400,SCREEN_HEIGHT-55))
             for idx,dialouge in enumerate(self.dialogue_show):
                 if self.dialogue_click_list[0]==idx:
                     self.font_title=pygame.font.Font(self.font,30) 
