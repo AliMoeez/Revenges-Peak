@@ -28,9 +28,10 @@ while run:
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
-    win=Win(level_1)
-    
+    win=Win(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
+
     for event in event_list:
+
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True ; dialogue_story_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN :
@@ -91,19 +92,12 @@ while run:
             level_1=False
         
         if win.back_to_menu(event):
+            level_1_wizard_talk=True
+            talk_to_abyss_level_one=True
+            investigate_object_level_one=True
             reset_locations=True
             level_1=False
-        #    level_1_wizard_talk=True
-        #    talk_to_abyss_level_one=True
-        #    investigate_object_level_one=True
-
-    print(level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
-
-    if win.story_reset_conditions():
-        level_1_wizard_talk=True
-        talk_to_abyss_level_one=True
-        investigate_object_level_one=True
-           
+                      
     if lose.condition():
         player_lose_condition=True
               
@@ -123,7 +117,7 @@ while run:
     levelone.border()
     levelone.tile_set_level_direction()
     levelone.tile_set()
- #   levelone.win_condition()
+    levelone.win_condition()
 
     player.move(key)
     player.attack(key)
@@ -178,6 +172,7 @@ while run:
     dialogue.show()
 
     tutorial.show()
+
 
     win.condition() 
     win.blit()

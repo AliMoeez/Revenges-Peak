@@ -1,8 +1,5 @@
-text=[1,2,3,4]
+x=False
+y=False
 
-
-for i,y in enumerate(text):
-    text[i]+=1
-    if text[i]>5:
-        text[i]=5
-    print(text)
+if x is False and y is False:
+    print("YES")

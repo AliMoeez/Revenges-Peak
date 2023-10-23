@@ -6,10 +6,13 @@ from .lose import Lose
 
 
 class Win:
-    def __init__(self,level_1):
+    def __init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one):
         LevelOne.__init__(self,camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
         self.level_1=level_1 ; self.screen_fade_number=screen_fade_number ; self.WHITE=(255,255,255) ; self.RED=(220,20,60)
         self.font=r"Assets\Misc\Fonts\Pixellari.ttf" ; self.player_health=player_health
+        self.level_1_wizard_talk=level_1_wizard_talk
+        self.talk_to_abyss_level_one=talk_to_abyss_level_one
+        self.investigate_object_level_one=investigate_object_level_one
 
     def condition(self):
         if any([self.level_1]):
@@ -61,8 +64,8 @@ class Win:
     def next_level(self):
         pass
 
-    def story_reset_conditions(self):
-        if Win.back_to_menu(self):
+    def story_reset_conditions(self,event):
+        if Win.back_to_menu(self,event):
             return True
 
 
