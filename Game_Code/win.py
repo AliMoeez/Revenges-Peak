@@ -13,10 +13,14 @@ class Win:
         self.level_1_wizard_talk=level_1_wizard_talk
         self.talk_to_abyss_level_one=talk_to_abyss_level_one
         self.investigate_object_level_one=investigate_object_level_one
+        self.player_x_movment=player_x_movement
+        self.player_y_movement=player_y_movement
 
     def condition(self):
         if any([self.level_1]):
             if LevelOne.win_condition(self):
+                self.player_x_movment[0]=0
+                self.player_y_movement[0]=0
                 return True
 
     def screen_fade(self):
@@ -61,14 +65,10 @@ class Win:
                 self.player_health[0]=1000
                 return True
             
-    def next_level(self):
-        pass
-
-    def story_reset_conditions(self,event):
-        if Win.back_to_menu(self,event):
-            return True
-
-
-
-
-
+    def next_level(self,event):
+        if Win.condition(self):
+            Win.text(self)
+            Win.buttons(self)
+            if event.type==pygame.MOUSEBUTTONDOWN and self.next_level_blit.collidepoint(pygame.mouse.get_pos()):
+                self.player_health[0]=1000
+                return True

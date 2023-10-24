@@ -13,7 +13,7 @@ run=True
 
 level_screen=False
 
-level_1=False
+level_1=False ; level_2=False ; level_3=False ; level_4=False
 
 backround_tile_set=load_pygame(r"Assets\Tileset\backround_tile_set_file\backround_tile_set.tmx")
 

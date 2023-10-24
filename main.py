@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives,Lose,Tutorial,Win
+from Game_Code import Menu,LevelOne,LevelTwo,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives,Lose,Tutorial,Win
 
 while run:
     level_1_tile_set_rect.clear()
@@ -18,6 +18,7 @@ while run:
 
     menu=Menu(level_screen,level_1)
     levelone=LevelOne(camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
+    leveltwo=LevelTwo(level_2)
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
                   player_control,dialogue_condition,dialogue_story_condition,reset_locations,tutorial_one,tutorial_two)
@@ -62,12 +63,17 @@ while run:
         if level_screen:
             if key[pygame.K_q]:level_screen=False
             if menu.level_screen_blit_background() is not None:
-                if event.type==pygame.MOUSEBUTTONDOWN and menu.level_screen_blit_background().collidepoint(event.pos):
-                    level_screen=False
-                    level_1=True
-        if level_1:
+                if event.type==pygame.MOUSEBUTTONDOWN and menu.level_screen_blit_background()[0].collidepoint(event.pos):
+                    level_screen=False ; level_1=True
+                if event.type==pygame.MOUSEBUTTONDOWN and menu.level_screen_blit_background()[1].collidepoint(event.pos):
+                    level_screen=False ; level_2=True
+                if event.type==pygame.MOUSEBUTTONDOWN and menu.level_screen_blit_background()[2].collidepoint(event.pos):
+                    level_screen=False ; level_3=True
+                if event.type==pygame.MOUSEBUTTONDOWN and menu.level_screen_blit_background()[3].collidepoint(event.pos):
+                    level_screen=False ; level_4=True
+        if any([level_1,level_2]):
             if key[pygame.K_q]:
-                level_1=False ; level_screen=True
+                level_1=False ; level_2=False ; level_screen=True
             if tutorial.skip(event,event_list):
                 text_position[0]=0
                 if tutorial_one: tutorial_one=False
@@ -76,28 +82,25 @@ while run:
             if key[pygame.K_f] and player_control_cooldown[0]==1:
                 for idx,distance in enumerate(control.distance()):
                     if distance<100:
-                        player_control_index.clear()
-                        player_control_index.append(idx)
-                        player_control=True
+                        player_control_index.clear() ; player_control_index.append(idx) ; player_control=True
             if key[pygame.K_v] and player_control:
                 player_control_cooldown[0]=-0.05
 
         if lose.retry(event):
-            player_lose_condition=False
-            reset_locations=True
+            player_lose_condition=False ; reset_locations=True
 
         if lose.back_to_menu(event):
-            player_lose_condition=False
-            reset_locations=True
-            level_1=False
+            player_lose_condition=False ; reset_locations=True ; level_1=False
         
         if win.back_to_menu(event):
-            level_1_wizard_talk=True
-            talk_to_abyss_level_one=True
-            investigate_object_level_one=True
+            level_1_wizard_talk=True ; talk_to_abyss_level_one=True ; investigate_object_level_one=True
+            reset_locations=True ; level_1=False
+        
+        if win.next_level(event):
+            if level_1:
+                level_1=False ; level_2=True
             reset_locations=True
-            level_1=False
-                      
+                                     
     if lose.condition():
         player_lose_condition=True
               
@@ -118,6 +121,8 @@ while run:
     levelone.tile_set_level_direction()
     levelone.tile_set()
     levelone.win_condition()
+
+    leveltwo.backround()
 
     player.move(key)
     player.attack(key)

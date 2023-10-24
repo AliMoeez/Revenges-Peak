@@ -5,9 +5,11 @@ from Game_Asset_Code import *
 from .menu import Menu
 from .control import Control
 from .player import Player
+from .objectives import Objectives
 
 class LevelOne(Menu):
     def __init__(self,camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one):
+        Objectives.__init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,dialogue_objective_list)
         self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.level_1_tile_set=level_1_tile_set ; self.level_1=level_1
         self.level_screen=level_screen ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.object_rect=object_rect
         self.dialogue_condition=dialogue_condition 
@@ -66,8 +68,7 @@ class LevelOne(Menu):
 
     def win_condition(self):
         if self.level_1:
-            if self.level_1_wizard_talk is False and self.talk_to_abyss_level_one is False and self.investigate_object_level_one is False:
-                print(self.level_1_wizard_talk,self.talk_to_abyss_level_one,self.investigate_object_level_one,"HERE")
+            if not self.investigate_object_level_one and Objectives.level_one_objectives(self)[0]<200:
                 return True
             return False
             
