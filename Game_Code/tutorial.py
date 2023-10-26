@@ -12,7 +12,8 @@ class Tutorial:
         self.tutorial_one=tutorial_one ; self.tutorial_two=tutorial_two 
         self.level_1=level_1 ; self.player_rect=self.player_rect ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.WHITE=(255,55,55) 
         self.text_position=text_position ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement ; self.tutorial_two_list=tutorial_two_list
-        self.left_mouse_button_icon=left_mouse_button_icon
+        self.left_mouse_button_icon=left_mouse_button_icon ; self.investigate_object_level_one=investigate_object_level_one ; self.talk_to_abyss_level_one=talk_to_abyss_level_one
+        self.player_attack_cooldown=player_attack_cooldown
 
     def begin_tutorial(self,event,event_list):
         if any([self.level_1]) and not self.tutorial_one:

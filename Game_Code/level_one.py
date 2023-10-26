@@ -4,7 +4,6 @@ import pygame
 from Game_Asset_Code import *
 from .menu import Menu
 from .control import Control
-from .player import Player
 from .objectives import Objectives
 
 class LevelOne(Menu):

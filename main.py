@@ -21,10 +21,13 @@ while run:
     leveltwo=LevelTwo(level_2)
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
-                  player_control,dialogue_condition,dialogue_story_condition,reset_locations,tutorial_one,tutorial_two)
+                  player_control,dialogue_condition,dialogue_story_condition,
+                  reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations)
     people=People(level_1,level_1_wizard_talk,reset_locations)
+
+    #print(player_rect.x,player_rect.y)
     
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations)

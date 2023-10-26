@@ -95,7 +95,7 @@ brute_1_fall_flip_1=[] ; brute_1_fall_number=[]
 for i,brute in enumerate(brute_1_fall_1): brute_1_fall_1[i]=pygame.transform.scale(brute_1_fall_1[i],(59*1.8,35*1.8))
 for i,brute in enumerate(brute_1_fall_1[:]) : brute_1_fall_flip_1.append(pygame.transform.flip(brute_1_fall_1[i],True,False))
 
-enemy_2_level_1_x=[700.800,900] ; enemy_2_level_1_y=[300,1400,1500]  #600,200
+enemy_2_level_1_x=[377,323,464] ; enemy_2_level_1_y=[510,471,471]  #600,200
 
 enemy_2_x_movement=[] ; enemy_2_y_movement=[]
 
@@ -103,5 +103,5 @@ enemy_2_rects=[] ; enemy_2_fall_type=[]  ; enemy_2_health=[]
 
 enemy_run_number=[0] ; enemy_idle_number=[0] ; enemy_attack_number=[0] ; enemy_x_movement=[0] ; enemy_y_movement=[0]
 
-for i,y in enumerate(enemy_2_rects): enemy_2_rects.append(pygame.Rect(enemy_2_level_1_x[i],enemy_2_level_1_y[i],40,70))
+for i,y in enumerate(enemy_2_level_1_x): enemy_2_rects.append(pygame.Rect(enemy_2_level_1_x[i],enemy_2_level_1_y[i],40,70))
 

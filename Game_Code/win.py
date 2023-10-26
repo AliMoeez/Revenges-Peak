@@ -2,7 +2,6 @@ import pygame
 
 from Game_Asset_Code import *
 from .level_one import LevelOne
-from .lose import Lose
 
 
 class Win:
@@ -21,6 +20,7 @@ class Win:
             if LevelOne.win_condition(self):
                 self.player_x_movment[0]=0
                 self.player_y_movement[0]=0
+              #  print(self.player_x_movment[0],self.player_y_movement[0])
                 return True
 
     def screen_fade(self):
