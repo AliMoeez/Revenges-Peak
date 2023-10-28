@@ -14,6 +14,16 @@ class EnemyGeneralFunctions:
             self.player_enemy_distance.append(math.hypot(self.player_rect.x-enemy_rects[idx].x,self.player_rect.y-enemy_rects[idx].y))
         return self.player_enemy_distance
     
+    def enemy_groups(self,enemy_rects_total):
+        enemy_to_enemy_distance=[]
+        for i in enemy_rects_total:
+            for j in enemy_rects_total:
+                distance=math.hypot(i[0]-j[0],i[1]-j[1])
+                if distance>0:
+                    enemy_to_enemy_distance.append(distance)
+            
+                     
+    
     def idle(self,distance_list:list,player_control_list:list,enemy_health:list,enemy_x_movement:list,enemy_y_movement:list,
              enemy_idle_right,enemy_idle_left,enemy_idle_number:list,enemy_rects:list,idle_increase:int,idle_max_number:int):
         for idx,distance in enumerate(distance_list):

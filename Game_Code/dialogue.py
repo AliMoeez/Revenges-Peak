@@ -136,4 +136,4 @@ class Dialouge:
                     self.dialogue_click_list[0]=0
                     return True
             except IndexError:
-                pass
+                print("HERE")
