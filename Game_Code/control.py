@@ -10,15 +10,15 @@ class Control(EnemyOne):
         self.player_rect=player_rect ; self.enemy_1_level_1_rect=enemy_1_level_1_rect ; self.level_1=level_1 ; self.player_control_index=player_control_index
         self.player_control=player_control ; self.player_control_cooldown=player_control_cooldown ; self.enemy_1_level_1_rect=enemy_1_level_1_rect 
         self.camera_x_y=camera_x_y ; self.enemy_run_number=enemy_run_number ; self.enemy_idle_number=enemy_idle_number ; self.player_key=player_key
-        self.enemy_attack_number=enemy_attack_number ; self.enemy_2_rects=enemy_2_rects ; self.enemy_x_movement=enemy_x_movement ; self.enemy_y_movement=enemy_y_movement
+        self.enemy_attack_number=enemy_attack_number ; self.enemy_2_level_1_rects=enemy_2_rects ; self.enemy_x_movement=enemy_x_movement ; self.enemy_y_movement=enemy_y_movement
         self.level_1_tile_set_rect=level_1_tile_set_rect
 
         if self.level_1:
-            self.enemy_rects=self.enemy_1_level_1_rect+self.enemy_2_rects ; self.tile_set=self.level_1_tile_set_rect
+            self.enemy_rects=self.enemy_2_level_1_rects ; self.tile_set=self.level_1_tile_set_rect
             self.enemy_rects_type=[]
-            for idx,enemy_1 in enumerate(self.enemy_1_level_1_rect):
-                self.enemy_rects_type.append("Enemy_1")
-            for idx,enemy_1 in enumerate(self.enemy_2_rects):
+           # for idx,enemy_1 in enumerate(self.enemy_1_level_1_rect):
+           #     self.enemy_rects_type.append("Enemy_1")
+            for idx,enemy_1 in enumerate(self.enemy_2_level_1_rects):
                 self.enemy_rects_type.append("Enemy_2")
 
     def distance(self):
@@ -51,19 +51,20 @@ class Control(EnemyOne):
                 
     def enemy_index(self):
         if any([self.level_1]):
-            for idx,enemy in enumerate(self.enemy_rects):
-                if self.player_control_index[0]==idx:
-                    if enemy in self.enemy_2_rects:
-                        for idy,enemy_2 in enumerate(self.enemy_2_rects):
-                            if enemy==enemy_2:
-                                return idy
+            pass
+            #for idx,enemy in enumerate(self.enemy_rects):
+            #    if self.player_control_index[0]==idx:
+            #        if enemy in self.enemy_2_level_1_rects:
+            #            for idy,enemy_2 in enumerate(self.enemy_2_level_1_rects):
+            #                if enemy==enemy_2:
+             #                  print("HERE")
+             #                  return idy
         
     def mechanic_idle(self,key):
         if self.player_key[-1]=='d':
             SCREEN.blit(self.enemy_idle[int(self.enemy_idle_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
         else:
             SCREEN.blit(self.enemy_idle_flip[int(self.enemy_idle_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0],self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]))
-        
         self.enemy_idle_number[0]+=0.07
         if self.enemy_idle_number[0]>len(self.enemy_idle)-1:
             self.enemy_idle_number[0]=0
@@ -110,7 +111,7 @@ class Control(EnemyOne):
                 self.enemy_x_movement[0]=0
                 self.enemy_y_movement[0]=0
                 if self.player_key[-1]=='d':
-                    SCREEN.blit(self.enemy_attack[int(self.enemy_attack_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0]-25,self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]-30))
+                   SCREEN.blit(self.enemy_attack[int(self.enemy_attack_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0]-25,self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]-30))
                 else:
                     SCREEN.blit(self.enemy_attack_flip[int(self.enemy_attack_number[0]//2)],(self.enemy_rects[self.player_control_index[0]].x-self.camera_x_y[0]-55,self.enemy_rects[self.player_control_index[0]].y-self.camera_x_y[1]-30))
                 self.enemy_attack_number[0]+=0.15
@@ -141,6 +142,6 @@ class Control(EnemyOne):
                     if self.enemy_y_movement[0]>0:
                         self.enemy_rects[self.player_control_index[0]].bottom=tile.top
                     if self.enemy_y_movement[0]<0:
-                        self.enemy_rects[self.player_control_index[0]].top=tile.bottom
+                        self.enemy_rects[self.player_control_index[0]].top=tile.bottomZ
 
 

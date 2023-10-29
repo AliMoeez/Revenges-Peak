@@ -19,7 +19,7 @@ class Tutorial:
         if any([self.level_1]) and not self.tutorial_one:
              self.enemy_one_distance_list=EnemyOne.distance(self)
              for idx,distance in enumerate(self.enemy_one_distance_list):
-                 if distance<300 and self.tutorial_two_list[0]>=1:
+                 if distance<500 and self.tutorial_two_list[0]>=1:
                      self.tutorial_two_list[0]-=1
                      return True
 

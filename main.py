@@ -62,7 +62,6 @@ while run:
         if not level_screen and not any([level_1]):
             if event.type==pygame.MOUSEBUTTONDOWN and menu.main_menu_buttons().collidepoint(event.pos):
                 level_screen= not level_screen
-       
         if level_screen:
             if key[pygame.K_q]:level_screen=False
             if menu.level_screen_blit_background() is not None:
@@ -82,6 +81,15 @@ while run:
                 if tutorial_one: tutorial_one=False
                 if tutorial_two: tutorial_two=False
             if tutorial.begin_tutorial(event,event_list): tutorial_two=True
+            
+            
+
+
+
+
+
+
+            
             if key[pygame.K_f] and player_control_cooldown[0]==1:
                 for idx,distance in enumerate(control.distance()):
                     if distance<100:
@@ -89,6 +97,20 @@ while run:
             if key[pygame.K_v] and player_control:
                 player_control_cooldown[0]=-0.05
 
+        
+        
+        
+
+
+
+
+
+
+
+
+
+        
+        
         if lose.retry(event):
             player_lose_condition=False ; reset_locations=True
 
@@ -136,6 +158,7 @@ while run:
     player.collision_with_object_logic()
 
     enemy_one.distance()
+    enemy_one.enemy_groups()
     enemy_one.idle()
     enemy_one.run()
     enemy_one.attack()

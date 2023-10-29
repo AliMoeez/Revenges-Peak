@@ -16,11 +16,14 @@ class EnemyOne:
         self.red=(178,34,34) ; self.player_key=player_key ; self.player_health=player_health ; self.reset_locations=reset_locations ; self.skeleton_fall_number=skeleton_fall_number
         self.enemy_1_health=enemy_1_health ; self.enemy_1_fall_type=enemy_1_fall_type
 
+        self.enemy_2_rects=enemy_2_rects
+
         self.enemy_1_level_1_x=enemy_1_level_1_x ; self.enemy_1_level_1_y=enemy_1_level_1_y
 
         if level_1:
             self.enemy_1_rects=enemy_1_level_1_rect
             self.tile_level=self.level_1_tile_set_rect
+            self.enemy_rects_total=enemy_level_1_group_rect
             for idx,skeleton in enumerate(self.enemy_1_rects):
                 self.skeleton_idle_number.append(0) ; self.skeleton_run_number.append(0) ; self.skeleton_attack_number.append(0)
                 self.enemy_1_x_movement.append(0) ; self.enemy_1_y_movement.append(0) ; self.skeleton_fall_number.append(0)
@@ -29,6 +32,10 @@ class EnemyOne:
     def distance(self):
         if any([self.level_1]):
             return EnemyGeneralFunctions.distance(self,self.enemy_1_rects)
+        
+    def enemy_groups(self):
+        if any([self.level_1]):
+            EnemyGeneralFunctions.enemy_groups(self,self.enemy_rects_total)
 
     def idle(self):
         self.enemy_1_distance=EnemyOne.distance(self)
