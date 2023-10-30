@@ -4,9 +4,10 @@ import math
 from Game_Asset_Code import *
 from .lose import Lose
 from .enemy_general_functions import EnemyGeneralFunctions
+from .control_test import ControlTest
 
 class EnemyOne:
-    def __init__(self,level_1,enemy_1_level_1_rect,reset_locations):
+    def __init__(self,level_1,enemy_1_level_1_rect,reset_locations,player_control):
         EnemyGeneralFunctions.__init__(self)
         Lose.__init__(self,level_1,player_lose_condition,reset_locations)
         self.level_1=level_1 ; self.camera_x_y=camera_x_y ; self.enemy_1_level_1_rect=enemy_1_level_1_rect ; self.skeleton_idle_number=skeleton_idle_number
@@ -14,7 +15,7 @@ class EnemyOne:
         self.enemy_1_x_movement=enemy_1_x_movement ; self.enemy_1_y_movement=enemy_1_y_movement ; self.player_control_index=player_control_index
         self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_attack_number=player_attack_number ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"
         self.red=(178,34,34) ; self.player_key=player_key ; self.player_health=player_health ; self.reset_locations=reset_locations ; self.skeleton_fall_number=skeleton_fall_number
-        self.enemy_1_health=enemy_1_health ; self.enemy_1_fall_type=enemy_1_fall_type
+        self.enemy_1_health=enemy_1_health ; self.enemy_1_fall_type=enemy_1_fall_type ; self.player_control=player_control
 
         self.enemy_2_rects=enemy_2_rects
 
@@ -33,10 +34,6 @@ class EnemyOne:
         if any([self.level_1]):
             return EnemyGeneralFunctions.distance(self,self.enemy_1_rects)
         
-    def enemy_groups(self):
-        if any([self.level_1]):
-            EnemyGeneralFunctions.enemy_groups(self,self.enemy_rects_total)
-
     def idle(self):
         self.enemy_1_distance=EnemyOne.distance(self)
         self.skeleton_idle=skeleton_idle; self.skeleton_idle_flip=skeleton_idle_flip
@@ -51,7 +48,6 @@ class EnemyOne:
             EnemyGeneralFunctions.move(self,self.enemy_1_distance,self.player_control_index,
                                        self.enemy_1_health,self.enemy_1_rects,self.skeleton_run,self.skeleton_run_flip,self.skeleton_run_number,
                                        self.enemy_1_x_movement,self.enemy_1_y_movement,0.10,7)
-
 
     def attack(self):
         self.enemy_1_distance=EnemyOne.distance(self)
@@ -81,8 +77,16 @@ class EnemyOne:
         if any([self.level_1]):
             return EnemyGeneralFunctions.collision_with_object(self,self.tile_level,self.enemy_1_rects)
 
-
     def collision_with_object_logic(self):
         if any([self.level_1]):
             self.collision=EnemyOne.collision_with_object(self)
             EnemyGeneralFunctions.collision_with_object_logic(self,self.enemy_1_rects,self.enemy_1_x_movement,self.enemy_1_y_movement,self.collision)
+
+    def control_run(self,key):
+        if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0 and not key[pygame.K_e]:
+            ControlTest.mechanic_walk(self,key,self.skeleton_run,self.enemy_1_level_1_rect,self.enemy_1_x_movement,self.enemy_1_level_1_y,
+                self.skeleton_run_flip,self.skeleton_run_number,self.skeleton_idle,self.skeleton_idle_number,self.skeleton_idle_flip)
+
+    def control_attack(self,key):
+        if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0:
+            ControlTest.mechanic_attack(self,key,self.skeleton_attack,self.enemy_1_level_1_rect,self.skeleton_attack_number,self.enemy_1_x_movement,self.enemy_1_y_movement)

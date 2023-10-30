@@ -32,7 +32,7 @@ class EnemyTwo:
     def idle(self):
         self.enemy_2_distance=EnemyTwo.distance(self)
         self.brute_1_idle=brute_1_idle ; self.brute_1_idle_flip=brute_1_idle_flip
-        if any([self.level_1]):
+        if any([self.level_1]): pass
             EnemyGeneralFunctions.idle(self,self.enemy_2_distance,self.player_control_index,self.enemy_2_health,self.enemy_2_x_movement,self.enemy_2_y_movement,
                                        self.brute_1_idle,self.brute_1_idle_flip,self.brute_1_idle_number,self.enemy_2_rect,0.10,4)
 
@@ -76,3 +76,6 @@ class EnemyTwo:
         if any([self.level_1]):
             self.collision=EnemyTwo.collision_with_object(self)
             EnemyGeneralFunctions.collision_with_object_logic(self,self.enemy_2_rect,self.enemy_2_x_movement,self.enemy_2_y_movement,self.collision)
+
+    def show_in_control(self):
+        

@@ -2,11 +2,9 @@ import pygame
 import math
 
 from Game_Asset_Code import *
-from .enemy_one import EnemyOne
 
-class Control(EnemyOne):
+class Control:
     def __init__(self,level_1,player_control,player_control_index):
-        super().__init__(level_1,enemy_1_level_1_rect,reset_locations)
         self.player_rect=player_rect ; self.enemy_1_level_1_rect=enemy_1_level_1_rect ; self.level_1=level_1 ; self.player_control_index=player_control_index
         self.player_control=player_control ; self.player_control_cooldown=player_control_cooldown ; self.enemy_1_level_1_rect=enemy_1_level_1_rect 
         self.camera_x_y=camera_x_y ; self.enemy_run_number=enemy_run_number ; self.enemy_idle_number=enemy_idle_number ; self.player_key=player_key
@@ -14,11 +12,11 @@ class Control(EnemyOne):
         self.level_1_tile_set_rect=level_1_tile_set_rect
 
         if self.level_1:
-            self.enemy_rects=self.enemy_2_level_1_rects ; self.tile_set=self.level_1_tile_set_rect
+            self.enemy_rects=self.enemy_1_level_1_rect+self.enemy_2_level_1_rects ; self.tile_set=self.level_1_tile_set_rect
             self.enemy_rects_type=[]
-           # for idx,enemy_1 in enumerate(self.enemy_1_level_1_rect):
-           #     self.enemy_rects_type.append("Enemy_1")
-            for idx,enemy_1 in enumerate(self.enemy_2_level_1_rects):
+            for idx,enemy_1 in enumerate(self.enemy_1_level_1_rect):
+                self.enemy_rects_type.append("Enemy_1")
+            for idx,enemy_2 in enumerate(self.enemy_2_level_1_rects):
                 self.enemy_rects_type.append("Enemy_2")
 
     def distance(self):
@@ -51,14 +49,13 @@ class Control(EnemyOne):
                 
     def enemy_index(self):
         if any([self.level_1]):
-            pass
-            #for idx,enemy in enumerate(self.enemy_rects):
-            #    if self.player_control_index[0]==idx:
-            #        if enemy in self.enemy_2_level_1_rects:
-            #            for idy,enemy_2 in enumerate(self.enemy_2_level_1_rects):
-            #                if enemy==enemy_2:
-             #                  print("HERE")
-             #                  return idy
+            for idx,enemy in enumerate(self.enemy_rects):
+                if self.player_control_index[0]==idx:
+                    if enemy in self.enemy_2_level_1_rects:
+                        for idy,enemy_2 in enumerate(self.enemy_2_level_1_rects):
+                            if enemy==enemy_2:
+                                print("HERE")
+                                return idy
         
     def mechanic_idle(self,key):
         if self.player_key[-1]=='d':
@@ -142,6 +139,6 @@ class Control(EnemyOne):
                     if self.enemy_y_movement[0]>0:
                         self.enemy_rects[self.player_control_index[0]].bottom=tile.top
                     if self.enemy_y_movement[0]<0:
-                        self.enemy_rects[self.player_control_index[0]].top=tile.bottomZ
+                        self.enemy_rects[self.player_control_index[0]].top=tile.bottom
 
 

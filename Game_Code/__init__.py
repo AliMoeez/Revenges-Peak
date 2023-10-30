@@ -12,3 +12,4 @@ from .lose import Lose
 from .win import Win
 from .tutorial import Tutorial
 from .enemy_general_functions import EnemyGeneralFunctions
+from .control_test import ControlTest

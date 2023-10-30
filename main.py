@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,LevelTwo,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives,Lose,Tutorial,Win
+from Game_Code import Menu,LevelOne,LevelTwo,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives,Lose,Tutorial,Win,ControlTest
 
 while run:
     level_1_tile_set_rect.clear()
@@ -80,7 +80,7 @@ while run:
                 text_position[0]=0
                 if tutorial_one: tutorial_one=False
                 if tutorial_two: tutorial_two=False
-            if tutorial.begin_tutorial(event,event_list): tutorial_two=True
+            if tutorial.begin_tutorial(event,event_list): tutorial_two=Trueff
             
             
 
@@ -158,7 +158,6 @@ while run:
     player.collision_with_object_logic()
 
     enemy_one.distance()
-    enemy_one.enemy_groups()
     enemy_one.idle()
     enemy_one.run()
     enemy_one.attack()
