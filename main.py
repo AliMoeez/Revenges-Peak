@@ -23,9 +23,11 @@ while run:
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
                   player_control,dialogue_condition,dialogue_story_condition,
                   reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
-    enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations)
+    enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations)
     people=People(level_1,level_1_wizard_talk,reset_locations)
+
+  #  controltest=ControlTest(level_1)
 
     #print(player_rect.x,player_rect.y)
     
@@ -80,36 +82,25 @@ while run:
                 text_position[0]=0
                 if tutorial_one: tutorial_one=False
                 if tutorial_two: tutorial_two=False
-            if tutorial.begin_tutorial(event,event_list): tutorial_two=Trueff
+            if tutorial.begin_tutorial(event,event_list): tutorial_two=True
             
             
-
-
-
-
-
 
             
             if key[pygame.K_f] and player_control_cooldown[0]==1:
-                for idx,distance in enumerate(control.distance()):
+                for idx,distance in enumerate(enemy_one.distance()):
                     if distance<100:
-                        player_control_index.clear() ; player_control_index.append(idx) ; player_control=True
+                        player_control_index.clear() 
+                        player_control_index.append((idx,"Enemy_1")) 
+                        player_control=True
+            
             if key[pygame.K_v] and player_control:
                 player_control_cooldown[0]=-0.05
 
         
         
         
-
-
-
-
-
-
-
-
-
-        
+    
         
         if lose.retry(event):
             player_lose_condition=False ; reset_locations=True
@@ -165,6 +156,10 @@ while run:
     enemy_one.fall()
     enemy_one.collision_with_object()
     enemy_one.collision_with_object_logic()
+    enemy_one.control_run(key)
+    enemy_one.control_attack(key)
+    enemy_one.control_collision()
+    enemy_one.control_collision_object_logic()
 
     enemy_two.distance()
     enemy_two.idle()
@@ -175,13 +170,17 @@ while run:
     enemy_two.collision_with_object()
     enemy_two.collision_with_object_logic()
 
-    control=Control(level_1,player_control,player_control_index)
-    control.distance()
-    control.enemy_definition()
-    control.mechanic_walk(key)
-    control.mechanic_attack(key)
-    control.mechanic_collision()
-    control.mechanic_collision_logic()
+
+    #control=Control(level_1,player_control,player_control_index)
+    #control.distance()
+    #control.enemy_definition()
+    #control.mechanic_walk(key)
+    #control.mechanic_attack(key)
+    #control.mechanic_collision()
+    #control.mechanic_collision_logic()
+
+
+
 
     people.idle()
     people.run()

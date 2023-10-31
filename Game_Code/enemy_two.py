@@ -13,7 +13,9 @@ class EnemyTwo:
         self.level_1=level_1 ; self.camera_x_y=camera_x_y ; self.brute_1_idle_number=brute_1_idle_number ; self.brute_1_run_number=brute_1_run_number
         self.player_rect=player_rect ; self.player_control_index=player_control_index ; self.enemy_2_level_1_rects=enemy_2_rects ; self.brute_1_attack_number=brute_1_attack_number
         self.enemy_2_level_1_x=enemy_2_level_1_x ; self.enemy_2_level_1_y=enemy_2_level_1_y ; self.enemy_2_x_movement=enemy_2_x_movement ; self.enemy_2_y_movement=enemy_2_y_movement
-        self.enemy_rects=enemy_1_level_1_rect+enemy_2_rects ; self.enemy_index=Control.enemy_index(self) ; self.level_1_tile_set_rect=level_1_tile_set_rect
+        self.enemy_rects=enemy_1_level_1_rect+enemy_2_rects 
+      #  self.enemy_index=Control.enemy_index(self) ;
+        self.level_1_tile_set_rect=level_1_tile_set_rect
         self.player_health=player_health ; self.reset_locations=reset_locations ; self.brute_1_fall_number=brute_1_fall_number ; self.enemy_2_health=enemy_2_health
         self.red=(178,34,34) ; self.enemy_2_fall_type=enemy_2_fall_type ; self.player_attack_number=player_attack_number ; self.player_key=player_key
 
@@ -32,7 +34,7 @@ class EnemyTwo:
     def idle(self):
         self.enemy_2_distance=EnemyTwo.distance(self)
         self.brute_1_idle=brute_1_idle ; self.brute_1_idle_flip=brute_1_idle_flip
-        if any([self.level_1]): pass
+        if any([self.level_1]):
             EnemyGeneralFunctions.idle(self,self.enemy_2_distance,self.player_control_index,self.enemy_2_health,self.enemy_2_x_movement,self.enemy_2_y_movement,
                                        self.brute_1_idle,self.brute_1_idle_flip,self.brute_1_idle_number,self.enemy_2_rect,0.10,4)
 
@@ -77,5 +79,5 @@ class EnemyTwo:
             self.collision=EnemyTwo.collision_with_object(self)
             EnemyGeneralFunctions.collision_with_object_logic(self,self.enemy_2_rect,self.enemy_2_x_movement,self.enemy_2_y_movement,self.collision)
 
-    def show_in_control(self):
+   # def show_in_control(self):
         
