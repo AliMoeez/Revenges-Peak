@@ -34,45 +34,55 @@ class EnemyOne:
         if any([self.level_1]):
             return EnemyGeneralFunctions.distance(self,self.enemy_1_rects)
         
-    def idle(self):
+
+    def iscontrolled(self):
+        if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_1":
+            return self.player_control_index[0][0]
+    
+    def enemy_index(self):
+        if any([self.level_1]):
+             for idx,skeleton in enumerate(self.enemy_1_rects):
+                  return idx 
+
+    def idle(self,key):
         self.enemy_1_distance=EnemyOne.distance(self)
         self.skeleton_idle=skeleton_idle; self.skeleton_idle_flip=skeleton_idle_flip
-        
-        for idx,enemy in enumerate(self.enemy_1_level_1_rect):
-            if any([self.level_1]) and self.player_control_index[0][0]!=idx:
-                EnemyGeneralFunctions.idle(self,self.enemy_1_distance,self.player_control_index,self.enemy_1_health,self.enemy_1_x_movement,self.enemy_1_y_movement,
-                                        self.skeleton_idle,self.skeleton_idle_flip,self.skeleton_idle_number,self.enemy_1_rects,0.10,4)
-        else:
-            ControlTest.mechanic_walk(self,key,self.skeleton_run,self.enemy_1_level_1_rect,self.enemy_1_x_movement,self.enemy_1_level_1_y,
-            self.skeleton_run_flip,self.skeleton_run_number,self.skeleton_idle,self.skeleton_idle_number,self.skeleton_idle_flip)
+
+        if any([self.level_1]):
+            if any([self.level_1]) and not self.player_control and not self.player_control_cooldown[0]>0 and not key[pygame.K_e] and not self.player_control_index[0][1]=="Enemy_1":
+                    EnemyGeneralFunctions.idle(self,self.enemy_1_distance,self.player_control_index,self.enemy_1_health,self.enemy_1_x_movement,self.enemy_1_y_movement,
+                        self.skeleton_idle,self.skeleton_idle_flip,self.skeleton_idle_number,self.enemy_1_rects,0.10,4)
+            else:
+                pass
 
 
-    def run(self):
+    def run(self,key):
         self.enemy_1_distance=EnemyOne.distance(self)
         self.skeleton_run=skeleton_run; self.skeleton_run_flip=skeleton_run_flip
-        
-        for idx,enemy in enumerate(self.enemy_1_level_1_rect):
-            if any([self.level_1]) and self.player_control_index[0][0]!=idx:
-                EnemyGeneralFunctions.move(self,self.enemy_1_distance,self.player_control_index,
-                                       self.enemy_1_health,self.enemy_1_rects,self.skeleton_run,self.skeleton_run_flip,self.skeleton_run_number,
-                                       self.enemy_1_x_movement,self.enemy_1_y_movement,0.10,7)
-            else:
-                ControlTest.mechanic_walk(self,key,self.skeleton_run,self.enemy_1_level_1_rect,self.enemy_1_x_movement,self.enemy_1_level_1_y,
-                self.skeleton_run_flip,self.skeleton_run_number,self.skeleton_idle,self.skeleton_idle_number,self.skeleton_idle_flip)
-            
 
-    def attack(self):
+        if any([self.level_1]):
+            if any([self.level_1]) and not self.player_control and not self.player_control_cooldown[0]>0 and not key[pygame.K_e] and not self.player_control_index[0][1]=="Enemy_1":
+                    EnemyGeneralFunctions.move(self,self.enemy_1_distance,self.player_control_index,
+                                self.enemy_1_health,self.enemy_1_rects,self.skeleton_run,self.skeleton_run_flip,self.skeleton_run_number,
+                                self.enemy_1_x_movement,self.enemy_1_y_movement,0.10,7)
+            else:
+                ControlTest.mechanic_walk(self,key,self.skeleton_run,self.enemy_1_level_1_rect,self.enemy_1_x_movement,self.enemy_1_y_movement,
+                self.skeleton_run_flip,self.skeleton_run_number,self.skeleton_idle,self.skeleton_idle_number,self.skeleton_idle_flip)
+
+                
+
+    def attack(self,key):
         self.enemy_1_distance=EnemyOne.distance(self)
         self.skeleton_attack=skeleton_attack; self.skeleton_attack_flip=skeleton_attack_flip
         
-        for idx,enemy in enumerate(self.enemy_1_level_1_rect):
-            if any([self.level_1]) and self.player_control_index[0][0]!=idx:
-                EnemyGeneralFunctions.attack(self,self.enemy_1_distance,self.enemy_1_health,self.player_control_index,self.enemy_1_x_movement,self.enemy_1_y_movement,
+        if any([self.level_1]):
+                if any([self.level_1]) and not self.player_control and  not self.player_control_cooldown[0]>0 and not self.player_control_index[0][1]=="Enemy_1":
+                    EnemyGeneralFunctions.attack(self,self.enemy_1_distance,self.enemy_1_health,self.player_control_index,self.enemy_1_x_movement,self.enemy_1_y_movement,
                                          self.skeleton_attack,self.skeleton_attack_flip,self.skeleton_attack_number,self.enemy_1_rects,self.enemy_1_fall_type,
                                          0.10,7,25,55,30,30,self.player_health,200)
-            else:
-                ControlTest.mechanic_attack(self,key,self.skeleton_attack,self.enemy_1_level_1_rect,self.skeleton_attack_flip,
-                self.skeleton_attack_number,self.enemy_1_x_movement,self.enemy_1_y_movement)
+                else:
+                    ControlTest.mechanic_attack(self,key,self.skeleton_attack,self.enemy_1_level_1_rect,self.skeleton_attack_flip,
+                            self.skeleton_attack_number,self.enemy_1_x_movement,self.enemy_1_y_movement)
 
 
     def player_hit(self):
@@ -102,15 +112,13 @@ class EnemyOne:
 
     def control_run(self,key):
         if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0 and not key[pygame.K_e] and self.player_control_index[0][1]=="Enemy_1":
-            ControlTest.mechanic_walk(self,key,self.skeleton_run,self.enemy_1_level_1_rect,self.enemy_1_x_movement,self.enemy_1_level_1_y,
+            ControlTest.mechanic_walk(self,key,self.skeleton_run,self.enemy_1_level_1_rect,self.enemy_1_x_movement,self.enemy_1_y_movement,
                 self.skeleton_run_flip,self.skeleton_run_number,self.skeleton_idle,self.skeleton_idle_number,self.skeleton_idle_flip)
 
-    def control_attack(self,key):
-        for idx,enemy in enumerate(self.enemy_1_level_1_rect):
-            if any([self.level_1]) and self.player_control_index[0][0]!=idx:
-        if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_1":
-            ControlTest.mechanic_attack(self,key,self.skeleton_attack,self.enemy_1_level_1_rect,self.skeleton_attack_flip,
-                                        self.skeleton_attack_number,self.enemy_1_x_movement,self.enemy_1_y_movement)
+ #   def control_attack(self,key):
+ #       if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_1":
+ #           ControlTest.mechanic_attack(self,key,self.skeleton_attack,self.enemy_1_level_1_rect,self.skeleton_attack_flip,
+ #                                       self.skeleton_attack_number,self.enemy_1_x_movement,self.enemy_1_y_movement)
             
     def control_collision(self):
         if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_1":
