@@ -90,9 +90,6 @@ while run:
 
 
 
-
-
-
                         
             if key[pygame.K_f] and player_control_cooldown[0]==1:
                 for idx,distance in enumerate(enemy_one.distance()):
@@ -106,8 +103,6 @@ while run:
                         player_control_index.append((idx,"Enemy_2")) 
                         player_control=True
             
-
-
 
 
 
@@ -182,8 +177,9 @@ while run:
     enemy_one.fall()
     enemy_one.collision_with_object()
     enemy_one.collision_with_object_logic()
-  #  enemy_one.control_run(key)
-  #  enemy_one.control_attack(key)
+    enemy_one.enemy_index()
+    enemy_one.control_run(key)
+    enemy_one.control_attack(key)
     enemy_one.control_collision()
     enemy_one.control_collision_object_logic()
 
