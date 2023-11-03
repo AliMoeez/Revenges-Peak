@@ -82,7 +82,7 @@ class EnemyTwo:
             self.collision=EnemyTwo.collision_with_object(self)
             EnemyGeneralFunctions.collision_with_object_logic(self,self.enemy_2_rect,self.enemy_2_x_movement,self.enemy_2_y_movement,self.collision)
 
-    def control_run(self,key):
+    """def control_run(self,key):
         if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0 and not key[pygame.K_e] and self.player_control_index[0][1]=="Enemy_2":
             ControlTest.mechanic_walk(self,key,self.brute_1_run,self.enemy_2_level_1_rects,self.enemy_2_x_movement,self.enemy_2_y_movement,
                 self.brute_1_run_flip,self.brute_1_run_number,self.brute_1_idle,self.brute_1_idle_number,self.brute_1_idle_flip)
@@ -98,7 +98,7 @@ class EnemyTwo:
     
     def control_collision_object_logic(self):
         if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_2":
-            ControlTest.mechanic_collision_logic(self,self.tile_level,self.enemy_2_level_1_rects,self.enemy_2_x_movement,self.enemy_2_y_movement)
+            ControlTest.mechanic_collision_logic(self,self.tile_level,self.enemy_2_level_1_rects,self.enemy_2_x_movement,self.enemy_2_y_movement)"""
 
    # def show_in_control(self):
         

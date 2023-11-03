@@ -112,3 +112,5 @@ enemy_level_1_group_rect=[
     (enemy_1_level_1_rect[7],enemy_1_level_1_rect[8],enemy_2_rects[4])
 ]
 
+enemy_1_x_control_movement=[0]
+enemy_1_y_control_movement=[0]

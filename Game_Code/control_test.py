@@ -10,19 +10,6 @@ class ControlTest:
         self.camera_x_y=camera_x_y
         self.player_control_index=player_control_index
         self.player_key=player_key
-     #   self.enemy_1_level_1_rect=enemy_1_level_1_rect
-     #   self.enemy_2_level_1_rects=enemy_2_rects
-
-    #    if self.level_1:
-    #        self.enemy_rects=self.enemy_1_level_1_rect+self.enemy_2_level_1_rects
-
-   # def distance(self):
-   #     if any([self.level_1]):
-   #         self.player_enemy_distance=[]
-   ##         for idx,enemy in enumerate(self.enemy_rects):
-    #            self.player_enemy_distance.append(math.hypot(self.player_rect.x-self.enemy_rects[idx].x,self.player_rect.y-self.enemy_rects[idx].y))
-    #        return self.player_enemy_distance
-
 
  #   def enemy_camera(self,enemy_rects):
   #      for idx,enemy in enumerate(enemy_rects):
@@ -30,6 +17,8 @@ class ControlTest:
   #              return enemy_rects[idx]
             
     def mechanic_idle(self,enemy_idle,enemy_idle_number,enemy_rects,enemy_idle_flip):
+        enemy_x_movement[0]=0
+        enemy_y_movement[0]=0
         if self.player_key[-1]=='d':
             SCREEN.blit(enemy_idle[int(enemy_idle_number[0]//2)],(enemy_rects[self.player_control_index[0][0]].x-self.camera_x_y[0],enemy_rects[self.player_control_index[0][0]].y-self.camera_x_y[1]))
         else:
@@ -44,9 +33,11 @@ class ControlTest:
                 SCREEN.blit(enemy_walk[int(enemy_run_number[0]//2)],(enemy_rects[self.player_control_index[0][0]].x-self.camera_x_y[0],enemy_rects[self.player_control_index[0][0]].y-self.camera_x_y[1]))
                 enemy_x_movement[0]=2  ; self.player_key.append("d")
                 if key[pygame.K_w]:
-                    enemy_x_movement[0]=math.sqrt(2) ; enemy_y_movement[0]=-math.sqrt(2)
+                    enemy_x_movement[0]=math.sqrt(2) 
+                    enemy_y_movement[0]=-math.sqrt(2)
                 elif key[pygame.K_s]:
-                    enemy_x_movement[0]=math.sqrt(2) ; enemy_y_movement[0]=math.sqrt(2)
+                    enemy_x_movement[0]=math.sqrt(2) 
+                    enemy_y_movement[0]=math.sqrt(2)
 
             elif key[pygame.K_w] and not key[pygame.K_s] : 
                 enemy_y_movement[0]=-2
@@ -70,7 +61,7 @@ class ControlTest:
                 ControlTest.mechanic_idle(self,enemy_idle,enemy_idle_number,enemy_rects,enemy_idle_flip) ; enemy_x_movement[0]=0 ; enemy_y_movement[0]=0
     
             enemy_run_number[0]+=0.15
-            if enemy_run_number[0]>len(enemy_walk)+1: enemy_run_number[0]=0
+            if enemy_run_number[0]>len(enemy_walk): enemy_run_number[0]=0
    
     def mechanic_attack(self,key,enemy_attack,enemy_rects,enemy_attack_flip,enemy_attack_number,enemy_x_movement,enemy_y_movement):
         if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0:
@@ -95,7 +86,7 @@ class ControlTest:
 
     def mechanic_collision_logic(self,tile_set,enemy_rects,enemy_x_movement,enemy_y_movement):
         if any([self.level_1]) and self.player_control and self.player_control_cooldown[0]>0:
-            for idx,enemy in enumerate(enemy_rects):
+           for idx,enemy in enumerate(enemy_rects):
                 enemy_rects[self.player_control_index[0][0]].x+=enemy_x_movement[0]
                 self.collision=ControlTest.mechanic_collision(self,tile_set,enemy_rects)
                 for tile in self.collision:
