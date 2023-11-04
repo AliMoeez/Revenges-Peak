@@ -134,13 +134,13 @@ class EnemyGeneralFunctions:
                 enemy_run_number[idx]+=enemy_run_increment
                 if enemy_run_number[idx]>enemy_run_max: enemy_run_number[idx]=0
                 if self.player_rect.x>=enemy_rects[idx].x:
-                    enemy_x_movement[idx]=0
-                    if self.player_rect.y<enemy_rects[idx].y: enemy_y_movement[idx]=-0
-                    if self.player_rect.y>=enemy_rects[idx].y: enemy_y_movement[idx]=0
+                    enemy_x_movement[idx]=1
+                    if self.player_rect.y<enemy_rects[idx].y: enemy_y_movement[idx]=-1
+                    if self.player_rect.y>=enemy_rects[idx].y: enemy_y_movement[idx]=1
                 if self.player_rect.x<enemy_rects[idx].x:
-                    enemy_x_movement[idx]=-0
-                    if self.player_rect.y<enemy_rects[idx].y: enemy_y_movement[idx]=-0
-                    if self.player_rect.y>=enemy_rects[idx].y: enemy_y_movement[idx]=0
+                    enemy_x_movement[idx]=-1
+                    if self.player_rect.y<enemy_rects[idx].y: enemy_y_movement[idx]=-1
+                    if self.player_rect.y>=enemy_rects[idx].y: enemy_y_movement[idx]=1
 
     def attack_control(self,distance_list:list,enemy_health:list,player_control_list:list,enemy_x_movement:list,enemy_y_movement:list,enemy_attack_right,enemy_attack_left,
                enemy_attack_number:list,enemy_rects:list,enemy_fall_type:list,attack_number_increment:int,attack_number_max:int,
@@ -160,3 +160,27 @@ class EnemyGeneralFunctions:
                 if enemy_attack_number[idx]>attack_number_max:
                     enemy_attack_number[idx]=0
                     player_health[0]-=health_reduction
+    
+
+    def collision_with_object_control(self,tile_level_list,enemy_rects:list):
+        self.tile_hit=[]
+        for tile in tile_level_list:
+            for idx,enemy in enumerate(enemy_rects):
+                if enemy.colliderect(tile):
+                    self.tile_hit.append(tile)
+        return self.tile_hit
+
+    def collision_with_object_logic_control(self,enemy_rects:list,enemy_x_movement:list,enemy_y_movement:list,collision):
+        for idx,enemy in enumerate(enemy_rects):
+            enemy_rects[idx].x+=enemy_x_movement[idx]
+            for tile in collision:
+                if enemy_x_movement[idx]>0:
+                    enemy_rects[idx].right=tile.left
+                if enemy_x_movement[idx]<0:
+                    enemy_rects[idx].left=tile.right
+            enemy_rects[idx].y+=enemy_y_movement[idx]
+            for tile in collision:
+                if enemy_y_movement[idx]>0:
+                    enemy_rects[idx].bottom=tile.top
+                if enemy_y_movement[idx]<0:
+                    enemy_rects[idx].top=tile.bottom

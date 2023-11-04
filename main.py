@@ -97,7 +97,7 @@ while run:
                         player_control_index.clear() 
                         player_control_index.append((idx,"Enemy_1")) 
                         player_control=True
-                        
+
                 
                 for idx,distance in enumerate(enemy_two.distance()):
                     if distance<100:
@@ -105,12 +105,6 @@ while run:
                         player_control_index.append((idx,"Enemy_2")) 
                         player_control=True
         
-
-
-
-
-
-
 
 
          #   print(player_control_index)
@@ -191,10 +185,11 @@ while run:
     enemy_two.fall()
     enemy_two.collision_with_object()
     enemy_two.collision_with_object_logic()
-    #enemy_two.control_run(key)
-    #enemy_two.control_attack(key)
-    #enemy_two.control_collision()
-    #enemy_two.control_collision_object_logic()
+    enemy_two.enemy_index()
+    enemy_two.control_run(key)
+    enemy_two.control_attack(key)
+    enemy_two.control_collision()
+    enemy_two.control_collision_object_logic()
 
 
     #control=Control(level_1,player_control,player_control_index)
