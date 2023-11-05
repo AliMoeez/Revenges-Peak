@@ -81,14 +81,14 @@ class EnemyOne:
 
         if any([self.level_1]):
 
-            if not self.player_control:
+            if EnemyOne.enemy_index(self) not in self.enemy_1_rects:
                     self.enemy_1_rects_control=self.enemy_1_rects
                     self.enemy_1_distance_control=self.enemy_1_distance
 
                     EnemyGeneralFunctions.move(self,self.enemy_1_distance,self.player_control_index,
                         self.enemy_1_health,self.enemy_1_rects,self.skeleton_run,self.skeleton_run_flip,self.skeleton_run_number,
                         self.enemy_1_x_movement,self.enemy_1_y_movement,0.10,7)
-            else:
+            if EnemyOne.enemy_index(self)  in self.enemy_1_rects:
                     self.enemy_1_rects_control=[i for i in self.enemy_1_rects if i!=EnemyOne.enemy_index(self)]
                     self.enemy_1_distance_control=[i for idx, i in enumerate(self.enemy_1_distance) if idx!=self.player_control_index[0][0]]
                     EnemyGeneralFunctions.move_control(self,self.enemy_1_distance_control,self.player_control_index,

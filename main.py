@@ -88,8 +88,6 @@ while run:
 
 
 
-
-
                         
             if key[pygame.K_f] and player_control_cooldown[0]==1:
                 for idx,distance in enumerate(enemy_one.distance()):

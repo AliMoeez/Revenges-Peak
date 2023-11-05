@@ -66,7 +66,7 @@ class EnemyTwo:
         self.brute_1_run=brute_1_run ; self.brute_1_run_flip=brute_1_run_flip
         if any([self.level_1]):
             
-            if not self.player_control:
+            if EnemyTwo.enemy_index(self) not in self.enemy_2_rect:
                 self.enemy_2_rects_control=self.enemy_2_rect
                 self.enemy_2_distance_control=self.enemy_2_distance
 
@@ -74,7 +74,7 @@ class EnemyTwo:
                                        self.brute_1_run,self.brute_1_run_flip,self.brute_1_run_number,self.enemy_2_x_movement,self.enemy_2_y_movement,
                                        0.10,7)
             
-            else:
+            if EnemyTwo.enemy_index(self)  in self.enemy_2_rect:
                 self.enemy_2_rects_control=[i for i in self.enemy_2_rect if i!=EnemyTwo.enemy_index(self)]
                 self.enemy_2_distance_control=[i for idx, i in enumerate(self.enemy_2_distance) if idx!=self.player_control_index[0][0]]
                 EnemyGeneralFunctions.move_control(self,self.enemy_2_distance_control,self.player_control_index,self.enemy_2_health,self.enemy_2_rects_control,
