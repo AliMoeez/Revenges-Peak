@@ -25,6 +25,7 @@ class LevelOne(Menu):
 
         if self.level_1: 
             self.level_screen=False
+            SCREEN.fill((131,164,72))
             if self.rect_camera.x>self.min_x_border and self.rect_camera.x<self.max_x_border and self.rect_camera.y>self.min_y_border and self.rect_camera.y<self.max_y_border:
                  LevelOne.border_logic_total(self)
             if (self.rect_camera.x<self.min_x_border or self.rect_camera.x>self.max_x_border) and not self.rect_camera.y<self.min_y_border and not self.rect_camera.y>self.max_y_border:

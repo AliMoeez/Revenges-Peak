@@ -7,7 +7,7 @@ from .win import Win
 
 class Player:
     def __init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,
-                 dialogue_story_condition,reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one):
+                 dialogue_story_condition,reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2):
         Lose.__init__(self,level_1,player_lose_condition,reset_locations)
         Win.__init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
         self.player_x=player_x ; self.player_y=player_y ; self.player_width=player_width ; self.player_height=player_height ; self.player_rect=player_rect ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement
@@ -15,6 +15,7 @@ class Player:
         self.player_control_cooldown=player_control_cooldown ; self.player_control=player_control ; self.object_rect=object_rect ; self.dialogue_condition=dialogue_condition
         self.dialogue_story_condition=dialogue_story_condition ; self.reset_locations=reset_locations ; self.tutorial_one=tutorial_one ; self.tutorial_two=tutorial_two
         self.level_1_wizard_talk=level_1_wizard_talk ; self.talk_to_abyss_level_one=talk_to_abyss_level_one ; self.investigate_object_level_one=investigate_object_level_one
+        self.level_2=level_2
   #      print(self.player_rect.x,self.player_rect.y)
 
     def idle(self,key):
@@ -35,7 +36,7 @@ class Player:
 
     def move(self,key):
         self.player_run_list=player_run_list ; self.player_run_list_flip=player_run_list_flip ; self.player_run_number=player_run_number
-        if (any([self.level_1]) and not (self.tutorial_one or self.tutorial_two) and not Win.condition(self) and not key[pygame.K_e] and not self.dialogue_condition and not self.dialogue_story_condition
+        if (any([self.level_1,self.level_2]) and not (self.tutorial_one or self.tutorial_two) and not Win.condition(self) and not key[pygame.K_e] and not self.dialogue_condition and not self.dialogue_story_condition
              and not self.player_health[0]<=0 or self.player_attack_cooldown[0]<=0)  :
             if key[pygame.K_d] and not key[pygame.K_a]:
                 SCREEN.blit(self.player_run_list[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
@@ -79,7 +80,7 @@ class Player:
 
     def attack(self,key):
         self.player_attack_list=player_attack_list ; self.player_attack_list_flip=player_attack_list_flip ; self.player_attack_number=player_attack_number
-        if any([self.level_1]) and not (self.tutorial_one or self.tutorial_two) and key[pygame.K_e]  and not Win.condition(self)  and self.player_attack_cooldown[0]>0 and not self.dialogue_condition and not self.dialogue_story_condition and not self.player_health[0]<=0 :
+        if any([self.level_1,self.level_2]) and not (self.tutorial_one or self.tutorial_two) and key[pygame.K_e]  and not Win.condition(self)  and self.player_attack_cooldown[0]>0 and not self.dialogue_condition and not self.dialogue_story_condition and not self.player_health[0]<=0 :
             self.player_x_movement[0]=0 ; self.player_y_movement[0]=0
 
             if self.player_key[-1]=="d":
@@ -93,7 +94,7 @@ class Player:
         if not key[pygame.K_e]: self.player_attack_number[0]=0
 
     def control(self,key):
-        if any([self.level_1]):
+        if any([self.level_1,self.level_2]):
             if self.player_control and self.player_control_cooldown[0]>0:
                 self.player_control_cooldown[0]-=0.01/2 #0.01/2
                 self.player_x_movement[0]=0 ; self.player_y_movement[0]=0
@@ -105,13 +106,13 @@ class Player:
             if self.player_control_cooldown[0]>=1: self.player_control_cooldown[0]=1
 
     def dialouge_state(self,key):
-        if any([self.level_1]) and (self.dialogue_condition or self.dialogue_story_condition):
+        if any([self.level_1,self.level_2]) and (self.dialogue_condition or self.dialogue_story_condition):
             Player.idle(self,key)
 
     def health_power_cooldown_icons(self):
         self.maximum_health=1000 ; self.health_bar_length=500 ; self.health_bar_ratio=self.maximum_health/self.health_bar_length ; self.health_icon=health_icon
         self.sword_icon=sword_icon ; self.potion_icon=potion_icon
-        if any([self.level_1]):
+        if any([self.level_1,self.level_2]):
             
             self.health_icons=pygame.draw.rect(SCREEN,(178,34,34),pygame.Rect(20,10,self.player_health[0]/self.health_bar_ratio,25))
             SCREEN.blit(self.health_icon,(32,14)) ; self.health_border=pygame.draw.rect(SCREEN,(220,220,220),pygame.Rect(20,10,self.health_bar_length,25),4) 
@@ -124,7 +125,7 @@ class Player:
 
     def fall(self):
         self.player_fall_list=player_fall_list ; self.player_fall_list_flip=player_fall_list_flip ; self.player_fall_number=player_fall_number
-        if any([self.level_1]): 
+        if any([self.level_1,self.level_2]): 
             if self.player_health[0]<=0:
                 self.player_x_movement[0]=0 ; self.player_y_movement[0]=0
                 if self.player_key[-1]=='d':

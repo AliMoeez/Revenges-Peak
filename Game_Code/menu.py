@@ -2,20 +2,20 @@ import pygame
 from Game_Asset_Code import *
 
 class Menu:
-    def __init__(self,level_screen,level_1):
+    def __init__(self,level_screen,level_1,level_2):
         self.WHITE=(255,255,255) ; self.LIGHT_BROWN=(133,70,30)
         self.backround_tile_set=backround_tile_set ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"
-        self.level_screen=level_screen ; self.level_1=level_1
+        self.level_screen=level_screen ; self.level_1=level_1 ; self.level_2=level_2
 
     def main_menu(self):
-        if (not self.level_screen or self.level_screen) and not any([self.level_1]):
+        if (not self.level_screen or self.level_screen) and not any([self.level_1,self.level_2]):
             for layer in self.backround_tile_set:
                 for tile in layer.tiles():
                     x_val=tile[0]*32 ; y_val=tile[1]*32
                     SCREEN.blit(tile[2],(x_val,y_val))  
 
     def main_menu_buttons(self):
-        if not self.level_screen and not any([self.level_1]):
+        if not self.level_screen and not any([self.level_1,self.level_2]):
             self.font_title=pygame.font.Font(self.font,52) ; self.font_title_render=self.font_title.render("Revenge's Peak",True,self.WHITE) ; SCREEN.blit(self.font_title_render,(SCREEN_WIDTH//2-170,SCREEN_HEIGHT-700))  
             self.font_play=pygame.font.Font(self.font,34) ; self.font_play_render=self.font_play.render("Play",True,self.WHITE)
             self.font_play_surface=pygame.Surface((80,50)) ; self.font_play_surface.set_alpha(85) ; self.font_play_surface.fill(self.LIGHT_BROWN)

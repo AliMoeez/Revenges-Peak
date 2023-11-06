@@ -19,7 +19,9 @@ backround_tile_set=load_pygame(r"Assets\Tileset\backround_tile_set_file\backroun
 
 level_1_tile_set=load_pygame(r"Assets\Tileset\Level_1_Tile_Set_Sheet.tmx") ; level_1_tile_set_rect=[]
 
-object_rect=[]
+level_2_tile_set=load_pygame(r"Assets\Tileset\Level_2_TIleset\Level_2_Tileset.tmx") ; level_2_tile_set_rect=[]
+
+object_rect=[] 
 
 left_mouse_button_icon=pygame.image.load(r"Assets\Keys\Buttons Pack\Buttons Pack\MOUSE\MOUSEBUTTONLEFT.png")
 left_mouse_button_icon=pygame.transform.scale(left_mouse_button_icon,(40,40))

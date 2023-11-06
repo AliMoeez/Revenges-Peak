@@ -10,26 +10,21 @@ from Game_Code import Menu,LevelOne,LevelTwo,Player,EnemyOne,EnemyTwo,Control,Di
 
 while run:
     level_1_tile_set_rect.clear()
+    level_2_tile_set_rect.clear()
     object_rect.clear()
     key=pygame.key.get_pressed()
     event_list=pygame.event.get()
-    if level_1:
-        SCREEN.fill((131,164,72))
 
-    menu=Menu(level_screen,level_1)
+    menu=Menu(level_screen,level_1,level_2)
     levelone=LevelOne(camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
-    leveltwo=LevelTwo(level_2)
+    leveltwo=LevelTwo(level_2,level_screen)
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
                   player_control,dialogue_condition,dialogue_story_condition,
-                  reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
+                  reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2)
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control)
     people=People(level_1,level_1_wizard_talk,reset_locations)
-
-  #  controltest=ControlTest(level_1)
-
-    #print(player_rect.x,player_rect.y)
     
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations)
@@ -77,7 +72,9 @@ while run:
                     level_screen=False ; level_4=True
         if any([level_1,level_2]):
             if key[pygame.K_q]:
-                level_1=False ; level_2=False ; level_screen=True
+                level_1=False 
+                level_2=False 
+                level_screen=True
             if tutorial.skip(event,event_list):
                 text_position[0]=0
                 if tutorial_one: tutorial_one=False
@@ -88,7 +85,7 @@ while run:
 
 
 
-                        
+      
             if key[pygame.K_f] and player_control_cooldown[0]==1:
                 for idx,distance in enumerate(enemy_one.distance()):
                     if distance<100:
@@ -151,7 +148,11 @@ while run:
     levelone.tile_set()
     levelone.win_condition()
 
-    leveltwo.backround()
+    leveltwo.border()
+    leveltwo.tile_layer_flooring()
+    leveltwo.tile_layer_plants()
+    leveltwo.tile_layer_dialogue_objects()
+    leveltwo.tile_layer_collision()
 
     player.move(key)
     player.attack(key)
@@ -207,6 +208,7 @@ while run:
     tutorial.player_idle_show()
 
     levelone.tile_set_tree_top()
+    leveltwo.tile_layer_tree_tops()
 
     player.health_power_cooldown_icons()
 
