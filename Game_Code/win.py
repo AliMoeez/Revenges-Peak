@@ -5,7 +5,7 @@ from .level_one import LevelOne
 
 
 class Win:
-    def __init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one):
+    def __init__(self,level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one):
         LevelOne.__init__(self,camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
         self.level_1=level_1 ; self.screen_fade_number=screen_fade_number ; self.WHITE=(255,255,255) ; self.RED=(220,20,60)
         self.font=r"Assets\Misc\Fonts\Pixellari.ttf" ; self.player_health=player_health
@@ -14,9 +14,10 @@ class Win:
         self.investigate_object_level_one=investigate_object_level_one
         self.player_x_movment=player_x_movement
         self.player_y_movement=player_y_movement
+        self.level_2=level_2
 
     def condition(self):
-        if any([self.level_1]):
+        if any([self.level_1,self.level_2]):
             if LevelOne.win_condition(self):
                 self.player_x_movment[0]=0
                 self.player_y_movement[0]=0
