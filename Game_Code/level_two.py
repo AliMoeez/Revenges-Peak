@@ -23,7 +23,7 @@ class LevelTwo:
         self.rect_camera=self.player_rect
 
         if self.level_2: 
-           # SCREEN.fill((132,145,65))
+            SCREEN.fill((132,145,65))
             if self.rect_camera.x>self.min_x_border and self.rect_camera.x<self.max_x_border and self.rect_camera.y>self.min_y_border and self.rect_camera.y<self.max_y_border:
                 LevelTwo.border_logic_total(self)
             if (self.rect_camera.x<self.min_x_border or self.rect_camera.x>self.max_x_border) and not self.rect_camera.y<self.min_y_border and not self.rect_camera.y>self.max_y_border:
@@ -39,14 +39,12 @@ class LevelTwo:
                 if layer.name in [layers]:
                     for tile in layer.tiles():
                         x_val=tile[0]*16 ; y_val=tile[1]*16
-                        x=SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
-                        print(x)
+                        SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
                         if layer.name in ["Tile Layer 3"]:
                             self.level_2_tile_set_rect.append(pygame.Rect(x_val,y_val,16,16))
                         if layer.name in ["Tile Layer 5"]:
                             self.object_rect.append([pygame.Rect(x_val,y_val,16,16)])
-    
-                    
+                 
     def tile_layer_flooring(self): 
         LevelTwo.tile_set_general_function(self,"Tile Layer 1")
 

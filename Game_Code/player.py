@@ -49,7 +49,6 @@ class Player:
         self.player_run_list=player_run_list ; self.player_run_list_flip=player_run_list_flip ; self.player_run_number=player_run_number
         if (any([self.level_1,self.level_2]) and not (self.tutorial_one or self.tutorial_two) and not Win.condition(self) and not key[pygame.K_e] and not self.dialogue_condition and not self.dialogue_story_condition
              and not self.player_health[0]<=0 or self.player_attack_cooldown[0]<=0)  :
-            print("MOVE")
             if key[pygame.K_d] and not key[pygame.K_a]:
                 SCREEN.blit(self.player_run_list[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
                 self.player_x_movement[0]=3  ; self.player_key.append("d")

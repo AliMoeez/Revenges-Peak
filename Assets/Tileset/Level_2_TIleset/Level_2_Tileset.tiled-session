@@ -9,19 +9,19 @@
     "file.lastUsedOpenFilter": "Tiled map files (*.tmx *.xml)",
     "fileStates": {
         "C:/Users/Owner/Desktop/Revenges Peak/Assets/Tileset/Level_1_Tile_Set_Sheet.tmx": {
-            "scale": 0.31547916666666664,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2353.5627022386584,
-                "y": 1599.154724955425
+                "x": 1700,
+                "y": 1607.5757575757575
             }
         },
         "Level_2_Tileset.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 0,
+            "scale": 0.33,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 1147,
-                "y": 777
+                "x": 2266.6666666666665,
+                "y": 1656.060606060606
             }
         }
     },
