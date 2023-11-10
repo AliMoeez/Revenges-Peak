@@ -1,4 +1,5 @@
 import pygame
+import math
 
 from Game_Asset_Code import *
 
@@ -11,6 +12,14 @@ class LevelTwo:
         self.level_2_tile_set_rect=level_2_tile_set_rect
         self.camera_x_y=camera_x_y
         self.player_rect=player_rect
+        self.object_rect=object_rect
+
+
+    def object_player_distance(self,x_val,y_val):
+        self.object_player_distance_list=[]
+        self.distance=math.hypot(self.player_rect.x-x_val,self.player_rect.y-y_val)
+        self.object_player_distance_list.append(self.distance)
+        return self.object_player_distance_list
 
     def border(self):
         self.player_control=player_control ; self.player_control_cooldown=player_control_cooldown ; self.enemy_rects=enemy_1_level_1_rect+enemy_2_rects  ; self.player_control_index=player_control_index
@@ -39,11 +48,9 @@ class LevelTwo:
                 if layer.name in [layers]:
                     for tile in layer.tiles():
                         x_val=tile[0]*16 ; y_val=tile[1]*16
-                        SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
-                        if layer.name in ["Tile Layer 3"]:
-                            self.level_2_tile_set_rect.append(pygame.Rect(x_val,y_val,16,16))
-                        if layer.name in ["Tile Layer 5"]:
-                            self.object_rect.append([pygame.Rect(x_val,y_val,16,16)])
+                        for distance in LevelTwo.object_player_distance(self,x_val,y_val):
+                            if distance<1000:
+                                SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
                  
     def tile_layer_flooring(self): 
         LevelTwo.tile_set_general_function(self,"Tile Layer 1")
@@ -52,13 +59,38 @@ class LevelTwo:
         LevelTwo.tile_set_general_function(self,"Tile Layer 2")
 
     def tile_layer_collision(self):
-        LevelTwo.tile_set_general_function(self,"Tile Layer 3")
+        if self.level_2:
+            for layer in self.level_2_tile_set:
+                if layer.name in ["Tile Layer 3"]:
+                    for tile in layer.tiles():
+                        x_val=tile[0]*32 ; y_val=tile[1]*32
+                        for distance in LevelTwo.object_player_distance(self,x_val,y_val):
+                            if distance<1000:
+                                SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
+                            if distance<100:
+                                self.level_2_tile_set_rect.append(pygame.Rect(x_val,y_val,16,16))
 
     def tile_layer_tree_tops(self):
-        LevelTwo.tile_set_general_function(self,"Tile Layer 4")
+        if self.level_2:
+            for layer in self.level_2_tile_set:
+                if layer.name in ["Tile Layer 4"]:
+                    for tile in layer.tiles():
+                        x_val=tile[0]*16 ; y_val=tile[1]*16
+                        for distance in LevelTwo.object_player_distance(self,x_val,y_val):
+                            if distance<1000:
+                                SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
 
     def tile_layer_dialogue_objects(self):
-        LevelTwo.tile_set_general_function(self,"Tile Layer 5")
+        if self.level_2:
+            for layer in self.level_2_tile_set:
+                if layer.name in ["Tile Layer 5"]:
+                    for tile in layer.tiles():
+                        x_val=tile[0]*16 ; y_val=tile[1]*16
+                        for distance in LevelTwo.object_player_distance(self,x_val,y_val):
+                            if distance<1000:
+                                SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
+                            if distance<100:
+                                self.object_rect.append(pygame.Rect(x_val,y_val,16,16))
 
     def border_logic_total(self):
         self.camera_x_y[0]+=self.rect_camera.x-self.camera_x_y[0]-525

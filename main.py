@@ -15,6 +15,9 @@ while run:
     key=pygame.key.get_pressed()
     event_list=pygame.event.get()
 
+   # clock=pygame.time.Clock()
+   # x=clock.tick(FPS)
+
     menu=Menu(level_screen,level_1,level_2)
     levelone=LevelOne(camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
     leveltwo=LevelTwo(level_2,level_screen)
