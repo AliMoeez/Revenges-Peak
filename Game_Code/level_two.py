@@ -24,8 +24,8 @@ class LevelTwo:
     def border(self):
         self.player_control=player_control ; self.player_control_cooldown=player_control_cooldown ; self.enemy_rects=enemy_1_level_1_rect+enemy_2_rects  ; self.player_control_index=player_control_index
       #  self.enemy_rects_camera=Control.enemy_camera(self) 
-        self.max_x_border=4000 ; self.max_y_border=2000 ; self.min_x_border=530 ; self.min_y_border=300
-        self.max_x_player=4590 ; self.max_y_player=2415; self.min_x_player=50 ; self.min_y_player=25
+        self.max_x_border=2482 ; self.max_y_border=2000 ; self.min_x_border=530 ; self.min_y_border=300
+        self.max_x_player=3072 ; self.max_y_player=2415; self.min_x_player=50 ; self.min_y_player=25
       
       #  if self.player_control and self.player_control_cooldown[0]>0: self.rect_camera=self.enemy_rects_camera
       #else
@@ -63,7 +63,7 @@ class LevelTwo:
             for layer in self.level_2_tile_set:
                 if layer.name in ["Tile Layer 3"]:
                     for tile in layer.tiles():
-                        x_val=tile[0]*32 ; y_val=tile[1]*32
+                        x_val=tile[0]*16 ; y_val=tile[1]*16
                         for distance in LevelTwo.object_player_distance(self,x_val,y_val):
                             if distance<1000:
                                 SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
