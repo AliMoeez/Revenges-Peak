@@ -27,7 +27,7 @@ while run:
                   reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2)
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control)
-    people=People(level_1,level_1_wizard_talk,reset_locations)
+    people=People(level_1,level_1_wizard_talk,reset_locations,level_2)
     
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations)

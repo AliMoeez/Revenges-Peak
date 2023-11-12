@@ -27,8 +27,23 @@ for idx,num in enumerate(elder_run_list[:]): elder_run_list_flip.append(pygame.t
 elder_icon=pygame.image.load(r"Assets\People\Wizard Pack\Icon.png")
 elder_icon=pygame.transform.scale(elder_icon,(150,120))
 
+guard_idle=pygame.image.load(r"Assets\People\sprite sheets\medieval\shady_guy.png")
 
-people_level_1_x=[390]
+def guard_idles(images,frame,width,height):
+    image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),0,width,height)) ; image=pygame.transform.scale(image,(width//0.5,height//0.5))
+    return image
+
+guard_idle_1=guard_idles(guard_idle,0,34,34) ; guard_idle_2=guard_idles(guard_idle,1,34,34) ; guard_idle_3=guard_idles(guard_idle,2,34,34) ; guard_idle_4=guard_idles(guard_idle,3,34,34)
+guard_idle_5=guard_idles(guard_idle,4,34,34)
+
+guard_idle_list=[guard_idle_1,guard_idle_2,guard_idle_3,guard_idle_4,guard_idle_5] ; guard_idle_list_flip=[] ; guard_idle_number=[0]
+for idx,num in enumerate(guard_idle_list[:]): guard_idle_list_flip.append(pygame.transform.flip(num,True,False))
+
+guard_icon=pygame.image.load(r"Assets\People\individual sprites\medieval\guard\guard_1_icon.png")
+guard_icon=pygame.transform.scale(guard_icon,(150,120))
+
+
+people_level_1_x=[400]
 people_level_1_y=[1500]
 people_level_x_movement=[]
 people_level_y_movement=[]
@@ -36,6 +51,11 @@ people_level_1_rect=[]
 people_health_list=[]
 
 for i,y in enumerate(people_level_1_x): people_level_1_rect.append(pygame.Rect(people_level_1_x[i],people_level_1_y[i],231,231))
+
+people_level_2_x=[350]
+people_level_2_y=[1500]
+people_level_2_rect=[]
+for i,y in enumerate(people_level_2_x): people_level_2_rect.append(pygame.Rect(people_level_2_x[i],people_level_2_y[i],34,34))
 
 
 

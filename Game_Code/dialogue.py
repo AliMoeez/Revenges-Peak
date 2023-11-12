@@ -7,7 +7,7 @@ from .people import People
 
 class Dialouge:
     def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk):
-        People.__init__(self,level_1,level_1_wizard_talk,reset_locations) 
+        People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2) 
       #  Player.__init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,
       #                  player_control,dialogue_condition,dialogue_story_condition,reset_locations,tutorial_one,tutorial_two)
         self.dialogue_condition=dialogue_condition ; self.object_rect=object_rect ; self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.level_1=level_1 ; self.mouse_button_blit_list=mouse_button_blit_list
