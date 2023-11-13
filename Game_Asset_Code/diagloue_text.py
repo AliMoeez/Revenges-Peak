@@ -33,4 +33,30 @@ def level_1_dialogue_walk_up(player_icon,elder_icon):
         ("ENOUGH!!.....Your power exceeds theres.....Now go!.",elder_icon,"Wizard"),
         ]
     return test_level_1_dialogue
+
+def level_2_dialogue(player_icon):
+    level_2_dialogue_1=[
+        ("Anes's fortress should be nearby. This place is eerliy quite, wait who's that?",player_icon,"You")
+    ]
+    return level_2_dialogue_1
+
+def level_2_dialogue_walk_up(player_icon,guard_icon):
+    level_2_dialouge_2=[
+        ("What are you doing here? You know Anes is nearby right.",player_icon,"You"),
+        ("Long story, but I would rather not get into it....",guard_icon,"???"),
+        ("You can tell me, I can help you!.",player_icon,"You"),
+        ("Help me with what? I've been through more than you could dream of.",guard_icon,"???"),
+        ("Do you know, or heard of the Wizard by chance? I was sent here to defeat Anes...",player_icon,"You"),
+        ("If I tell you will you leave me alone?",guard_icon,"???"),
+        ("Sure......",player_icon,"You"),
+        ("I was trying to loot Anes's chamber. Heard he has alot of gold in it, with my buddies. \n He got the best of us and im the only one standing. Name is Knave by the way.",guard_icon,"Knave")
+        ("Do you have any idea on how to beat him? ",player_icon,"You"),
+        ("I've heard you must tire him out. Didn't seem like that worked. Though, we only lasted \n a few seconds.",guard_icon,"Knave"),
+        ("Hmmm. Any other tips?",player_icon,"You"),
+        ("Oh yeah, their seems to be alot of his goons South-East of here. It would be best to  \n take them out beforehand.",guard_icon,"Knave"),
+        ("Thank you!",player_icon,"You"),
+        ("Now will you leave me alone?.",guard_icon,"Knave"),
+        ("Whatever, sounds good.....",player_icon,"You"),
+    ]
+    return level_2_dialouge_2
        

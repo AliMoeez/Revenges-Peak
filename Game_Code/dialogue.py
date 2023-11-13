@@ -6,14 +6,16 @@ from Game_Asset_Code import *
 from .people import People
 
 class Dialouge:
-    def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk):
+    def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk):
         People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2) 
-      #  Player.__init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,
-      #                  player_control,dialogue_condition,dialogue_story_condition,reset_locations,tutorial_one,tutorial_two)
         self.dialogue_condition=dialogue_condition ; self.object_rect=object_rect ; self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.level_1=level_1 ; self.mouse_button_blit_list=mouse_button_blit_list
         self.dialogue_click_list=dialogue_click_list ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.WHITE=(255,55,55) ; self.dialouge_list=dialouge_list ; self.dialogue_story_condition=dialogue_story_condition
         self.player_icon=player_icon ; self.abyss_icon=abyss_icon ; self.text_position=text_position ; self.dialogue_offset=dialogue_offset ; self.dialogue_offset_length=dialogue_offset_length
-        self.level_1_wizard_talk=level_1_wizard_talk ; self.mouse_button_blit_list=mouse_button_blit_list ; self.elder_icon=elder_icon
+        self.level_1_wizard_talk=level_1_wizard_talk ; self.mouse_button_blit_list=mouse_button_blit_list ; self.elder_icon=elder_icon 
+        self.level_2=level_2
+        self.level_2_guard_talk=level_2_guard_talk
+        self.level_2_boss_talk=level_2_boss_talk
+        self.level_2_player_talk=level_2_player_talk
 
     def distance_level_object(self):
         self.tile_interact_rect_distance=[]
@@ -24,7 +26,7 @@ class Dialouge:
     def level_object_interaction(self):
         Dialouge.distance_level_object(self)
         self.left_mouse_button_icon=left_mouse_button_icon
-        if any([self.level_1]):
+        if any([self.level_1,self.level_2]):
             self.mouse_button_blit_list.clear()
             for idx,distance in enumerate(self.tile_interact_rect_distance):
                 if self.tile_interact_rect_distance[idx]<100: 
@@ -33,15 +35,19 @@ class Dialouge:
                     return self.object_rect[idx]
     
     def level_dialogue_condition(self,event,event_list):
-        if any([self.level_1]):
+        if any([self.level_1,self.level_2]):
             if event.type==pygame.MOUSEBUTTONDOWN and len(self.mouse_button_blit_list)>0:
                 return True 
+            if self.level_2 and not self.level_2_guard_talk:
+                return True
 
     def text(self):
         if self.level_1:    
             self.test_level_1_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[0]
             self.test_level_2_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[1]
             self.test_level_3_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[2]
+        if self.level_2:
+            self.test_level_1_dialogue=level_2_dialogue(self.player_icon)
 
     def get_index_object(self):
         if self.dialogue_condition:
@@ -51,7 +57,7 @@ class Dialouge:
                     return idx
                 
     def text_type(self):
-        if self.dialogue_condition:
+        if self.dialogue_condition and self.level_1:
             Dialouge.text(self)
             self.object_index=Dialouge.get_index_object(self)
             if self.object_index==1:
@@ -66,22 +72,29 @@ class Dialouge:
                 self.dialogue_show=self.test_level_3_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
+        
+    def beginning_condition(self):
+        if self.level_2 and self.dialogue_condition and not self.level_2_guard_talk:
+            pass
 
     def level_dialogue_story(self,event,event_list):
-        if any([self.level_1]):
+        if any([self.level_1,self.level_2]):
             for idx,distance in enumerate(People.distance_dialogue(self)):
                 if distance<200:
                      if self.level_1_wizard_talk: return True
                      else: return False
+                
 
     def text_story(self):
         if self.level_1:
             self.test_level_1_dialogue=level_1_dialogue_walk_up(self.player_icon,self.elder_icon)
+        if self.level_1:
+            self.test_level_1_dialogue=level_2_dialogue_walk_up(self.player_icon)
 
     def text_type_story(self):
         if self.dialogue_story_condition:
             Dialouge.text_story(self)
-            if  self.level_1_wizard_talk:
+            if  self.level_1_wizard_talk and self.level_1:
                 self.dialogue_show=self.test_level_1_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
