@@ -15,12 +15,14 @@ class Win:
         self.player_x_movment=player_x_movement
         self.player_y_movement=player_y_movement
         self.level_2=level_2
+        self.dialogue_objective_list=dialogue_objective_list
 
     def condition(self):
         if any([self.level_1,self.level_2]):
             if LevelOne.win_condition(self):
                 self.player_x_movment[0]=0
                 self.player_y_movement[0]=0
+                self.dialogue_objective_list[0]=0
               #  print(self.player_x_movment[0],self.player_y_movement[0])
                 return True
 

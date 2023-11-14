@@ -41,19 +41,24 @@ while run:
             if event.type==pygame.MOUSEBUTTONDOWN :
                 dialogue_click_list[0]+=1 ; text_position[0]=0
 
-        if dialogue.level_dialogue_story(event,event_list):
+        if dialogue.level_dialogue_story(event,event_list) or dialogue.beginning_condition():
             mouse_button_blit_list.clear() ; dialogue_story_condition=True ; dialogue_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN:
                 dialogue_click_list[0]+=1 ; text_position[0]=0
      
         if (dialogue_condition or dialogue_story_condition) and dialogue.end_dialouge(event,event_list): 
             mouse_button_blit_list.clear() ; dialogue_condition=False ; dialogue_story_condition=False
-            if dialogue_objective_list[0]==1:
-                level_1_wizard_talk=False
-            if dialogue_objective_list[0]==2:
-                talk_to_abyss_level_one=False
-            if dialogue_objective_list[0]==3:
-                investigate_object_level_one=False
+            if level_1:
+                if dialogue_objective_list[0]==1:
+                    level_1_wizard_talk=False
+                if dialogue_objective_list[0]==2:
+                    talk_to_abyss_level_one=False
+                if dialogue_objective_list[0]==3:
+                    investigate_object_level_one=False
+            if level_2:
+                if dialogue_objective_list[0]==0:
+                    level_2_player_talk=False
+                    level_2_guard_talk=True
                 
         if event.type==pygame.QUIT:
             pygame.quit() 
@@ -122,6 +127,7 @@ while run:
         
         if lose.retry(event):
             player_lose_condition=False ; reset_locations=True
+            dialogue_objective_list[0]=0
 
         if lose.back_to_menu(event):
             player_lose_condition=False ; reset_locations=True ; level_1=False

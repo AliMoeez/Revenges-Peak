@@ -13,6 +13,7 @@ class Dialouge:
         self.player_icon=player_icon ; self.abyss_icon=abyss_icon ; self.text_position=text_position ; self.dialogue_offset=dialogue_offset ; self.dialogue_offset_length=dialogue_offset_length
         self.level_1_wizard_talk=level_1_wizard_talk ; self.mouse_button_blit_list=mouse_button_blit_list ; self.elder_icon=elder_icon 
         self.level_2=level_2
+        self.guard_icon=guard_icon
         self.level_2_guard_talk=level_2_guard_talk
         self.level_2_boss_talk=level_2_boss_talk
         self.level_2_player_talk=level_2_player_talk
@@ -38,16 +39,13 @@ class Dialouge:
         if any([self.level_1,self.level_2]):
             if event.type==pygame.MOUSEBUTTONDOWN and len(self.mouse_button_blit_list)>0:
                 return True 
-            if self.level_2 and not self.level_2_guard_talk:
-                return True
+  
 
     def text(self):
         if self.level_1:    
             self.test_level_1_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[0]
             self.test_level_2_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[1]
             self.test_level_3_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[2]
-        if self.level_2:
-            self.test_level_1_dialogue=level_2_dialogue(self.player_icon)
 
     def get_index_object(self):
         if self.dialogue_condition:
@@ -74,8 +72,8 @@ class Dialouge:
                 return self.dialogue_show,self.dialouge_list
         
     def beginning_condition(self):
-        if self.level_2 and self.dialogue_condition and not self.level_2_guard_talk:
-            pass
+        if self.level_2 and self.level_2_player_talk:
+            return True
 
     def level_dialogue_story(self,event,event_list):
         if any([self.level_1,self.level_2]):
@@ -84,12 +82,12 @@ class Dialouge:
                      if self.level_1_wizard_talk: return True
                      else: return False
                 
-
     def text_story(self):
         if self.level_1:
             self.test_level_1_dialogue=level_1_dialogue_walk_up(self.player_icon,self.elder_icon)
-        if self.level_1:
-            self.test_level_1_dialogue=level_2_dialogue_walk_up(self.player_icon)
+        if self.level_2:
+            self.test_level_1_dialogue=level_2_dialogue(self.player_icon)
+            self.test_level_2_dialogue=level_2_dialogue_walk_up(self.player_icon,self.guard_icon)
 
     def text_type_story(self):
         if self.dialogue_story_condition:
@@ -98,7 +96,15 @@ class Dialouge:
                 self.dialogue_show=self.test_level_1_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
-    
+            if self.level_2_player_talk and self.level_2:
+                self.dialogue_show=self.test_level_1_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+            if self.level_2_guard_talk and self.level_2:
+                self.dialogue_show=self.test_level_2_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+               
     def scrolling_text(self):
         self.message_speed=2
         if self.dialogue_condition or self.dialogue_story_condition:
