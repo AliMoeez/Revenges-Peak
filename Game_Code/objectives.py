@@ -55,7 +55,7 @@ class Objectives:
             if self.level_2_guard_talk:
                 self.objectives_distance=Objectives.distance(self,self.people_level_2_rect[0].x,self.people_level_2_rect[0].y)
                 if self.objectives_distance[0]<200:
-                    self.dialogue_objective_list[0]=2
+                    self.dialogue_objective_list[0]=1
                 return self.objectives_distance[0],self.people_level_2_rect[0].x,self.people_level_2_rect[0].y
             
     def define_level(self):

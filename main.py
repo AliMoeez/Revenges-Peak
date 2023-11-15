@@ -48,6 +48,7 @@ while run:
      
         if (dialogue_condition or dialogue_story_condition) and dialogue.end_dialouge(event,event_list): 
             mouse_button_blit_list.clear() ; dialogue_condition=False ; dialogue_story_condition=False
+            
             if level_1:
                 if dialogue_objective_list[0]==1:
                     level_1_wizard_talk=False
@@ -58,7 +59,10 @@ while run:
             if level_2:
                 if dialogue_objective_list[0]==0:
                     level_2_player_talk=False
-                    level_2_guard_talk=True
+                if dialogue_objective_list[0]==1:
+                    level_2_guard_talk=False
+
+        
                 
         if event.type==pygame.QUIT:
             pygame.quit() 

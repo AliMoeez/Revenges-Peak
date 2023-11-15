@@ -70,6 +70,8 @@ class Dialouge:
                 self.dialogue_show=self.test_level_3_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
+        else:
+            self.dialogue_show="None"
         
     def beginning_condition(self):
         if self.level_2 and self.level_2_player_talk:
@@ -100,14 +102,16 @@ class Dialouge:
                 self.dialogue_show=self.test_level_1_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
-            if self.level_2_guard_talk and self.level_2:
+            if self.level_2_guard_talk and not self.level_2_player_talk and self.level_2:
                 self.dialogue_show=self.test_level_2_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
+        else:
+            self.dialogue_show="None"
                
     def scrolling_text(self):
         self.message_speed=2
-        if self.dialogue_condition or self.dialogue_story_condition:
+        if (self.dialogue_condition or self.dialogue_story_condition) and self.dialogue_show!="None":
             for idx,dialouge in enumerate(self.dialogue_show):
                 if self.dialogue_click_list[0]==idx:
                     if self.text_position[0]<self.message_speed*len(self.dialogue_show[idx][0]):
@@ -132,7 +136,7 @@ class Dialouge:
         
     def show(self):
         Dialouge.scrolling_text(self)
-        if self.dialogue_condition or self.dialogue_story_condition:
+        if (self.dialogue_condition or self.dialogue_story_condition) and self.dialogue_show!="None":
             self.screen_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT))  ; self.screen_fade.set_alpha(50) ; self.screen_fade.fill((0,0,0)) ; SCREEN.blit(self.screen_fade,(0,0))
             self.text_bgackround_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT-250))  ; self.text_bgackround_fade.set_alpha(50) ; self.text_bgackround_fade.fill((100,100,100)) ; SCREEN.blit(self.text_bgackround_fade,(0,550))
             self.font_title=pygame.font.Font(self.font,25) 

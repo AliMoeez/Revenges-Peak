@@ -9,5 +9,5 @@ investigate_object_level_one=True
 
 #level two dialogue assets
 level_2_player_talk=True
-level_2_guard_talk=False
-level_2_boss_talk=False
+level_2_guard_talk=True
+level_2_boss_talk=True
