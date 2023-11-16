@@ -25,11 +25,11 @@ while run:
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
                   player_control,dialogue_condition,dialogue_story_condition,
                   reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2)
-    enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control)
-    enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control)
+    enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2)
+    enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control,level_2)
     people=People(level_1,level_1_wizard_talk,reset_locations,level_2)
     
-    dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk)
+    dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
@@ -43,6 +43,7 @@ while run:
 
         if dialogue.level_dialogue_story(event,event_list) or dialogue.beginning_condition():
             mouse_button_blit_list.clear() ; dialogue_story_condition=True ; dialogue_condition=False
+            print("HERE")
             if event.type==pygame.MOUSEBUTTONDOWN:
                 dialogue_click_list[0]+=1 ; text_position[0]=0
      
@@ -61,6 +62,9 @@ while run:
                     level_2_player_talk=False
                 if dialogue_objective_list[0]==1:
                     level_2_guard_talk=False
+                if dialogue_objective_list[0]==2:
+                    print("HERE")
+                    levle_2_enemy_talk=False
 
         
                 
@@ -228,7 +232,8 @@ while run:
 
     player.health_power_cooldown_icons()
 
-    objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk)
+    objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,
+                          dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk)
     objectives.define_level()
     objectives.level_one_objectives()
     objectives.level_two_objectives()

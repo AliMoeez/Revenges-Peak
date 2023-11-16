@@ -6,7 +6,7 @@ from Game_Asset_Code import *
 from .people import People
 
 class Dialouge:
-    def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk):
+    def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk):
         People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2) 
         self.dialogue_condition=dialogue_condition ; self.object_rect=object_rect ; self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.level_1=level_1 ; self.mouse_button_blit_list=mouse_button_blit_list
         self.dialogue_click_list=dialogue_click_list ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.WHITE=(255,55,55) ; self.dialouge_list=dialouge_list ; self.dialogue_story_condition=dialogue_story_condition
@@ -17,6 +17,8 @@ class Dialouge:
         self.level_2_guard_talk=level_2_guard_talk
         self.level_2_boss_talk=level_2_boss_talk
         self.level_2_player_talk=level_2_player_talk
+        self.brute_1_icon=brute_1_icon
+        self.level_2_enemy_talk=level_2_enemy_talk
 
     def distance_level_object(self):
         self.tile_interact_rect_distance=[]
@@ -89,7 +91,8 @@ class Dialouge:
             self.test_level_1_dialogue=level_1_dialogue_walk_up(self.player_icon,self.elder_icon)
         if self.level_2:
             self.test_level_1_dialogue=level_2_dialogue(self.player_icon)
-            self.test_level_2_dialogue=level_2_dialogue_walk_up(self.player_icon,self.guard_icon)
+            self.test_level_2_dialogue=level_2_dialogue_walk_up(self.player_icon,self.guard_icon,self.brute_1_icon)[0]
+            self.test_level_3_dialogue=level_2_dialogue_walk_up(self.player_icon,self.guard_icon,self.brute_1_icon)[1]
 
     def text_type_story(self):
         if self.dialogue_story_condition:
@@ -104,6 +107,10 @@ class Dialouge:
                 return self.dialogue_show,self.dialouge_list
             if self.level_2_guard_talk and not self.level_2_player_talk and self.level_2:
                 self.dialogue_show=self.test_level_2_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+            if self.level_2_enemy_talk and not self.level_2_guard_talk and self.level_2:
+                self.dialogue_show=self.test_level_3_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
         else:

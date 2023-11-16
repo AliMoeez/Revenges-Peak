@@ -8,7 +8,7 @@ from .objectives import Objectives
 
 class LevelOne(Menu):
     def __init__(self,camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one):
-        Objectives.__init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk)
+        Objectives.__init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk)
         self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.level_1_tile_set=level_1_tile_set ; self.level_1=level_1
         self.level_screen=level_screen ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.object_rect=object_rect
         self.dialogue_condition=dialogue_condition 

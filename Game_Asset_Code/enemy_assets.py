@@ -43,14 +43,19 @@ for i,skeleton in enumerate(skeleton_fall[:]): skeleton_fall_flip.append(pygame.
 
 enemy_1_level_1_x=[457,428,3500,3650,3950,4050,4070,4300,4450] ; enemy_1_level_1_y=[519,484,1700,1715,1880,1895,1800,705,755] #400,200  800,200
 
+enemy_1_level_2_x=[400,500] ; enemy_1_level_2_y=[200,300]
+
 enemy_1_x_movement=[] ; enemy_1_y_movement=[]
 
-enemy_1_level_1_rect=[]
+enemy_1_level_1_rect=[] ; enemy_1_level_2_rect=[]
 
 enemy_1_health=[] ; enemy_1_fall_type=[]
 
 for i,num in enumerate(enemy_1_level_1_x): enemy_1_level_1_rect.append(pygame.Rect(enemy_1_level_1_x[i],enemy_1_level_1_y[i],40,70))
+for i,num in enumerate(enemy_1_level_2_x): enemy_1_level_2_rect.append(pygame.Rect(enemy_1_level_2_x[i],enemy_1_level_2_y[i],40,70))
 
+brute_1_icon=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\icon.png")
+brute_1_icon=pygame.transform.scale(brute_1_icon,(150,100))
 
 brute_1_idle_1=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_1.png").convert_alpha() 
 brute_1_idle_2=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\ready_2.png").convert_alpha() 
@@ -97,13 +102,16 @@ for i,brute in enumerate(brute_1_fall_1[:]) : brute_1_fall_flip_1.append(pygame.
 
 enemy_2_level_1_x=[377,353,3525,3950,4370] ; enemy_2_level_1_y=[450,525,1775,1950,754]  #600,200
 
+enemy_2_level_2_x=[200,250] ; enemy_2_level_2_y=[250,350] 
+
 enemy_2_x_movement=[] ; enemy_2_y_movement=[]
 
-enemy_2_rects=[] ; enemy_2_fall_type=[]  ; enemy_2_health=[]
+enemy_2_rects=[] ; enemy_2_fall_type=[]  ; enemy_2_health=[] ; enemy_2_level_2_rects=[]
 
 enemy_run_number=[0] ; enemy_idle_number=[0] ; enemy_attack_number=[0] ; enemy_x_movement=[0] ; enemy_y_movement=[0]
 
 for i,y in enumerate(enemy_2_level_1_x): enemy_2_rects.append(pygame.Rect(enemy_2_level_1_x[i],enemy_2_level_1_y[i],40,70))
+for i,y in enumerate(enemy_2_level_2_x): enemy_2_level_2_rects.append(pygame.Rect(enemy_2_level_2_x[i],enemy_2_level_2_y[i],40,70))
 
 enemy_level_1_group_rect=[
     (enemy_1_level_1_rect[0],enemy_1_level_1_rect[1],enemy_2_rects[0],enemy_2_rects[1]),

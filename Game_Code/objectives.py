@@ -7,15 +7,18 @@ from .dialogue import Dialouge
 
 class Objectives:
     def __init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,
-                 dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk):
+                 dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk):
         People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2)
-        Dialouge.__init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk)
+        Dialouge.__init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk)
         self.level_1=level_1 ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.RED=(255,55,55) ; self.level_1_wizard_talk=level_1_wizard_talk
         self.player_rect=player_rect ; self.people_level_1_rect=people_level_1_rect ; self.camera_x_y=camera_x_y ; self.red_arrow_icon=red_arrow_icon
         self.WHITE=(255,255,255) ; self.talk_to_abyss_level_one=talk_to_abyss_level_one ; self.investigate_object_level_one=investigate_object_level_one
         self.dialogue_objective_list=dialogue_objective_list
         self.level_2=level_2; self.level_2_guard_talk=level_2_guard_talk ; self.level_2_boss_talk=level_2_boss_talk
         self.people_level_2_rect=people_level_2_rect
+        self.level_2_enemy_talk=level_2_enemy_talk
+        self.enemy_2_level_2_rects=enemy_2_level_2_rects
+
     
     def distance(self,place_x:int,place_y:int):
         if any([self.level_1,self.level_2]):
@@ -57,6 +60,11 @@ class Objectives:
                 if self.objectives_distance[0]<200:
                     self.dialogue_objective_list[0]=1
                 return self.objectives_distance[0],self.people_level_2_rect[0].x,self.people_level_2_rect[0].y
+            if self.level_2_enemy_talk and not self.level_2_guard_talk:
+                self.objectives_distance=Objectives.distance(self,self.enemy_2_level_2_rects[0].x,self.enemy_2_level_2_rects[0].y)
+                if self.objectives_distance[0]<200:
+                    self.dialogue_objective_list[0]=2
+                return self.objectives_distance[0],self.enemy_2_level_2_rects[0].x,self.enemy_2_level_2_rects[0].y
             
     def define_level(self):
         if self.level_1: self.level_objectives=Objectives.level_one_objectives(self)

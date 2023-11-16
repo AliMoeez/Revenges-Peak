@@ -40,7 +40,7 @@ def level_2_dialogue(player_icon):
     ]
     return level_2_dialogue_1
 
-def level_2_dialogue_walk_up(player_icon,guard_icon):
+def level_2_dialogue_walk_up(player_icon,guard_icon,brute_icon):
     level_2_dialouge_2=[
         ("What are you doing here? You know Anes is nearby right.",player_icon,"You"),
       #  ("Long story, but I would rather not get into it....",guard_icon,"???"),
@@ -58,5 +58,10 @@ def level_2_dialogue_walk_up(player_icon,guard_icon):
         ("Now will you leave me alone?",guard_icon,"Knave"),
         ("Whatever, sounds good.....",player_icon,"You"),
     ]
-    return level_2_dialouge_2
+    level_2_dialouge_3=[
+        ("GeT hIM !!!!!!!!!",brute_icon,"Brute"),
+        ("Oh no......",player_icon,"You")
+
+    ]
+    return level_2_dialouge_2,level_2_dialouge_3
        
