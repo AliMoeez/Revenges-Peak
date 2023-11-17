@@ -43,13 +43,13 @@ while run:
 
         if dialogue.level_dialogue_story(event,event_list) or dialogue.beginning_condition():
             mouse_button_blit_list.clear() ; dialogue_story_condition=True ; dialogue_condition=False
-            print("HERE")
+         #   print("HERE")
             if event.type==pygame.MOUSEBUTTONDOWN:
                 dialogue_click_list[0]+=1 ; text_position[0]=0
      
         if (dialogue_condition or dialogue_story_condition) and dialogue.end_dialouge(event,event_list): 
             mouse_button_blit_list.clear() ; dialogue_condition=False ; dialogue_story_condition=False
-            
+
             if level_1:
                 if dialogue_objective_list[0]==1:
                     level_1_wizard_talk=False
@@ -63,8 +63,9 @@ while run:
                 if dialogue_objective_list[0]==1:
                     level_2_guard_talk=False
                 if dialogue_objective_list[0]==2:
-                    print("HERE")
-                    levle_2_enemy_talk=False
+                    level_2_enemy_talk=False
+
+                
 
         
                 

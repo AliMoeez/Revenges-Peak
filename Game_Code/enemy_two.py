@@ -32,8 +32,6 @@ class EnemyTwo:
         if any([self.level_1,self.level_2]):
             self.enemy_2_control_x_movement=[i for idx, i in enumerate(self.enemy_2_x_movement) if idx!=self.player_control_index[0][0]]
             self.enemy_2_control_y_movement=[i for idx, i in enumerate(self.enemy_2_y_movement) if idx!=self.player_control_index[0][0]]
-            self.tile_level=self.level_1_tile_set_rect
-            self.enemy_2_rect=self.enemy_2_level_1_rects
             for i,num in enumerate(self.enemy_2_level_1_x):
                 self.brute_1_idle_number.append(0) ; self.brute_1_run_number.append(0) ; self.brute_1_attack_number.append(0)
                 self.enemy_2_x_movement.append(0) ; self.enemy_2_y_movement.append(0) ; self.enemy_2_fall_type.append(0)
