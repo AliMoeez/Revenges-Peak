@@ -4,7 +4,7 @@ import math
 from Game_Asset_Code import *
 #from .player import Player
 from .people import People
-from .enemy_two import EnemyTwo
+from .enemies import EnemyTwo
 
 class Dialouge:
     def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk):
@@ -97,17 +97,11 @@ class Dialouge:
             for idx,distance in enumerate(self.distance_talk):
                 if distance<200:
                     if self.level_1:
-                        if self.level_1_wizard_talk: 
-                            return True
-                        else: 
-                            return False
-                    
-                    
+                        if self.level_1_wizard_talk: return True
+                        else: return False
                     if self.level_2:
-                        if self.level_2_guard_talk or (self.level_2_enemy_talk and not self.level_2_guard_talk):
-                            return True
-                        else:
-                            return False
+                        if self.level_2_guard_talk or (self.level_2_enemy_talk and not self.level_2_guard_talk): return True
+                        else: return False
                     
     def text_story(self):
         if self.level_1:

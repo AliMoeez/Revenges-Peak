@@ -43,7 +43,7 @@ for i,skeleton in enumerate(skeleton_fall[:]): skeleton_fall_flip.append(pygame.
 
 enemy_1_level_1_x=[457,428,3500,3650,3950,4050,4070,4300,4450] ; enemy_1_level_1_y=[519,484,1700,1715,1880,1895,1800,705,755] #400,200  800,200
 
-enemy_1_level_2_x=[] ; enemy_1_level_2_y=[]
+enemy_1_level_2_x=[1900] ; enemy_1_level_2_y=[1550]
 
 enemy_1_x_movement=[] ; enemy_1_y_movement=[]
 
@@ -102,7 +102,7 @@ for i,brute in enumerate(brute_1_fall_1[:]) : brute_1_fall_flip_1.append(pygame.
 
 enemy_2_level_1_x=[377,353,3525,3950,4370] ; enemy_2_level_1_y=[450,525,1775,1950,754]  #600,200
 
-enemy_2_level_2_x=[700] ; enemy_2_level_2_y=[1500] 
+enemy_2_level_2_x=[1700] ; enemy_2_level_2_y=[1500] #1700,1500
 
 enemy_2_x_movement=[] ; enemy_2_y_movement=[]
 

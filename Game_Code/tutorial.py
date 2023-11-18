@@ -3,7 +3,7 @@ import pygame
 from Game_Asset_Code import *
 from .dialogue import Dialouge
 from .player import Player
-from .enemy_one import EnemyOne
+from .enemies import EnemyOne
 
 class Tutorial:
     def __init__(self,level_1,tutorial_one,tutorial_two):

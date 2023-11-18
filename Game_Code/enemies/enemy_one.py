@@ -2,9 +2,9 @@ import pygame
 import math
 
 from Game_Asset_Code import *
-from .lose import Lose
+from Game_Code.lose import Lose
 from .enemy_general_functions import EnemyGeneralFunctions
-from .control_test import ControlTest
+from Game_Code.control_test import ControlTest
 
 class EnemyOne:
     def __init__(self,level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2):
@@ -35,7 +35,7 @@ class EnemyOne:
                 self.skeleton_idle_number.append(0)  ; self.skeleton_run_number.append(0)  ; self.skeleton_attack_number.append(0) ; self.enemy_1_x_movement.append(0) 
                 self.enemy_1_y_movement.append(0)  ; self.skeleton_fall_number.append(0) ; self.enemy_1_health.append(100)  ; self.enemy_1_fall_type.append(0)
                 if len(self.enemy_1_x_movement)>len(self.enemy_1_rects):
-                    del self.enemy_1_x_movement[-1], self.enemy_1_y_movement[-1]
+                    del self.enemy_1_x_movement[-1], self.enemy_1_y_movement[-1], self.enemy_1_health[-1]
 
     def distance(self):
         if any([self.level_1,self.level_2]):

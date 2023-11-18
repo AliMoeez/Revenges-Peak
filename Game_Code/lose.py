@@ -2,7 +2,6 @@ import pygame
 
 from Game_Asset_Code import *
 
-
 class Lose:
     def __init__(self,level_1,player_lose_condition,reset_locations):
         self.level_1=level_1 

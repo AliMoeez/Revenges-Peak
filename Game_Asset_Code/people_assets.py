@@ -52,7 +52,7 @@ people_health_list=[]
 for i,y in enumerate(people_level_1_x): people_level_1_rect.append(pygame.Rect(people_level_1_x[i],people_level_1_y[i],231,231))
 
 people_level_2_x=[350]
-people_level_2_y=[1500]
+people_level_2_y=[500]
 people_level_2_rect=[]
 for i,y in enumerate(people_level_2_x): people_level_2_rect.append(pygame.Rect(people_level_2_x[i],people_level_2_y[i],34,34))
 

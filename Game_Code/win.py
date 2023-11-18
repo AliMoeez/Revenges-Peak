@@ -1,7 +1,7 @@
 import pygame
 
 from Game_Asset_Code import *
-from .level_one import LevelOne
+from .levels import LevelOne
 
 
 class Win:

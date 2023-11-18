@@ -2,7 +2,7 @@ import pygame
 
 from .general_assets import *
 
-player_x=450; player_y=2000; player_width=15 ; player_height=64 ; player_control=False
+player_x=450; player_y=2000; player_width=15 ; player_height=64 ; player_control=False #450,2000
 player_rect=pygame.Rect(player_x,player_y,player_width,player_height)
 
 player_x_movement=[0] ; player_y_movement=[0] ; player_key=[0] ; player_health=[100000000] ; player_control_cooldown=[1] ; player_control_index=["placeholder"]

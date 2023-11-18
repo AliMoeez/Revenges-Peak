@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,LevelTwo,Player,EnemyOne,EnemyTwo,Control,Dialouge,People,Objectives,Lose,Tutorial,Win,ControlTest
+from Game_Code import Menu,LevelOne,LevelTwo,Player,EnemyOne,EnemyTwo,Dialouge,People,Objectives,Lose,Tutorial,Win
 
 while run:
     level_1_tile_set_rect.clear()
@@ -14,9 +14,6 @@ while run:
     object_rect.clear()
     key=pygame.key.get_pressed()
     event_list=pygame.event.get()
-
-   # clock=pygame.time.Clock()
-   # x=clock.tick(FPS)
 
     menu=Menu(level_screen,level_1,level_2)
     levelone=LevelOne(camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
@@ -43,7 +40,6 @@ while run:
 
         if dialogue.level_dialogue_story(event,event_list) or dialogue.beginning_condition():
             mouse_button_blit_list.clear() ; dialogue_story_condition=True ; dialogue_condition=False
-         #   print("HERE")
             if event.type==pygame.MOUSEBUTTONDOWN:
                 dialogue_click_list[0]+=1 ; text_position[0]=0
      
@@ -64,10 +60,6 @@ while run:
                     level_2_guard_talk=False
                 if dialogue_objective_list[0]==2:
                     level_2_enemy_talk=False
-
-                
-
-        
                 
         if event.type==pygame.QUIT:
             pygame.quit() 
@@ -102,12 +94,6 @@ while run:
                 tutorial_one=False
                 tutorial_two=False
 
-            
-
-
-
-
-      
             if key[pygame.K_f] and player_control_cooldown[0]==1:
                 for idx,distance in enumerate(enemy_one.distance()):
                     if distance<100:
@@ -122,18 +108,9 @@ while run:
                         player_control_index.append((idx,"Enemy_2")) 
                         player_control=True
         
-
-
-         #   print(player_control_index)
-            
             if key[pygame.K_v] and player_control:
                 player_control_cooldown[0]=-0.05
 
-        
-        
-        
-    
-        
         if lose.retry(event):
             player_lose_condition=False ; reset_locations=True
             dialogue_objective_list[0]=0
@@ -165,7 +142,6 @@ while run:
     menu.main_menu_buttons()
     menu.level_screen_blit_background()
     menu.level_screen_blit()
-
 
     levelone.border()
     levelone.tile_set_level_direction()
@@ -213,15 +189,6 @@ while run:
     enemy_two.control_attack(key)
     enemy_two.control_collision()
     enemy_two.control_collision_object_logic()
-
-
-    #control=Control(level_1,player_control,player_control_index)
-    #control.distance()
-    #control.enemy_definition()
-    #control.mechanic_walk(key)
-    #control.mechanic_attack(key)
-    #control.mechanic_collision()
-    #control.mechanic_collision_logic()
 
     people.idle()
     people.run()

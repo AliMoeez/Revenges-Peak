@@ -1,0 +1,1 @@
+from .frost_boss import FrostBoss

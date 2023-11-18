@@ -2,10 +2,9 @@ import pygame
 import math
 
 from Game_Asset_Code import *
-from .control import Control
-from .lose import Lose
+from Game_Code.lose import Lose
 from .enemy_general_functions import EnemyGeneralFunctions
-from .control_test import ControlTest
+from Game_Code.control_test import ControlTest
 
 class EnemyTwo:
     def __init__(self,level_1,enemy_2_rects,reset_locations,player_control,level_2):
@@ -32,10 +31,13 @@ class EnemyTwo:
         if any([self.level_1,self.level_2]):
             self.enemy_2_control_x_movement=[i for idx, i in enumerate(self.enemy_2_x_movement) if idx!=self.player_control_index[0][0]]
             self.enemy_2_control_y_movement=[i for idx, i in enumerate(self.enemy_2_y_movement) if idx!=self.player_control_index[0][0]]
-            for i,num in enumerate(self.enemy_2_level_1_x):
+            for i,num in enumerate(self.enemy_2_rect):
                 self.brute_1_idle_number.append(0) ; self.brute_1_run_number.append(0) ; self.brute_1_attack_number.append(0)
                 self.enemy_2_x_movement.append(0) ; self.enemy_2_y_movement.append(0) ; self.enemy_2_fall_type.append(0)
                 self.brute_1_fall_number.append(0) ; self.enemy_2_health.append(100)
+            
+            if len(self.enemy_2_health)>len(self.enemy_2_rect):
+                del self.enemy_2_health[-1]
                 
     def distance(self):
         if any([self.level_2,self.level_2]):
@@ -112,7 +114,7 @@ class EnemyTwo:
     def fall(self):
         self.brute_1_fall_1=brute_1_fall_1 ; self.brute_1_fall_flip_1=brute_1_fall_flip_1
         if any([self.level_2,self.level_2]):
-            EnemyGeneralFunctions.fall(self,enemy_2_rects,self.enemy_2_fall_type,self.brute_1_fall_1,self.brute_1_fall_flip_1,
+            EnemyGeneralFunctions.fall(self,self.enemy_2_rect,self.enemy_2_fall_type,self.brute_1_fall_1,self.brute_1_fall_flip_1,
                                        self.brute_1_fall_number,self.enemy_2_health,0.25,7,0,-10,self.enemy_2_x_movement,self.enemy_2_y_movement)
 
     def reset_position(self):
