@@ -1,1 +1,2 @@
 from .frost_boss import FrostBoss
+from .boss_general_fucntions import BossGeneralFunctions
