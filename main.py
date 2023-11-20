@@ -25,7 +25,7 @@ while run:
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control,level_2)
     people=People(level_1,level_1_wizard_talk,reset_locations,level_2)
-    frostboss=FrostBoss(level_2)
+    frostboss=FrostBoss(level_2,level_2_boss_talk)
     
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations)
@@ -61,7 +61,8 @@ while run:
                     level_2_guard_talk=False
                 if dialogue_objective_list[0]==2:
                     level_2_enemy_talk=False
-                
+                if dialogue_objective_list[0]==4:
+                    level_2_boss_talk=False
         if event.type==pygame.QUIT:
             pygame.quit() 
             sys.exit()
@@ -195,6 +196,9 @@ while run:
     people.run()
 
     frostboss.idle()
+    frostboss.move()
+    frostboss.collision_with_object()
+    frostboss.collision_with_object_logic()
 
     tutorial.player_idle_show()
 

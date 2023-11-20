@@ -16,10 +16,33 @@ class BossGeneralFunctions:
         if idle_number[0]>idle_max_length:
             idle_number[0]=0
 
+    def move(self,boss_rect,move_list:list,move_list_flip:list,move_list_number:list,offset_x:int,
+             offset_y:int,move_max_length:int,move_increase:float,boss_x_movement:list,boss_y_movement:list,x_movement:int,y_movement:int):
+        
+        if self.player_rect.x<=boss_rect.x:
+            SCREEN.blit(move_list[int(move_list_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
+            boss_x_movement[0]=-x_movement
+            if self.player_rect.y<=boss_rect.y:
+                boss_y_movement[0]=-y_movement
+            else:
+                boss_y_movement[0]=y_movement
+        
+        else:
+            SCREEN.blit(move_list_flip[int(move_list_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
+            boss_x_movement[0]=x_movement
+            if self.player_rect.y<=boss_rect.y:
+                boss_y_movement[0]=-y_movement
+            else:
+                boss_y_movement[0]=y_movement
+
+        move_list_number[0]+=move_increase
+        if move_list_number[0]>move_max_length:
+            move_list_number[0]=0
+
     def collision_with_object(self,tile_rect:list,boss_rect):
         self.tile_hit=[]
         for tile in tile_rect:
-            if boss_rect.colliderect(tile_rect):
+            if boss_rect.colliderect(tile):
                 self.tile_hit.append(tile)
         return self.tile_hit
     

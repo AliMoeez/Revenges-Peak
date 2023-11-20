@@ -40,7 +40,7 @@ def level_2_dialogue(player_icon):
     ]
     return level_2_dialogue_1
 
-def level_2_dialogue_walk_up(player_icon,guard_icon,brute_icon):
+def level_2_dialogue_walk_up(player_icon,guard_icon,brute_icon,frost_icon):
     level_2_dialouge_2=[
         ("What are you doing here? You know Anes is nearby right.",player_icon,"You"),
       #  ("Long story, but I would rather not get into it....",guard_icon,"???"),
@@ -63,5 +63,11 @@ def level_2_dialogue_walk_up(player_icon,guard_icon,brute_icon):
         ("Oh no......",player_icon,"You")
 
     ]
-    return level_2_dialouge_2,level_2_dialouge_3
+    level_2_dialogue_4=[
+        ("WHO GOES THERE",frost_icon,"Anes"),
+        ("You've hurt our people enough! I ask you to stop immedietely or face severe consequences!",player_icon,"You"),
+        ("HAHAHHA. WHO ARE YOU ANYWAYS! YOU WILL DIE NOW!!!!!",frost_icon,"Anes"),
+        ("Why did I say that.....",player_icon,"You")
+    ]
+    return level_2_dialouge_2,level_2_dialouge_3,level_2_dialogue_4
        

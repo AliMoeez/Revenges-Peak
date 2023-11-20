@@ -20,6 +20,7 @@ class Objectives:
         self.enemy_2_level_2_rects=enemy_2_level_2_rects
         self.enemy_1_health=enemy_1_health
         self.enemy_2_health=enemy_2_health
+        self.frost_boss_rect=frost_boss_rect
 
     
     def distance(self,place_x:int,place_y:int):
@@ -57,7 +58,7 @@ class Objectives:
             
     def level_two_objectives(self):
         if self.level_2:
-            if self.level_2_guard_talk:
+            """if self.level_2_guard_talk:
                 self.objectives_distance=Objectives.distance(self,self.people_level_2_rect[0].x,self.people_level_2_rect[0].y)
                 if self.objectives_distance[0]<200:
                     self.dialogue_objective_list[0]=1
@@ -71,7 +72,13 @@ class Objectives:
                 self.objectives_distance=Objectives.distance(self,self.enemy_2_level_2_rects[0].x,self.enemy_2_level_2_rects[0].y)
                 if self.objectives_distance[0]<200:
                     self.dialogue_objective_list[0]=3
-                return self.objectives_distance[0],self.enemy_2_level_2_rects[0].x,self.enemy_2_level_2_rects[0].y
+                return self.objectives_distance[0],self.enemy_2_level_2_rects[0].x,self.enemy_2_level_2_rects[0].y"""
+            if self.level_2_boss_talk:
+                self.objectives_distance=Objectives.distance(self,self.frost_boss_rect.x,self.frost_boss_rect.y)
+                if self.objectives_distance[0]<200:
+                    self.dialogue_objective_list[0]=4
+                return self.objectives_distance[0],self.frost_boss_rect.x,self.frost_boss_rect.y
+
             
     def define_level(self):
         if self.level_1: self.level_objectives=Objectives.level_one_objectives(self)
