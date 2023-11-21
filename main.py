@@ -197,6 +197,7 @@ while run:
 
     frostboss.idle()
     frostboss.move()
+    frostboss.attack()
     frostboss.collision_with_object()
     frostboss.collision_with_object_logic()
 
@@ -206,6 +207,7 @@ while run:
     leveltwo.tile_layer_tree_tops()
 
     player.health_power_cooldown_icons()
+    frostboss.health()
 
     objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,
                           dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk)
