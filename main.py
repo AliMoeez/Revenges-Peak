@@ -198,6 +198,8 @@ while run:
     frostboss.idle()
     frostboss.move()
     frostboss.attack()
+    frostboss.player_hit()
+    frostboss.fall()
     frostboss.collision_with_object()
     frostboss.collision_with_object_logic()
 
