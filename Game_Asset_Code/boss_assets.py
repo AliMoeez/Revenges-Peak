@@ -13,7 +13,17 @@ frost_boss_y=1400 #735
 frost_boss_x_movement=[0]
 frost_boss_y_movement=[0]
 
+frost_boss_x_increment=[0]
+frost_boss_y_increment=[0]
+
+frost_boss_damage=[0]
+
 frost_boss_health=[1000]
+
+frost_boss_fast_mode_timer=[0]
+frost_boss_fast_mode_timer_max=[0]
+
+frost_boss_slow_down_timer=[0]
 
 frost_boss_rect=pygame.Rect(frost_boss_x,frost_boss_y,128*1.5,128*1.5)
 
@@ -121,6 +131,9 @@ for i,frost_boss_image in enumerate(frost_boss_fall[:]): frost_boss_fall_flip.ap
 
 frost_boss_health_icon=pygame.image.load(r"Assets\Player\health_icon.png")
 frost_boss_health_icon=pygame.transform.scale(frost_boss_health_icon,(17,17))
+
+frost_boss_fast_mode_icon=pygame.image.load(r"Assets\Bosses\Frost Brute\Other\man-silhouette-running-escaping.png")
+frost_boss_fast_mode_icon=pygame.transform.scale(frost_boss_fast_mode_icon,(17,17))
 
 frost_boss_fall_type=[0]
 

@@ -200,6 +200,8 @@ while run:
     frostboss.attack()
     frostboss.player_hit()
     frostboss.fall()
+    frostboss.fast_mode()
+    frostboss.slow_down()
     frostboss.collision_with_object()
     frostboss.collision_with_object_logic()
 

@@ -52,10 +52,12 @@ class BossGeneralFunctions:
                 attack_list_number[0]=-2
                 player_health[0]-=player_health_fall
 
-    def health(self,boss_health,boss_max_health,health_bar_length,health_bar_ratio,health_icon):
-        self.health_icon=pygame.draw.rect(SCREEN,(173,216,230),pygame.Rect(670,10,boss_health[0]/health_bar_ratio,25))
-        SCREEN.blit(health_icon,(682,14))
-        self.health_border=pygame.draw.rect(SCREEN,(220,220,220),pygame.Rect(670,10,health_bar_length,25),4)
+    def health(self,boss_health,boss_max_health,health_bar_length,
+               health_bar_ratio,health_icon,bar_colour:tuple,
+               x_pos:int,y_pos:int,icon_x:int,icon_y:int,bar_length_multiplier:int):
+        self.health_icon=pygame.draw.rect(SCREEN,bar_colour,pygame.Rect(x_pos,y_pos,(boss_health[0]*bar_length_multiplier)/health_bar_ratio,25))
+        SCREEN.blit(health_icon,(icon_x,icon_y))
+        self.health_border=pygame.draw.rect(SCREEN,(220,220,220),pygame.Rect(x_pos,y_pos,health_bar_length,25),4)
 
     def player_hit(self,boss_health,player_attack_number,boss_health_decrease,key):
         if player_attack_number[0]>=6 and key[pygame.K_e]:
