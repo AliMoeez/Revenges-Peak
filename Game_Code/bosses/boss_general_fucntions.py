@@ -76,6 +76,10 @@ class BossGeneralFunctions:
             if boss_fall_number[0]>boss_fall_max:
                 boss_fall_number[0]=boss_fall_max
 
+    def reset_position(self,boss_rect,x_pos,y_pos):
+        boss_rect.x=x_pos
+        boss_rect.y=y_pos
+
     def collision_with_object(self,tile_rect:list,boss_rect):
         self.tile_hit=[]
         for tile in tile_rect:
@@ -96,4 +100,6 @@ class BossGeneralFunctions:
                 boss_rect.bottom=tile.top
             if boss_y_movement[0]<0:
                 boss_rect.top=tile.bottom
+
+        
 

@@ -14,7 +14,6 @@ class LevelTwo:
         self.player_rect=player_rect
         self.object_rect=object_rect
 
-
     def object_player_distance(self,x_val,y_val):
         self.object_player_distance_list=[]
         self.distance=math.hypot(self.player_rect.x-x_val,self.player_rect.y-y_val)

@@ -11,7 +11,7 @@ class Dialouge:
     def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk):
         People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2) 
         EnemyTwo.__init__(self,level_1,enemy_2_rects,reset_locations,player_control,level_2)
-        FrostBoss.__init__(self,level_2,level_2_boss_talk)
+        FrostBoss.__init__(self,level_2,level_2_boss_talk,reset_locations)
         self.dialogue_condition=dialogue_condition ; self.object_rect=object_rect ; self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.level_1=level_1 ; self.mouse_button_blit_list=mouse_button_blit_list
         self.dialogue_click_list=dialogue_click_list ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.WHITE=(255,55,55) ; self.dialouge_list=dialouge_list ; self.dialogue_story_condition=dialogue_story_condition
         self.player_icon=player_icon ; self.abyss_icon=abyss_icon ; self.text_position=text_position ; self.dialogue_offset=dialogue_offset ; self.dialogue_offset_length=dialogue_offset_length
@@ -87,11 +87,11 @@ class Dialouge:
         if self.level_1:
             self.distance_talk=People.distance_dialogue(self)
         if self.level_2:
-          #  if self.level_2_guard_talk:
-          #      self.distance_talk=People.distance_dialogue(self)
-          #  elif self.level_2_enemy_talk and not self.level_2_guard_talk:
-               # self.distance_talk=EnemyTwo.distance(self)
-            if self.level_2_boss_talk:
+            if self.level_2_guard_talk:
+                self.distance_talk=People.distance_dialogue(self)
+            elif self.level_2_enemy_talk and not self.level_2_guard_talk:
+                self.distance_talk=EnemyTwo.distance(self)
+            elif self.level_2_boss_talk and not self.level_2_enemy_talk:
                 self.distance_talk=FrostBoss.distance(self) 
             else:
                 self.distance_talk=People.distance_dialogue(self)
@@ -105,7 +105,7 @@ class Dialouge:
                         if self.level_1_wizard_talk: return True
                         else: return False
                     if self.level_2:
-                        if self.level_2_guard_talk or (self.level_2_enemy_talk and not self.level_2_guard_talk) or self.level_2_boss_talk: 
+                        if self.level_2_guard_talk or (self.level_2_enemy_talk and not self.level_2_guard_talk) or (self.level_2_boss_talk and not self.level_2_enemy_talk): 
                             return True
                         else: 
                             return False
@@ -126,7 +126,7 @@ class Dialouge:
                 self.dialogue_show=self.test_level_1_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
-            """if self.level_2_player_talk and self.level_2:
+            if self.level_2_player_talk and self.level_2:
                 self.dialogue_show=self.test_level_1_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
@@ -137,8 +137,8 @@ class Dialouge:
             if self.level_2_enemy_talk and not self.level_2_guard_talk and self.level_2:
                 self.dialogue_show=self.test_level_3_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
-                return self.dialogue_show,self.dialouge_list"""
-            if self.level_2 and self.level_2_boss_talk:
+                return self.dialogue_show,self.dialouge_list
+            if self.level_2 and self.level_2_boss_talk and not self.level_2_enemy_talk:
                 self.dialogue_show=self.test_level_4_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list

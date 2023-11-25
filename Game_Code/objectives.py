@@ -58,7 +58,7 @@ class Objectives:
             
     def level_two_objectives(self):
         if self.level_2:
-            """if self.level_2_guard_talk:
+            if self.level_2_guard_talk:
                 self.objectives_distance=Objectives.distance(self,self.people_level_2_rect[0].x,self.people_level_2_rect[0].y)
                 if self.objectives_distance[0]<200:
                     self.dialogue_objective_list[0]=1
@@ -68,15 +68,10 @@ class Objectives:
                 if self.objectives_distance[0]<200:
                     self.dialogue_objective_list[0]=2
                 return self.objectives_distance[0],self.enemy_2_level_2_rects[0].x,self.enemy_2_level_2_rects[0].y
-            if not self.level_2_enemy_talk and all(self.enemy_1_health)<=0 and all(self.enemy_2_health)<=0:
-                self.objectives_distance=Objectives.distance(self,self.enemy_2_level_2_rects[0].x,self.enemy_2_level_2_rects[0].y)
-                if self.objectives_distance[0]<200:
-                    self.dialogue_objective_list[0]=3
-                return self.objectives_distance[0],self.enemy_2_level_2_rects[0].x,self.enemy_2_level_2_rects[0].y"""
-            if self.level_2_boss_talk:
+            if self.level_2_boss_talk and not self.level_2_enemy_talk and all(self.enemy_1_health)<=0 and all(self.enemy_2_health)<=0:
                 self.objectives_distance=Objectives.distance(self,self.frost_boss_rect.x,self.frost_boss_rect.y)
                 if self.objectives_distance[0]<200:
-                    self.dialogue_objective_list[0]=4
+                    self.dialogue_objective_list[0]=3
                 return self.objectives_distance[0],self.frost_boss_rect.x,self.frost_boss_rect.y
 
             

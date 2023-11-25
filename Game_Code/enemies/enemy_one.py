@@ -9,7 +9,7 @@ from Game_Code.control_test import ControlTest
 class EnemyOne:
     def __init__(self,level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2):
         EnemyGeneralFunctions.__init__(self)
-        Lose.__init__(self,level_1,player_lose_condition,reset_locations)
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2)
         self.level_1=level_1 ; self.camera_x_y=camera_x_y ; self.enemy_1_level_1_rect=enemy_1_level_1_rect ; self.skeleton_idle_number=skeleton_idle_number
         self.skeleton_run_number=skeleton_run_number ; self.skeleton_attack_number=skeleton_attack_number ; self.player_rect=player_rect
         self.enemy_1_x_movement=enemy_1_x_movement ; self.enemy_1_y_movement=enemy_1_y_movement ; self.player_control_index=player_control_index
@@ -20,6 +20,7 @@ class EnemyOne:
         self.enemy_2_rects=enemy_2_rects ; self.level_2=level_2 ; self.level_2_tile_set_rect=level_2_tile_set_rect
 
         self.enemy_1_level_1_x=enemy_1_level_1_x ; self.enemy_1_level_1_y=enemy_1_level_1_y
+        self.enemy_1_level_2_x=enemy_1_level_2_x ; self.enemy_1_level_2_y=enemy_1_level_2_y
 
         if level_1:
             self.enemy_1_rects=enemy_1_level_1_rect
@@ -130,6 +131,10 @@ class EnemyOne:
         if self.reset_locations:
             if self.level_1:
                 Lose.reset_positions_multiple(self,self.enemy_1_rects,self.enemy_1_level_1_x,self.enemy_1_level_1_y,self.enemy_1_health,100)
+                return True
+            if self.level_2:
+                print("ENEMNT ONE RESET")
+                Lose.reset_positions_multiple(self,self.enemy_1_rects,self.enemy_1_level_2_x,self.enemy_1_level_2_y,self.enemy_1_health,100)
                 return True
 
     def collision_with_object(self):

@@ -8,7 +8,7 @@ from .win import Win
 class Player:
     def __init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,
                  dialogue_story_condition,reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2):
-        Lose.__init__(self,level_1,player_lose_condition,reset_locations)
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2)
         Win.__init__(self,level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
         self.player_x=player_x ; self.player_y=player_y ; self.player_width=player_width ; self.player_height=player_height ; self.player_rect=player_rect ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement
         self.camera_x_y=camera_x_y  ; self.level_1=level_1 ;  self.level_screen=level_screen ; self.player_key=player_key ; self.player_attack_cooldown=player_attack_cooldown ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_health=player_health
@@ -16,9 +16,6 @@ class Player:
         self.dialogue_story_condition=dialogue_story_condition ; self.reset_locations=reset_locations ; self.tutorial_one=tutorial_one ; self.tutorial_two=tutorial_two
         self.level_1_wizard_talk=level_1_wizard_talk ; self.talk_to_abyss_level_one=talk_to_abyss_level_one ; self.investigate_object_level_one=investigate_object_level_one
         self.level_2=level_2 ; self.level_2_tile_set_rect=level_2_tile_set_rect
-
-
-   #     print(self.level_2)
 
         if self.level_1:
             self.tile_set_rect=self.level_1_tile_set_rect
@@ -30,8 +27,6 @@ class Player:
     def idle(self,key):
         self.player_idle_list=player_idle_list ; self.player_idle_list_flip=player_idle_list_flip ; self.player_idle_number=player_idle_number
 
-      #  print("HERERE")
-        
         if self.player_key[-1]=="d": SCREEN.blit(self.player_idle_list[int(self.player_idle_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
         else: SCREEN.blit(self.player_idle_list_flip[int(self.player_idle_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-60,self.player_rect.y-self.camera_x_y[1]-40))
 
@@ -149,10 +144,10 @@ class Player:
 
     def reset_position(self):
         if self.reset_locations:
-            if self.level_1:
+            if self.level_1 or self.level_2:
                 Lose.reset_positions(self,player_rect,self.player_x,self.player_y)
+                print("PLAYER RESET LOCATIONS")
                 return True
-                
 
     def collision_with_object(self):
         if any([self.level_1,self.level_2]):

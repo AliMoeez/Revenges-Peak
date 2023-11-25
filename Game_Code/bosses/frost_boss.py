@@ -5,13 +5,13 @@ from Game_Asset_Code import *
 from .boss_general_fucntions import BossGeneralFunctions
 
 class FrostBoss:
-    def __init__(self,level_2,level_2_boss_talk) -> None:
+    def __init__(self,level_2,level_2_boss_talk,reset_locations) -> None:
         self.level_2=level_2 ; self.frost_boss_rect=frost_boss_rect ; self.player_rect=player_rect ; self.camera_x_y=camera_x_y
         self.level_2_boss_talk=level_2_boss_talk ; self.level_2_tile_set_rect=level_2_tile_set_rect ; self.frost_boss_x_movement=frost_boss_x_movement ; self.frost_boss_y_movement=frost_boss_y_movement
         self.frost_boss_attack_number=frost_boss_attack_number ; self.frost_boss_health_icon=frost_boss_health_icon ; self.frost_boss_health=frost_boss_health ;self.frost_boss_fall_type=frost_boss_fall_type
         self.player_attack_number=player_attack_number ; self.player_health=player_health ; self.frost_boss_fast_mode_timer=frost_boss_fast_mode_timer ; self.frost_boss_x_increment=frost_boss_x_increment
         self.frost_boss_y_increment=frost_boss_y_increment ; self.frost_boss_damage=frost_boss_damage ; self.frost_boss_slow_down_timer=frost_boss_slow_down_timer ; self.frost_boss_fast_mode_icon=frost_boss_fast_mode_icon
-        self.frost_boss_fast_mode_timer_max=frost_boss_fast_mode_timer_max
+        self.frost_boss_fast_mode_timer_max=frost_boss_fast_mode_timer_max ; self.reset_locations=reset_locations ; self.frost_boss_x=frost_boss_x ; self.frost_boss_y=frost_boss_y
 
     def distance(self):
         self.distance_list=[]
@@ -52,13 +52,13 @@ class FrostBoss:
         if self.level_2 and not self.level_2_boss_talk:
         
             if self.frost_boss_fast_mode_timer[0]<=150:
-                self.frost_boss_fast_mode_timer[0]+=1 ; self.frost_boss_x_increment[0]=2 ; self.frost_boss_y_increment[0]=2 ; self.frost_boss_damage[0]=100
+                self.frost_boss_fast_mode_timer[0]+=1 ; self.frost_boss_x_increment[0]=2 ; self.frost_boss_y_increment[0]=2 ; self.frost_boss_damage[0]=500 #100
             
             if self.frost_boss_fast_mode_timer[0]>150:
                 
                 self.frost_boss_fast_mode_timer[0]=151
                 self.frost_boss_fast_mode_timer_max[0]+=1 
-                self.frost_boss_x_increment[0]=10 ; self.frost_boss_y_increment[0]=10 ; self.frost_boss_damage[0]=200
+                self.frost_boss_x_increment[0]=10 ; self.frost_boss_y_increment[0]=10 ; self.frost_boss_damage[0]=900 #200
                 
                 if self.frost_boss_fast_mode_timer_max[0]>100:
                     self.frost_boss_fast_mode_timer[0]=0
@@ -89,6 +89,12 @@ class FrostBoss:
         if self. level_2 and not self.level_2_boss_talk:
             BossGeneralFunctions.fall(self,self.frost_boss_rect,self.frost_boss_fall,self.frost_boss_fall_flip,self.frost_boss_fall_number,0.25,30,self.frost_boss_x_movement,
                                       self.frost_boss_y_movement,70,30,self.frost_boss_health,self.frost_boss_fall_type)
+            
+    def reset_position(self):
+        if self.level_2 and self.reset_locations:
+            print("BOSS RESET")
+            BossGeneralFunctions.reset_position(self,self.frost_boss_rect,self.frost_boss_x,self.frost_boss_y)
+            return True
 
     def health(self):
         if self.level_2 and not self.level_2_boss_talk:

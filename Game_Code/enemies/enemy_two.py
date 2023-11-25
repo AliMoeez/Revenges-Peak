@@ -9,7 +9,7 @@ from Game_Code.control_test import ControlTest
 class EnemyTwo:
     def __init__(self,level_1,enemy_2_rects,reset_locations,player_control,level_2):
         EnemyGeneralFunctions.__init__(self)
-        Lose.__init__(self,level_1,player_lose_condition,reset_locations)
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2)
         self.level_1=level_1 ; self.camera_x_y=camera_x_y ; self.brute_1_idle_number=brute_1_idle_number ; self.brute_1_run_number=brute_1_run_number
         self.player_rect=player_rect ; self.player_control_index=player_control_index ; self.enemy_2_level_1_rects=enemy_2_rects ; self.brute_1_attack_number=brute_1_attack_number
         self.enemy_2_level_1_x=enemy_2_level_1_x ; self.enemy_2_level_1_y=enemy_2_level_1_y ; self.enemy_2_x_movement=enemy_2_x_movement ; self.enemy_2_y_movement=enemy_2_y_movement
@@ -19,6 +19,8 @@ class EnemyTwo:
         self.player_health=player_health ; self.reset_locations=reset_locations ; self.brute_1_fall_number=brute_1_fall_number ; self.enemy_2_health=enemy_2_health
         self.red=(178,34,34) ; self.enemy_2_fall_type=enemy_2_fall_type ; self.player_attack_number=player_attack_number ; self.player_key=player_key
         self.enemy_2_x_control_movement=enemy_2_x_control_movement ; self.enemy_2_y_control_movement=enemy_2_y_control_movement
+
+        self.enemy_2_level_2_x=enemy_2_level_2_x ; self.enemy_2_level_2_y=enemy_2_level_2_y
         
         if self.level_1:
             self.tile_level=self.level_1_tile_set_rect
@@ -121,6 +123,10 @@ class EnemyTwo:
         if self.reset_locations:
             if self.level_1:
                 Lose.reset_positions_multiple(self,self.enemy_2_rect,self.enemy_2_level_1_x,self.enemy_2_level_1_y,self.enemy_2_health,100)
+                return True
+            if self.level_2:
+                print("ENEMY TWO RESET")
+                Lose.reset_positions_multiple(self,self.enemy_2_rect,self.enemy_2_level_2_x,self.enemy_2_level_2_y,self.enemy_2_health,100)
                 return True
 
     def collision_with_object(self):
