@@ -8,15 +8,19 @@ Tileset Level One: https://rafaelmatos.itch.io/epic-rpg-world-pack-free-demo-anc
 
 Tileset Level Two: https://pixivan.itch.io/top-down-forest-tileset 
 
+
 Frost Boss : https://chierit.itch.io/boss-frost-guardian 
 
 Main Boss : https://creativekind.itch.io/necromancer-free 
 
+
 Enemies One : https://sanctumpixel.itch.io/sword-skeleton-pixel-art-character 
 
-Enemies Two l https://sanctumpixel.itch.io/imp-axe-demon-pixel-art-character  
+Enemies Two l https://sanctumpixel.itch.io/imp-axe-demon-pixel-art-character 
+
 
 Items : https://kyrise.itch.io/kyrises-free-16x16-rpg-icon-pack 
+
 
 Sword Icon : <a href="https://www.flaticon.com/free-icons/fight ”  title="fight icons">Fight icons created by Freepik - Flaticon</a>
 
