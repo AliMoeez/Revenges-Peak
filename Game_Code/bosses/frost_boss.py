@@ -52,13 +52,13 @@ class FrostBoss:
         if self.level_2 and not self.level_2_boss_talk:
         
             if self.frost_boss_fast_mode_timer[0]<=150:
-                self.frost_boss_fast_mode_timer[0]+=1 ; self.frost_boss_x_increment[0]=2 ; self.frost_boss_y_increment[0]=2 ; self.frost_boss_damage[0]=500 #100
+                self.frost_boss_fast_mode_timer[0]+=1 ; self.frost_boss_x_increment[0]=2 ; self.frost_boss_y_increment[0]=2 ; self.frost_boss_damage[0]=100 #100
             
             if self.frost_boss_fast_mode_timer[0]>150:
                 
                 self.frost_boss_fast_mode_timer[0]=151
                 self.frost_boss_fast_mode_timer_max[0]+=1 
-                self.frost_boss_x_increment[0]=10 ; self.frost_boss_y_increment[0]=10 ; self.frost_boss_damage[0]=900 #200
+                self.frost_boss_x_increment[0]=10 ; self.frost_boss_y_increment[0]=10 ; self.frost_boss_damage[0]=200 #200
                 
                 if self.frost_boss_fast_mode_timer_max[0]>100:
                     self.frost_boss_fast_mode_timer[0]=0
@@ -81,8 +81,8 @@ class FrostBoss:
         self.distance_player_boss=FrostBoss.distance(self)
         if self.level_2 and not self.level_2_boss_talk:
             for distance in self.distance_player_boss:
-                if distance<=100:
-                    BossGeneralFunctions.player_hit(self,self.frost_boss_health,self.player_attack_number,10,pygame.key.get_pressed())
+                if distance<=100: #boss health decreasw was 10 before
+                    BossGeneralFunctions.player_hit(self,self.frost_boss_health,self.player_attack_number,100,pygame.key.get_pressed())
 
     def fall(self):
         self.frost_boss_fall=frost_boss_fall ; self.frost_boss_fall_flip=frost_boss_fall_flip ; self.frost_boss_fall_number=frost_boss_fall_number
@@ -93,7 +93,7 @@ class FrostBoss:
     def reset_position(self):
         if self.level_2 and self.reset_locations:
             print("BOSS RESET")
-            BossGeneralFunctions.reset_position(self,self.frost_boss_rect,self.frost_boss_x,self.frost_boss_y)
+            BossGeneralFunctions.reset_position(self,self.frost_boss_rect,self.frost_boss_x,self.frost_boss_y,self.frost_boss_health,1000)
             return True
 
     def health(self):

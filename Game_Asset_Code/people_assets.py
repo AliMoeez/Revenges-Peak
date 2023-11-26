@@ -40,7 +40,7 @@ guard_idle_list=[guard_idle_1,guard_idle_2,guard_idle_3,guard_idle_4,guard_idle_
 for idx,num in enumerate(guard_idle_list[:]): guard_idle_list_flip.append(pygame.transform.flip(num,True,False))
 
 guard_icon=pygame.image.load(r"Assets\People\individual sprites\medieval\shady_guy\shady_guy_icon.png")
-guard_icon=pygame.transform.scale(guard_icon,(150,120))
+guard_icon=pygame.transform.scale(guard_icon,(130,100))
 
 people_level_1_x=[400]
 people_level_1_y=[1500]

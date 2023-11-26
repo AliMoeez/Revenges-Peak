@@ -76,9 +76,10 @@ class BossGeneralFunctions:
             if boss_fall_number[0]>boss_fall_max:
                 boss_fall_number[0]=boss_fall_max
 
-    def reset_position(self,boss_rect,x_pos,y_pos):
+    def reset_position(self,boss_rect,x_pos,y_pos,boss_health:list,boss_original_health):
         boss_rect.x=x_pos
         boss_rect.y=y_pos
+        boss_health[0]=boss_original_health
 
     def collision_with_object(self,tile_rect:list,boss_rect):
         self.tile_hit=[]

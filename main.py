@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,LevelTwo,Player,EnemyOne,EnemyTwo,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss
+from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,Player,EnemyOne,EnemyTwo,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,HealingPlayer
 
 while run:
     level_1_tile_set_rect.clear()
@@ -18,6 +18,7 @@ while run:
     menu=Menu(level_screen,level_1,level_2)
     levelone=LevelOne(camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
     leveltwo=LevelTwo(level_2,level_screen)
+    levelthree=LevelThree(level_3)
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
                   player_control,dialogue_condition,dialogue_story_condition,
@@ -26,7 +27,8 @@ while run:
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control,level_2)
     people=People(level_1,level_1_wizard_talk,reset_locations,level_2)
     frostboss=FrostBoss(level_2,level_2_boss_talk,reset_locations)
-    
+
+    healingplayer=HealingPlayer(level_1,level_2)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations,level_2)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
@@ -82,10 +84,11 @@ while run:
                     level_screen=False ; level_3=True
                 if event.type==pygame.MOUSEBUTTONDOWN and menu.level_screen_blit_background()[3].collidepoint(event.pos):
                     level_screen=False ; level_4=True
-        if any([level_1,level_2]):
+        if any([level_1,level_2,level_3]):
             if key[pygame.K_q]:
                 level_1=False 
                 level_2=False 
+                level_3=False
                 level_screen=True
             if tutorial.skip(event,event_list):
                 text_position[0]=0
@@ -123,14 +126,22 @@ while run:
 
         if lose.back_to_menu(event):
             player_lose_condition=False ; reset_locations=True ; level_1=False ; level_2=False
+            if level_2:
+                camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True
         
         if win.back_to_menu(event):
             level_1_wizard_talk=True ; talk_to_abyss_level_one=True ; investigate_object_level_one=True
-            reset_locations=True ; level_1=False
+            reset_locations=True
+            if level_2:
+                camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True 
+            level_1=False ; level_2=False
         
         if win.next_level(event):
             if level_1:
                 level_1=False ; level_2=True
+            if level_2:
+                level_2=False ; level_3=True
+                camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True 
             reset_locations=True
                                      
     if lose.condition():
@@ -164,6 +175,8 @@ while run:
     leveltwo.tile_layer_plants()
     leveltwo.tile_layer_dialogue_objects()
     leveltwo.tile_layer_collision()
+
+    levelthree.background()
 
     player.move(key)
     player.attack(key)
@@ -213,6 +226,8 @@ while run:
     frostboss.slow_down()
     frostboss.collision_with_object()
     frostboss.collision_with_object_logic()
+
+    healingplayer.blit()
 
     tutorial.player_idle_show()
 

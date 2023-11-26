@@ -13,6 +13,7 @@ class LevelTwo:
         self.camera_x_y=camera_x_y
         self.player_rect=player_rect
         self.object_rect=object_rect
+        self.frost_boss_health=frost_boss_health
 
     def object_player_distance(self,x_val,y_val):
         self.object_player_distance_list=[]
@@ -40,7 +41,11 @@ class LevelTwo:
                 LevelTwo.border_logic_x_axis(self)
             if (self.rect_camera.y<self.min_y_border or self.rect_camera.y>self.max_y_border) and (self.rect_camera.x<self.min_x_border or self.rect_camera.x>self.max_x_border):
                 LevelTwo.border_logic_x_y_axis(self)
-        
+
+    def win_condition(self):
+        if self.level_2 and self.frost_boss_health[0]<=0:
+            return True
+
     def tile_set_general_function(self,layers:str):
         if self.level_2:
             for layer in self.level_2_tile_set:

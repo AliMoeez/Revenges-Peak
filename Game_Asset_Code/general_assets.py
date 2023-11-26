@@ -49,6 +49,16 @@ tutorial_two=False
 
 tutorial_two_list=[1]
 
+health_potion_image=pygame.image.load(r"Assets\Items\Kyrise's 16x16 RPG Icon Pack - V1.3\icons\16x16\potion_02a - Copy.png")
+health_potion_image=pygame.transform.scale(health_potion_image,(25,25))
+
+level_2_health_potion_x=[450,700]
+level_2_health_potion_y=[2000,2000]
+
+level_2_health_potion_rect=[]
+
+for i,y in enumerate(level_2_health_potion_x): level_2_health_potion_rect.append(pygame.Rect(level_2_health_potion_x[i],level_2_health_potion_y[i],25,25))
+
 
 
 

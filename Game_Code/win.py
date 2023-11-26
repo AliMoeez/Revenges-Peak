@@ -2,11 +2,13 @@ import pygame
 
 from Game_Asset_Code import *
 from .levels import LevelOne
+from .levels import LevelTwo
 
 
 class Win:
     def __init__(self,level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one):
         LevelOne.__init__(self,camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
+        LevelTwo.__init__(self,level_2,level_screen)
         self.level_1=level_1 ; self.screen_fade_number=screen_fade_number ; self.WHITE=(255,255,255) ; self.RED=(220,20,60)
         self.font=r"Assets\Misc\Fonts\Pixellari.ttf" ; self.player_health=player_health
         self.level_1_wizard_talk=level_1_wizard_talk
@@ -19,11 +21,8 @@ class Win:
 
     def condition(self):
         if any([self.level_1,self.level_2]):
-            if LevelOne.win_condition(self):
-                self.player_x_movment[0]=0
-                self.player_y_movement[0]=0
-                self.dialogue_objective_list[0]=0
-              #  print(self.player_x_movment[0],self.player_y_movement[0])
+            if LevelOne.win_condition(self) or LevelTwo.win_condition(self):
+                self.player_x_movment[0]=0 ; self.player_y_movement[0]=0 ; self.dialogue_objective_list[0]=0
                 return True
 
     def screen_fade(self):

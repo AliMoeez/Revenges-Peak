@@ -1,6 +1,7 @@
 from .menu import Menu
 from .levels import LevelOne
 from .levels import LevelTwo
+from .levels import LevelThree
 from .player import Player
 from .enemies import EnemyGeneralFunctions
 from .enemies import EnemyOne
@@ -14,3 +15,4 @@ from .tutorial import Tutorial
 from .control_test import ControlTest
 from .bosses import FrostBoss
 from .bosses import BossGeneralFunctions
+from .healing_player import HealingPlayer
