@@ -28,7 +28,7 @@ while run:
     people=People(level_1,level_1_wizard_talk,reset_locations,level_2)
     frostboss=FrostBoss(level_2,level_2_boss_talk,reset_locations)
 
-    healingplayer=HealingPlayer(level_1,level_2)
+    healingplayer=HealingPlayer(level_1,level_2,reset_locations)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations,level_2)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
@@ -38,38 +38,24 @@ while run:
 
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True ; dialogue_story_condition=False
-            if event.type==pygame.MOUSEBUTTONDOWN :
-                dialogue_click_list[0]+=1 ; text_position[0]=0
-
+            if event.type==pygame.MOUSEBUTTONDOWN : dialogue_click_list[0]+=1 ; text_position[0]=0
         if dialogue.level_dialogue_story(event,event_list) or dialogue.beginning_condition():
             mouse_button_blit_list.clear() ; dialogue_story_condition=True ; dialogue_condition=False
-            if event.type==pygame.MOUSEBUTTONDOWN:
-                dialogue_click_list[0]+=1 ; text_position[0]=0
-     
+            if event.type==pygame.MOUSEBUTTONDOWN: dialogue_click_list[0]+=1 ; text_position[0]=0
         if (dialogue_condition or dialogue_story_condition) and dialogue.end_dialouge(event,event_list): 
             mouse_button_blit_list.clear() ; dialogue_condition=False ; dialogue_story_condition=False
-
             if level_1:
-                if dialogue_objective_list[0]==1:
-                    level_1_wizard_talk=False
-                if dialogue_objective_list[0]==2:
-                    talk_to_abyss_level_one=False
-                if dialogue_objective_list[0]==3:
-                    investigate_object_level_one=False
+                if dialogue_objective_list[0]==1: level_1_wizard_talk=False
+                if dialogue_objective_list[0]==2: talk_to_abyss_level_one=False
+                if dialogue_objective_list[0]==3: investigate_object_level_one=False
             if level_2:
-                if dialogue_objective_list[0]==0:
-                    level_2_player_talk=False
-                if dialogue_objective_list[0]==1:
-                    level_2_guard_talk=False
-                if dialogue_objective_list[0]==2:
-                    level_2_enemy_talk=False
-                if dialogue_objective_list[0]==3:
-                    level_2_boss_talk=False
-        
-        if event.type==pygame.QUIT:
-            pygame.quit() 
-            sys.exit()
+                if dialogue_objective_list[0]==0: level_2_player_talk=False
+                if dialogue_objective_list[0]==1: level_2_guard_talk=False
+                if dialogue_objective_list[0]==2: level_2_enemy_talk=False
+                if dialogue_objective_list[0]==3: level_2_boss_talk=False
        
+        if event.type==pygame.QUIT:
+            pygame.quit() ; sys.exit()
         if not level_screen and not any([level_1,level_2]):
             if event.type==pygame.MOUSEBUTTONDOWN and menu.main_menu_buttons().collidepoint(event.pos):
                 level_screen= not level_screen
@@ -86,44 +72,30 @@ while run:
                     level_screen=False ; level_4=True
         if any([level_1,level_2,level_3]):
             if key[pygame.K_q]:
-                level_1=False 
-                level_2=False 
-                level_3=False
-                level_screen=True
+                level_1=False  ; level_2=False ; level_3=False ; level_screen=True
             if tutorial.skip(event,event_list):
                 text_position[0]=0
                 if tutorial_one: tutorial_one=False
                 if tutorial_two: tutorial_two=False
             if tutorial.begin_tutorial(event,event_list): tutorial_two=True
 
-            if level_2:
-                tutorial_one=False
-                tutorial_two=False
+            if level_2 or level_3:
+                tutorial_one=False ; tutorial_two=False
 
             if key[pygame.K_f] and player_control_cooldown[0]==1:
                 for idx,distance in enumerate(enemy_one.distance()):
                     if distance<100:
-                        player_control_index.clear() 
-                        player_control_index.append((idx,"Enemy_1")) 
-                        player_control=True
-
-                
+                        player_control_index.clear() ; player_control_index.append((idx,"Enemy_1"))  ; player_control=True                
                 for idx,distance in enumerate(enemy_two.distance()):
                     if distance<100:
-                        player_control_index.clear() 
-                        player_control_index.append((idx,"Enemy_2")) 
-                        player_control=True
+                        player_control_index.clear() ; player_control_index.append((idx,"Enemy_2")) ; player_control=True
         
-            if key[pygame.K_v] and player_control:
-                player_control_cooldown[0]=-0.05
+            if key[pygame.K_v] and player_control: player_control_cooldown[0]=-0.05
 
         if lose.retry(event):
             if level_2:
                 camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True
-
-            player_lose_condition=False ; reset_locations=True
-            dialogue_objective_list[0]=0 
-
+            player_lose_condition=False ; reset_locations=True ;dialogue_objective_list[0]=0 
         if lose.back_to_menu(event):
             player_lose_condition=False ; reset_locations=True ; level_1=False ; level_2=False
             if level_2:
@@ -143,6 +115,11 @@ while run:
                 level_2=False ; level_3=True
                 camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True 
             reset_locations=True
+
+        if healingplayer.healing_condition(event):
+            if player_health[0]<=1000:
+                player_health[0]+=100
+                if player_health[0]>1000: player_health[0]=1000
                                      
     if lose.condition():
         player_lose_condition=True
@@ -158,7 +135,6 @@ while run:
     if level_2:
         if player.reset_position() and  enemy_one.reset_position() and enemy_two.reset_position() and people.reset_position() and frostboss.reset_position():
             reset_locations=False
-
 
     menu.main_menu()
     menu.main_menu_buttons()
@@ -228,6 +204,8 @@ while run:
     frostboss.collision_with_object_logic()
 
     healingplayer.blit()
+    healingplayer.interaction()
+    healingplayer.reset_position()
 
     tutorial.player_idle_show()
 

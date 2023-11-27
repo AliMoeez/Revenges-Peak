@@ -25,6 +25,7 @@ object_rect=[]
 
 left_mouse_button_icon=pygame.image.load(r"Assets\Keys\Buttons Pack\Buttons Pack\MOUSE\MOUSEBUTTONLEFT.png")
 left_mouse_button_icon=pygame.transform.scale(left_mouse_button_icon,(40,40))
+left_mouse_button_icon_miniture=pygame.transform.scale(left_mouse_button_icon,(25,25))
 
 abyss_icon=pygame.image.load(r"Assets\Misc\Icons\Abyss_Icon.png")
 abyss_icon=pygame.transform.scale(abyss_icon,(100,150))
