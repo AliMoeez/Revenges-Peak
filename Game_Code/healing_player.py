@@ -59,6 +59,7 @@ class HealingPlayer:
         
     def reset_position(self):
         if any([self.level_1,self.level_2]) and self.reset_locations:
-            for idx,health in enumerate(self.level_health_potion_rect):
+             for idx,health in enumerate(self.level_health_potion_rect):
                 self.level_health_potion_rect[idx].x=self.level_health_potion_x[idx]
                 self.level_health_potion_rect[idx].y=self.level_health_potion_y[idx]
+             return True

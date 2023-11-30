@@ -21,6 +21,8 @@ level_1_tile_set=load_pygame(r"Assets\Tileset\Level_1_Tile_Set_Sheet.tmx") ; lev
 
 level_2_tile_set=load_pygame(r"Assets\Tileset\Level_2_TIleset\Level_2_Tileset.tmx") ; level_2_tile_set_rect=[]
 
+level_3_tile_set=load_pygame(r"Assets\Tileset\Level_3_Tileset\Level_3_Tileset.tmx") ; level_3_tile_set_rect=[]
+
 object_rect=[] 
 
 left_mouse_button_icon=pygame.image.load(r"Assets\Keys\Buttons Pack\Buttons Pack\MOUSE\MOUSEBUTTONLEFT.png")
@@ -53,8 +55,8 @@ tutorial_two_list=[1]
 health_potion_image=pygame.image.load(r"Assets\Items\Kyrise's 16x16 RPG Icon Pack - V1.3\icons\16x16\potion_02a - Copy.png")
 health_potion_image=pygame.transform.scale(health_potion_image,(25,25))
 
-level_2_health_potion_x=[450,700]
-level_2_health_potion_y=[2000,2000]
+level_2_health_potion_x=[1940,2470]
+level_2_health_potion_y=[1042,975]
 
 level_2_health_potion_rect=[]
 

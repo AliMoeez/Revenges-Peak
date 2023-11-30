@@ -11,6 +11,7 @@ from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,Player,EnemyOne,EnemyTwo
 while run:
     level_1_tile_set_rect.clear()
     level_2_tile_set_rect.clear()
+    level_3_tile_set_rect.clear()
     object_rect.clear()
     key=pygame.key.get_pressed()
     event_list=pygame.event.get()
@@ -22,7 +23,7 @@ while run:
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
                   player_control,dialogue_condition,dialogue_story_condition,
-                  reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2)
+                  reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2,level_3)
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control,level_2)
     people=People(level_1,level_1_wizard_talk,reset_locations,level_2)
@@ -94,12 +95,14 @@ while run:
 
         if lose.retry(event):
             if level_2:
-                camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True
+                level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True
+
             player_lose_condition=False ; reset_locations=True ;dialogue_objective_list[0]=0 
+
         if lose.back_to_menu(event):
             player_lose_condition=False ; reset_locations=True ; level_1=False ; level_2=False
             if level_2:
-                camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True
+                level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True
         
         if win.back_to_menu(event):
             level_1_wizard_talk=True ; talk_to_abyss_level_one=True ; investigate_object_level_one=True
@@ -133,7 +136,8 @@ while run:
             level_1_wizard_talk=True
             reset_locations=False
     if level_2:
-        if player.reset_position() and  enemy_one.reset_position() and enemy_two.reset_position() and people.reset_position() and frostboss.reset_position():
+        if player.reset_position() and  enemy_one.reset_position() and enemy_two.reset_position() and people.reset_position() and frostboss.reset_position() and healingplayer.reset_position():
+            camera_x_y[0]=0 ; camera_x_y[1]=0 
             reset_locations=False
 
     menu.main_menu()
@@ -153,6 +157,10 @@ while run:
     leveltwo.tile_layer_collision()
 
     levelthree.background()
+    levelthree.collision_tiles()
+    levelthree.filler_tiles()
+    levelthree.ground_tiles()
+    levelthree.object_tiles()
 
     player.move(key)
     player.attack(key)
@@ -205,12 +213,12 @@ while run:
 
     healingplayer.blit()
     healingplayer.interaction()
-    healingplayer.reset_position()
 
     tutorial.player_idle_show()
 
     levelone.tile_set_tree_top()
     leveltwo.tile_layer_tree_tops()
+    levelthree.tree_top_tiles()
 
     player.health_power_cooldown_icons()
     frostboss.health()

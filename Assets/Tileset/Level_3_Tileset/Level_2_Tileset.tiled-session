@@ -16,20 +16,12 @@
                 "y": 1974
             }
         },
-        "C:/Users/Owner/Desktop/Revenges Peak/Assets/Tileset/Level_3_Tileset/Level_3_Tileset.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 983,
-                "y": 885
-            }
-        },
         "Level_2_Tileset.tmx": {
-            "scale": 0.33,
+            "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 940.909090909091,
-                "y": 1128.7878787878788
+                "x": 776,
+                "y": 1223
             }
         }
     },
