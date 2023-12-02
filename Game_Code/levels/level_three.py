@@ -20,8 +20,8 @@ class LevelThree:
         return self.distance_list
 
     def background(self):
-        self.max_x_border=3310 ; self.max_y_border=2000 ; self.min_x_border=530 ; self.min_y_border=300
-        self.max_x_player=3900 ; self.max_y_player=2415; self.min_x_player=50 ; self.min_y_player=25
+        self.max_x_border=3410 ; self.max_y_border=2000 ; self.min_x_border=530 ; self.min_y_border=300
+        self.max_x_player=4000 ; self.max_y_player=2415; self.min_x_player=50 ; self.min_y_player=25
       #  if self.player_control and self.player_control_cooldown[0]>0: self.rect_camera=self.enemy_rects_camera
       #else
         self.rect_camera=self.player_rect
@@ -57,7 +57,7 @@ class LevelThree:
                         if distance<1000:
                             SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
                             rect_list.append(pygame.Rect(x_val,y_val,width,height))
-                            pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1],width,height),width=1)
+                        #    pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1],width,height),width=1)
 
 
     def ground_tiles(self):
