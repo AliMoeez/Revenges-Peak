@@ -6,6 +6,7 @@ from .player import Player
 from .enemies import EnemyGeneralFunctions
 from .enemies import EnemyOne
 from .enemies import EnemyTwo
+from .enemies import EnemyThree
 from .dialogue import Dialouge
 from .people import People
 from .objectives import Objectives

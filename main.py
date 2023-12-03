@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,Player,EnemyOne,EnemyTwo,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,HealingPlayer
+from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,Player,EnemyOne,EnemyTwo,EnemyThree,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,HealingPlayer
 
 while run:
     level_1_tile_set_rect.clear()
@@ -26,6 +26,7 @@ while run:
                   reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2,level_3)
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control,level_2)
+    enemy_three=EnemyThree(level_3,player_control)
     people=People(level_1,level_1_wizard_talk,reset_locations,level_2)
     frostboss=FrostBoss(level_2,level_2_boss_talk,reset_locations)
 
@@ -197,6 +198,9 @@ while run:
     enemy_two.control_attack(key)
     enemy_two.control_collision()
     enemy_two.control_collision_object_logic()
+
+    enemy_three.distance()
+    enemy_three.idle()
 
     people.idle()
     people.run()
