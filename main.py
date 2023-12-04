@@ -201,6 +201,8 @@ while run:
 
     enemy_three.distance()
     enemy_three.idle()
+    enemy_three.move()
+    enemy_three.attack()
 
     people.idle()
     people.run()

@@ -118,33 +118,69 @@ for i,y in enumerate(enemy_2_level_1_x): enemy_2_rects.append(pygame.Rect(enemy_
 for i,y in enumerate(enemy_2_level_2_x): enemy_2_level_2_rects.append(pygame.Rect(enemy_2_level_2_x[i],enemy_2_level_2_y[i],40,70))
 
 enemy_three_idle_image=pygame.image.load(r"Assets\Enemies\Arrow Enemy\Sprites\Character\Idle.png")
+enemy_three_move_image=pygame.image.load(r"Assets\Enemies\Arrow Enemy\Sprites\Character\Run.png")
+enemy_three_attack_image=pygame.image.load(r"Assets\Enemies\Arrow Enemy\Sprites\Character\Attack.png")
+enemy_three_fall_image=pygame.image.load(r"Assets\Enemies\Arrow Enemy\Sprites\Character\Death.png")
+
 
 def enemy_three_idle(images,frame,width,height): 
-    image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),0,width,height)) ; image=pygame.transform.scale(image,(width*2,height*2))
+    image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),0,width,height)) ; image=pygame.transform.scale(image,(width*1.50,height*1.50))
     return image
 
-idle_1=enemy_three_idle(enemy_three_idle_image,0,100,100) 
-idle_2=enemy_three_idle(enemy_three_idle_image,1,100,100) 
-idle_3=enemy_three_idle(enemy_three_idle_image,2,100,100) 
-idle_4=enemy_three_idle(enemy_three_idle_image,3,100,100) 
-idle_5=enemy_three_idle(enemy_three_idle_image,4,100,100) 
-idle_6=enemy_three_idle(enemy_three_idle_image,5,100,100)
-idle_7=enemy_three_idle(enemy_three_idle_image,6,100,100) 
-idle_8=enemy_three_idle(enemy_three_idle_image,7,100,100) 
-idle_9=enemy_three_idle(enemy_three_idle_image,8,100,100) 
-idle_10=enemy_three_idle(enemy_three_idle_image,9,100,100) 
+idle_1=enemy_three_idle(enemy_three_idle_image,0,100,100)  ; idle_2=enemy_three_idle(enemy_three_idle_image,1,100,100)  ; idle_3=enemy_three_idle(enemy_three_idle_image,2,100,100)  ; idle_4=enemy_three_idle(enemy_three_idle_image,3,100,100)  
+idle_5=enemy_three_idle(enemy_three_idle_image,4,100,100)  ; idle_6=enemy_three_idle(enemy_three_idle_image,5,100,100) ; idle_7=enemy_three_idle(enemy_three_idle_image,6,100,100)  ; idle_8=enemy_three_idle(enemy_three_idle_image,7,100,100) 
+idle_9=enemy_three_idle(enemy_three_idle_image,8,100,100)  ; idle_10=enemy_three_idle(enemy_three_idle_image,9,100,100) 
+
+def enemy_three_move(images,frame,width,height): 
+    image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),0,width,height)) ; image=pygame.transform.scale(image,(width*1.50,height*1.50))
+    return image
+
+move_1=enemy_three_move(enemy_three_move_image,0,100,100)  ; move_2=enemy_three_move(enemy_three_move_image,1,100,100)  ; move_3=enemy_three_move(enemy_three_move_image,2,100,100)  ; move_4=enemy_three_move(enemy_three_move_image,3,100,100)  
+move_5=enemy_three_move(enemy_three_move_image,4,100,100)  ; move_6=enemy_three_move(enemy_three_move_image,5,100,100) ; move_7=enemy_three_move(enemy_three_move_image,6,100,100)  ; move_8=enemy_three_move(enemy_three_move_image,7,100,100) 
+
+
+def enemy_three_fall(images,frame,width,height): 
+    image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),0,width,height)) ; image=pygame.transform.scale(image,(width*1.50,height*1.50))
+    return image
+
+fall_1=enemy_three_fall(enemy_three_fall_image,0,100,100)  ; fall_2=enemy_three_fall(enemy_three_fall_image,1,100,100)  ; fall_3=enemy_three_fall(enemy_three_fall_image,2,100,100)  ; fall_4=enemy_three_fall(enemy_three_fall_image,3,100,100)  
+fall_5=enemy_three_fall(enemy_three_fall_image,4,100,100)  ; fall_6=enemy_three_fall(enemy_three_fall_image,5,100,100) ; fall_7=enemy_three_fall(enemy_three_fall_image,6,100,100)  ; fall_8=enemy_three_fall(enemy_three_fall_image,7,100,100) 
+fall_9=enemy_three_fall(enemy_three_fall_image,8,100,100)  ; fall_10=enemy_three_fall(enemy_three_fall_image,9,100,100) 
+
+
+def enemy_three_attack(images,frame,width,height): 
+    image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),0,width,height)) ; image=pygame.transform.scale(image,(width*1.50,height*1.50))
+    return image
+
+attack_1=enemy_three_attack(enemy_three_attack_image,0,100,100)  ; attack_2=enemy_three_attack(enemy_three_attack_image,1,100,100)  ; attack_3=enemy_three_attack(enemy_three_attack_image,2,100,100)  ; attack_4=enemy_three_attack(enemy_three_attack_image,3,100,100)  
+attack_5=enemy_three_attack(enemy_three_attack_image,4,100,100)  ; attack_6=enemy_three_attack(enemy_three_attack_image,5,100,100)
+
 
 enemy_three_idle_list=[idle_1,idle_2,idle_3,idle_4,idle_5,idle_6,idle_7,idle_8,idle_9,idle_10] ; enemy_three_idle_list_flip=[] ; enemy_three_idle_number=[]
 for idx,num in enumerate(enemy_three_idle_list[:]): enemy_three_idle_list_flip.append(pygame.transform.flip(num,True,False))
 
+enemy_three_move_list=[move_1,move_2,move_3,move_4,move_5,move_6,move_7,move_8] ; enemy_three_move_list_flip=[] ; enemy_three_move_number=[]
+for idx,num in enumerate(enemy_three_move_list[:]): enemy_three_move_list_flip.append(pygame.transform.flip(num,True,False))
+
+enemy_three_fall_list=[fall_1,fall_2,fall_3,fall_4,fall_5,fall_6,fall_7,fall_8,fall_9,fall_10] ; enemy_three_fall_list_flip=[] ; enemy_three_fall_number=[]
+for idx,num in enumerate(enemy_three_fall_list[:]): enemy_three_fall_list_flip.append(pygame.transform.flip(num,True,False))
+
+enemy_three_attack_list=[attack_1,attack_2,attack_3,attack_4,attack_5,attack_6] ; enemy_three_attack_list_flip=[] ; enemy_three_attack_number=[]
+for idx,num in enumerate(enemy_three_attack_list[:]): enemy_three_attack_list_flip.append(pygame.transform.flip(num,True,False))
+
 enemy_three_level_3_x=[500,700]
 enemy_three_level_3_y=[2000,2000]
+
+enemy_three_fall_type=[]
 
 enemy_3_level_3_rect=[]
 enemy_3_health=[]
 
 enemy_3_x_movement=[]
 enemy_3_y_movement=[]
+
+enemy_3_x_movement_control=[0]
+enemy_3_y_movement_control=[0]
 
 for idx,enemy_three in enumerate(enemy_three_level_3_x): enemy_3_level_3_rect.append(pygame.Rect(enemy_three_level_3_x[idx],enemy_three_level_3_y[idx],30,30))
 
