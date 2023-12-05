@@ -62,16 +62,16 @@ class EnemyOne:
 
                     self.enemy_1_rects_control=self.enemy_1_rects
                     self.enemy_1_distance_control=self.enemy_1_distance
-
+                    
                     EnemyGeneralFunctions.idle(self,self.enemy_1_distance,self.player_control_index,self.enemy_1_health,self.enemy_1_x_movement,self.enemy_1_y_movement,
-                        self.skeleton_idle,self.skeleton_idle_flip,self.skeleton_idle_number,self.enemy_1_rects,0.10,4)
-                
+                                self.skeleton_idle,self.skeleton_idle_flip,self.skeleton_idle_number,self.enemy_1_rects,0.10,4,0,0,400)
+                    
                 if EnemyOne.enemy_index(self) in self.enemy_1_rects:
                     self.enemy_1_rects_control=[i for i in self.enemy_1_rects if i!=EnemyOne.enemy_index(self)]
                     self.enemy_1_distance_control=[i for idx, i in enumerate(self.enemy_1_distance) if idx!=self.player_control_index[0][0]]
                     
                     EnemyGeneralFunctions.idle_control(self,self.enemy_1_distance_control,self.player_control_index,self.enemy_1_health,self.enemy_1_x_movement,self.enemy_1_y_movement,
-                        self.skeleton_idle,self.skeleton_idle_flip,self.skeleton_idle_number,self.enemy_1_rects_control,0.10,4)
+                                self.skeleton_idle,self.skeleton_idle_flip,self.skeleton_idle_number,self.enemy_1_rects_control,0.10,4)
 
     def run(self,key):
         self.enemy_1_distance=EnemyOne.distance(self)
@@ -83,15 +83,20 @@ class EnemyOne:
                     self.enemy_1_rects_control=self.enemy_1_rects
                     self.enemy_1_distance_control=self.enemy_1_distance
 
+
                     EnemyGeneralFunctions.move(self,self.enemy_1_distance,self.player_control_index,
                         self.enemy_1_health,self.enemy_1_rects,self.skeleton_run,self.skeleton_run_flip,self.skeleton_run_number,
-                        self.enemy_1_x_movement,self.enemy_1_y_movement,0.10,7)
+                        self.enemy_1_x_movement,self.enemy_1_y_movement,0.10,7,0,0,0,0,100,400,idx)
+                    
+
             if EnemyOne.enemy_index(self)  in self.enemy_1_rects:
                     self.enemy_1_rects_control=[i for i in self.enemy_1_rects if i!=EnemyOne.enemy_index(self)]
                     self.enemy_1_distance_control=[i for idx, i in enumerate(self.enemy_1_distance) if idx!=self.player_control_index[0][0]]
+
+                                
                     EnemyGeneralFunctions.move_control(self,self.enemy_1_distance_control,self.player_control_index,
                         self.enemy_1_health,self.enemy_1_rects_control,self.skeleton_run,self.skeleton_run_flip,self.skeleton_run_number,
-                        self.enemy_1_control_x_movement,self.enemy_1_control_y_movement,0.10,7)
+                        self.enemy_1_control_x_movement,self.enemy_1_control_y_movement,0.10,7,idx)
 
     def attack(self,key):
         self.enemy_1_distance=EnemyOne.distance(self)
@@ -103,15 +108,14 @@ class EnemyOne:
             if EnemyOne.enemy_index(self) not in self.enemy_1_rects:
                 self.enemy_1_rects_control=self.enemy_1_rects
                 self.enemy_1_distance_control=self.enemy_1_distance
-               
+
                 EnemyGeneralFunctions.attack(self,self.enemy_1_distance,self.enemy_1_health,self.player_control_index,self.enemy_1_x_movement,self.enemy_1_y_movement,
                     self.skeleton_attack,self.skeleton_attack_flip,self.skeleton_attack_number,self.enemy_1_rects,self.enemy_1_fall_type,
-                    0.10,7,25,55,30,30,self.player_health,200)
+                    0.10,7,25,55,30,30,self.player_health,200,100)
            
             if EnemyOne.enemy_index(self) in self.enemy_1_rects:
                 self.enemy_1_rects_control=[i for i in self.enemy_1_rects if i!=EnemyOne.enemy_index(self)]
                 self.enemy_1_distance_control=[i for idx, i in enumerate(self.enemy_1_distance) if idx!=self.player_control_index[0][0]]
-                
 
                 EnemyGeneralFunctions.attack_control(self,self.enemy_1_distance_control,self.enemy_1_health,self.player_control_index,self.enemy_1_x_movement,self.enemy_1_y_movement,
                     self.skeleton_attack,self.skeleton_attack_flip,self.skeleton_attack_number,self.enemy_1_rects_control,self.enemy_1_fall_type,

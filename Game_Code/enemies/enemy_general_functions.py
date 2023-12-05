@@ -15,55 +15,56 @@ class EnemyGeneralFunctions:
         return self.player_enemy_distance
             
     def idle(self,distance_list:list,player_control_list:list,enemy_health:list,enemy_x_movement:list,enemy_y_movement:list,
-             enemy_idle_right,enemy_idle_left,enemy_idle_number:list,enemy_rects:list,idle_increase:int,idle_max_number:int):
-        
-        for idx,distance in enumerate(distance_list):
-            if distance>400 and not player_control_list[0]==idx and enemy_health[idx]>0:
-                print("HERERE")
-                enemy_x_movement[idx]=0 
-                enemy_y_movement[idx]=0
-                SCREEN.blit(enemy_idle_right[int(enemy_idle_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1]))
-                pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
-                enemy_idle_number[idx]+=idle_increase
-                if enemy_idle_number[idx]>idle_max_number:
-                    enemy_idle_number[idx]=0
+             enemy_idle_right,enemy_idle_left,enemy_idle_number:list,enemy_rects:list,idle_increase:int,idle_max_number:int,
+             offset_x_right:int,offset_y_right:int,max_distance:int):
+                for idx,distance in enumerate(distance_list):
+                    if distance>max_distance and not player_control_list[0]==idx and enemy_health[idx]>0:
+                        print("HERERE")
+                        enemy_x_movement[idx]=0 
+                        enemy_y_movement[idx]=0
+                        SCREEN.blit(enemy_idle_right[int(enemy_idle_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_right,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_right))
+                        pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
+                        enemy_idle_number[idx]+=idle_increase
+                        if enemy_idle_number[idx]>idle_max_number:
+                            enemy_idle_number[idx]=0
 
     def move(self,distance_list:list,player_control_list:list,enemy_health:list,enemy_rects,enemy_run_right,enemy_run_left,enemy_run_number:list,
-             enemy_x_movement:list,enemy_y_movement:list,enemy_run_increment:int,enemy_run_max:int):
-        for idx,distance in enumerate(distance_list):
-            if distance>=100 and distance<=400 and enemy_health[idx]>0:
-                pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
-                if self.player_rect.x>=enemy_rects[idx].x: SCREEN.blit(enemy_run_right[int(enemy_run_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1]))
-                else: SCREEN.blit(enemy_run_left[int(enemy_run_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1]))
-                enemy_run_number[idx]+=enemy_run_increment
-                if enemy_run_number[idx]>enemy_run_max: enemy_run_number[idx]=0
-                if self.player_rect.x>=enemy_rects[idx].x:
-                    enemy_x_movement[idx]=1
-                    if self.player_rect.y<enemy_rects[idx].y: enemy_y_movement[idx]=-1
-                    if self.player_rect.y>=enemy_rects[idx].y: enemy_y_movement[idx]=1
-                if self.player_rect.x<enemy_rects[idx].x:
-                    enemy_x_movement[idx]=-1
-                    if self.player_rect.y<enemy_rects[idx].y: enemy_y_movement[idx]=-1
-                    if self.player_rect.y>=enemy_rects[idx].y: enemy_y_movement[idx]=1
+             enemy_x_movement:list,enemy_y_movement:list,enemy_run_increment:int,enemy_run_max:int,offset_x_right:int,offset_y_right:int,
+             offset_x_left:int,offset_y_left:int,min_distance:int,max_distance:int):
+            for idx,distance in enumerate(distance_list):
+                if distance>=min_distance and distance<=max_distance and enemy_health[idx]>0:
+                    pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
+                    if self.player_rect.x>=enemy_rects[idx].x: SCREEN.blit(enemy_run_right[int(enemy_run_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_right,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_right))
+                    else: SCREEN.blit(enemy_run_left[int(enemy_run_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_left,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_left))
+                    enemy_run_number[idx]+=enemy_run_increment
+                    if enemy_run_number[idx]>enemy_run_max: enemy_run_number[idx]=0
+                    if self.player_rect.x>=enemy_rects[idx].x:
+                        enemy_x_movement[idx]=1
+                        if self.player_rect.y<enemy_rects[idx].y: enemy_y_movement[idx]=-1
+                        if self.player_rect.y>=enemy_rects[idx].y: enemy_y_movement[idx]=1
+                    if self.player_rect.x<enemy_rects[idx].x:
+                        enemy_x_movement[idx]=-1
+                        if self.player_rect.y<enemy_rects[idx].y: enemy_y_movement[idx]=-1
+                        if self.player_rect.y>=enemy_rects[idx].y: enemy_y_movement[idx]=1
 
     def attack(self,distance_list:list,enemy_health:list,player_control_list:list,enemy_x_movement:list,enemy_y_movement:list,enemy_attack_right,enemy_attack_left,
                enemy_attack_number:list,enemy_rects:list,enemy_fall_type:list,attack_number_increment:int,attack_number_max:int,
-               offset_x_right:int,offset_x_left:int,offset_y_right:int,offset_y_left:int,player_health:list,health_reduction:int):
-        for idx,distance in enumerate(distance_list):
-            if distance<100 and enemy_health[idx]>0:
-                pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
-                enemy_x_movement[idx]=0 
-                enemy_y_movement[idx]=0
-                if self.player_rect.x>=enemy_rects[idx].x:
-                    SCREEN.blit(enemy_attack_right[int(enemy_attack_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_right,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_right))
-                    enemy_fall_type[idx]=1
-                else:
-                    SCREEN.blit(enemy_attack_left[int(enemy_attack_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_left,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_left))
-                    enemy_fall_type[idx]=2
-                enemy_attack_number[idx]+=attack_number_increment
-                if enemy_attack_number[idx]>attack_number_max:
-                    enemy_attack_number[idx]=0
-                    player_health[0]-=health_reduction
+               offset_x_right:int,offset_x_left:int,offset_y_right:int,offset_y_left:int,player_health:list,health_reduction:int,max_distance:int):
+                for idx,distance in enumerate(distance_list):
+                    if distance<max_distance and enemy_health[idx]>0:
+                        pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
+                        enemy_x_movement[idx]=0 
+                        enemy_y_movement[idx]=0
+                        if self.player_rect.x>=enemy_rects[idx].x:
+                            SCREEN.blit(enemy_attack_right[int(enemy_attack_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_right,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_right))
+                            enemy_fall_type[idx]=1
+                        else:
+                            SCREEN.blit(enemy_attack_left[int(enemy_attack_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_left,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_left))
+                            enemy_fall_type[idx]=2
+                        enemy_attack_number[idx]+=attack_number_increment
+                        if enemy_attack_number[idx]>attack_number_max:
+                            enemy_attack_number[idx]=0
+                            player_health[0]-=health_reduction
                 
     def player_hit(self,font,colour:tuple,distance_list:list,player_attack_length:list,enemy_health:list,enemy_rects:list,player_key_list:list,offset_x:int):
         self.font_hit=pygame.font.Font(font,15)

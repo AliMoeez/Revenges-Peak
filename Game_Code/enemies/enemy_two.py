@@ -59,13 +59,15 @@ class EnemyTwo:
                 self.enemy_2_rects_control=self.enemy_2_rect
                 self.enemy_2_distance_control=self.enemy_2_distance
 
+
                 EnemyGeneralFunctions.idle(self,self.enemy_2_distance,self.player_control_index,self.enemy_2_health,self.enemy_2_x_movement,self.enemy_2_y_movement,
-                                       self.brute_1_idle,self.brute_1_idle_flip,self.brute_1_idle_number,self.enemy_2_rect,0.10,4)
+                                            self.brute_1_idle,self.brute_1_idle_flip,self.brute_1_idle_number,self.enemy_2_rect,0.10,4,0,0,400)
            
             if EnemyTwo.enemy_index(self) in self.enemy_2_rect:
                     self.enemy_2_rects_control=[i for i in self.enemy_2_rect if i!=EnemyTwo.enemy_index(self)]
                     self.enemy_2_distance_control=[i for idx, i in enumerate(self.enemy_2_distance) if idx!=self.player_control_index[0][0]]
-        
+
+
                     EnemyGeneralFunctions.idle_control(self,self.enemy_2_distance_control,self.player_control_index,self.enemy_2_health,self.enemy_2_x_movement,self.enemy_2_y_movement,
                                        self.brute_1_idle,self.brute_1_idle_flip,self.brute_1_idle_number,self.enemy_2_rects_control,0.10,4)
 
@@ -82,11 +84,12 @@ class EnemyTwo:
 
                 EnemyGeneralFunctions.move(self,self.enemy_2_distance,self.player_control_index,self.enemy_2_health,self.enemy_2_rect,
                                        self.brute_1_run,self.brute_1_run_flip,self.brute_1_run_number,self.enemy_2_x_movement,self.enemy_2_y_movement,
-                                       0.10,7)
+                                       0.10,7,0,0,0,0,100,400)
             
             if EnemyTwo.enemy_index(self)  in self.enemy_2_rect:
                 self.enemy_2_rects_control=[i for i in self.enemy_2_rect if i!=EnemyTwo.enemy_index(self)]
                 self.enemy_2_distance_control=[i for idx, i in enumerate(self.enemy_2_distance) if idx!=self.player_control_index[0][0]]
+
                 EnemyGeneralFunctions.move_control(self,self.enemy_2_distance_control,self.player_control_index,self.enemy_2_health,self.enemy_2_rects_control,
                                        self.brute_1_run,self.brute_1_run_flip,self.brute_1_run_number,self.enemy_2_x_movement,self.enemy_2_y_movement,
                                        0.10,7)
@@ -99,15 +102,18 @@ class EnemyTwo:
             if EnemyTwo.enemy_index(self) not in self.enemy_2_rect:
                 self.enemy_2_rects_control=self.enemy_2_rect
                 self.enemy_2_distance_control=self.enemy_2_distance
+                                
                 EnemyGeneralFunctions.attack(self,self.enemy_2_distance,self.enemy_2_health,self.player_control_index,self.enemy_2_x_movement,self.enemy_2_y_movement,
-                    self.brute_1_attack_1,self.brute_1_attack_flip_1,self.brute_1_attack_number,self.enemy_2_rect,self.enemy_2_fall_type,
-                    0.10,7,25,55,30,30,self.player_health,200)
+                            self.brute_1_attack_1,self.brute_1_attack_flip_1,self.brute_1_attack_number,self.enemy_2_rect,self.enemy_2_fall_type,
+                            0.10,7,25,55,30,30,self.player_health,200,100)
+                        
             if EnemyTwo.enemy_index(self) in self.enemy_2_rect:
                 self.enemy_2_rects_control=[i for i in self.enemy_2_rect if i!=EnemyTwo.enemy_index(self)]
-                self.enemy_2_distance_control=[i for idx, i in enumerate(self.enemy_2_distance) if idx!=self.player_control_index[0][0]]           
+                self.enemy_2_distance_control=[i for idx, i in enumerate(self.enemy_2_distance) if idx!=self.player_control_index[0][0]]    
+
                 EnemyGeneralFunctions.attack_control(self,self.enemy_2_distance_control,self.enemy_2_health,self.player_control_index,self.enemy_2_x_movement,self.enemy_2_y_movement,
-                    self.brute_1_attack_1,self.brute_1_attack_flip_1,self.brute_1_attack_number,self.enemy_2_rects_control,self.enemy_2_fall_type,
-                    0.10,7,25,55,30,30,self.player_health,200)
+                            self.brute_1_attack_1,self.brute_1_attack_flip_1,self.brute_1_attack_number,self.enemy_2_rects_control,self.enemy_2_fall_type,
+                            0.10,7,25,55,30,30,self.player_health,200)
         
     def player_hit(self):
         if any([self.level_2,self.level_2]):
