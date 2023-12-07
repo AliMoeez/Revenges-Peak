@@ -203,6 +203,7 @@ while run:
     enemy_three.idle()
     enemy_three.move()
     enemy_three.attack()
+    enemy_three.arrow_total_logic()
     enemy_three.fall()
     enemy_three.collision_with_object()
     enemy_three.collision_with_object_logic()

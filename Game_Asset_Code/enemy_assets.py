@@ -159,7 +159,7 @@ def enemy_three_arrow(images,frame,width,height):
     image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),0,width,height)) ; image=pygame.transform.scale(image,(width*1.50,height*1.50))
     return image
 
-arrow_1=enemy_three_arrow(enemy_three_arrow_image,0,48,5) ; arrow_2=enemy_three_arrow(enemy_three_arrow_image,1,48,5)
+arrow_1=enemy_three_arrow(enemy_three_arrow_image,0,24,5) ; arrow_2=enemy_three_arrow(enemy_three_arrow_image,1,24,5)
 
 enemy_three_idle_list=[idle_1,idle_2,idle_3,idle_4,idle_5,idle_6,idle_7,idle_8,idle_9,idle_10] ; enemy_three_idle_list_flip=[] ; enemy_three_idle_number=[]
 for idx,num in enumerate(enemy_three_idle_list[:]): enemy_three_idle_list_flip.append(pygame.transform.flip(num,True,False))
@@ -179,7 +179,6 @@ for idx,num in enumerate(enemy_three_arrow_list[:]): enemy_three_arrow_list_flip
 enemy_three_level_3_x=[500,700]
 enemy_three_level_3_y=[2000,2000]
 
-
 enemy_three_fall_type=[]
 
 enemy_3_level_3_rect=[]
@@ -196,5 +195,5 @@ enemy_3_x_movement_control=[0]
 enemy_3_y_movement_control=[0]
 
 for idx,enemy_three in enumerate(enemy_three_level_3_x): enemy_3_level_3_rect.append(pygame.Rect(enemy_three_level_3_x[idx],enemy_three_level_3_y[idx],30,30))
-for idx,arrow in enumerate(enemy_three_level_3_x): enemy_3_level_3_arrow_rect.append(pygame.Rect(enemy_three_level_3_x[idx],enemy_three_level_3_y[idx],48,5))
+for idx,arrow in enumerate(enemy_three_level_3_x): enemy_3_level_3_arrow_rect.append(pygame.Rect(enemy_three_level_3_x[idx],enemy_three_level_3_y[idx],25,5))
 
