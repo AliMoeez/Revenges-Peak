@@ -184,6 +184,7 @@ enemy_three_fall_type=[]
 enemy_3_level_3_rect=[]
 enemy_3_level_3_arrow_rect=[]
 enemy_3_health=[]
+player_last_position=[]
 
 enemy_3_x_movement=[]
 enemy_3_y_movement=[]
