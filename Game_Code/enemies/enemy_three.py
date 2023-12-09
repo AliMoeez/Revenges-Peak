@@ -87,20 +87,51 @@ class EnemyThree:
             self.arrow_player_distance_list.append(self.arrow_player_distance)
             
             self.player_last_position.append((self.player_rect.x,self.player_rect.y))
-            
-            if len(self.player_last_position)>1:
-                del self.player_last_position[-1]
+
+            print(self.player_last_position)
         
+            if len(self.player_last_position)>1 or self.arrow_player_distance_list[idx]<=50 or self.arrow_player_distance_list[idx]>400:
+                del self.player_last_position[-1]
+                
+
         return self.arrow_player_distance_list
 
     def arrow_angle(self):
         self.angle_list=[]
         for idx,arrow in enumerate(self.enemy_3_level_3_arrow_rect):
             self.dx,self.dy=self.player_last_position[0][0]-self.enemy_3_level_3_arrow_rect[idx].x, self.player_last_position[0][1]-self.enemy_3_level_3_arrow_rect[idx].y            
-            self.angle=math.degrees(math.atan2(-self.dy,self.dx))/25
+            self.angle=(math.degrees(math.atan2(-self.dy,self.dx))-180)/360
             self.angle_list.append(self.angle)
         return self.angle_list
-     
+    
+
+    def arrow_movement(self,player_x,player_y,arrow_rect,arrow_x_movement,arrow_y_movement):
+        slope_list=[]
+        intercept_list=[]
+        for idx,arrows in enumerate(arrow_rect):
+            try: slope=(player_y-arrow_rect[idx].y)/(player_x-arrow_rect[idx].x)
+            except ZeroDivisionError: slope=(player_y-arrow_rect[idx].y)
+            slope_list.append(slope)
+        for idx,slope in enumerate(slope_list):
+            intercept=player_y-(slope*player_x)
+            intercept_list.append(intercept)
+
+         #   print(slope_list,player_y,arrow_rect[idx].y,player_x,arrow_rect[idx].x)
+
+            if self.player_rect.x>arrow_rect[idx].x:
+                try: arrow_x_movement[idx]=((player_y-intercept_list[idx])/slope_list[idx])/100
+                except ZeroDivisionError: arrow_x_movement[idx]=((player_y-intercept_list[idx]))/100
+
+            if self.player_rect.x<=arrow_rect[idx].x:
+                try: arrow_x_movement[idx]=-((player_y-intercept_list[idx])/slope_list[idx])/100
+                except ZeroDivisionError: arrow_x_movement[idx]=-((player_y-intercept_list[idx]))/100
+
+            if self.player_rect.y>arrow_rect[idx].y:
+                arrow_y_movement[idx]=-((slope_list[idx]*player_x)-intercept_list[idx])/1000
+            if self.player_rect.y<=arrow_rect[idx].y:
+                arrow_y_movement[idx]=((slope_list[idx]*player_x)-intercept_list[idx])/1000
+
+        
     def arrow_logic(self):
         self.angle=EnemyThree.arrow_angle(self)
         for idx,enemy in enumerate(self.enemy_rect):
@@ -108,50 +139,29 @@ class EnemyThree:
             pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(self.enemy_3_level_3_arrow_rect[idx].x-self.camera_x_y[0],self.enemy_3_level_3_arrow_rect[idx].y-self.camera_x_y[1],24,5),width=1)
           
             if self.player_last_position[0][0]>enemy.x:
-          #      self.enemy_three_arrow_list[0]=pygame.transform.rotate(self.enemy_three_arrow_list[idx],self.angle[idx])
-                SCREEN.blit(self.enemy_three_arrow_list[0],(self.enemy_3_level_3_arrow_rect[idx].x-self.camera_x_y[0],self.enemy_3_level_3_arrow_rect[idx].y-self.camera_x_y[1]))
-                
-                
-                self.enemy_3_arrow_x_movement[idx]=7
-             #   if self.player_last_position[0][1]>enemy.y:
-             #       self.enemy_3_arrow_y_movement[idx]=7
-             #   if self.player_last_position[0][1]<enemy.y:
-             #      self.enemy_3_arrow_y_movement[idx]=-7
+                SCREEN.blit(self.enemy_three_arrow_list[0],(self.enemy_3_level_3_arrow_rect[idx].x-self.camera_x_y[0],self.enemy_3_level_3_arrow_rect[idx].y-self.camera_x_y[1]))    
+            if self.player_last_position[0][0]<=enemy.x:
+                SCREEN.blit(self.enemy_three_arrow_list_flip[0],(self.enemy_3_level_3_arrow_rect[idx].x-self.camera_x_y[0],self.enemy_3_level_3_arrow_rect[idx].y-self.camera_x_y[1]))
+
+            EnemyThree.arrow_movement(self,self.player_last_position[0][0],self.player_last_position[0][1],self.enemy_3_level_3_arrow_rect,
+                                      self.enemy_3_arrow_x_movement,self.enemy_3_arrow_y_movement)
 
             
-            if self.player_last_position[0][0]<enemy.x:
-           #     self.enemy_three_arrow_list_flip[0]=pygame.transform.rotate(self.enemy_three_arrow_list_flip[idx],self.angle[idx])
-                SCREEN.blit(self.enemy_three_arrow_list_flip[0],(self.enemy_3_level_3_arrow_rect[idx].x-self.camera_x_y[0],self.enemy_3_level_3_arrow_rect[idx].y-self.camera_x_y[1]))
-             
-             
-             
-                self.enemy_3_arrow_x_movement[idx]=-7
-             #   if self.player_last_position[0][1]>=enemy.y:
-             #       self.enemy_3_arrow_y_movement[idx]=7
-             #   if self.player_last_position[0][1]<enemy.y:
-             #       self.enemy_3_arrow_y_movement[idx]=-7
-
             self.enemy_3_level_3_arrow_rect[idx].x+=self.enemy_3_arrow_x_movement[idx]
             self.enemy_3_level_3_arrow_rect[idx].y+=self.enemy_3_arrow_y_movement[idx]
 
-         #   print(self.enemy_3_level_3_arrow_rect[idx].x,self.enemy_3_level_3_arrow_rect[idx].y)
-
-      #      self.enemy_three_arrow_number[idx]+=0.15
-       #     if self.enemy_three_arrow_number[idx]>3:
-        #        self.enemy_three_arrow_number[idx]=0
 
     def arrow_total_logic(self):
         if any([self.level_3]):
             self.distance_list=EnemyThree.arrow_distance(self)
             self.angle=EnemyThree.arrow_angle(self)
             for idx,distance in enumerate(self.distance_list):
-              #  print(self.enemy_three_attack_number,self.enemy_3_level_3_arrow_rect)
                 if self.enemy_three_attack_number[idx]>7:
                     if self.distance_list[idx]>50:
                         EnemyThree.arrow_logic(self)
                     if self.distance_list[idx]<=50 or self.distance_list[idx]>400:
                         self.enemy_three_attack_number[idx]=0
-                        self.player_last_position[0]=(self.player_rect.x,self.player_rect.y)
+                      #  self.player_last_position[0]=(self.player_rect.x,self.player_rect.y)
                         self.enemy_3_level_3_arrow_rect[idx].x=self.enemy_rect[idx].x
                         self.enemy_3_level_3_arrow_rect[idx].y=self.enemy_rect[idx].y
 
