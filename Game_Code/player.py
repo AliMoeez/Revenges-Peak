@@ -50,27 +50,27 @@ class Player:
              and not self.player_health[0]<=0 or self.player_attack_cooldown[0]<=0)  :
             if key[pygame.K_d] and not key[pygame.K_a]:
                 SCREEN.blit(self.player_run_list[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
-                self.player_x_movement[0]=3 ; self.player_key.append("d")
+                self.player_x_movement[0]=30 ; self.player_key.append("d")
                 if key[pygame.K_w]:
                     self.player_x_movement[0]=math.sqrt(300) ; self.player_y_movement[0]=-math.sqrt(300)
                 elif key[pygame.K_s]:
                     self.player_x_movement[0]=math.sqrt(300) ; self.player_y_movement[0]=math.sqrt(300)
 
             elif key[pygame.K_w] and not key[pygame.K_s] : 
-                self.player_y_movement[0]=-3
+                self.player_y_movement[0]=-30
                 if self.player_key[-1]=="d": SCREEN.blit(self.player_run_list[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
                 else: SCREEN.blit(self.player_run_list_flip[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-60,self.player_rect.y-self.camera_x_y[1]-40))
 
             elif key[pygame.K_a] and not key[pygame.K_d]:
                 SCREEN.blit(self.player_run_list_flip[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-60,self.player_rect.y-self.camera_x_y[1]-40))
-                self.player_x_movement[0]=-3 ; self.player_key.append("a")
+                self.player_x_movement[0]=-30 ; self.player_key.append("a")
                 if key[pygame.K_w]:
                     self.player_x_movement[0]=-math.sqrt(300); self.player_y_movement[0]=-math.sqrt(300)
                 elif key[pygame.K_s]:
                     self.player_x_movement[0]=-math.sqrt(300) ; self.player_y_movement[0]=math.sqrt(300)
 
             elif key[pygame.K_s] and not key[pygame.K_w]: 
-                self.player_y_movement[0]=3 #3
+                self.player_y_movement[0]=30 #3
                 if self.player_key[-1]=="d": SCREEN.blit(self.player_run_list[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-40,self.player_rect.y-self.camera_x_y[1]-40))
                 else: SCREEN.blit(self.player_run_list_flip[int(self.player_run_number[0])//2],(self.player_rect.x-self.camera_x_y[0]-60,self.player_rect.y-self.camera_x_y[1]-40))
             

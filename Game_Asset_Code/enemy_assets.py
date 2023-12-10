@@ -176,8 +176,8 @@ for idx,num in enumerate(enemy_three_attack_list[:]): enemy_three_attack_list_fl
 enemy_three_arrow_list=[arrow_1,arrow_2] ; enemy_three_arrow_list_flip=[] ; enemy_three_arrow_number=[]
 for idx,num in enumerate(enemy_three_arrow_list[:]): enemy_three_arrow_list_flip.append(pygame.transform.flip(num,True,False))
 
-enemy_three_level_3_x=[500,700]
-enemy_three_level_3_y=[2000,2000]
+enemy_three_level_3_x=[500] #700
+enemy_three_level_3_y=[2000] #2000
 
 enemy_three_fall_type=[]
 
