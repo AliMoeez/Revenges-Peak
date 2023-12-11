@@ -83,21 +83,15 @@ class EnemyThree:
     def arrow_distance(self):
         self.arrow_player_distance_list=[]
         for idx,arrow in enumerate(self.enemy_3_level_3_arrow_rect):
-            
             self.player_last_position.append((self.player_rect.x,self.player_rect.y))
 
             self.arrow_player_distance=math.hypot(self.player_last_position[0][0]-arrow.x,self.player_last_position[0][1]-arrow.y)
             self.arrow_player_distance_list.append(self.arrow_player_distance)
-
-         #   print(self.player_last_position)
         
-
             if len(self.player_last_position)>1:
                 del self.player_last_position[-1]
             if self.arrow_player_distance_list[idx]<=50 or self.arrow_player_distance_list[idx]>400:
                 self.player_last_position[0]=(self.player_rect.x,self.player_rect.y)
-
-                
 
         return self.arrow_player_distance_list
 
@@ -111,66 +105,30 @@ class EnemyThree:
     
 
     def arrow_movement(self,player_x,player_y,arrow_rect,arrow_x_movement,arrow_y_movement):
-        slope_list=[]
-        intercept_list=[]
+        slope_list=[] ; intercept_list=[]
         for idx,arrows in enumerate(arrow_rect):
             try: slope=(player_y-arrow_rect[idx].y)/(player_x-arrow_rect[idx].x)
             except ZeroDivisionError: slope=(player_y-arrow_rect[idx].y)
             slope_list.append(slope)
         for idx,slope in enumerate(slope_list):
-            intercept=player_y-(slope*player_x)
-            intercept_list.append(intercept)
-
-         #   print(slope_list,player_y,arrow_rect[idx].y,player_x,arrow_rect[idx].x)
+            intercept=player_y-(slope*player_x) ; intercept_list.append(intercept)
 
             if player_x>arrow_rect[idx].x:
-                print("HERE")
                 try: 
                     arrow_x_movement[idx]=((player_y-intercept_list[idx])/slope_list[idx])/100
-
-                    if player_y>arrow_rect[idx].y:
-                        arrow_y_movement[idx]=-((slope_list[idx]*player_x)-intercept_list[idx])/100
-            
-                    if player_y<=arrow_rect[idx].y:
-                        arrow_y_movement[idx]=((slope_list[idx]*player_x)-intercept_list[idx])/100
-
+                    if player_y>arrow_rect[idx].y: arrow_y_movement[idx]=-((slope_list[idx]*player_x)-intercept_list[idx])/100
+                    if player_y<=arrow_rect[idx].y: arrow_y_movement[idx]=((slope_list[idx]*player_x)-intercept_list[idx])/100
                 except ZeroDivisionError: 
-                    arrow_x_movement[idx]=5
-                    arrow_y_movement[idx]=0
+                    arrow_x_movement[idx]=5 ; arrow_y_movement[idx]=0
 
-                
-       
             if player_x<=arrow_rect[idx].x:
-                print("ELSE")
                 try: 
                     arrow_x_movement[idx]=-((player_y-intercept_list[idx])/slope_list[idx])/100
-               
-                    if player_y>arrow_rect[idx].y:
-                        arrow_y_movement[idx]=-((slope_list[idx]*player_x)-intercept_list[idx])/100
-                    
-                    if player_y<=arrow_rect[idx].y:
-                        arrow_y_movement[idx]=((slope_list[idx]*player_x)-intercept_list[idx])/100
-                
+                    if player_y>arrow_rect[idx].y: arrow_y_movement[idx]=-((slope_list[idx]*player_x)-intercept_list[idx])/100
+                    if player_y<=arrow_rect[idx].y: arrow_y_movement[idx]=((slope_list[idx]*player_x)-intercept_list[idx])/100
                 except ZeroDivisionError: 
-                    arrow_x_movement[idx]=-5
-                    arrow_y_movement[idx]=0
-
+                    arrow_x_movement[idx]=-5 ; arrow_y_movement[idx]=0
             
-            
-           # if arrow_x_movement[idx]>0 and arrow_x_movement[idx]<10:
-           #     arrow_x_movement[idx]=20
-           # if arrow_x_movement[idx]>-10 and arrow_x_movement[idx]<0:
-           #     arrow_x_movement[idx]=-20
-
-          #  if arrow_y_movement[idx]>50:
-          #      arrow_y_movement[idx]=arrow_y_movement[idx]//3*(1/50)
-          #  if arrow_y_movement[idx]<-50:
-          #      arrow_y_movement[idx]=arrow_y_movement[idx]//3*(1/50)
-
-
-        #    print(arrow_y_movement)
-
-        
     def arrow_logic(self):
         self.angle=EnemyThree.arrow_angle(self)
         for idx,enemy in enumerate(self.enemy_rect):
@@ -186,14 +144,7 @@ class EnemyThree:
             EnemyThree.arrow_movement(self,self.player_last_position[0][0],self.player_last_position[0][1],self.enemy_rect,
                                       self.enemy_3_arrow_x_movement,self.enemy_3_arrow_y_movement)
             
-           
-#            print(self.player_last_position[0][0],self.player_last_position[0][1])
-
-       #     print(self.enemy_3_level_3_arrow_rect)
-
-         #   print(self.enemy_3_arrow_x_movement,self.enemy_3_arrow_y_movement)
-
-            
+ 
             self.enemy_3_level_3_arrow_rect[idx].x+=self.enemy_3_arrow_x_movement[idx]*2
             self.enemy_3_level_3_arrow_rect[idx].y+=self.enemy_3_arrow_y_movement[idx]/4
 
@@ -207,14 +158,11 @@ class EnemyThree:
                         EnemyThree.arrow_logic(self)
                     if self.distance_list[idx]<=50 or self.distance_list[idx]>400:
                         self.enemy_three_attack_number[idx]=0
-                      #  self.player_last_position[0]=(self.player_rect.x,self.player_rect.y)
                         self.enemy_3_level_3_arrow_rect[idx].x=self.enemy_rect[idx].x
                         self.enemy_3_level_3_arrow_rect[idx].y=self.enemy_rect[idx].y
                     if self.distance_list[idx]<=50:
-                        print("HERE")
                         self.player_health[0]-=100
 
-              #  print( self.enemy_3_level_3_arrow_rect)
                 
     def attack(self):
         self.enemy_three_attack_list=enemy_three_attack_list ; self.enemy_three_attack_list_flip=enemy_three_attack_list_flip

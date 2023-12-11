@@ -45,9 +45,11 @@ enemy_1_level_1_x=[457,428,3500,3650,3950,4050,4070,4300,4450] ; enemy_1_level_1
 
 enemy_1_level_2_x=[1900,1920,1970,1990] ; enemy_1_level_2_y=[1550,1590,1570,1590,1592]
 
+enemy_1_level_3_x=[3853,3964,4743,3454,3364] ; enemy_1_level_3_y=[725,983,1046,1043,13404]
+
 enemy_1_x_movement=[] ; enemy_1_y_movement=[]
 
-enemy_1_level_1_rect=[] ; enemy_1_level_2_rect=[]
+enemy_1_level_1_rect=[] ; enemy_1_level_2_rect=[] ; enemy_1_level_3_rect=[]
 
 enemy_1_health=[] ; enemy_1_fall_type=[]
 
@@ -55,6 +57,7 @@ enemy_1_x_control_movement=[0] ; enemy_1_y_control_movement=[0]
 
 for i,num in enumerate(enemy_1_level_1_x): enemy_1_level_1_rect.append(pygame.Rect(enemy_1_level_1_x[i],enemy_1_level_1_y[i],40,70))
 for i,num in enumerate(enemy_1_level_2_x): enemy_1_level_2_rect.append(pygame.Rect(enemy_1_level_2_x[i],enemy_1_level_2_y[i],40,70))
+for i,num in enumerate(enemy_1_level_3_x): enemy_1_level_3_rect.append(pygame.Rect(enemy_1_level_3_x[i],enemy_1_level_3_y[i],40,70))
 
 brute_1_icon=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\icon.png")
 brute_1_icon=pygame.transform.scale(brute_1_icon,(150,100))
@@ -106,9 +109,11 @@ enemy_2_level_1_x=[377,353,3525,3950,4370] ; enemy_2_level_1_y=[450,525,1775,195
 
 enemy_2_level_2_x=[1700,1800,1827,1900] ; enemy_2_level_2_y=[1500,1550,1570,1580] #1700,1500
 
+enemy_2_level_3_x=[3830,3763,3773,3604,3833,700] ; enemy_2_level_3_y=[725,520,1276,1073,1326,2000] #1700,1500
+
 enemy_2_x_movement=[] ; enemy_2_y_movement=[]
 
-enemy_2_rects=[] ; enemy_2_fall_type=[]  ; enemy_2_health=[] ; enemy_2_level_2_rects=[]
+enemy_2_rects=[] ; enemy_2_fall_type=[]  ; enemy_2_health=[] ; enemy_2_level_2_rects=[] ; enemy_2_level_3_rects=[]
 
 enemy_run_number=[0] ; enemy_idle_number=[0] ; enemy_attack_number=[0] ; enemy_x_movement=[0] ; enemy_y_movement=[0]
 
@@ -116,6 +121,7 @@ enemy_2_x_control_movement=[0] ; enemy_2_y_control_movement=[0]
 
 for i,y in enumerate(enemy_2_level_1_x): enemy_2_rects.append(pygame.Rect(enemy_2_level_1_x[i],enemy_2_level_1_y[i],40,70))
 for i,y in enumerate(enemy_2_level_2_x): enemy_2_level_2_rects.append(pygame.Rect(enemy_2_level_2_x[i],enemy_2_level_2_y[i],40,70))
+for i,y in enumerate(enemy_2_level_3_x): enemy_2_level_3_rects.append(pygame.Rect(enemy_2_level_3_x[i],enemy_2_level_3_y[i],40,70))
 
 enemy_three_idle_image=pygame.image.load(r"Assets\Enemies\Arrow Enemy\Sprites\Character\Idle.png")
 enemy_three_move_image=pygame.image.load(r"Assets\Enemies\Arrow Enemy\Sprites\Character\Run.png")
@@ -176,8 +182,8 @@ for idx,num in enumerate(enemy_three_attack_list[:]): enemy_three_attack_list_fl
 enemy_three_arrow_list=[arrow_1,arrow_2] ; enemy_three_arrow_list_flip=[] ; enemy_three_arrow_number=[]
 for idx,num in enumerate(enemy_three_arrow_list[:]): enemy_three_arrow_list_flip.append(pygame.transform.flip(num,True,False))
 
-enemy_three_level_3_x=[500] #700
-enemy_three_level_3_y=[2000] #2000
+enemy_three_level_3_x=[2992,2902,3867,3356,3853] #700
+enemy_three_level_3_y=[996,1806,1306,1412,1900] #2000
 
 enemy_three_fall_type=[]
 

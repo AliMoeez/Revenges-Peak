@@ -19,7 +19,6 @@ class EnemyGeneralFunctions:
              offset_x_right:int,offset_y_right:int,max_distance:int):
                 for idx,distance in enumerate(distance_list):
                     if distance>max_distance and not player_control_list[0]==idx and enemy_health[idx]>0:
-                        print("HERERE")
                         enemy_x_movement[idx]=0 
                         enemy_y_movement[idx]=0
                         SCREEN.blit(enemy_idle_right[int(enemy_idle_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_right,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_right))
