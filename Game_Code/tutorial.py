@@ -7,7 +7,8 @@ from .enemies import EnemyOne
 
 class Tutorial:
     def __init__(self,level_1,tutorial_one,tutorial_two):
-        Dialouge.__init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk)
+        Dialouge.__init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
+                          level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talk)
         EnemyOne.__init__(self,level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2,level_3)
         self.tutorial_one=tutorial_one ; self.tutorial_two=tutorial_two 
         self.level_1=level_1 ; self.player_rect=self.player_rect ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.WHITE=(255,55,55) 

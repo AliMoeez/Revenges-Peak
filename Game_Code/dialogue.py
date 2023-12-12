@@ -8,7 +8,8 @@ from .enemies import EnemyTwo
 from .bosses.frost_boss import FrostBoss
 
 class Dialouge:
-    def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk):
+    def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
+                 level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talk):
         People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2) 
         EnemyTwo.__init__(self,level_1,enemy_2_rects,reset_locations,player_control,level_2,level_3)
         FrostBoss.__init__(self,level_2,level_2_boss_talk,reset_locations)
@@ -17,6 +18,7 @@ class Dialouge:
         self.player_icon=player_icon ; self.abyss_icon=abyss_icon ; self.text_position=text_position ; self.dialogue_offset=dialogue_offset ; self.dialogue_offset_length=dialogue_offset_length
         self.level_1_wizard_talk=level_1_wizard_talk ; self.mouse_button_blit_list=mouse_button_blit_list ; self.elder_icon=elder_icon 
         self.level_2=level_2
+        self.level_3=level_3
         self.guard_icon=guard_icon
         self.level_2_guard_talk=level_2_guard_talk
         self.level_2_boss_talk=level_2_boss_talk
@@ -24,6 +26,9 @@ class Dialouge:
         self.brute_1_icon=brute_1_icon
         self.level_2_enemy_talk=level_2_enemy_talk
         self.frost_boss_icon=frost_boss_icon
+        self.level_3_player_talk_1=level_3_player_talk_1
+        self.level_3_player_talk_2=level_3_player_talk_2
+        self.level_3_enemy_talk=level_3_enemy_talk
 
     def distance_level_object(self):
         self.tile_interact_rect_distance=[]
@@ -34,7 +39,7 @@ class Dialouge:
     def level_object_interaction(self):
         Dialouge.distance_level_object(self)
         self.left_mouse_button_icon=left_mouse_button_icon
-        if any([self.level_1,self.level_2]):
+        if any([self.level_1,self.level_2,self.level_3]):
             self.mouse_button_blit_list.clear()
             for idx,distance in enumerate(self.tile_interact_rect_distance):
                 if self.tile_interact_rect_distance[idx]<100: 
@@ -43,7 +48,7 @@ class Dialouge:
                     return self.object_rect[idx]
     
     def level_dialogue_condition(self,event,event_list):
-        if any([self.level_1,self.level_2]):
+        if any([self.level_1,self.level_2,self.level_3]):
             if event.type==pygame.MOUSEBUTTONDOWN and len(self.mouse_button_blit_list)>0:
                 return True 
   
@@ -95,10 +100,12 @@ class Dialouge:
                 self.distance_talk=FrostBoss.distance(self) 
             else:
                 self.distance_talk=People.distance_dialogue(self)
+        if self.level_3:
+            pass
 
     def level_dialogue_story(self,event,event_list):
         Dialouge.dialogue_condition_distance(self)
-        if any([self.level_1,self.level_2]):
+        if any([self.level_1,self.level_2,self.level_3]):
             for idx,distance in enumerate(self.distance_talk):
                 if distance<200:
                     if self.level_1:
@@ -109,6 +116,8 @@ class Dialouge:
                             return True
                         else: 
                             return False
+                    if self.level_3:
+                        pass
                     
     def text_story(self):
         if self.level_1:
@@ -118,6 +127,10 @@ class Dialouge:
             self.test_level_2_dialogue=level_2_dialogue_walk_up(self.player_icon,self.guard_icon,self.brute_1_icon,self.frost_boss_icon)[0]
             self.test_level_3_dialogue=level_2_dialogue_walk_up(self.player_icon,self.guard_icon,self.brute_1_icon,self.frost_boss_icon)[1]
             self.test_level_4_dialogue=level_2_dialogue_walk_up(self.player_icon,self.guard_icon,self.brute_1_icon,self.frost_boss_icon)[2]
+        if self.level_3:
+            self.test_level_1_dialogue=level_3_dialogue(self.player_icon,self.brute_1_icon)[0]
+            self.test_level_2_dialogue=level_3_dialogue(self.player_icon,self.brute_1_icon)[1]
+            self.test_level_3_dialogue=level_3_dialogue(self.player_icon,self.brute_1_icon)[2]
 
     def text_type_story(self):
         if self.dialogue_story_condition:

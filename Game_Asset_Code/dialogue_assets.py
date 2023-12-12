@@ -12,3 +12,9 @@ level_2_player_talk=True
 level_2_guard_talk=True
 level_2_enemy_talk=True
 level_2_boss_talk=True
+
+#level three dialogue assets
+level_3_player_talk_1=True
+level_3_player_talk_2=True
+level_3_enemy_talk=True
+

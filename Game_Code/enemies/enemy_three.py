@@ -210,7 +210,7 @@ class EnemyThree:
     def collision_with_object(self):
         if any([self.level_3]):
             if EnemyThree.enemy_index(self) not in self.enemy_rect:
-                return EnemyGeneralFunctions.collision_with_object(self,self.tile_rect,self.enemy_rect)
+                return EnemyGeneralFunctions.collision_with_object(self,self.tile_rect,self.enemy_rect,self.enemy_3_x_movement,self.enemy_3_y_movement)
             if not EnemyThree.enemy_index(self) not in self.enemy_rect:
                 self.enemy_3_rects_control=[i for i in self.enemy_rect if i!=EnemyThree.enemy_index(self)]
                 return EnemyGeneralFunctions.collision_with_object_control(self,self.tile_rect,self.enemy_3_rects_control)

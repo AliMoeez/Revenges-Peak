@@ -31,7 +31,8 @@ while run:
     frostboss=FrostBoss(level_2,level_2_boss_talk,reset_locations)
 
     healingplayer=HealingPlayer(level_1,level_2,reset_locations)
-    dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk)
+    dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
+                      level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talka)
     lose=Lose(level_1,player_lose_condition,reset_locations,level_2)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)

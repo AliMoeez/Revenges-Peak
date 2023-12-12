@@ -90,11 +90,13 @@ class EnemyGeneralFunctions:
                 if fall_number[idx]>fall_max:
                     fall_number[idx]=fall_max
 
-    def collision_with_object(self,tile_level_list,enemy_rects:list):
+    def collision_with_object(self,tile_level_list,enemy_rects:list,enemy_x_movement:list,enemy_y_movement:list):
         self.tile_hit=[]
         for tile in tile_level_list:
             for idx,enemy in enumerate(enemy_rects):
                 if enemy.colliderect(tile):
+                    enemy_x_movement[idx]=1
+                    enemy_y_movement[idx]=1
                     self.tile_hit.append(tile)
         return self.tile_hit
 
@@ -103,15 +105,15 @@ class EnemyGeneralFunctions:
             enemy_rects[idx].x+=enemy_x_movement[idx]
             for tile in collision:
                 if enemy_x_movement[idx]>0:
-                    enemy_rects[idx].right=tile.left
+                    enemy_x_movement[idx]=20
                 if enemy_x_movement[idx]<0:
-                    enemy_rects[idx].left=tile.right
+                    enemy_x_movement[idx]=-20
             enemy_rects[idx].y+=enemy_y_movement[idx]
             for tile in collision:
                 if enemy_y_movement[idx]>0:
-                    enemy_rects[idx].bottom=tile.top
+                    enemy_y_movement[idx]=-20
                 if enemy_y_movement[idx]<0:
-                    enemy_rects[idx].top=tile.bottom
+                    enemy_y_movement[idx]=20
 
     def idle_control(self,distance_list:list,player_control_list:list,enemy_health:list,enemy_x_movement:list,enemy_y_movement:list,
              enemy_idle_right,enemy_idle_left,enemy_idle_number:list,enemy_rects:list,idle_increase:int,idle_max_number:int):

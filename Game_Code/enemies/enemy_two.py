@@ -95,8 +95,8 @@ class EnemyTwo:
                 self.enemy_2_distance_control=[i for idx, i in enumerate(self.enemy_2_distance) if idx!=self.player_control_index[0][0]]
 
                 EnemyGeneralFunctions.move_control(self,self.enemy_2_distance_control,self.player_control_index,self.enemy_2_health,self.enemy_2_rects_control,
-                                       self.brute_1_run,self.brute_1_run_flip,self.brute_1_run_number,self.enemy_2_x_movement,self.enemy_2_y_movement,
-                                       0.10,7)
+                                        self.brute_1_run,self.brute_1_run_flip,self.brute_1_run_number,self.enemy_2_x_movement,self.enemy_2_y_movement,
+                                        0.25,7)
 
 
     def attack(self):
@@ -142,7 +142,7 @@ class EnemyTwo:
     def collision_with_object(self):
         if any([self.level_1,self.level_2,self.level_3]):
             if EnemyTwo.enemy_index(self) not in self.enemy_2_rect:
-                return EnemyGeneralFunctions.collision_with_object(self,self.tile_level,self.enemy_2_rect)
+                return EnemyGeneralFunctions.collision_with_object(self,self.tile_level,self.enemy_2_rect,self.enemy_2_x_movement,self.enemy_2_y_movement)
             if not EnemyTwo.enemy_index(self) not in self.enemy_2_rect:
                 self.enemy_2_rects_control=[i for i in self.enemy_2_rect if i!=EnemyTwo.enemy_index(self)]
                 return EnemyGeneralFunctions.collision_with_object_control(self,self.tile_level,self.enemy_2_rects_control)
