@@ -7,7 +7,8 @@ from .dialogue import Dialouge
 
 class Objectives:
     def __init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,
-                 dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk):
+                 dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk,
+                 level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talk,level_3,level_3_attack_enemies):
         People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2)
         Dialouge.__init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
                           level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talk)
@@ -22,10 +23,15 @@ class Objectives:
         self.enemy_1_health=enemy_1_health
         self.enemy_2_health=enemy_2_health
         self.frost_boss_rect=frost_boss_rect
+        self.level_3_player_talk_1=level_3_player_talk_1
+        self.level_3=level_3
+        self.level_3_player_talk_2=level_3_player_talk_2
+        self.level_3_enemy_talk=level_3_enemy_talk
+        self.enemy_3_level_3_rect=enemy_3_level_3_rect
+        self.level_3_attack_enemies=level_3_attack_enemies
 
-    
     def distance(self,place_x:int,place_y:int):
-        if any([self.level_1,self.level_2]):
+        if any([self.level_1,self.level_2,self.level_3]):
             self.player_objective_distance_list=[]
             self.player_objective_distance=math.hypot(self.player_rect.x-place_x,self.player_rect.y-place_y)
             self.player_objective_distance_list.append(self.player_objective_distance)
@@ -74,14 +80,23 @@ class Objectives:
                 if self.objectives_distance[0]<200:
                     self.dialogue_objective_list[0]=3
                 return self.objectives_distance[0],self.frost_boss_rect.x,self.frost_boss_rect.y
-
             
+    
+    def level_three_objectives(self):
+        if self.level_3:
+            if not self.level_3_player_talk_1 and self.level_3_player_talk_2:
+                self.objectives_distance=Objectives.distance(self,self.enemy_3_level_3_rect[0].x,self.enemy_3_level_3_rect[0].y)
+                if self.objectives_distance[0]<200:
+                    self.dialogue_objective_list[0]=1
+                return self.objectives_distance[0],self.enemy_3_level_3_rect[0].x,self.enemy_3_level_3_rect[0].y
+
     def define_level(self):
         if self.level_1: self.level_objectives=Objectives.level_one_objectives(self)
         if self.level_2: self.level_objectives=Objectives.level_two_objectives(self)
+        if self.level_3: self.level_objectives=Objectives.level_three_objectives(self)
 
     def rotation_angle(self):
-        if any([self.level_1,self.level_2]):
+        if any([self.level_1,self.level_2,self.level_3]):
             if self.level_objectives is not None:
                 self.interact_x,self.interact_y=self.level_objectives[1],self.level_objectives[2]
                 self.dx,self.dy=self.interact_x-self.player_rect.x, self.interact_y-self.player_rect.y            
@@ -93,7 +108,7 @@ class Objectives:
         self.objectives_backgruond=SCREEN.blit(self.objectives_backgruond,(SCREEN_WIDTH//2-30,SCREEN_HEIGHT-790))
 
     def show_objectives(self):
-        if any([self.level_1,self.level_2]):
+        if any([self.level_1,self.level_2,self.level_3]):
             if self.level_objectives is not None:
                 Objectives.background(self)
                 self.font_title=pygame.font.Font(self.font,24) 

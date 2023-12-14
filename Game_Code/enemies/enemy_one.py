@@ -122,7 +122,7 @@ class EnemyOne:
 
                 EnemyGeneralFunctions.attack_control(self,self.enemy_1_distance_control,self.enemy_1_health,self.player_control_index,self.enemy_1_x_movement,self.enemy_1_y_movement,
                     self.skeleton_attack,self.skeleton_attack_flip,self.skeleton_attack_number,self.enemy_1_rects_control,self.enemy_1_fall_type,
-                    0.10,7,25,55,30,30,self.player_health,200)
+                    0.10,7,25,55,30,30,self.player_health,2000)
 
     def player_hit(self):
         if any([self.level_1,self.level_2,self.level_3]):

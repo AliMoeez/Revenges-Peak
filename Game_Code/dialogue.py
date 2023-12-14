@@ -87,6 +87,8 @@ class Dialouge:
     def beginning_condition(self):
         if self.level_2 and self.level_2_player_talk:
             return True
+        if self.level_3 and self.level_3_player_talk_1:
+            return True
         
     def dialogue_condition_distance(self):
         if self.level_1:
@@ -101,7 +103,8 @@ class Dialouge:
             else:
                 self.distance_talk=People.distance_dialogue(self)
         if self.level_3:
-            pass
+            self.distance_talk=EnemyTwo.distance(self)
+            
 
     def level_dialogue_story(self,event,event_list):
         Dialouge.dialogue_condition_distance(self)
@@ -116,8 +119,11 @@ class Dialouge:
                             return True
                         else: 
                             return False
-                    if self.level_3:
-                        pass
+                   # if self.level_3:
+                       # if self.level_3_player_talk_1 or (self.level_3_player_talk_2 and not self.level_3_player_talk_1) or (self.level_3_enemy_talk and not self.level_3_player_talk_2):
+                       #     return True
+                       # else:
+                        #    return False
                     
     def text_story(self):
         if self.level_1:
@@ -139,6 +145,7 @@ class Dialouge:
                 self.dialogue_show=self.test_level_1_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
+           
             if self.level_2_player_talk and self.level_2:
                 self.dialogue_show=self.test_level_1_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
@@ -155,6 +162,23 @@ class Dialouge:
                 self.dialogue_show=self.test_level_4_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
+            
+
+            if self.level_3_player_talk_1 and self.level_3:
+                self.dialogue_show=self.test_level_1_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+            
+            if self.level_3_player_talk_2 and self.level_3 and not self.level_3_player_talk_1:
+                self.dialogue_show=self.test_level_2_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+            
+            if self.level_3_enemy_talk and self.level_3 and not self.level_3_player_talk_2:
+                self.dialogue_show=self.test_level_3_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+            
 
         else:
             self.dialogue_show="None"

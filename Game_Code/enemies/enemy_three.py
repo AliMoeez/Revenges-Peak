@@ -12,6 +12,7 @@ class EnemyThree:
         self.player_control=player_control ; self.player_rect=player_rect ; self.camera_x_y=camera_x_y ; self.enemy_three_fall_type=enemy_three_fall_type ; self.player_health=player_health ; self.enemy_3_x_movement_control=enemy_3_x_movement_control
         self.enemy_3_y_movement_control=enemy_3_y_movement_control ; self.enemy_3_arrow_x_movement=enemy_3_arrow_x_movement ; self.enemy_3_arrow_y_movement=enemy_3_arrow_y_movement ; self.enemy_3_level_3_arrow_rect=enemy_3_level_3_arrow_rect
         self.enemy_three_arrow_list=enemy_three_arrow_list ; self.enemy_three_arrow_list_flip=enemy_three_arrow_list_flip ; self.enemy_three_arrow_number=enemy_three_arrow_number ; self.player_last_position=player_last_position ; self.player_health=player_health
+        self.font=r"Assets\Misc\Fonts\Pixellari.ttf" ; self.red=(178,34,34) ; self.player_attack_number=player_attack_number ; self.player_key=player_key
 
         if self.level_3:
             self.tile_rect=level_3_tile_set_rect
@@ -77,9 +78,14 @@ class EnemyThree:
 
                 EnemyGeneralFunctions.move_control(self,self.enemy_3_distance_control,self.player_control_index,self.enemy_3_health,self.enemy_3_rects_control,self.enemy_three_move_list,self.enemy_three_move_list_flip,
                                                 self.enemy_three_move_number,self.enemy_3_x_movement,self.enemy_3_y_movement,0.75,9)
-
+                
 
     
+    def player_hit(self):
+        if any([self.level_3]):
+            self.distance_list=EnemyThree.distance(self)
+            EnemyGeneralFunctions.player_hit(self,self.font,self.red,self.distance_list,self.player_attack_number,self.enemy_3_health,self.enemy_rect,self.player_key,25)
+
     def arrow_distance(self):
         self.arrow_player_distance_list=[]
         for idx,arrow in enumerate(self.enemy_3_level_3_arrow_rect):

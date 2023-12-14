@@ -32,7 +32,7 @@ while run:
 
     healingplayer=HealingPlayer(level_1,level_2,reset_locations)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
-                      level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talka)
+                      level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talk)
     lose=Lose(level_1,player_lose_condition,reset_locations,level_2)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
@@ -42,11 +42,15 @@ while run:
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True ; dialogue_story_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN : dialogue_click_list[0]+=1 ; text_position[0]=0
+        
         if dialogue.level_dialogue_story(event,event_list) or dialogue.beginning_condition():
             mouse_button_blit_list.clear() ; dialogue_story_condition=True ; dialogue_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN: dialogue_click_list[0]+=1 ; text_position[0]=0
+        
         if (dialogue_condition or dialogue_story_condition) and dialogue.end_dialouge(event,event_list): 
+            print("HERE")
             mouse_button_blit_list.clear() ; dialogue_condition=False ; dialogue_story_condition=False
+            
             if level_1:
                 if dialogue_objective_list[0]==1: level_1_wizard_talk=False
                 if dialogue_objective_list[0]==2: talk_to_abyss_level_one=False
@@ -56,7 +60,15 @@ while run:
                 if dialogue_objective_list[0]==1: level_2_guard_talk=False
                 if dialogue_objective_list[0]==2: level_2_enemy_talk=False
                 if dialogue_objective_list[0]==3: level_2_boss_talk=False
+            if level_3:
+                if dialogue_objective_list[0]==0: level_3_player_talk_1=False
+
+                if level_3_attack_enemies and dialogue_objective_list[0]==1:
+                    if all(enemy_3_health)<=0 and all(enemy_2_health)<=0 and all(enemy_1_health)<=0:
+                        print("HEREREREZ")
+
        
+
         if event.type==pygame.QUIT:
             pygame.quit() ; sys.exit()
         if not level_screen and not any([level_1,level_2]):
@@ -73,6 +85,7 @@ while run:
                     level_screen=False ; level_3=True
                 if event.type==pygame.MOUSEBUTTONDOWN and menu.level_screen_blit_background()[3].collidepoint(event.pos):
                     level_screen=False ; level_4=True
+        
         if any([level_1,level_2,level_3]):
             if key[pygame.K_q]:
                 level_1=False  ; level_2=False ; level_3=False ; level_screen=True
@@ -92,7 +105,11 @@ while run:
                 for idx,distance in enumerate(enemy_two.distance()):
                     if distance<100:
                         player_control_index.clear() ; player_control_index.append((idx,"Enemy_2")) ; player_control=True
-        
+                for idx,distance in enumerate(enemy_three.distance()):
+                    if distance<100:
+                        player_control_index.clear() ; player_control_index.append((idx,"Enemy_3")) ; player_control=True
+
+    
             if key[pygame.K_v] and player_control: player_control_cooldown[0]=-0.05
 
         if lose.retry(event):
@@ -204,6 +221,7 @@ while run:
     enemy_three.idle()
     enemy_three.move()
     enemy_three.attack()
+    enemy_three.player_hit()
     enemy_three.arrow_total_logic()
     enemy_three.fall()
     enemy_three.collision_with_object()
@@ -240,10 +258,12 @@ while run:
     frostboss.health()
 
     objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,
-                          dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk)
+                          dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk,
+                          level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talk,level_3,level_3_attack_enemies)
     objectives.define_level()
     objectives.level_one_objectives()
     objectives.level_two_objectives()
+    objectives.level_three_objectives()
     objectives.show_objectives()
     
     dialogue.level_object_interaction()
