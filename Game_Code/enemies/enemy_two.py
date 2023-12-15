@@ -42,8 +42,8 @@ class EnemyTwo:
                 self.enemy_2_x_movement.append(0) ; self.enemy_2_y_movement.append(0) ; self.enemy_2_fall_type.append(0)
                 self.brute_1_fall_number.append(0) ; self.enemy_2_health.append(100)
             
-            if len(self.enemy_2_health)>len(self.enemy_2_rect):
-                del self.enemy_2_health[-1]
+                if len(self.enemy_2_health)>len(self.enemy_2_rect):
+                    del self.enemy_2_health[-1]
                 
     def distance(self):
         if any([self.level_1,self.level_2,self.level_3]):

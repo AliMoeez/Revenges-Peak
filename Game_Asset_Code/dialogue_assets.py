@@ -16,6 +16,7 @@ level_2_boss_talk=True
 #level three dialogue assets
 level_3_player_talk_1=True
 level_3_attack_enemies=True
+level_3_all_enemies=False
 level_3_player_talk_2=True
 level_3_enemy_talk=True
 

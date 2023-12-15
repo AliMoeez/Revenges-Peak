@@ -178,6 +178,11 @@ class Dialouge:
                 self.dialogue_show=self.test_level_3_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
+
+            if self.level_3_enemy_talk and self.level_3 and not self.level_3_player_talk_2:
+                self.dialogue_show=self.test_level_3_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list          
             
 
         else:

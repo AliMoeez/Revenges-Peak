@@ -48,7 +48,6 @@ while run:
             if event.type==pygame.MOUSEBUTTONDOWN: dialogue_click_list[0]+=1 ; text_position[0]=0
         
         if (dialogue_condition or dialogue_story_condition) and dialogue.end_dialouge(event,event_list): 
-            print("HERE")
             mouse_button_blit_list.clear() ; dialogue_condition=False ; dialogue_story_condition=False
             
             if level_1:
@@ -61,13 +60,18 @@ while run:
                 if dialogue_objective_list[0]==2: level_2_enemy_talk=False
                 if dialogue_objective_list[0]==3: level_2_boss_talk=False
             if level_3:
-                if dialogue_objective_list[0]==0: level_3_player_talk_1=False
+                if dialogue_objective_list[0]==0: 
+                    level_3_player_talk_1=False
+                if dialogue_objective_list[0]==1:
+                    print("HERE")
+
 
                 if level_3_attack_enemies and dialogue_objective_list[0]==1:
-                    if all(enemy_3_health)<=0 and all(enemy_2_health)<=0 and all(enemy_1_health)<=0:
-                        print("HEREREREZ")
+                    print("HERE")
 
-       
+                    
+
+            
 
         if event.type==pygame.QUIT:
             pygame.quit() ; sys.exit()
@@ -158,6 +162,17 @@ while run:
         if player.reset_position() and  enemy_one.reset_position() and enemy_two.reset_position() and people.reset_position() and frostboss.reset_position() and healingplayer.reset_position():
             camera_x_y[0]=0 ; camera_x_y[1]=0 
             reset_locations=False
+
+
+    if level_3:
+        if all(i<=0 for i in enemy_1_health) and all(i<=0 for i in enemy_2_health) and all(i<=0 for i in enemy_3_health):
+            level_3_all_enemies=True
+
+  #  print(enemy_1_health,"ENEMY_1")
+  ##  print(enemy_2_health,"ENEMY_2")
+   # print(enemy_3_health,"ENEMY_3")
+
+   # print(dialogue_objective_list[0])
 
     menu.main_menu()
     menu.main_menu_buttons()

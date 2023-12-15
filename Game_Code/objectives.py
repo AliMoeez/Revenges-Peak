@@ -29,6 +29,7 @@ class Objectives:
         self.level_3_enemy_talk=level_3_enemy_talk
         self.enemy_3_level_3_rect=enemy_3_level_3_rect
         self.level_3_attack_enemies=level_3_attack_enemies
+        self.enemy_3_health=enemy_3_health
 
     def distance(self,place_x:int,place_y:int):
         if any([self.level_1,self.level_2,self.level_3]):
@@ -84,11 +85,12 @@ class Objectives:
     
     def level_three_objectives(self):
         if self.level_3:
-            if not self.level_3_player_talk_1 and self.level_3_player_talk_2:
+           if not self.level_3_player_talk_1 and self.level_3_player_talk_2:
                 self.objectives_distance=Objectives.distance(self,self.enemy_3_level_3_rect[0].x,self.enemy_3_level_3_rect[0].y)
-                if self.objectives_distance[0]<200:
-                    self.dialogue_objective_list[0]=1
+                if all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health):
+                    dialogue_objective_list[0]=1
                 return self.objectives_distance[0],self.enemy_3_level_3_rect[0].x,self.enemy_3_level_3_rect[0].y
+
 
     def define_level(self):
         if self.level_1: self.level_objectives=Objectives.level_one_objectives(self)

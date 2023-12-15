@@ -69,7 +69,7 @@ class EnemyGeneralFunctions:
         self.font_hit=pygame.font.Font(font,15)
         self.font_hit_render=self.font_hit.render("-25",True,colour)
         for idx,distance in enumerate(distance_list):
-            if player_attack_length[0]>6.0 and distance<100000 and enemy_health[idx]>0: #100
+            if player_attack_length[0]>6.0 and distance<100000000 and enemy_health[idx]>0: #100
                 if self.player_rect.x<=enemy_rects[idx].x and player_key_list[-1]=='d':
                     SCREEN.blit(self.font_hit_render,(enemy_rects[idx].x-self.camera_x_y[0]+offset_x,enemy_rects[idx].y-self.camera_x_y[1]))
                     enemy_health[idx]-=500 #50

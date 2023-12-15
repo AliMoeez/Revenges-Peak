@@ -23,7 +23,7 @@ class EnemyThree:
                 self.enemy_three_idle_number.append(0) ; self.enemy_three_move_number.append(0) ; self.enemy_three_fall_number.append(0) ; self.enemy_three_attack_number.append(0) ; self.enemy_3_health.append(100) ; self.enemy_3_x_movement.append(0) 
                 self.enemy_3_y_movement.append(0) ; self.enemy_three_fall_type.append(0) ; self.enemy_3_arrow_x_movement.append(0) ; self.enemy_3_arrow_y_movement.append(0) ; self.enemy_three_arrow_number.append(0)
                 if len(self.enemy_3_x_movement)>len(self.enemy_rect):
-                    del self.enemy_three_idle_number[-1],self.enemy_3_health[1],self.enemy_3_x_movement[-1],self.enemy_3_y_movement[-1], self.enemy_three_move_number[-1], self.enemy_three_arrow_number[-1]
+                    del self.enemy_three_idle_number[-1],self.enemy_3_health[-1],self.enemy_3_x_movement[-1],self.enemy_3_y_movement[-1], self.enemy_three_move_number[-1], self.enemy_three_arrow_number[-1]
                     del self.enemy_three_fall_number[-1],self.enemy_three_attack_number[-1],self.enemy_three_fall_type[-1], self.enemy_3_arrow_x_movement[-1], self.enemy_3_arrow_y_movement[-1]
 
     def distance(self):
