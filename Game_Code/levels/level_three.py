@@ -78,7 +78,7 @@ class LevelThree:
 
     def object_tiles(self):
         if self.level_3:
-            LevelThree.general_tile_rect(self,"Tile Layer 5",self.level_3_tile_set_rect,16,16)
+            LevelThree.general_tile_rect(self,"Tile Layer 5",self.object_rect,16,16)
 
     def border_logic_total(self):
         self.camera_x_y[0]+=self.rect_camera.x-self.camera_x_y[0]-525

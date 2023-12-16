@@ -79,8 +79,8 @@ def level_3_dialogue(player_icon,arrow_enemy_icon):
         ("There must be some sort of clue to where Anes is.....",player_icon,"You")
     ]
     level_3_dialogue_3=[
-        ("HE FELL FOR IT, GET HIM!!",arrow_enemy_icon,"Archer"),
-        ("I need to get out of here!",player_icon,"You")
+        ("Intresting, this reads. 'To go west is what you need to protect. It is prudent and necessary to take such precations to ensure its security. Do not open it else....'",player_icon,"You"),
+        ("That has to be it! I wonder what it is though.",player_icon,"You")
     ]
     return level_3_dialogue_1,level_3_dialogue_2,level_3_dialogue_3
 

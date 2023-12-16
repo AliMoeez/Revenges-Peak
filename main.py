@@ -32,7 +32,7 @@ while run:
 
     healingplayer=HealingPlayer(level_1,level_2,reset_locations)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
-                      level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talk)
+                      level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4)
     lose=Lose(level_1,player_lose_condition,reset_locations,level_2)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
@@ -62,17 +62,16 @@ while run:
             if level_3:
                 if dialogue_objective_list[0]==0: 
                     level_3_player_talk_1=False
+                
+                print(dialogue_objective_list[0])
                 if dialogue_objective_list[0]==1:
-                    print("HERE")
+                    level_3_player_talk_2=False
 
 
-                if level_3_attack_enemies and dialogue_objective_list[0]==1:
-                    print("HERE")
+              ##  if level_3_attack_enemies and dialogue_objective_list[0]==1:
+               #     print("HERE ENENIES")
 
-                    
-
-            
-
+    
         if event.type==pygame.QUIT:
             pygame.quit() ; sys.exit()
         if not level_screen and not any([level_1,level_2]):
@@ -174,6 +173,8 @@ while run:
 
    # print(dialogue_objective_list[0])
 
+   # print(player_rect.x,player_rect.y,object_rect)
+
     menu.main_menu()
     menu.main_menu_buttons()
     menu.level_screen_blit_background()
@@ -274,7 +275,7 @@ while run:
 
     objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,
                           dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk,
-                          level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talk,level_3,level_3_attack_enemies)
+                          level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3,)
     objectives.define_level()
     objectives.level_one_objectives()
     objectives.level_two_objectives()

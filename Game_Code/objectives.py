@@ -8,10 +8,10 @@ from .dialogue import Dialouge
 class Objectives:
     def __init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,
                  dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk,
-                 level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talk,level_3,level_3_attack_enemies):
+                 level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3):
         People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2)
         Dialouge.__init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
-                          level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_enemy_talk)
+                          level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4)
         self.level_1=level_1 ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.RED=(255,55,55) ; self.level_1_wizard_talk=level_1_wizard_talk
         self.player_rect=player_rect ; self.people_level_1_rect=people_level_1_rect ; self.camera_x_y=camera_x_y ; self.red_arrow_icon=red_arrow_icon
         self.WHITE=(255,255,255) ; self.talk_to_abyss_level_one=talk_to_abyss_level_one ; self.investigate_object_level_one=investigate_object_level_one
@@ -26,9 +26,9 @@ class Objectives:
         self.level_3_player_talk_1=level_3_player_talk_1
         self.level_3=level_3
         self.level_3_player_talk_2=level_3_player_talk_2
-        self.level_3_enemy_talk=level_3_enemy_talk
+        self.level_3_player_talk_3=level_3_player_talk_3
         self.enemy_3_level_3_rect=enemy_3_level_3_rect
-        self.level_3_attack_enemies=level_3_attack_enemies
+        self.level_3_player_talk_4=level_3_player_talk_4
         self.enemy_3_health=enemy_3_health
 
     def distance(self,place_x:int,place_y:int):
@@ -88,7 +88,11 @@ class Objectives:
            if not self.level_3_player_talk_1 and self.level_3_player_talk_2:
                 self.objectives_distance=Objectives.distance(self,self.enemy_3_level_3_rect[0].x,self.enemy_3_level_3_rect[0].y)
                 if all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health):
-                    dialogue_objective_list[0]=1
+                    self.dialogue_objective_list[0]=1
+                return self.objectives_distance[0],self.enemy_3_level_3_rect[0].x,self.enemy_3_level_3_rect[0].y
+           if self.level_3_player_talk_3 and not self.level_3_player_talk_2:
+                self.objectives_distance=Objectives.distance(self,self.enemy_3_level_3_rect[0].x,self.enemy_3_level_3_rect[0].y)
+                self.dialogue_objective_list[0]=1
                 return self.objectives_distance[0],self.enemy_3_level_3_rect[0].x,self.enemy_3_level_3_rect[0].y
 
 
