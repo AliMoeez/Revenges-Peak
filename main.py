@@ -9,6 +9,7 @@ from Game_Asset_Code import *
 from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,Player,EnemyOne,EnemyTwo,EnemyThree,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,HealingPlayer
 
 while run:
+  #  print(object_rect)
     level_1_tile_set_rect.clear()
     level_2_tile_set_rect.clear()
     level_3_tile_set_rect.clear()
@@ -37,10 +38,12 @@ while run:
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
 
+
     for event in event_list:
 
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True ; dialogue_story_condition=False
+            print("HERE")
             if event.type==pygame.MOUSEBUTTONDOWN : dialogue_click_list[0]+=1 ; text_position[0]=0
         
         if dialogue.level_dialogue_story(event,event_list) or dialogue.beginning_condition():
@@ -49,6 +52,7 @@ while run:
         
         if (dialogue_condition or dialogue_story_condition) and dialogue.end_dialouge(event,event_list): 
             mouse_button_blit_list.clear() ; dialogue_condition=False ; dialogue_story_condition=False
+
             
             if level_1:
                 if dialogue_objective_list[0]==1: level_1_wizard_talk=False
@@ -63,7 +67,7 @@ while run:
                 if dialogue_objective_list[0]==0: 
                     level_3_player_talk_1=False
                 
-                print(dialogue_objective_list[0])
+          #      print(dialogue_objective_list[0])
                 if dialogue_objective_list[0]==1:
                     level_3_player_talk_2=False
 
@@ -166,6 +170,8 @@ while run:
     if level_3:
         if all(i<=0 for i in enemy_1_health) and all(i<=0 for i in enemy_2_health) and all(i<=0 for i in enemy_3_health):
             level_3_all_enemies=True
+
+   # print(dialogue_story_condition,dialogue_condition)
 
   #  print(enemy_1_health,"ENEMY_1")
   ##  print(enemy_2_health,"ENEMY_2")

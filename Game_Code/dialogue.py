@@ -68,6 +68,9 @@ class Dialouge:
             self.test_level_1_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[0]
             self.test_level_2_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[1]
             self.test_level_3_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[2]
+        if self.level_3:
+            self.test_level_1_dialogue=level_3_dialogue_walk_up(self.player_icon,self.frost_boss_icon)[0]
+            self.test_level_2_dialogue=level_3_dialogue_walk_up(self.player_icon,self.frost_boss_icon)[1]
 
     def get_index_object(self):
         if self.dialogue_condition:
@@ -92,8 +95,20 @@ class Dialouge:
                 self.dialogue_show=self.test_level_3_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
+        
+        elif self.dialogue_condition and self.level_3:
+            Dialouge.text(self)
+            self.object_index=Dialouge.get_index_object(self)
+            if self.object_index==1:
+                self.dialogue_show=self.test_level_1_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+            elif self.object_index==2:
+                self.dialogue_show=self.test_level_2_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list       
         else:
-            self.dialogue_show="None"
+            self.dialogue_show="None HERE"
         
     def beginning_condition(self):
         if self.level_2 and self.level_2_player_talk:
@@ -116,9 +131,13 @@ class Dialouge:
             else:
                 self.distance_talk=People.distance_dialogue(self)
         if self.level_3:
-            self.distance_talk=EnemyTwo.distance(self)
+            if self.level_3_player_talk_3 and not self.level_3_player_talk_2:
+                self.distance_talk=Dialouge.distance_level_object(self)
+            elif self.level_3_player_talk_4 and not self.level_3_player_talk_3:
+                self.distance_talk=Dialouge.distance_level_object(self)
+            else:
+                self.distance_talk=EnemyTwo.distance(self)
             
-
     def level_dialogue_story(self,event,event_list):
         Dialouge.dialogue_condition_distance(self)
         if any([self.level_1,self.level_2,self.level_3]):
@@ -132,11 +151,11 @@ class Dialouge:
                             return True
                         else: 
                             return False
-                   # if self.level_3:
-                       # if self.level_3_player_talk_1 or (self.level_3_player_talk_2 and not self.level_3_player_talk_1) or (self.level_3_enemy_talk and not self.level_3_player_talk_2):
-                       #     return True
-                       # else:
-                        #    return False
+                    if self.level_3:
+                        if (self.level_3_player_talk_3 and not self.level_3_player_talk_2) or (self.level_3_player_talk_4 and not self.level_3_player_talk_3):
+                            return True
+                        else:
+                          return False
                     
     def text_story(self):
         if self.level_1:
@@ -149,7 +168,6 @@ class Dialouge:
         if self.level_3:
             self.test_level_1_dialogue=level_3_dialogue(self.player_icon,self.brute_1_icon)[0]
             self.test_level_2_dialogue=level_3_dialogue(self.player_icon,self.brute_1_icon)[1]
-            self.test_level_3_dialogue=level_3_dialogue(self.player_icon,self.brute_1_icon)[2]
 
     def text_type_story(self):
         if self.dialogue_story_condition:
@@ -186,17 +204,7 @@ class Dialouge:
                 self.dialogue_show=self.test_level_2_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
-            
-            if self.level_3_player_talk_3 and self.level_3 and not self.level_3_player_talk_2:
-                self.dialogue_show=self.test_level_3_dialogue
-                self.dialouge_list[0]=len(self.dialogue_show)
-                return self.dialogue_show,self.dialouge_list
-
-            if self.level_3_player_talk_4 and self.level_3 and not self.level_3_player_talk_3:
-                self.dialogue_show=self.test_level_3_dialogue
-                self.dialouge_list[0]=len(self.dialogue_show)
-                return self.dialogue_show,self.dialouge_list          
-            
+               
         else:
             self.dialogue_show="None"
                
@@ -227,6 +235,7 @@ class Dialouge:
         
     def show(self):
         Dialouge.scrolling_text(self)
+        print(self.dialogue_show,"BEFOROEOREOFOEOROE")
         if (self.dialogue_condition or self.dialogue_story_condition) and self.dialogue_show!="None":
             self.screen_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT))  ; self.screen_fade.set_alpha(50) ; self.screen_fade.fill((0,0,0)) ; SCREEN.blit(self.screen_fade,(0,0))
             self.text_bgackround_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT-250))  ; self.text_bgackround_fade.set_alpha(50) ; self.text_bgackround_fade.fill((100,100,100)) ; SCREEN.blit(self.text_bgackround_fade,(0,550))
@@ -234,6 +243,7 @@ class Dialouge:
             self.font_title_render=self.font_title.render("To Continue",True,self.WHITE) 
             SCREEN.blit(self.font_title_render,(SCREEN_WIDTH//2+450,SCREEN_HEIGHT-45))
             SCREEN.blit(self.left_mouse_button_icon,(SCREEN_WIDTH//2+400,SCREEN_HEIGHT-55))
+            print(self.dialogue_show)
             for idx,dialouge in enumerate(self.dialogue_show):
                 if self.dialogue_click_list[0]==idx:
                     self.font_title=pygame.font.Font(self.font,30) 
