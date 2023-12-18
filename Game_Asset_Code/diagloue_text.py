@@ -73,12 +73,14 @@ def level_2_dialogue_walk_up(player_icon,guard_icon,brute_icon,frost_icon):
 
 def level_3_dialogue_walk_up(player_icon,boss_2_icon):
     level_3_dialogue_walk_up_1=[
+        ("",player_icon,""),
         ("Intresting, this reads. 'To go west is what you need to protect. It is prudent and necessary to take such precations to ensure its security. Do not open it else....'",player_icon,"You"),
         ("That has to be it! I wonder what it is though.",player_icon,"You")
         
     ]
 
     level_3_dialogue_walk_up_2=[
+        ("",player_icon,""),
         ("Hmmm... the chest is unlocked? For what reason? Oh well......... This letter reads 'To: General Animous ; Hello General, thank you for honouring your commitment to the Regime. With that we will hold a ceremony on the day of the first day of Summerr in Cerville. Thank you, Signed: Anes'", player_icon,"You"),
         ("Well I have two days to prepare......",player_icon,"You"),
         ("How was the letter?",boss_2_icon,"???"),

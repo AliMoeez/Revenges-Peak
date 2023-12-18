@@ -80,35 +80,38 @@ class Dialouge:
                     return idx
                 
     def text_type(self):
-        if self.dialogue_condition and self.level_1:
-            Dialouge.text(self)
-            self.object_index=Dialouge.get_index_object(self)
-            if self.object_index==1:
-                self.dialogue_show=self.test_level_1_dialogue
-                self.dialouge_list[0]=len(self.dialogue_show)
-                return self.dialogue_show,self.dialouge_list
-            elif self.object_index==2:
-                self.dialogue_show=self.test_level_2_dialogue
-                self.dialouge_list[0]=len(self.dialogue_show)
-                return self.dialogue_show,self.dialouge_list
-            elif self.object_index==3:
-                self.dialogue_show=self.test_level_3_dialogue
-                self.dialouge_list[0]=len(self.dialogue_show)
-                return self.dialogue_show,self.dialouge_list
-        
-        elif self.dialogue_condition and self.level_3:
-            Dialouge.text(self)
-            self.object_index=Dialouge.get_index_object(self)
-            if self.object_index==1:
-                self.dialogue_show=self.test_level_1_dialogue
-                self.dialouge_list[0]=len(self.dialogue_show)
-                return self.dialogue_show,self.dialouge_list
-            elif self.object_index==2:
-                self.dialogue_show=self.test_level_2_dialogue
-                self.dialouge_list[0]=len(self.dialogue_show)
-                return self.dialogue_show,self.dialouge_list       
+        if self.dialogue_condition:
+            if self.level_1:
+                Dialouge.text(self)
+                self.object_index=Dialouge.get_index_object(self)
+                if self.object_index==1:
+                    self.diaglogue_click=self.test_level_1_dialogue
+                    self.dialouge_list[0]=len(self.diaglogue_click)
+                    return self.diaglogue_click,self.dialouge_list
+                elif self.object_index==2:
+                    self.diaglogue_click=self.test_level_2_dialogue
+                    self.dialouge_list[0]=len(self.diaglogue_click)
+                    return self.diaglogue_click,self.dialouge_list
+                elif self.object_index==3:
+                    self.diaglogue_click=self.test_level_3_dialogue
+                    self.dialouge_list[0]=len(self.diaglogue_click)
+                    return self.diaglogue_click,self.dialouge_list
+    
+            elif self.level_3:
+                Dialouge.text(self)
+                print("HERERERERERRER")
+                self.object_index=Dialouge.get_index_object(self)
+                print(self.object_index)
+                if self.object_index==0:
+                    self.diaglogue_click=self.test_level_1_dialogue
+                    self.dialouge_list[0]=len(self.diaglogue_click)
+                    return self.diaglogue_click,self.dialouge_list
+                elif self.object_index==1:
+                    self.diaglogue_click=self.test_level_2_dialogue
+                    self.dialouge_list[0]=len(self.diaglogue_click)
+                    return self.diaglogue_click,self.dialouge_list       
         else:
-            self.dialogue_show="None HERE"
+            self.diaglogue_click="None"
         
     def beginning_condition(self):
         if self.level_2 and self.level_2_player_talk:
@@ -210,10 +213,16 @@ class Dialouge:
                
     def scrolling_text(self):
         self.message_speed=2
-        if (self.dialogue_condition or self.dialogue_story_condition) and self.dialogue_show!="None":
-            for idx,dialouge in enumerate(self.dialogue_show):
+        
+        if self.dialogue_condition:
+            self.shown=self.diaglogue_click
+        if self.dialogue_story_condition:
+            self.shown=self.dialogue_show
+        
+        if (self.dialogue_condition or self.dialogue_story_condition) and self.shown!="None":
+            for idx,dialouge in enumerate(self.shown):
                 if self.dialogue_click_list[0]==idx:
-                    if self.text_position[0]<self.message_speed*len(self.dialogue_show[idx][0]):
+                    if self.text_position[0]<self.message_speed*len(self.shown[idx][0]):
                         self.text_position[0]+=4 #0.75
                     
     def line_function(self,screen,text,position,font,colour):
@@ -228,28 +237,44 @@ class Dialouge:
                 if self.x_pos +self.word_w>=self.width_max:
                     self.x_pos=position[0]
                     self.y_pos+=self.word_h
-                screen.blit(self.word_to_surface,(self.x_pos,self.y_pos))
+                x=screen.blit(self.word_to_surface,(self.x_pos,self.y_pos))
                 self.x_pos+=self.word_w+self.space
             self.x_pos=position[0]
             self.y_pos+=self.word_h
         
     def show(self):
         Dialouge.scrolling_text(self)
-        print(self.dialogue_show,"BEFOROEOREOFOEOROE")
-        if (self.dialogue_condition or self.dialogue_story_condition) and self.dialogue_show!="None":
+
+        if self.dialogue_condition:
+            self.shown=self.diaglogue_click
+        if self.dialogue_story_condition:
+            self.shown=self.dialogue_show
+#      
+        if (self.dialogue_condition or self.dialogue_story_condition) and self.shown!="None":
             self.screen_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT))  ; self.screen_fade.set_alpha(50) ; self.screen_fade.fill((0,0,0)) ; SCREEN.blit(self.screen_fade,(0,0))
             self.text_bgackround_fade=pygame.Surface((SCREEN_WIDTH,SCREEN_HEIGHT-250))  ; self.text_bgackround_fade.set_alpha(50) ; self.text_bgackround_fade.fill((100,100,100)) ; SCREEN.blit(self.text_bgackround_fade,(0,550))
             self.font_title=pygame.font.Font(self.font,25) 
             self.font_title_render=self.font_title.render("To Continue",True,self.WHITE) 
             SCREEN.blit(self.font_title_render,(SCREEN_WIDTH//2+450,SCREEN_HEIGHT-45))
             SCREEN.blit(self.left_mouse_button_icon,(SCREEN_WIDTH//2+400,SCREEN_HEIGHT-55))
-            print(self.dialogue_show)
-            for idx,dialouge in enumerate(self.dialogue_show):
+
+       #     print(self.dialogue_show,self.diaglogue_click)
+            
+            
+            for idx,dialouge in enumerate(self.shown):
+                print(self.shown[idx][0])
                 if self.dialogue_click_list[0]==idx:
                     self.font_title=pygame.font.Font(self.font,30) 
-                    Dialouge.line_function(self,SCREEN,self.dialogue_show[idx][0][0:int(self.text_position[0])//self.message_speed],(SCREEN_WIDTH//2-350,600),self.font_title,self.WHITE)
-                    self.icon_blit=SCREEN.blit(self.dialogue_show[idx][1],(SCREEN_WIDTH//2-550,SCREEN_HEIGHT-200))
-                    self.font_name=pygame.font.Font(self.font,30)  ; self.font_name_render=self.font_name.render(self.dialogue_show[idx][2],True,self.WHITE)
+                    Dialouge.line_function(self,SCREEN,self.shown[idx][0][0:int(self.text_position[0])//self.message_speed],(SCREEN_WIDTH//2-350,600),self.font_title,self.WHITE)
+                    
+                    
+                    self.icon_blit=SCREEN.blit(self.shown[idx][1],(SCREEN_WIDTH//2-550,SCREEN_HEIGHT-200))
+                    
+                  #  print(self.shown[idx][0])
+                   
+                   
+                   
+                    self.font_name=pygame.font.Font(self.font,30)  ; self.font_name_render=self.font_name.render(self.shown[idx][2],True,self.WHITE)
                     SCREEN.blit(self.font_name_render,(SCREEN_WIDTH//2-550,SCREEN_HEIGHT-75))
     
     def end_dialouge(self,event,event_list):

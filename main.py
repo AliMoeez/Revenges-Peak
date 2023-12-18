@@ -43,7 +43,6 @@ while run:
 
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True ; dialogue_story_condition=False
-            print("HERE")
             if event.type==pygame.MOUSEBUTTONDOWN : dialogue_click_list[0]+=1 ; text_position[0]=0
         
         if dialogue.level_dialogue_story(event,event_list) or dialogue.beginning_condition():

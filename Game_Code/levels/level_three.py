@@ -56,7 +56,7 @@ class LevelThree:
                     for distance in self.distance_list:
                         if distance<1000:
                             SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
-                            rect_list.append(pygame.Rect(x_val,y_val,width,height))
+                    rect_list.append(pygame.Rect(x_val,y_val,width,height))
                         #    pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1],width,height),width=1)
 
 
