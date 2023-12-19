@@ -5,13 +5,15 @@ from Game_Asset_Code import *
 
 
 class LevelThree:
-    def __init__(self,level_3) -> None:
+    def __init__(self,level_3,level_3_player_talk_3,level_3_player_talk_4) -> None:
         self.level_3=level_3
         self.level_3_tile_set=level_3_tile_set
         self.level_3_tile_set_rect=level_3_tile_set_rect
         self.player_rect=player_rect
         self.camera_x_y=camera_x_y
         self.object_rect=object_rect
+        self.level_3_player_talk_3=level_3_player_talk_3
+        self.level_3_player_talk_4=level_3_player_talk_4
 
     def distance(self,x_val,y_val,player_rect):
         self.distance_list=[]
@@ -57,7 +59,6 @@ class LevelThree:
                         if distance<1000:
                             SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
                     rect_list.append(pygame.Rect(x_val,y_val,width,height))
-                        #    pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1],width,height),width=1)
 
 
     def ground_tiles(self):
@@ -79,6 +80,8 @@ class LevelThree:
     def object_tiles(self):
         if self.level_3:
             LevelThree.general_tile_rect(self,"Tile Layer 5",self.object_rect,16,16)
+            if not self.level_3_player_talk_4 :
+                del self.object_rect[0]
 
     def border_logic_total(self):
         self.camera_x_y[0]+=self.rect_camera.x-self.camera_x_y[0]-525

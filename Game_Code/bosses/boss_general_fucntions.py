@@ -11,8 +11,10 @@ class BossGeneralFunctions:
              idle_max_length:int,idle_increase:float,boss_health:list):
         if boss_health[0]>0:
             if self.player_rect.x<=boss_rect.x:
+                print("RIGHT")
                 SCREEN.blit(idle[int(idle_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
             else:
+                print("LEFT")
                 SCREEN.blit(idle_flip[int(idle_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
             idle_number[0]+=idle_increase
             if idle_number[0]>idle_max_length:

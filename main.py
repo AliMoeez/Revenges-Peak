@@ -6,10 +6,9 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,Player,EnemyOne,EnemyTwo,EnemyThree,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,HealingPlayer
+from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,Player,EnemyOne,EnemyTwo,EnemyThree,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,GeneralBoss,HealingPlayer
 
 while run:
-  #  print(object_rect)
     level_1_tile_set_rect.clear()
     level_2_tile_set_rect.clear()
     level_3_tile_set_rect.clear()
@@ -20,7 +19,7 @@ while run:
     menu=Menu(level_screen,level_1,level_2)
     levelone=LevelOne(camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
     leveltwo=LevelTwo(level_2,level_screen)
-    levelthree=LevelThree(level_3)
+    levelthree=LevelThree(level_3,level_3_player_talk_3,level_3_player_talk_4)
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
                   player_control,dialogue_condition,dialogue_story_condition,
@@ -30,6 +29,7 @@ while run:
     enemy_three=EnemyThree(level_3,player_control)
     people=People(level_1,level_1_wizard_talk,reset_locations,level_2)
     frostboss=FrostBoss(level_2,level_2_boss_talk,reset_locations)
+    generalboss=GeneralBoss(level_3,level_3_player_talk_4)
 
     healingplayer=HealingPlayer(level_1,level_2,reset_locations)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
@@ -38,6 +38,7 @@ while run:
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
 
+   # print(player_rect)
 
     for event in event_list:
 
@@ -51,7 +52,6 @@ while run:
         
         if (dialogue_condition or dialogue_story_condition) and dialogue.end_dialouge(event,event_list): 
             mouse_button_blit_list.clear() ; dialogue_condition=False ; dialogue_story_condition=False
-
             
             if level_1:
                 if dialogue_objective_list[0]==1: level_1_wizard_talk=False
@@ -63,17 +63,10 @@ while run:
                 if dialogue_objective_list[0]==2: level_2_enemy_talk=False
                 if dialogue_objective_list[0]==3: level_2_boss_talk=False
             if level_3:
-                if dialogue_objective_list[0]==0: 
-                    level_3_player_talk_1=False
-                
-          #      print(dialogue_objective_list[0])
-                if dialogue_objective_list[0]==1:
-                    level_3_player_talk_2=False
-
-
-              ##  if level_3_attack_enemies and dialogue_objective_list[0]==1:
-               #     print("HERE ENENIES")
-
+                if dialogue_objective_list[0]==0: level_3_player_talk_1=False
+                if dialogue_objective_list[0]==1: level_3_player_talk_2=False
+                if dialogue_objective_list[0]==2: level_3_player_talk_3=False
+                if dialogue_objective_list[0]==3: level_3_player_talk_4=False
     
         if event.type==pygame.QUIT:
             pygame.quit() ; sys.exit()
@@ -170,16 +163,6 @@ while run:
         if all(i<=0 for i in enemy_1_health) and all(i<=0 for i in enemy_2_health) and all(i<=0 for i in enemy_3_health):
             level_3_all_enemies=True
 
-   # print(dialogue_story_condition,dialogue_condition)
-
-  #  print(enemy_1_health,"ENEMY_1")
-  ##  print(enemy_2_health,"ENEMY_2")
-   # print(enemy_3_health,"ENEMY_3")
-
-   # print(dialogue_objective_list[0])
-
-   # print(player_rect.x,player_rect.y,object_rect)
-
     menu.main_menu()
     menu.main_menu_buttons()
     menu.level_screen_blit_background()
@@ -265,6 +248,8 @@ while run:
     frostboss.slow_down()
     frostboss.collision_with_object()
     frostboss.collision_with_object_logic()
+
+    generalboss.idle()
 
     healingplayer.blit()
     healingplayer.interaction()

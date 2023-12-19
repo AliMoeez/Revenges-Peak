@@ -93,11 +93,13 @@ class Objectives:
                 return self.objectives_distance[0],self.enemy_3_level_3_rect[0].x,self.enemy_3_level_3_rect[0].y
            if self.level_3_player_talk_3 and not self.level_3_player_talk_2:
                 self.objectives_distance=Objectives.distance(self,3904,417)
-                self.dialogue_objective_list[0]=2
+                if self.objectives_distance[0]<200:
+                    self.dialogue_objective_list[0]=2
                 return self.objectives_distance[0],3904,417
            if self.level_3_player_talk_4 and not self.level_3_player_talk_3:
                 self.objectives_distance=Objectives.distance(self,288,225)
-                self.dialogue_objective_list[0]=3
+                if self.objectives_distance[0]<200:
+                    self.dialogue_objective_list[0]=3
                 return self.objectives_distance[0],288,225
 
     def define_level(self):

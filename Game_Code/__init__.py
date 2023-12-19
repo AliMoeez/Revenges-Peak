@@ -15,5 +15,6 @@ from .win import Win
 from .tutorial import Tutorial
 from .control_test import ControlTest
 from .bosses import FrostBoss
+from .bosses import GeneralBoss
 from .bosses import BossGeneralFunctions
 from .healing_player import HealingPlayer
