@@ -250,6 +250,8 @@ while run:
     frostboss.collision_with_object_logic()
 
     generalboss.idle()
+    generalboss.move()
+    generalboss.attack()
 
     healingplayer.blit()
     healingplayer.interaction()

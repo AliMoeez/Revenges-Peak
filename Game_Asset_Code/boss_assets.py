@@ -107,7 +107,7 @@ frost_boss_fast_mode_icon=pygame.transform.scale(frost_boss_fast_mode_icon,(17,1
 
 frost_boss_fall_type=[0]
 
-general_boss_idle_image=pygame.image.load(r"Assets\Bosses\General Boss\Boss_Assets\spritesheets\fire_FREE_SpriteSheet_288x128.png")
+general_boss_image=pygame.image.load(r"Assets\Bosses\General Boss\Boss_Assets\spritesheets\fire_FREE_SpriteSheet_288x128.png")
 
 def general_boss_idle(images,frame,width,height):
     image=pygame.Surface((width,height),pygame.SRCALPHA)
@@ -115,20 +115,122 @@ def general_boss_idle(images,frame,width,height):
     image=pygame.transform.scale(image,(width*1.40,height*1.40))
     return image
 
-general_boss_idle_1=general_boss_idle(general_boss_idle_image,0,288,128)
-general_boss_idle_2=general_boss_idle(general_boss_idle_image,1,288,128)
-general_boss_idle_3=general_boss_idle(general_boss_idle_image,2,288,128)
-general_boss_idle_4=general_boss_idle(general_boss_idle_image,3,288,128)
-general_boss_idle_5=general_boss_idle(general_boss_idle_image,4,288,128)
-general_boss_idle_6=general_boss_idle(general_boss_idle_image,5,288,128)
-general_boss_idle_7=general_boss_idle(general_boss_idle_image,6,288,128)
-general_boss_idle_8=general_boss_idle(general_boss_idle_image,7,288,128)
+general_boss_idle_1=general_boss_idle(general_boss_image,0,288,128) ; general_boss_idle_2=general_boss_idle(general_boss_image,1,288,128) ; general_boss_idle_3=general_boss_idle(general_boss_image,2,288,128) ; general_boss_idle_4=general_boss_idle(general_boss_image,3,288,128) ;general_boss_idle_5=general_boss_idle(general_boss_image,4,288,128)
+general_boss_idle_6=general_boss_idle(general_boss_image,5,288,128) ; general_boss_idle_7=general_boss_idle(general_boss_image,6,288,128) ; general_boss_idle_8=general_boss_idle(general_boss_image,7,288,128)
 
 general_boss_idle=[general_boss_idle_1,general_boss_idle_2,general_boss_idle_3,general_boss_idle_4,general_boss_idle_5,
                 general_boss_idle_6,general_boss_idle_7,general_boss_idle_8]
 general_boss_idle_flip=[]
 general_boss_idle_number=[0]
-for i,general_boss_image in enumerate(general_boss_idle[:]): general_boss_idle_flip.append(pygame.transform.flip(general_boss_idle[i],True,False))
+for i,general_boss_images in enumerate(general_boss_idle[:]): general_boss_idle_flip.append(pygame.transform.flip(general_boss_idle[i],True,False))
+
+def general_boss_move(images,frame,width,height):
+    image=pygame.Surface((width,height),pygame.SRCALPHA)
+    image.blit(images,(0,0),((frame*width),128,width,height))
+    image=pygame.transform.scale(image,(width*1.40,height*1.40))
+    return image
+
+general_boss_move_1=general_boss_move(general_boss_image,0,288,128) ; general_boss_move_2=general_boss_move(general_boss_image,1,288,128) ; general_boss_move_3=general_boss_move(general_boss_image,2,288,128) ; general_boss_move_4=general_boss_move(general_boss_image,3,288,128) ;general_boss_move_5=general_boss_move(general_boss_image,4,288,128)
+general_boss_move_6=general_boss_move(general_boss_image,5,288,128) ; general_boss_move_7=general_boss_move(general_boss_image,6,288,128) ; general_boss_move_8=general_boss_move(general_boss_image,7,288,128)
+
+general_boss_move=[general_boss_move_1,general_boss_move_2,general_boss_move_3,general_boss_move_4,general_boss_move_5,
+                general_boss_move_6,general_boss_move_7,general_boss_move_8]
+general_boss_move_flip=[]
+general_boss_move_number=[0]
+for i,general_boss_images in enumerate(general_boss_move[:]): general_boss_move_flip.append(pygame.transform.flip(general_boss_move[i],True,False))
+
+
+general_boss_attack_number=[0]
+
+def general_boss_attack_1(images,frame,width,height):
+    image=pygame.Surface((width,height),pygame.SRCALPHA)
+    image.blit(images,(0,0),((frame*width),640,width,height))
+    image=pygame.transform.scale(image,(width*1.40,height*1.40))
+    return image
+
+general_boss_attack_1_1=general_boss_attack_1(general_boss_image,0,288,128) ; general_boss_attack_1_2=general_boss_attack_1(general_boss_image,1,288,128) ; general_boss_attack_1_3=general_boss_attack_1(general_boss_image,2,288,128) ; general_boss_attack_1_4=general_boss_attack_1(general_boss_image,3,288,128) ;general_boss_attack_1_5=general_boss_attack_1(general_boss_image,4,288,128)
+general_boss_attack_1_6=general_boss_attack_1(general_boss_image,5,288,128) ; general_boss_attack_1_7=general_boss_attack_1(general_boss_image,6,288,128) ; general_boss_attack_1_8=general_boss_attack_1(general_boss_image,7,288,128)
+
+general_boss_attack_1=[general_boss_attack_1_1,general_boss_attack_1_2,general_boss_attack_1_3,general_boss_attack_1_4,general_boss_attack_1_5,
+                general_boss_attack_1_6,general_boss_attack_1_7,general_boss_attack_1_8]
+general_boss_attack_1_flip=[]
+general_boss_attack_1_number=[0]
+for i,general_boss_images in enumerate(general_boss_attack_1[:]): general_boss_attack_1_flip.append(pygame.transform.flip(general_boss_attack_1[i],True,False))
+
+
+
+def general_boss_attack_2(images,frame,width,height):
+    image=pygame.Surface((width,height),pygame.SRCALPHA)
+    image.blit(images,(0,0),((frame*width),896,width,height))
+    image=pygame.transform.scale(image,(width*1.40,height*1.40))
+    return image
+
+general_boss_attack_2_1=general_boss_attack_2(general_boss_image,0,288,128) ; general_boss_attack_2_2=general_boss_attack_2(general_boss_image,1,288,128) ; general_boss_attack_2_3=general_boss_attack_2(general_boss_image,2,288,128) ; general_boss_attack_2_4=general_boss_attack_2(general_boss_image,3,288,128) ;general_boss_attack_2_5=general_boss_attack_2(general_boss_image,4,288,128)
+general_boss_attack_2_6=general_boss_attack_2(general_boss_image,5,288,128) ; general_boss_attack_2_7=general_boss_attack_2(general_boss_image,6,288,128) ; general_boss_attack_2_8=general_boss_attack_2(general_boss_image,7,288,128) ; general_boss_attack_2_9=general_boss_attack_2(general_boss_image,8,288,128) ; general_boss_attack_2_10=general_boss_attack_2(general_boss_image,9,288,128) ; general_boss_attack_2_11=general_boss_attack_2(general_boss_image,10,288,128)
+
+general_boss_attack_2=[general_boss_attack_2_1,general_boss_attack_2_2,general_boss_attack_2_3,general_boss_attack_2_4,general_boss_attack_2_5,
+                general_boss_attack_2_6,general_boss_attack_2_7,general_boss_attack_2_8,general_boss_attack_2_9,general_boss_attack_2_10,general_boss_attack_2_11]
+general_boss_attack_2_flip=[]
+general_boss_attack_2_number=[0]
+for i,general_boss_images in enumerate(general_boss_attack_2[:]): general_boss_attack_2_flip.append(pygame.transform.flip(general_boss_attack_2[i],True,False))
+
+
+
+def general_boss_attack_3(images,frame,width,height):
+    image=pygame.Surface((width,height),pygame.SRCALPHA)
+    image.blit(images,(0,0),((frame*width),1024,width,height))
+    image=pygame.transform.scale(image,(width*1.40,height*1.40))
+    return image
+
+general_boss_attack_3_1=general_boss_attack_3(general_boss_image,11,288,128) ; general_boss_attack_3_2=general_boss_attack_3(general_boss_image,12,288,128) ; general_boss_attack_3_3=general_boss_attack_3(general_boss_image,13,288,128) ; general_boss_attack_3_4=general_boss_attack_3(general_boss_image,14,288,128) ;general_boss_attack_3_5=general_boss_attack_3(general_boss_image,15,288,128)
+general_boss_attack_3_6=general_boss_attack_3(general_boss_image,16,288,128) ; general_boss_attack_3_7=general_boss_attack_3(general_boss_image,17,288,128) ; general_boss_attack_3_8=general_boss_attack_3(general_boss_image,18,288,128)
+
+general_boss_attack_3=[general_boss_attack_3_1,general_boss_attack_3_2,general_boss_attack_3_3,general_boss_attack_3_4,general_boss_attack_3_5,
+                general_boss_attack_3_6,general_boss_attack_3_7,general_boss_attack_3_8]
+general_boss_attack_3_flip=[]
+general_boss_attack_3_number=[0]
+for i,general_boss_images in enumerate(general_boss_attack_3[:]): general_boss_attack_3_flip.append(pygame.transform.flip(general_boss_attack_3[i],True,False))
+
+
+
+def general_boss_attack_4(images,frame,width,height):
+    image=pygame.Surface((width,height),pygame.SRCALPHA)
+    image.blit(images,(0,0),((frame*width),1280,width,height))
+    image=pygame.transform.scale(image,(width*1.40,height*1.40))
+    return image
+
+general_boss_attack_4_1=general_boss_attack_4(general_boss_image,0,288,128) ; general_boss_attack_4_2=general_boss_attack_4(general_boss_image,1,288,128) ; general_boss_attack_4_3=general_boss_attack_4(general_boss_image,2,288,128) ; general_boss_attack_4_4=general_boss_attack_4(general_boss_image,3,288,128) ;general_boss_attack_4_5=general_boss_attack_4(general_boss_image,4,288,128)
+general_boss_attack_4_6=general_boss_attack_4(general_boss_image,5,288,128) ; general_boss_attack_4_7=general_boss_attack_4(general_boss_image,6,288,128) ; general_boss_attack_4_8=general_boss_attack_4(general_boss_image,7,288,128)
+
+general_boss_attack_4_9=general_boss_attack_4(general_boss_image,8,288,128) ; general_boss_attack_4_10=general_boss_attack_4(general_boss_image,9,288,128) ; general_boss_attack_4_11=general_boss_attack_4(general_boss_image,10,288,128) ;   general_boss_attack_4_12=general_boss_attack_4(general_boss_image,11,288,128) ;general_boss_attack_4_13=general_boss_attack_4(general_boss_image,12,288,128)
+general_boss_attack_4_14=general_boss_attack_4(general_boss_image,13,288,128) ; general_boss_attack_4_15=general_boss_attack_4(general_boss_image,14,288,128) ; general_boss_attack_4_16=general_boss_attack_4(general_boss_image,15,288,128)
+
+general_boss_attack_4_17=general_boss_attack_4(general_boss_image,16,288,128) ; general_boss_attack_4_18=general_boss_attack_4(general_boss_image,17,288,128)
+
+general_boss_attack_4=[general_boss_attack_4_1,general_boss_attack_4_2,general_boss_attack_4_3,general_boss_attack_4_4,general_boss_attack_4_5,
+                general_boss_attack_4_6,general_boss_attack_4_7,general_boss_attack_4_8, general_boss_attack_4_9,general_boss_attack_4_10,general_boss_attack_4_11, 
+                general_boss_attack_4_12,general_boss_attack_4_7,general_boss_attack_4_13, general_boss_attack_4_14,general_boss_attack_4_15,
+                general_boss_attack_4_16,general_boss_attack_4_6,general_boss_attack_4_17,general_boss_attack_4_18]
+
+general_boss_attack_4_flip=[]
+general_boss_attack_4_number=[0]
+for i,general_boss_images in enumerate(general_boss_attack_4[:]): general_boss_attack_4_flip.append(pygame.transform.flip(general_boss_attack_4[i],True,False))
+
+
+
+
+general_boss_attack_number=[0]
+
+general_boss_fall_type=[0]
+
+
+general_boss_attack_type=[0]
+
+
+
+
+general_boss_x_movement=[0]
+general_boss_y_movement=[0]
 
 general_boss_level_3_x=[500] #<=50
 general_boss_level_3_y=[2000] #230
