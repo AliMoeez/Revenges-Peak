@@ -108,6 +108,10 @@ frost_boss_fast_mode_icon=pygame.transform.scale(frost_boss_fast_mode_icon,(17,1
 frost_boss_fall_type=[0]
 
 general_boss_image=pygame.image.load(r"Assets\Bosses\General Boss\Boss_Assets\spritesheets\fire_FREE_SpriteSheet_288x128.png")
+general_boss_health_icon=pygame.image.load(r"Assets\Bosses\General Boss\Other\heart (2).png")
+general_boss_health_icon=pygame.transform.scale(general_boss_health_icon,(17,17))
+
+
 
 def general_boss_idle(images,frame,width,height):
     image=pygame.Surface((width,height),pygame.SRCALPHA)
@@ -232,8 +236,8 @@ general_boss_attack_type=[0]
 general_boss_x_movement=[0]
 general_boss_y_movement=[0]
 
-general_boss_level_3_x=[500] #<=50
-general_boss_level_3_y=[2000] #230
+general_boss_level_3_x=[-100] #<=500
+general_boss_level_3_y=[230] #2000
 
 
 general_boss_health=[1000]

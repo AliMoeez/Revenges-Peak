@@ -29,7 +29,7 @@ while run:
     enemy_three=EnemyThree(level_3,player_control)
     people=People(level_1,level_1_wizard_talk,reset_locations,level_2)
     frostboss=FrostBoss(level_2,level_2_boss_talk,reset_locations)
-    generalboss=GeneralBoss(level_3,level_3_player_talk_4)
+    generalboss=GeneralBoss(level_3,level_3_player_talk_4,level_3_player_talk_3)
 
     healingplayer=HealingPlayer(level_1,level_2,reset_locations)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
@@ -38,9 +38,9 @@ while run:
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
 
-   # print(player_rect)
-
     for event in event_list:
+
+        print(dialogue_click_list)
 
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True ; dialogue_story_condition=False
@@ -252,6 +252,9 @@ while run:
     generalboss.idle()
     generalboss.move()
     generalboss.attack()
+    generalboss.health()
+    generalboss.collision_with_object()
+    generalboss.collision_with_object_logic()
 
     healingplayer.blit()
     healingplayer.interaction()

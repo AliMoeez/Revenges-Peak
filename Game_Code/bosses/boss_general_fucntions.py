@@ -11,10 +11,8 @@ class BossGeneralFunctions:
              idle_max_length:int,idle_increase:float,boss_health:list):
         if boss_health[0]>0:
             if self.player_rect.x<=boss_rect.x:
-                print("RIGHT")
                 SCREEN.blit(idle[int(idle_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
             else:
-                print("LEFT")
                 SCREEN.blit(idle_flip[int(idle_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
             idle_number[0]+=idle_increase
             if idle_number[0]>idle_max_length:
@@ -28,13 +26,21 @@ class BossGeneralFunctions:
             if self.player_rect.x<=boss_rect.x:
                 SCREEN.blit(move_list[int(move_list_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
                 boss_x_movement[0]=-x_movement
-                if self.player_rect.y<=boss_rect.y: boss_y_movement[0]=-y_movement
-                else: boss_y_movement[0]=y_movement 
+                
+                if self.player_rect.y<=boss_rect.y: 
+                    boss_y_movement[0]=-y_movement/2
+                else:
+                    boss_y_movement[0]=y_movement/2
+            
             else:
                 SCREEN.blit(move_list_flip[int(move_list_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
                 boss_x_movement[0]=x_movement
-                if self.player_rect.y<=boss_rect.y: boss_y_movement[0]=-y_movement
-                else: boss_y_movement[0]=y_movement
+                
+                if self.player_rect.y<=boss_rect.y: 
+                    boss_y_movement[0]=-y_movement/2
+                else:
+                    boss_y_movement[0]=y_movement/2
+           
             move_list_number[0]+=move_increase
             if move_list_number[0]>move_max_length: move_list_number[0]=0
 
