@@ -25,6 +25,7 @@ class Dialouge:
         self.brute_1_icon=brute_1_icon
         self.level_2_enemy_talk=level_2_enemy_talk
         self.frost_boss_icon=frost_boss_icon
+        self.general_boss_icon=general_boss_icon
         self.level_3_player_talk_1=level_3_player_talk_1
         self.level_3_player_talk_2=level_3_player_talk_2
         self.level_3_player_talk_3=level_3_player_talk_3
@@ -68,8 +69,8 @@ class Dialouge:
             self.test_level_2_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[1]
             self.test_level_3_dialogue=level_1_dialogue(self.player_icon,self.abyss_icon)[2]
         if self.level_3:
-            self.test_level_1_dialogue=level_3_dialogue_walk_up(self.player_icon,self.frost_boss_icon)[0]
-            self.test_level_2_dialogue=level_3_dialogue_walk_up(self.player_icon,self.frost_boss_icon)[1]
+            self.test_level_1_dialogue=level_3_dialogue_walk_up(self.player_icon,self.general_boss_icon)[0]
+            self.test_level_2_dialogue=level_3_dialogue_walk_up(self.player_icon,self.general_boss_icon)[1]
 
     def get_index_object(self):
         if self.dialogue_condition:
@@ -166,8 +167,8 @@ class Dialouge:
             self.test_level_3_dialogue=level_2_dialogue_walk_up(self.player_icon,self.guard_icon,self.brute_1_icon,self.frost_boss_icon)[1]
             self.test_level_4_dialogue=level_2_dialogue_walk_up(self.player_icon,self.guard_icon,self.brute_1_icon,self.frost_boss_icon)[2]
         if self.level_3:
-            self.test_level_1_dialogue=level_3_dialogue(self.player_icon,self.brute_1_icon)[0]
-            self.test_level_2_dialogue=level_3_dialogue(self.player_icon,self.brute_1_icon)[1]
+            self.test_level_1_dialogue=level_3_dialogue(self.player_icon,self.general_boss_icon)[0]
+            self.test_level_2_dialogue=level_3_dialogue(self.player_icon,self.general_boss_icon)[1]
 
     def text_type_story(self):
         if self.dialogue_story_condition:

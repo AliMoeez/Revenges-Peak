@@ -111,6 +111,9 @@ general_boss_image=pygame.image.load(r"Assets\Bosses\General Boss\Boss_Assets\sp
 general_boss_health_icon=pygame.image.load(r"Assets\Bosses\General Boss\Other\heart (2).png")
 general_boss_health_icon=pygame.transform.scale(general_boss_health_icon,(17,17))
 
+general_boss_icon=pygame.image.load(r"Assets\Bosses\General Boss\Boss_Assets\png\fire_knight\01_idle\idle_1 - Copy.png")
+general_boss_icon=pygame.transform.scale(general_boss_icon,(100,100))
+
 
 
 def general_boss_idle(images,frame,width,height):

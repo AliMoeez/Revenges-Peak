@@ -40,7 +40,7 @@ while run:
 
     for event in event_list:
 
-        print(dialogue_click_list)
+    #    print(dialogue_click_list)
 
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True ; dialogue_story_condition=False
@@ -163,6 +163,8 @@ while run:
         if all(i<=0 for i in enemy_1_health) and all(i<=0 for i in enemy_2_health) and all(i<=0 for i in enemy_3_health):
             level_3_all_enemies=True
 
+    print(player_rect.x,general_boss_rect.x, player_rect.y,general_boss_rect.y)
+
     menu.main_menu()
     menu.main_menu_buttons()
     menu.level_screen_blit_background()
@@ -249,7 +251,7 @@ while run:
     frostboss.collision_with_object()
     frostboss.collision_with_object_logic()
 
-    generalboss.idle()
+    generalboss.walk_up_condition()
     generalboss.move()
     generalboss.attack()
     generalboss.health()

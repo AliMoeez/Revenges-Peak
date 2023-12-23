@@ -23,23 +23,17 @@ class BossGeneralFunctions:
              boss_y_movement:list,x_movement:int,y_movement:int,attack_list_number,boss_health:list): 
         if boss_health[0]>0:
             attack_list_number[0]=0
-            if self.player_rect.x<=boss_rect.x:
-                SCREEN.blit(move_list[int(move_list_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
-                boss_x_movement[0]=-x_movement
-                
-                if self.player_rect.y<=boss_rect.y: 
-                    boss_y_movement[0]=-y_movement/2
-                else:
-                    boss_y_movement[0]=y_movement/2
             
+            if self.player_rect.y<=boss_rect.y-10:  boss_y_movement[0]=-y_movement/2
+            elif self.player_rect.y>boss_rect.y+10: boss_y_movement[0]=y_movement/2
+            else: boss_y_movement[0]=0
+            
+            if self.player_rect.x<=boss_rect.x-10:
+                SCREEN.blit(move_list[int(move_list_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y)) ; boss_x_movement[0]=-x_movement
+            elif self.player_rect.x>boss_rect.x+10:
+                SCREEN.blit(move_list_flip[int(move_list_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y)) ; boss_x_movement[0]=x_movement
             else:
-                SCREEN.blit(move_list_flip[int(move_list_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
-                boss_x_movement[0]=x_movement
-                
-                if self.player_rect.y<=boss_rect.y: 
-                    boss_y_movement[0]=-y_movement/2
-                else:
-                    boss_y_movement[0]=y_movement/2
+                SCREEN.blit(move_list[int(move_list_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y)) ; boss_x_movement[0]=0
            
             move_list_number[0]+=move_increase
             if move_list_number[0]>move_max_length: move_list_number[0]=0

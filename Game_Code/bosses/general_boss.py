@@ -30,24 +30,22 @@ class GeneralBoss:
         return self.player_general_boss_distance
     
     def walk_up_condition(self):
-        pass
-
-    def idle(self):
         self.general_boss_idle=general_boss_idle ; self.general_boss_idle_flip=general_boss_idle_flip ; self.general_boss_idle_number=general_boss_idle_number
-        self.distance=GeneralBoss.distance(self)
-        
-        if self.level_3 and not self.level_3_player_talk_4:
-            self.general_boss_x_movement[0]=0
-            self.general_boss_y_movement[0]=0
-            pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(self.general_boss_rect.x-self.camera_x_y[0],self.general_boss_rect.y-self.camera_x_y[1],70,80),width=1)
-            BossGeneralFunctions.idle(self,self.general_boss_rect,self.general_boss_idle_flip,self.general_boss_idle,self.general_boss_idle_number,
-                                    170,110,9,0.50,self.general_boss_health)
-
-
-    def move(self):
         self.general_boss_move=general_boss_move ; self.general_boss_move_flip=general_boss_move_flip ; self.general_boss_move_number=general_boss_move_number
         self.distance=GeneralBoss.distance(self)
-        if self.level_3 and self.distance<=300 and self.distance>100 and not self.level_3_player_talk_4:
+
+        if self.level_3 and self.level_3_player_talk_4 and self.dialogue_click_list[0]>=3:
+            if self.distance>=200:
+             BossGeneralFunctions.move(self,self.general_boss_rect,self.general_boss_move_flip,self.general_boss_move,self.general_boss_move_number,170,100,len(self.general_boss_move)+1,0.50,
+                                      self.general_boss_x_movement,self.general_boss_y_movement,4,4,self.general_boss_attack_number,self.general_boss_health)               
+            else:
+                self.general_boss_x_movement[0]=0 ; self.general_boss_y_movement[0]=0
+                BossGeneralFunctions.idle(self,self.general_boss_rect,self.general_boss_idle_flip,self.general_boss_idle,self.general_boss_idle_number,
+                                        170,110,9,0.50,self.general_boss_health)
+                
+    def move(self):
+        self.distance=GeneralBoss.distance(self)
+        if self.level_3 and self.distance>100 and not self.level_3_player_talk_4:
             BossGeneralFunctions.move(self,self.general_boss_rect,self.general_boss_move_flip,self.general_boss_move,self.general_boss_move_number,170,100,7,0.50,
                                       self.general_boss_x_movement,self.general_boss_y_movement,4,4,self.general_boss_attack_number,self.general_boss_health)
 
@@ -84,11 +82,11 @@ class GeneralBoss:
             BossGeneralFunctions.health(self,self.general_boss_health,1000,500,1000/500,self.general_boss_health_icon,self.orange_red,670,10,682,14,1)
     
     def collision_with_object(self):
-        if self.level_3 and not self.level_3_player_talk_4:
+        if self.level_3:
             return BossGeneralFunctions.collision_with_object(self,self.level_3_tile_set_rect,self.general_boss_rect)
 
     def collision_with_object_logic(self):
-        if self.level_3 and not self.level_3_player_talk_4:
+        if self.level_3:
             self.collision=GeneralBoss.collision_with_object(self)
             BossGeneralFunctions.collision_with_object_logic(self,self.general_boss_rect,self.general_boss_x_movement,self.collision,self.general_boss_y_movement)
 
