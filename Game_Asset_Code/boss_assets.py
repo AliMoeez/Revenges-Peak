@@ -223,8 +223,25 @@ general_boss_attack_4_flip=[]
 general_boss_attack_4_number=[0]
 for i,general_boss_images in enumerate(general_boss_attack_4[:]): general_boss_attack_4_flip.append(pygame.transform.flip(general_boss_attack_4[i],True,False))
 
+def general_boss_fall(images,frame,width,height):
+    image=pygame.Surface((width,height),pygame.SRCALPHA)
+    image.blit(images,(0,0),((frame*width),1664,width,height))
+    image=pygame.transform.scale(image,(width*1.40,height*1.40))
+    return image
 
+general_boss_fall_1=general_boss_fall(general_boss_image,0,288,128) ; general_boss_fall_2=general_boss_fall(general_boss_image,1,288,128) ; general_boss_fall_3=general_boss_fall(general_boss_image,2,288,128) ; general_boss_fall_4=general_boss_fall(general_boss_image,3,288,128) ;general_boss_fall_5=general_boss_fall(general_boss_image,4,288,128)
+general_boss_fall_6=general_boss_fall(general_boss_image,5,288,128) ; general_boss_fall_7=general_boss_fall(general_boss_image,6,288,128) ; general_boss_fall_8=general_boss_fall(general_boss_image,7,288,128)
+general_boss_fall_9=general_boss_fall(general_boss_image,8,288,128) ; general_boss_fall_10=general_boss_fall(general_boss_image,9,288,128) ; general_boss_fall_11=general_boss_fall(general_boss_image,10,288,128) ;   general_boss_fall_12=general_boss_fall(general_boss_image,11,288,128) ;general_boss_fall_13=general_boss_fall(general_boss_image,12,288,128)
 
+general_boss_fall=[general_boss_fall_1,general_boss_fall_2,general_boss_fall_3,general_boss_fall_4,general_boss_fall_5,
+                general_boss_fall_6,general_boss_fall_7,general_boss_fall_8, general_boss_fall_9,general_boss_fall_10,general_boss_fall_11, 
+                general_boss_fall_12,general_boss_fall_7,general_boss_fall_13]
+
+general_boss_fall_flip=[]
+general_boss_fall_number=[0]
+for i,general_boss_images in enumerate(general_boss_fall[:]): general_boss_fall_flip.append(pygame.transform.flip(general_boss_fall[i],True,False))
+
+general_boss_player_slow_down_number=[0]
 
 general_boss_attack_number=[0]
 

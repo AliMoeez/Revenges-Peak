@@ -16,7 +16,7 @@ class Player:
         self.player_control_cooldown=player_control_cooldown ; self.player_control=player_control ; self.object_rect=object_rect ; self.dialogue_condition=dialogue_condition
         self.dialogue_story_condition=dialogue_story_condition ; self.reset_locations=reset_locations ; self.tutorial_one=tutorial_one ; self.tutorial_two=tutorial_two
         self.level_1_wizard_talk=level_1_wizard_talk ; self.talk_to_abyss_level_one=talk_to_abyss_level_one ; self.investigate_object_level_one=investigate_object_level_one
-        self.level_2=level_2 ; self.level_2_tile_set_rect=level_2_tile_set_rect ; self.level_3=level_3 ; self.level_3_tile_set_rect=level_3_tile_set_rect
+        self.level_2=level_2 ; self.level_2_tile_set_rect=level_2_tile_set_rect ; self.level_3=level_3 ; self.level_3_tile_set_rect=level_3_tile_set_rect ; self.general_boss_player_slow_down_number=general_boss_player_slow_down_number
 
         if self.level_1:
             self.tile_set_rect=self.level_1_tile_set_rect
@@ -76,7 +76,7 @@ class Player:
             
             else: 
                 Player.idle(self,key) ; self.player_x_movement[0]=0 ; self.player_y_movement[0]=0
-    
+
             self.player_run_number[0]+=0.15
             if self.player_run_number[0]>7:self.player_run_number[0]=0
 
@@ -160,6 +160,14 @@ class Player:
                 if self.player_rect.colliderect(tiles):
                     self.tile_hit.append(tiles)
             return self.tile_hit
+        
+    def player_speed_changes(self):
+        if self.general_boss_player_slow_down_number[0]>0:
+            self.general_boss_player_slow_down_number[0]-=5
+            self.player_x_movement[0]=self.player_x_movement[0]//35
+            self.player_y_movement[0]=self.player_y_movement[0]//35
+        else:
+            self.general_boss_player_slow_down_number[0]=0
                     
     def collision_with_object_logic(self):
         if any([self.level_1,self.level_2,self.level_3]):

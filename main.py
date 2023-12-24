@@ -163,7 +163,10 @@ while run:
         if all(i<=0 for i in enemy_1_health) and all(i<=0 for i in enemy_2_health) and all(i<=0 for i in enemy_3_health):
             level_3_all_enemies=True
 
-    print(player_rect.x,general_boss_rect.x, player_rect.y,general_boss_rect.y)
+    #print(player_rect.x,general_boss_rect.x, player_rect.y,general_boss_rect.y)
+            
+
+    print(general_boss_player_slow_down_number)
 
     menu.main_menu()
     menu.main_menu_buttons()
@@ -192,6 +195,7 @@ while run:
     player.control(key)
     player.dialouge_state(key)
     player.fall()
+    player.player_speed_changes()
     player.collision_with_object()
     player.collision_with_object_logic()
 
@@ -254,7 +258,9 @@ while run:
     generalboss.walk_up_condition()
     generalboss.move()
     generalboss.attack()
+    generalboss.fall()
     generalboss.health()
+    generalboss.player_hit(key)
     generalboss.collision_with_object()
     generalboss.collision_with_object_logic()
 

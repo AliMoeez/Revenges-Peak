@@ -1,4 +1,5 @@
 import pygame
+import random
 import math
 
 
@@ -24,6 +25,10 @@ class GeneralBoss:
         self.orange_red=(164,36,28)
         self.level_3_tile_set_rect=level_3_tile_set_rect
         self.dialogue_click_list=dialogue_click_list
+        self.player_x_movement=player_x_movement
+        self.player_y_movement=player_y_movement
+        self.general_boss_player_slow_down_number=general_boss_player_slow_down_number
+        self.player_attack_number=player_attack_number
 
     def distance(self):
         self.player_general_boss_distance=math.hypot(self.player_rect.x-self.general_boss_rect.x,self.player_rect.y-self.general_boss_rect.y)
@@ -41,11 +46,12 @@ class GeneralBoss:
             else:
                 self.general_boss_x_movement[0]=0 ; self.general_boss_y_movement[0]=0
                 BossGeneralFunctions.idle(self,self.general_boss_rect,self.general_boss_idle_flip,self.general_boss_idle,self.general_boss_idle_number,
-                                        170,110,9,0.50,self.general_boss_health)
+                                        170,100,9,0.50,self.general_boss_health)
                 
     def move(self):
         self.distance=GeneralBoss.distance(self)
         if self.level_3 and self.distance>100 and not self.level_3_player_talk_4:
+            self.general_boss_attack_type[0]=random.randint(0,2)
             BossGeneralFunctions.move(self,self.general_boss_rect,self.general_boss_move_flip,self.general_boss_move,self.general_boss_move_number,170,100,7,0.50,
                                       self.general_boss_x_movement,self.general_boss_y_movement,4,4,self.general_boss_attack_number,self.general_boss_health)
 
@@ -68,18 +74,38 @@ class GeneralBoss:
 
         if self.general_boss_attack_number[0]+0.5>=self.max_attack_number:
         
-            self.general_boss_attack_type[0]+=1
+            self.general_boss_attack_type[0]=random.randint(0,3)
             if self.general_boss_attack_type[0]>3: 
                 self.general_boss_attack_type[0]=0
 
+        if self.general_boss_attack_type[0]==3:
+            self.general_boss_player_slow_down_number[0]=100
+        else:
+            self.general_boss_player_slow_down_number[0]-=1
+            if self.general_boss_player_slow_down_number[0]<=0:
+                self.general_boss_player_slow_down_number[0]=0
+        
         if self.level_3 and self.distance<=100 and not self.level_3_player_talk_4:
-            BossGeneralFunctions.attack(self,self.general_boss_rect,self.general_boss_attack_flip,self.genreal_boss_attack,self.general_boss_attack_number,170,100,self.max_attack_number,0.60,self.general_boss_x_movement,
+            BossGeneralFunctions.attack(self,self.general_boss_rect,self.general_boss_attack_flip,self.genreal_boss_attack,self.general_boss_attack_number,170,100,self.max_attack_number,0.75,self.general_boss_x_movement,
                                         self.general_boss_y_movement,self.general_boss_fall_type,self.general_boss_health,self.player_health,self.player_health_reduction)
             
+    
+    def fall(self):
+        self.general_boss_fall=general_boss_fall ; self.general_boss_fall_flip=general_boss_fall_flip ; self.general_boss_fall_number=general_boss_fall_number
+        if self.level_3 and not self.level_3_player_talk_4:
+            BossGeneralFunctions.fall(self,self.general_boss_rect,self.general_boss_fall,self.general_boss_fall_flip,self.general_boss_fall_number,0.50,18,self.general_boss_x_movement,self.general_boss_y_movement,
+                                      170,100,self.general_boss_health,self.general_boss_fall_type)
+            if self.general_boss_health[0]<=0:
+                self.general_boss_player_slow_down_number[0]=0
+
         
     def health(self):
         if self.level_3 and not self.level_3_player_talk_4:
             BossGeneralFunctions.health(self,self.general_boss_health,1000,500,1000/500,self.general_boss_health_icon,self.orange_red,670,10,682,14,1)
+
+    def player_hit(self,key):
+        if self.level_3 and not self.level_3_player_talk_4:
+            BossGeneralFunctions.player_hit(self,self.general_boss_health,self.player_attack_number,100,key)
     
     def collision_with_object(self):
         if self.level_3:
