@@ -4,15 +4,20 @@ import math
 from Game_Asset_Code import * 
 from .enemy_general_functions import EnemyGeneralFunctions
 from Game_Code.control_test import ControlTest
+from Game_Code.lose import Lose
 
 class EnemyThree:
-    def __init__(self,level_3,player_control) -> None:
+    def __init__(self,level_3,player_control,reset_locations) -> None:
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3)
         self.enemy_three_idle_number=enemy_three_idle_number ; self.enemy_three_move_number=enemy_three_move_number ; self.enemy_three_fall_number=enemy_three_fall_number ; self.enemy_three_attack_number=enemy_three_attack_number ; self.player_control_index=player_control_index
         self.level_3=level_3 ; self.enemy_3_health=enemy_3_health ; self.enemy_3_x_movement=enemy_3_x_movement ; self.enemy_3_y_movement=enemy_3_y_movement ; self.player_control_cooldown=player_control_cooldown
         self.player_control=player_control ; self.player_rect=player_rect ; self.camera_x_y=camera_x_y ; self.enemy_three_fall_type=enemy_three_fall_type ; self.player_health=player_health ; self.enemy_3_x_movement_control=enemy_3_x_movement_control
         self.enemy_3_y_movement_control=enemy_3_y_movement_control ; self.enemy_3_arrow_x_movement=enemy_3_arrow_x_movement ; self.enemy_3_arrow_y_movement=enemy_3_arrow_y_movement ; self.enemy_3_level_3_arrow_rect=enemy_3_level_3_arrow_rect
         self.enemy_three_arrow_list=enemy_three_arrow_list ; self.enemy_three_arrow_list_flip=enemy_three_arrow_list_flip ; self.enemy_three_arrow_number=enemy_three_arrow_number ; self.player_last_position=player_last_position ; self.player_health=player_health
-        self.font=r"Assets\Misc\Fonts\Pixellari.ttf" ; self.red=(178,34,34) ; self.player_attack_number=player_attack_number ; self.player_key=player_key
+        self.font=r"Assets\Misc\Fonts\Pixellari.ttf" ; self.red=(178,34,34) ; self.player_attack_number=player_attack_number ; self.player_key=player_key ; self.reset_locations=reset_locations
+
+        self.enemy_three_level_3_x=enemy_three_level_3_x
+        self.enemy_three_level_3_y=enemy_three_level_3_y
 
         if self.level_3:
             self.tile_rect=level_3_tile_set_rect
@@ -86,6 +91,13 @@ class EnemyThree:
             self.distance_list=EnemyThree.distance(self)
             EnemyGeneralFunctions.player_hit(self,self.font,self.red,self.distance_list,self.player_attack_number,self.enemy_3_health,self.enemy_rect,self.player_key,25)
 
+    def reset_position(self):
+        if self.reset_locations:
+            if self.level_3:
+               # print("ENEMY THREE")
+                Lose.reset_positions_multiple(self,self.enemy_rect,self.enemy_three_level_3_x,self.enemy_three_level_3_y,self.enemy_3_health,100)
+                return True
+        
     def arrow_distance(self):
         self.arrow_player_distance_list=[]
         for idx,arrow in enumerate(self.enemy_3_level_3_arrow_rect):

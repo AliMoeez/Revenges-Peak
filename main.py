@@ -26,15 +26,15 @@ while run:
                   reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2,level_3)
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2,level_3)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control,level_2,level_3)
-    enemy_three=EnemyThree(level_3,player_control)
+    enemy_three=EnemyThree(level_3,player_control,reset_locations)
     people=People(level_1,level_1_wizard_talk,reset_locations,level_2)
     frostboss=FrostBoss(level_2,level_2_boss_talk,reset_locations)
-    generalboss=GeneralBoss(level_3,level_3_player_talk_4,level_3_player_talk_3)
+    generalboss=GeneralBoss(level_3,level_3_player_talk_4,level_3_player_talk_3,reset_locations)
 
     healingplayer=HealingPlayer(level_1,level_2,reset_locations)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
                       level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4)
-    lose=Lose(level_1,player_lose_condition,reset_locations,level_2)
+    lose=Lose(level_1,player_lose_condition,reset_locations,level_2,level_3)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
 
@@ -114,19 +114,23 @@ while run:
         if lose.retry(event):
             if level_2:
                 level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True
+            if level_3:
+                camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_3_player_talk_1=True ; level_3_player_talk_2=True ; level_3_player_talk_3=True ; level_3_player_talk_4=True
 
             player_lose_condition=False ; reset_locations=True ;dialogue_objective_list[0]=0 
 
         if lose.back_to_menu(event):
-            player_lose_condition=False ; reset_locations=True ; level_1=False ; level_2=False
+            player_lose_condition=False ; reset_locations=True ; level_1=False ; level_2=False ; level_3=False
             if level_2:
                 level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True
+            if level_3:
+               level_3_player_talk_1=True ; level_3_player_talk_2=True ; level_3_player_talk_3=True ; level_3_player_talk_4=True
         
         if win.back_to_menu(event):
             level_1_wizard_talk=True ; talk_to_abyss_level_one=True ; investigate_object_level_one=True
             reset_locations=True
             if level_2:
-                camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True 
+                level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True 
             level_1=False ; level_2=False
         
         if win.next_level(event):
@@ -157,6 +161,11 @@ while run:
         if player.reset_position() and  enemy_one.reset_position() and enemy_two.reset_position() and people.reset_position() and frostboss.reset_position() and healingplayer.reset_position():
             camera_x_y[0]=0 ; camera_x_y[1]=0 
             reset_locations=False
+    if level_3:
+        if player.reset_position() and enemy_one.reset_position() and enemy_two.reset_position() and enemy_three.reset_position() and generalboss.reset_position():
+            print("EHRHE")
+            camera_x_y[0]=0 ; camera_x_y[1]=0
+            reset_locations=False
 
 
     if level_3:
@@ -167,6 +176,8 @@ while run:
             
 
     print(general_boss_player_slow_down_number)
+            
+   # print(reset_locations,"RLRLRLLRLRLRL")
 
     menu.main_menu()
     menu.main_menu_buttons()
@@ -196,6 +207,7 @@ while run:
     player.dialouge_state(key)
     player.fall()
     player.player_speed_changes()
+    player.reset_position()
     player.collision_with_object()
     player.collision_with_object_logic()
 
@@ -204,6 +216,7 @@ while run:
     enemy_one.run(key)
     enemy_one.attack(key)
     enemy_one.player_hit()
+    enemy_one.reset_position()
     enemy_one.fall()
     enemy_one.collision_with_object()
     enemy_one.collision_with_object_logic()
@@ -219,6 +232,7 @@ while run:
     enemy_two.attack()
     enemy_two.player_hit()
     enemy_two.fall()
+    enemy_two.reset_position()
     enemy_two.collision_with_object()
     enemy_two.collision_with_object_logic()
     enemy_two.enemy_index()
@@ -234,6 +248,7 @@ while run:
     enemy_three.player_hit()
     enemy_three.arrow_total_logic()
     enemy_three.fall()
+    enemy_three.reset_position()
     enemy_three.collision_with_object()
     enemy_three.collision_with_object_logic()
     enemy_three.enemy_index()
@@ -260,6 +275,7 @@ while run:
     generalboss.attack()
     generalboss.fall()
     generalboss.health()
+    generalboss.reset_position()
     generalboss.player_hit(key)
     generalboss.collision_with_object()
     generalboss.collision_with_object_logic()

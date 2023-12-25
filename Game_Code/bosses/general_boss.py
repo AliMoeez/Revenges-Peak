@@ -5,9 +5,11 @@ import math
 
 from Game_Asset_Code import *
 from .boss_general_fucntions import BossGeneralFunctions
+from Game_Code.lose import Lose
 
 class GeneralBoss:
-    def __init__(self,level_3,level_3_player_talk_4,level_3_player_talk_3):
+    def __init__(self,level_3,level_3_player_talk_4,level_3_player_talk_3,reset_locations):
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3)
         self.level_3=level_3
         self.level_3_player_talk_4=level_3_player_talk_4
         self.level_3_player_talk_3=level_3_player_talk_3
@@ -29,6 +31,9 @@ class GeneralBoss:
         self.player_y_movement=player_y_movement
         self.general_boss_player_slow_down_number=general_boss_player_slow_down_number
         self.player_attack_number=player_attack_number
+        self.reset_locations=reset_locations
+        self.general_boss_level_3_x=general_boss_level_3_x
+        self.general_boss_level_3_y=general_boss_level_3_y
 
     def distance(self):
         self.player_general_boss_distance=math.hypot(self.player_rect.x-self.general_boss_rect.x,self.player_rect.y-self.general_boss_rect.y)
@@ -64,13 +69,13 @@ class GeneralBoss:
         self.distance=GeneralBoss.distance(self)
 
         if self.general_boss_attack_type[0]==0:
-            self.genreal_boss_attack=self.general_boss_attack_1 ; self.general_boss_attack_flip=self.general_boss_attack_1_flip ; self.player_health_reduction=25 ; self.max_attack_number=9
+            self.genreal_boss_attack=self.general_boss_attack_1 ; self.general_boss_attack_flip=self.general_boss_attack_1_flip ; self.player_health_reduction=250 ; self.max_attack_number=9 #25
         elif self.general_boss_attack_type[0]==1:
-            self.genreal_boss_attack=self.general_boss_attack_2 ; self.general_boss_attack_flip=self.general_boss_attack_2_flip ; self.player_health_reduction=50 ; self.max_attack_number=12
+            self.genreal_boss_attack=self.general_boss_attack_2 ; self.general_boss_attack_flip=self.general_boss_attack_2_flip ; self.player_health_reduction=500 ; self.max_attack_number=12 #50
         elif self.general_boss_attack_type[0]==2:
-            self.genreal_boss_attack=self.general_boss_attack_3 ; self.general_boss_attack_flip=self.general_boss_attack_3_flip ; self.player_health_reduction=70 ; self.max_attack_number=9
+            self.genreal_boss_attack=self.general_boss_attack_3 ; self.general_boss_attack_flip=self.general_boss_attack_3_flip ; self.player_health_reduction=700 ; self.max_attack_number=9 #70
         elif self.general_boss_attack_type[0]==3:
-            self.genreal_boss_attack=self.general_boss_attack_4 ; self.general_boss_attack_flip=self.general_boss_attack_4_flip ; self.player_health_reduction=150 ; self.max_attack_number=30
+            self.genreal_boss_attack=self.general_boss_attack_4 ; self.general_boss_attack_flip=self.general_boss_attack_4_flip ; self.player_health_reduction=1500 ; self.max_attack_number=30 #150
 
         if self.general_boss_attack_number[0]+0.5>=self.max_attack_number:
         
@@ -106,6 +111,11 @@ class GeneralBoss:
     def player_hit(self,key):
         if self.level_3 and not self.level_3_player_talk_4:
             BossGeneralFunctions.player_hit(self,self.general_boss_health,self.player_attack_number,100,key)
+
+    def reset_position(self):
+        if self.level_3 and self.reset_locations and not self.level_3_player_talk_4:
+            Lose.reset_positions(self,self.general_boss_rect,self.general_boss_level_3_x[0],self.general_boss_level_3_y[0])
+            self.general_boss_player_slow_down_number[0]=0
     
     def collision_with_object(self):
         if self.level_3:
