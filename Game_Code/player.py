@@ -149,6 +149,7 @@ class Player:
     def reset_position(self):
         if self.reset_locations:
             if self.level_1 or self.level_2 or self.level_3:
+                self.general_boss_player_slow_down_number[0]=0
                 Lose.reset_positions(self,player_rect,self.player_x,self.player_y)
                 return True
 

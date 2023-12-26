@@ -23,7 +23,7 @@ class FrostBoss:
         self.frost_boss_idle=frost_boss_idle ; self.frost_boss_idle_flip=frost_boss_idle_flip ; self.frost_boss_idle_number=frost_boss_idle_number
         if self.level_2 and self.level_2_boss_talk:
             BossGeneralFunctions.idle(self,self.frost_boss_rect,self.frost_boss_idle,
-                                      self.frost_boss_idle_flip,self.frost_boss_idle_number,70,30,7,0.25,self.frost_boss_health)
+                                      self.frost_boss_idle_flip,self.frost_boss_idle_number,70,30,7,0.25,self.frost_boss_health,self.player_health)
             pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(self.frost_boss_rect.x-self.camera_x_y[0],self.frost_boss_rect.y-self.camera_x_y[1],128.5,128.5),width=1)
 
     def move(self):
@@ -34,7 +34,7 @@ class FrostBoss:
                 if distance>100:
                     BossGeneralFunctions.move(self,self.frost_boss_rect,self.frost_boss_run,self.frost_boss_run_flip,
                                             self.frost_boss_run_number,70,30,11,0.25,self.frost_boss_x_movement,
-                                            self.frost_boss_y_movement,self.frost_boss_x_increment[0],self.frost_boss_y_increment[0],self.frost_boss_attack_number,self.frost_boss_health)
+                                            self.frost_boss_y_movement,self.frost_boss_x_increment[0],self.frost_boss_y_increment[0],self.frost_boss_attack_number,self.frost_boss_health,self.player_health)
                     pygame.draw.rect(SCREEN,(200,200,200),pygame.Rect(self.frost_boss_rect.x-self.camera_x_y[0],self.frost_boss_rect.y-self.camera_x_y[1],128.5,128.5),width=1)
               
     def attack(self):

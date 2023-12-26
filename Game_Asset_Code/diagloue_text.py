@@ -103,7 +103,16 @@ def level_3_dialogue(player_icon,arrow_enemy_icon):
     level_3_dialogue_2=[
         ("There must be some sort of clue to where Anes is.....",player_icon,"You")
     ]
+    level_3_dialogue_3=[
+        ("Your weakness was your demise, your ignorance was your strength......",arrow_enemy_icon,"General Animous")
+    ]
+    level_3_dialogue_4=[
+        ("Aughhh",arrow_enemy_icon,"General Animous"),
+        ("Good ridannce.........Tell me more about Anes to keep your honour",player_icon,"You"),
+        ("NeveRrRrrr.................",arrow_enemy_icon,"General Animous"),
+        ("So be it",player_icon,"You")
+    ]
 
-    return level_3_dialogue_1,level_3_dialogue_2
+    return level_3_dialogue_1,level_3_dialogue_2,level_3_dialogue_3,level_3_dialogue_4
 
        

@@ -8,8 +8,8 @@ class BossGeneralFunctions:
         self.camera_x_y=camera_x_y
 
     def idle(self,boss_rect,idle:list,idle_flip:list,idle_number:list,offset_x:int,offset_y:int,
-             idle_max_length:int,idle_increase:float,boss_health:list):
-        if boss_health[0]>0:
+             idle_max_length:int,idle_increase:float,boss_health:list,player_health:list):
+        if boss_health[0]>0 or player_health[0]<=0:
             if self.player_rect.x<=boss_rect.x:
                 SCREEN.blit(idle[int(idle_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
             else:
@@ -20,8 +20,8 @@ class BossGeneralFunctions:
 
     def move(self,boss_rect,move_list:list,move_list_flip:list,move_list_number:list,offset_x:int,
              offset_y:int,move_max_length:int,move_increase:float,boss_x_movement:list,
-             boss_y_movement:list,x_movement:int,y_movement:int,attack_list_number,boss_health:list): 
-        if boss_health[0]>0:
+             boss_y_movement:list,x_movement:int,y_movement:int,attack_list_number,boss_health:list,player_health:list): 
+        if boss_health[0]>0 and player_health[0]>0:
             attack_list_number[0]=0
             
             if self.player_rect.y<=boss_rect.y-10:  boss_y_movement[0]=-y_movement/2
@@ -41,7 +41,7 @@ class BossGeneralFunctions:
     def attack(self,boss_rect,attack_list:list,attack_list_flip:list,attack_list_number:list,offset_x:int,offset_y:int,
                attack_max_length:int,attack_increase:float,boss_x_movement:list,boss_y_movement:list,boss_fall_type:list,
                boss_health:list,player_health:list,player_health_fall:int):
-        if boss_health[0]>0:
+        if boss_health[0]>0 and player_health[0]>0:
             boss_x_movement[0]=0 ; boss_y_movement[0]=0
             if self.player_rect.x<=boss_rect.x:
                 SCREEN.blit(attack_list[int(attack_list_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))

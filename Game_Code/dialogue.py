@@ -8,7 +8,7 @@ from .bosses.frost_boss import FrostBoss
 
 class Dialouge:
     def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
-                 level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4):
+                 level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win):
         People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2) 
         EnemyTwo.__init__(self,level_1,enemy_2_rects,reset_locations,player_control,level_2,level_3)
         FrostBoss.__init__(self,level_2,level_2_boss_talk,reset_locations)
@@ -30,10 +30,14 @@ class Dialouge:
         self.level_3_player_talk_2=level_3_player_talk_2
         self.level_3_player_talk_3=level_3_player_talk_3
         self.level_3_player_talk_4=level_3_player_talk_4
+        self.level_3_player_lose=level_3_player_lose
+        self.level_3_player_win=level_3_player_win
         
         self.enemy_1_health=enemy_1_health
         self.enemy_2_health=enemy_2_health
         self.enemy_3_health=enemy_3_health
+        self.player_health=player_health
+        self.general_boss_health=general_boss_health
 
     def distance_level_object(self):
         self.tile_interact_rect_distance=[]
@@ -118,6 +122,8 @@ class Dialouge:
             return True
         if self.level_3 and  self.level_3_player_talk_2 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health) and not self.level_3_player_talk_1:
             return True
+        if self.level_3 and not self.level_3_player_talk_4 and self.player_health[0]<=0:
+            return True
         
     def dialogue_condition_distance(self):
         if self.level_1:
@@ -169,6 +175,8 @@ class Dialouge:
         if self.level_3:
             self.test_level_1_dialogue=level_3_dialogue(self.player_icon,self.general_boss_icon)[0]
             self.test_level_2_dialogue=level_3_dialogue(self.player_icon,self.general_boss_icon)[1]
+            self.test_level_3_dialogue=level_3_dialogue(self.player_icon,self.general_boss_icon)[2]
+            self.test_level_4_dialogue=level_3_dialogue(self.player_icon,self.general_boss_icon)[3]
 
     def text_type_story(self):
         if self.dialogue_story_condition:
@@ -203,6 +211,17 @@ class Dialouge:
             
             if self.level_3_player_talk_2 and self.level_3 and not self.level_3_player_talk_1:
                 self.dialogue_show=self.test_level_2_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+
+            if self.level_3 and self.player_health[0]<=0 and not self.level_3_player_talk_4 :
+                print("HERE")
+                self.dialogue_show=self.test_level_3_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+            
+            if self.level_3 and self.general_boss_health[0]<=0 and not self.level_3_player_talk_4:
+                self.dialogue_show=self.test_level_4_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
                

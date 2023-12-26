@@ -33,7 +33,7 @@ while run:
 
     healingplayer=HealingPlayer(level_1,level_2,reset_locations)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
-                      level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4)
+                      level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win)
     lose=Lose(level_1,player_lose_condition,reset_locations,level_2,level_3)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
@@ -67,6 +67,7 @@ while run:
                 if dialogue_objective_list[0]==1: level_3_player_talk_2=False
                 if dialogue_objective_list[0]==2: level_3_player_talk_3=False
                 if dialogue_objective_list[0]==3: level_3_player_talk_4=False
+                level_3_player_lose=False
     
         if event.type==pygame.QUIT:
             pygame.quit() ; sys.exit()
@@ -163,7 +164,7 @@ while run:
             reset_locations=False
     if level_3:
         if player.reset_position() and enemy_one.reset_position() and enemy_two.reset_position() and enemy_three.reset_position() and generalboss.reset_position():
-            print("EHRHE")
+            general_boss_player_slow_down_number[0]=0
             camera_x_y[0]=0 ; camera_x_y[1]=0
             reset_locations=False
 
@@ -175,7 +176,7 @@ while run:
     #print(player_rect.x,general_boss_rect.x, player_rect.y,general_boss_rect.y)
             
 
-    print(general_boss_player_slow_down_number)
+   # print(player_health)
             
    # print(reset_locations,"RLRLRLLRLRLRL")
 
@@ -271,6 +272,7 @@ while run:
     frostboss.collision_with_object_logic()
 
     generalboss.walk_up_condition()
+    generalboss.idle()
     generalboss.move()
     generalboss.attack()
     generalboss.fall()

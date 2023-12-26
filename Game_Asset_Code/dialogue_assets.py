@@ -18,5 +18,7 @@ level_3_player_talk_1=False
 level_3_player_talk_2=False
 level_3_player_talk_3=False
 level_3_player_talk_4=True
+level_3_player_lose=False
+level_3_player_win=False
 
 
