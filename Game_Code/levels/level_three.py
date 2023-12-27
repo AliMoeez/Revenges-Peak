@@ -14,6 +14,7 @@ class LevelThree:
         self.object_rect=object_rect
         self.level_3_player_talk_3=level_3_player_talk_3
         self.level_3_player_talk_4=level_3_player_talk_4
+        self.general_boss_health=general_boss_health
 
     def distance(self,x_val,y_val,player_rect):
         self.distance_list=[]
@@ -39,6 +40,12 @@ class LevelThree:
             if (self.rect_camera.y<self.min_y_border or self.rect_camera.y>self.max_y_border) and (self.rect_camera.x<self.min_x_border or self.rect_camera.x>self.max_x_border):
                 LevelThree.border_logic_x_y_axis(self)
 
+
+    def win_condition(self):
+        if self.level_3:
+            if not self.level_3_player_talk_4 and self.general_boss_health[0]<=0:
+                return True
+
     def general_tiles(self,layers:str):
         for layer in self.level_3_tile_set:
             if layer.name==layers:
@@ -59,6 +66,7 @@ class LevelThree:
                         if distance<1000:
                             SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
                     rect_list.append(pygame.Rect(x_val,y_val,width,height))
+
 
 
     def ground_tiles(self):

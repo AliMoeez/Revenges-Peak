@@ -3,12 +3,14 @@ import pygame
 from Game_Asset_Code import *
 from .levels import LevelOne
 from .levels import LevelTwo
+from .levels import LevelThree
 
 
 class Win:
-    def __init__(self,level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one):
+    def __init__(self,level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_3,level_3_player_talk_4):
         LevelOne.__init__(self,camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
         LevelTwo.__init__(self,level_2,level_screen)
+        LevelThree.__init__(self,level_3,level_3_player_talk_3,level_3_player_talk_4)
         self.level_1=level_1 ; self.screen_fade_number=screen_fade_number ; self.WHITE=(255,255,255) ; self.RED=(220,20,60)
         self.font=r"Assets\Misc\Fonts\Pixellari.ttf" ; self.player_health=player_health
         self.level_1_wizard_talk=level_1_wizard_talk
@@ -17,11 +19,15 @@ class Win:
         self.player_x_movment=player_x_movement
         self.player_y_movement=player_y_movement
         self.level_2=level_2
+        self.level_3=level_3
+        self.level_3_player_talk_4=level_3_player_talk_4
+        self.general_boss_health=general_boss_health
         self.dialogue_objective_list=dialogue_objective_list
 
     def condition(self):
-        if any([self.level_1,self.level_2]):
-            if LevelOne.win_condition(self) or LevelTwo.win_condition(self):
+        if any([self.level_1,self.level_2,self.level_3]):
+            if LevelOne.win_condition(self) or LevelTwo.win_condition(self) or LevelThree.win_condition(self):
+                print("HERERERERERERERE")
                 self.player_x_movment[0]=0 ; self.player_y_movement[0]=0 ; self.dialogue_objective_list[0]=0
                 return True
 

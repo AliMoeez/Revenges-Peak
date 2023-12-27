@@ -54,7 +54,7 @@ class GeneralBoss:
                                         170,100,9,0.50,self.general_boss_health,self.player_health)
                 
     def idle(self):
-        if self.level_3 and not self.level_3_player_talk_4 and self.player_health[0]<0:
+        if self.level_3 and not self.level_3_player_talk_4 and self.player_health[0]<=0:
             self.general_boss_x_movement[0]=0 ; self.general_boss_y_movement[0]=0
             BossGeneralFunctions.idle(self,self.general_boss_rect,self.general_boss_idle_flip,self.general_boss_idle,self.general_boss_idle_number,
                                     170,100,9,0.50,self.general_boss_health,self.player_health)           
@@ -75,13 +75,13 @@ class GeneralBoss:
         self.distance=GeneralBoss.distance(self)
 
         if self.general_boss_attack_type[0]==0:
-            self.genreal_boss_attack=self.general_boss_attack_1 ; self.general_boss_attack_flip=self.general_boss_attack_1_flip ; self.player_health_reduction=250 ; self.max_attack_number=9 #25
+            self.genreal_boss_attack=self.general_boss_attack_1 ; self.general_boss_attack_flip=self.general_boss_attack_1_flip ; self.player_health_reduction=25 ; self.max_attack_number=9 #25
         elif self.general_boss_attack_type[0]==1:
-            self.genreal_boss_attack=self.general_boss_attack_2 ; self.general_boss_attack_flip=self.general_boss_attack_2_flip ; self.player_health_reduction=500 ; self.max_attack_number=12 #50
+            self.genreal_boss_attack=self.general_boss_attack_2 ; self.general_boss_attack_flip=self.general_boss_attack_2_flip ; self.player_health_reduction=50 ; self.max_attack_number=12 #50
         elif self.general_boss_attack_type[0]==2:
-            self.genreal_boss_attack=self.general_boss_attack_3 ; self.general_boss_attack_flip=self.general_boss_attack_3_flip ; self.player_health_reduction=700 ; self.max_attack_number=9 #70
+            self.genreal_boss_attack=self.general_boss_attack_3 ; self.general_boss_attack_flip=self.general_boss_attack_3_flip ; self.player_health_reduction=70 ; self.max_attack_number=9 #70
         elif self.general_boss_attack_type[0]==3:
-            self.genreal_boss_attack=self.general_boss_attack_4 ; self.general_boss_attack_flip=self.general_boss_attack_4_flip ; self.player_health_reduction=1500 ; self.max_attack_number=30 #150
+            self.genreal_boss_attack=self.general_boss_attack_4 ; self.general_boss_attack_flip=self.general_boss_attack_4_flip ; self.player_health_reduction=150 ; self.max_attack_number=30 #150
 
         if self.general_boss_attack_number[0]+0.5>=self.max_attack_number:
         
@@ -116,7 +116,7 @@ class GeneralBoss:
 
     def player_hit(self,key):
         if self.level_3 and not self.level_3_player_talk_4:
-            BossGeneralFunctions.player_hit(self,self.general_boss_health,self.player_attack_number,100,key)
+            BossGeneralFunctions.player_hit(self,self.general_boss_health,self.player_attack_number,500,key)
 
     def reset_position(self):
         if self.level_3 and self.reset_locations:

@@ -32,6 +32,8 @@ class Dialouge:
         self.level_3_player_talk_4=level_3_player_talk_4
         self.level_3_player_lose=level_3_player_lose
         self.level_3_player_win=level_3_player_win
+
+        self.dialogue_objective_list=dialogue_objective_list
         
         self.enemy_1_health=enemy_1_health
         self.enemy_2_health=enemy_2_health
@@ -122,7 +124,11 @@ class Dialouge:
             return True
         if self.level_3 and  self.level_3_player_talk_2 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health) and not self.level_3_player_talk_1:
             return True
-        if self.level_3 and not self.level_3_player_talk_4 and self.player_health[0]<=0:
+        if self.level_3 and not self.level_3_player_talk_4 and self.player_health[0]<=0 and not self.level_3_player_lose:
+            self.dialogue_objective_list[0]=4
+            return True
+        if self.level_3 and not self.level_3_player_talk_4 and self.general_boss_health[0]<=0 and not self.level_3_player_win:
+            self.dialogue_objective_list[0]=5
             return True
         
     def dialogue_condition_distance(self):
@@ -215,7 +221,6 @@ class Dialouge:
                 return self.dialogue_show,self.dialouge_list
 
             if self.level_3 and self.player_health[0]<=0 and not self.level_3_player_talk_4 :
-                print("HERE")
                 self.dialogue_show=self.test_level_3_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list

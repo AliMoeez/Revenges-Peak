@@ -6,7 +6,7 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 from Game_Asset_Code import *
-from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,Player,EnemyOne,EnemyTwo,EnemyThree,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,GeneralBoss,HealingPlayer
+from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,LevelFour,Player,EnemyOne,EnemyTwo,EnemyThree,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,GeneralBoss,HealingPlayer
 
 while run:
     level_1_tile_set_rect.clear()
@@ -20,6 +20,7 @@ while run:
     levelone=LevelOne(camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
     leveltwo=LevelTwo(level_2,level_screen)
     levelthree=LevelThree(level_3,level_3_player_talk_3,level_3_player_talk_4)
+    levelfour=LevelFour(level_4)
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
                   player_control,dialogue_condition,dialogue_story_condition,
@@ -31,16 +32,16 @@ while run:
     frostboss=FrostBoss(level_2,level_2_boss_talk,reset_locations)
     generalboss=GeneralBoss(level_3,level_3_player_talk_4,level_3_player_talk_3,reset_locations)
 
-    healingplayer=HealingPlayer(level_1,level_2,reset_locations)
+    healingplayer=HealingPlayer(level_1,level_2,reset_locations,level_3)
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
                       level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win)
     lose=Lose(level_1,player_lose_condition,reset_locations,level_2,level_3)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
-    win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
+    win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_3,level_3_player_talk_4)
+
+    print(player_rect.x,player_rect.y)
 
     for event in event_list:
-
-    #    print(dialogue_click_list)
 
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True ; dialogue_story_condition=False
@@ -67,7 +68,8 @@ while run:
                 if dialogue_objective_list[0]==1: level_3_player_talk_2=False
                 if dialogue_objective_list[0]==2: level_3_player_talk_3=False
                 if dialogue_objective_list[0]==3: level_3_player_talk_4=False
-                level_3_player_lose=False
+                if dialogue_objective_list[0]==4: level_3_player_lose=True
+                if dialogue_objective_list[0]==5: level_3_player_win=True
     
         if event.type==pygame.QUIT:
             pygame.quit() ; sys.exit()
@@ -86,16 +88,16 @@ while run:
                 if event.type==pygame.MOUSEBUTTONDOWN and menu.level_screen_blit_background()[3].collidepoint(event.pos):
                     level_screen=False ; level_4=True
         
-        if any([level_1,level_2,level_3]):
+        if any([level_1,level_2,level_3,level_4]):
             if key[pygame.K_q]:
-                level_1=False  ; level_2=False ; level_3=False ; level_screen=True
+                level_1=False  ; level_2=False ; level_3=False ; level_4=False ; level_screen=True
             if tutorial.skip(event,event_list):
                 text_position[0]=0
                 if tutorial_one: tutorial_one=False
                 if tutorial_two: tutorial_two=False
             if tutorial.begin_tutorial(event,event_list): tutorial_two=True
 
-            if level_2 or level_3:
+            if level_2 or level_3 or level_4:
                 tutorial_one=False ; tutorial_two=False
 
             if key[pygame.K_f] and player_control_cooldown[0]==1:
@@ -132,7 +134,9 @@ while run:
             reset_locations=True
             if level_2:
                 level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True 
-            level_1=False ; level_2=False
+            if level_3:
+                camera_x_y[0]=0 ; camera_x_y[1]=0  ; level_3_player_talk_1=True ; level_3_player_talk_2=True ; level_3_player_talk_3=True ; level_3_player_talk_4=True ; level_3_player_lose=False ; level_3_player_win=False
+            level_1=False ; level_2=False ; level_3=False
         
         if win.next_level(event):
             if level_1:
@@ -140,6 +144,9 @@ while run:
             if level_2:
                 level_2=False ; level_3=True
                 camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True 
+            if level_3:
+                level_3=False; level_4=True
+                camera_x_y[0]=0 ; camera_x_y[1]=0  ; level_3_player_talk_1=True ; level_3_player_talk_2=True ; level_3_player_talk_3=True ; level_3_player_talk_4=True ; level_3_player_lose=False ; level_3_player_win=False
             reset_locations=True
 
         if healingplayer.healing_condition(event):
@@ -173,13 +180,6 @@ while run:
         if all(i<=0 for i in enemy_1_health) and all(i<=0 for i in enemy_2_health) and all(i<=0 for i in enemy_3_health):
             level_3_all_enemies=True
 
-    #print(player_rect.x,general_boss_rect.x, player_rect.y,general_boss_rect.y)
-            
-
-   # print(player_health)
-            
-   # print(reset_locations,"RLRLRLLRLRLRL")
-
     menu.main_menu()
     menu.main_menu_buttons()
     menu.level_screen_blit_background()
@@ -201,6 +201,8 @@ while run:
     levelthree.filler_tiles()
     levelthree.ground_tiles()
     levelthree.object_tiles()
+
+    levelfour.background()
 
     player.move(key)
     player.attack(key)

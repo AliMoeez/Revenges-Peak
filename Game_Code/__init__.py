@@ -2,6 +2,7 @@ from .menu import Menu
 from .levels import LevelOne
 from .levels import LevelTwo
 from .levels import LevelThree
+from .levels import LevelFour
 from .player import Player
 from .enemies import EnemyGeneralFunctions
 from .enemies import EnemyOne

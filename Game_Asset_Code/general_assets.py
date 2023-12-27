@@ -60,8 +60,14 @@ level_2_health_potion_y=[1042,975]
 
 level_2_health_potion_rect=[]
 
+level_3_health_potion_x=[1008,3019,3765]
+level_3_health_potion_y=[618,617,522]
+
+level_3_health_potion_rect=[]
+
 for i,y in enumerate(level_2_health_potion_x): level_2_health_potion_rect.append(pygame.Rect(level_2_health_potion_x[i],level_2_health_potion_y[i],25,25))
 
+for i,y in enumerate(level_3_health_potion_x): level_3_health_potion_rect.append(pygame.Rect(level_3_health_potion_x[i],level_3_health_potion_y[i],25,25))
 
 
 
