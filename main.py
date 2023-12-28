@@ -12,19 +12,22 @@ while run:
     level_1_tile_set_rect.clear()
     level_2_tile_set_rect.clear()
     level_3_tile_set_rect.clear()
+ #   level_4_tile_set_rect.clear()
     object_rect.clear()
     key=pygame.key.get_pressed()
     event_list=pygame.event.get()
+
+   # print(level_4_tile_set_rect)
 
     menu=Menu(level_screen,level_1,level_2)
     levelone=LevelOne(camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
     leveltwo=LevelTwo(level_2,level_screen)
     levelthree=LevelThree(level_3,level_3_player_talk_3,level_3_player_talk_4)
-    levelfour=LevelFour(level_4)
+    levelfour=LevelFour(level_4,level_screen)
 
     player=Player(player_x,player_y,player_width,player_height,player_rect,level_1,
                   player_control,dialogue_condition,dialogue_story_condition,
-                  reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2,level_3)
+                  reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2,level_3,level_4)
     enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2,level_3)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control,level_2,level_3)
     enemy_three=EnemyThree(level_3,player_control,reset_locations)
@@ -38,8 +41,6 @@ while run:
     lose=Lose(level_1,player_lose_condition,reset_locations,level_2,level_3)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_3,level_3_player_talk_4)
-
-    print(player_rect.x,player_rect.y)
 
     for event in event_list:
 
@@ -202,7 +203,9 @@ while run:
     levelthree.ground_tiles()
     levelthree.object_tiles()
 
-    levelfour.background()
+    levelfour.border()
+    levelfour.ground_layer()
+    levelfour.collision_layer()
 
     player.move(key)
     player.attack(key)
@@ -292,6 +295,7 @@ while run:
     levelone.tile_set_tree_top()
     leveltwo.tile_layer_tree_tops()
     levelthree.tree_top_tiles()
+    levelfour.tree_top_layer()
 
     player.health_power_cooldown_icons()
     frostboss.health()

@@ -23,6 +23,8 @@ level_2_tile_set=load_pygame(r"Assets\Tileset\Level_2_TIleset\Level_2_Tileset.tm
 
 level_3_tile_set=load_pygame(r"Assets\Tileset\Level_3_Tileset\Level_3_Tileset.tmx") ; level_3_tile_set_rect=[]
 
+level_4_tile_set=load_pygame(r"Assets\Tileset\Level_4_Tileset\Level_4_Tilset_Sheet.tmx") ; level_4_tile_set_rect=[]
+
 object_rect=[] 
 
 left_mouse_button_icon=pygame.image.load(r"Assets\Keys\Buttons Pack\Buttons Pack\MOUSE\MOUSEBUTTONLEFT.png")
