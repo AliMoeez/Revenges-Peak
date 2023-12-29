@@ -10,6 +10,7 @@ class LevelFour:
         self.player_rect=player_rect
         self.camera_x_y=camera_x_y
         self.level_screen=level_screen
+        self.object_rect=object_rect
 
     def border(self):
         self.player_control=player_control ; self.player_control_cooldown=player_control_cooldown ; self.enemy_rects=enemy_1_level_1_rect+enemy_2_rects  ; self.player_control_index=player_control_index
@@ -58,6 +59,9 @@ class LevelFour:
 
     def collision_layer(self):
         LevelFour.tile_general_collision_functions(self,"Tile Layer 3",self.level_4_tile_set_rect)
+
+    def object_layer(self):
+        LevelFour.tile_general_collision_functions(self,"Tile Layer 4",self.object_rect)
         
     def border_logic_total(self):
         self.camera_x_y[0]+=self.rect_camera.x-self.camera_x_y[0]-525

@@ -10,7 +10,7 @@ def elder_idles(images,frame,width,height):
 
 idle_1=elder_idles(elder_idle,0,231,231); idle_2=elder_idles(elder_idle,1,231,231) ; idle_3=elder_idles(elder_idle,2,231,231)
 idle_4=elder_idles(elder_idle,3,231,231) ; idle_5=elder_idles(elder_idle,4,231,231) ; idle_6=elder_idles(elder_idle,5,231,231)
-elder_idle_list=[idle_1,idle_2,idle_3,idle_4,idle_5,idle_6] ; elder_idle_list_flip=[] ; elder_idle_number=[]
+elder_idle_list=[idle_1,idle_2,idle_3,idle_4,idle_5,idle_6] ; elder_idle_list_flip=[] ; elder_idle_number=[] ; elder_idle_number_level_4=[0]
 for idx,num in enumerate(elder_idle_list[:]): elder_idle_list_flip.append(pygame.transform.flip(num,True,False))
 
 elder_run=pygame.image.load(r"Assets\People\Wizard Pack\Run.png")
@@ -28,6 +28,30 @@ elder_icon=pygame.image.load(r"Assets\People\Wizard Pack\Icon.png")
 elder_icon=pygame.transform.scale(elder_icon,(150,120))
 
 guard_idle=pygame.image.load(r"Assets\People\sprite sheets\medieval\shady_guy.png")
+
+
+final_boss_x=[900]
+final_boss_y=[2000]
+
+final_boss_rect=pygame.Rect(final_boss_x[0],final_boss_y[0],100,100)
+
+final_boss_health=[1000]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def guard_idles(images,frame,width,height):
     image=pygame.Surface((width,height),pygame.SRCALPHA) ; image.blit(images,(0,0),((frame*width),0,width,height)) ; image=pygame.transform.scale(image,(width//0.5,height//0.5))
