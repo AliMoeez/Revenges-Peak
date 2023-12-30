@@ -291,6 +291,9 @@ while run:
     generalboss.collision_with_object_logic()
 
     finalboss.idle()
+    finalboss.move()
+    finaboss.attack_logic()
+    finalboss.attack()
 
     healingplayer.blit()
     healingplayer.interaction()
