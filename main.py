@@ -292,7 +292,7 @@ while run:
 
     finalboss.idle()
     finalboss.move()
-    finaboss.attack_logic()
+    finalboss.attack_logic()
     finalboss.attack()
 
     healingplayer.blit()
