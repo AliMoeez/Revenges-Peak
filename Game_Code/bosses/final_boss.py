@@ -1,6 +1,7 @@
 import pygame
 import math
 import random
+import numpy as np
 
 from Game_Asset_Code import *
 from .boss_general_fucntions import BossGeneralFunctions
@@ -20,6 +21,9 @@ class FinalBoss:
         self.elder_max_attack_list=elder_max_attack_list
         self.elder_boss_fall_type=elder_boss_fall_type
         self.elder_attack_list_type=elder_attack_list_type
+        self.elder_boss_attack_cooldown=elder_boss_attack_cooldown
+        self.level_4_tile_set_rect=level_4_tile_set_rect
+        self.elder_attack_poison_effect=elder_attack_poison_effect
 
 
     def distance(self):
@@ -34,8 +38,11 @@ class FinalBoss:
         self.elder_idle_list=elder_idle_list ; self.elder_idle_list_flip=elder_idle_list_flip ; self.elder_idle_number_level_4=elder_idle_number_level_4
       #  if self.level_4:
       #       pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(self.final_boss_rect.x-self.camera_x_y[0],self.final_boss_rect.y-self.camera_x_y[1],50,100),width=1)
-        if self.level_4 and self.distance>400:
-            BossGeneralFunctions.idle(self,self.final_boss_rect,self.elder_idle_list_flip,self.elder_idle_list,self.elder_idle_number_level_4,65,35,7,0.25,
+        
+        if self.level_4 and self.distance>400 or (self.distance<=100 and self.elder_boss_attack_cooldown[0]>=0 and self.elder_boss_attack_cooldown[0]<10):
+            self.final_boss_x_movement[0]=0
+            self.final_boss_y_movement[0]=0
+            BossGeneralFunctions.idle(self,self.final_boss_rect,self.elder_idle_list_flip,self.elder_idle_list,self.elder_idle_number_level_4,65,35,7,0.15,
                                       self.final_boss_health,self.player_health)
             
     def move(self):
@@ -50,31 +57,31 @@ class FinalBoss:
         self.elder_attacks_2_list=elder_attacks_2_list ; self.elder_attacks_2_list_flip=elder_attacks_2_list_flip ; self.elder_attacks_2_number_level_4=elder_attacks_2_number_level_4
 
         if self.elder_attack_list_type[0]==0:
-            self.elder_attack_list=self.elder_attacks_1_list ; self.elder_attack_list_flip=self.elder_attacks_1_list_flip ; self.elder_attack_number=self.elder_attacks_1_number_level_4
-            self.elder_max_attack_list[0]=8 ; self.damage=0
-
-        if self.elder_attack_list_type[0]==1:
-            self.elder_attack_list=self.elder_attacks_2_list ; self.elder_attack_list_flip=self.elder_attacks_2_list_flip ; self.elder_attack_number=self.elder_attacks_2_number_level_4
-            self.elder_max_attack_list[0]=8 ; self.damage=0
-
-        print(self.elder_attack_list_type[0])
-
-        print(self.elder_attack_number[0],self.elder_max_attack_list[0])
-
-        if self.elder_attack_number[0]>=self.elder_max_attack_list[0]-0.5: 
-            print("HERE")
-            self.elder_attack_list_type[0]=random.randint(0,1)
-
-
+            self.elder_attack_list=self.elder_attacks_1_list ; self.elder_attack_list_flip=self.elder_attacks_1_list_flip ; self.elder_attack_number=self.elder_attacks_1_number_level_4 ; self.elder_max_attack_list[0]=8 ; self.damage=0
         
+        if self.elder_attack_list_type[0]==1:
+            self.elder_attack_list=self.elder_attacks_2_list ; self.elder_attack_list_flip=self.elder_attacks_2_list_flip ; self.elder_attack_number=self.elder_attacks_2_number_level_4 ; self.elder_max_attack_list[0]=8 ; self.damage=0
+        
+        if self.elder_attack_number[0]>=self.elder_max_attack_list[0]-0.5: 
+            self.elder_attack_list_type[0]=np.random.choice([0,1],1,p=[0.7,0.3])[0] ; self.elder_boss_attack_cooldown[0]=0 ; self.elder_idle_number_level_4[0]=2
+        
+        if self.elder_boss_attack_cooldown[0]<10:
+            self.elder_boss_attack_cooldown[0]+=0.50 ; self.elder_attack_number[0]=0
+
     def attack(self):
         self.distance=FinalBoss.distance(self)
-        if self.level_4 and self.distance<=100:
+        if self.level_4 and self.distance<=100 and self.elder_boss_attack_cooldown[0]==10:
             BossGeneralFunctions.attack(self,self.final_boss_rect,self.elder_attack_list_flip,self.elder_attack_list,self.elder_attack_number,65,35,self.elder_max_attack_list[0],
-                                        0.40,self.final_boss_x_movement,self.final_boss_y_movement,self.elder_boss_fall_type,self.final_boss_health,self.player_health,self.damage)
+                                        0.25,self.final_boss_x_movement,self.final_boss_y_movement,self.elder_boss_fall_type,self.final_boss_health,self.player_health,self.damage)
 
     def poison_effect(self):
-        pass
+        if self.level_4 and self.elder_attack_list_type[0]==1 and self.elder_attack_number[0]>=self.elder_max_attack_list[0]-0.5: 
+            self.elder_attack_poison_effect[0]=0
+        
+        if self.elder_attack_poison_effect[0]>=0 and self.elder_attack_poison_effect[0]<10:
+            self.elder_attack_poison_effect[0]+=0.05 ; self.player_health[0]-=1
+        else: 
+            self.elder_attack_poison_effect[0]=10
 
     def call_support(self):
         pass
@@ -86,9 +93,11 @@ class FinalBoss:
         pass
 
     def collision_with_object(self):
-        pass
-
+        if self.level_4:
+            self.collision=BossGeneralFunctions.collision_with_object(self,self.level_4_tile_set_rect,self.final_boss_rect)
+            return self.collision
 
     def collision_with_object_logic(self):
-        pass
-
+        if self.level_4:
+            self.collision=FinalBoss.collision_with_object(self)
+            BossGeneralFunctions.collision_with_object_logic(self,self.final_boss_rect,self.final_boss_x_movement,self.collision,self.final_boss_y_movement)

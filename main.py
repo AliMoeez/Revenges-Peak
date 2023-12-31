@@ -294,6 +294,9 @@ while run:
     finalboss.move()
     finalboss.attack_logic()
     finalboss.attack()
+    finalboss.poison_effect()
+    finalboss.collision_with_object()
+    finalboss.collision_with_object_logic()
 
     healingplayer.blit()
     healingplayer.interaction()

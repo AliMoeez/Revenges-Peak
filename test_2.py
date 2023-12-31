@@ -1,4 +1,6 @@
-list=[-1321,-232,-233,-3214]
+import numpy as np 
 
-if all(i<=0 for i in list):
-    print("YES")
+
+choice=np.random.choice([0,1],1,p=[0.7,0.3])[0]
+
+print(choice)

@@ -13,7 +13,7 @@ class Player:
         Win.__init__(self,level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_3,level_3_player_talk_4)
         self.player_x=player_x ; self.player_y=player_y ; self.player_width=player_width ; self.player_height=player_height ; self.player_rect=player_rect ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement
         self.camera_x_y=camera_x_y  ; self.level_1=level_1 ;  self.level_screen=level_screen ; self.player_key=player_key ; self.player_attack_cooldown=player_attack_cooldown ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_health=player_health
-        self.player_control_cooldown=player_control_cooldown ; self.player_control=player_control ; self.object_rect=object_rect ; self.dialogue_condition=dialogue_condition
+        self.player_control_cooldown=player_control_cooldown ; self.player_control=player_control ; self.object_rect=object_rect ; self.dialogue_condition=dialogue_condition ; self.elder_attack_poison_effect=elder_attack_poison_effect
         self.dialogue_story_condition=dialogue_story_condition ; self.reset_locations=reset_locations ; self.tutorial_one=tutorial_one ; self.tutorial_two=tutorial_two ; self.level_4=level_4
         self.level_1_wizard_talk=level_1_wizard_talk ; self.talk_to_abyss_level_one=talk_to_abyss_level_one ; self.investigate_object_level_one=investigate_object_level_one ; self.level_4_tile_set_rect=level_4_tile_set_rect
         self.level_2=level_2 ; self.level_2_tile_set_rect=level_2_tile_set_rect ; self.level_3=level_3 ; self.level_3_tile_set_rect=level_3_tile_set_rect ; self.general_boss_player_slow_down_number=general_boss_player_slow_down_number
@@ -124,10 +124,14 @@ class Player:
 
     def health_power_cooldown_icons(self):
         self.maximum_health=1000 ; self.health_bar_length=500 ; self.health_bar_ratio=self.maximum_health/self.health_bar_length ; self.health_icon=health_icon
-        self.sword_icon=sword_icon ; self.potion_icon=potion_icon
+        self.sword_icon=sword_icon ; self.potion_icon=potion_icon ; self.final_boss_poison_colour=(88,136,0)
         if any([self.level_1,self.level_2,self.level_3,self.level_4]):
+
+            if self.level_4 and self.elder_attack_poison_effect[0]<10: self.colour_health_bar=self.final_boss_poison_colour
+            else: self.colour_health_bar=(178,34,34)
+
             
-            self.health_icons=pygame.draw.rect(SCREEN,(178,34,34),pygame.Rect(20,10,self.player_health[0]/self.health_bar_ratio,25))
+            self.health_icons=pygame.draw.rect(SCREEN,self.colour_health_bar,pygame.Rect(20,10,self.player_health[0]/self.health_bar_ratio,25))
             SCREEN.blit(self.health_icon,(32,14)) ; self.health_border=pygame.draw.rect(SCREEN,(220,220,220),pygame.Rect(20,10,self.health_bar_length,25),4) 
 
             self.attack_cool_down_icon=pygame.draw.rect(SCREEN,(30,144,255),pygame.Rect(20,40,((self.player_attack_cooldown[0]*100)/2)*2.5,25))

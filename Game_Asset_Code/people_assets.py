@@ -67,6 +67,8 @@ guard_idle=pygame.image.load(r"Assets\People\sprite sheets\medieval\shady_guy.pn
 elder_attack_list_type=[0]
 elder_max_attack_list=[0]
 elder_attack_number_level_4=[0]
+elder_attack_poison_effect=[10]
+elder_boss_attack_cooldown=[10]
 
 elder_boss_fall_type=[0]
 
