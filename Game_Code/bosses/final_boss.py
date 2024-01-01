@@ -25,6 +25,24 @@ class FinalBoss:
         self.level_4_tile_set_rect=level_4_tile_set_rect
         self.elder_attack_poison_effect=elder_attack_poison_effect
 
+        """        self.final_boss_support_x=final_boss_support_x
+                self.final_boss_support_y=final_boss_support_y
+                self.final_boss_support_fall_type=final_boss_support_fall_type
+
+
+        final_boss_support_fall_type=[]
+
+        final_boss_support_health=[]
+
+        final_boss_support_x_movement=[]
+        final_boss_support_y_movement=[]
+
+
+        final_boss_support_rect=[]"""
+
+
+
+
 
     def distance(self):
         self.distance=math.hypot(self.player_rect.x-self.final_boss_rect.x,self.player_rect.y-self.final_boss_rect.y)
@@ -83,8 +101,15 @@ class FinalBoss:
         else: 
             self.elder_attack_poison_effect[0]=10
 
+    def support_list(self):
+        if self.level_4 and self.final_boss_health[0]<=500:
+            pass
+
+
     def call_support(self):
-        pass
+        if self.level_4 and self.final_boss_health[0]<=500:
+            pass
+
 
     def health(self):
         pass

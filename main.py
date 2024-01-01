@@ -9,6 +9,7 @@ from Game_Asset_Code import *
 from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,LevelFour,Player,EnemyOne,EnemyTwo,EnemyThree,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,GeneralBoss,FinalBoss,HealingPlayer
 
 while run:
+    print(player_rect.x,player_rect.y)
     level_1_tile_set_rect.clear()
     level_2_tile_set_rect.clear()
     level_3_tile_set_rect.clear()
@@ -27,9 +28,9 @@ while run:
                   player_control,dialogue_condition,dialogue_story_condition,
                   reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2,level_3,level_4)
     
-    enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2,level_3)
-    enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control,level_2,level_3)
-    enemy_three=EnemyThree(level_3,player_control,reset_locations)
+    enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2,level_3,level_4)
+    enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control,level_2,level_3,level_4)
+    enemy_three=EnemyThree(level_3,player_control,reset_locations,level_4)
     
     people=People(level_1,level_1_wizard_talk,reset_locations,level_2)
     

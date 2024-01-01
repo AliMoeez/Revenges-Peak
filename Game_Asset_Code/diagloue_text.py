@@ -115,4 +115,33 @@ def level_3_dialogue(player_icon,arrow_enemy_icon):
 
     return level_3_dialogue_1,level_3_dialogue_2,level_3_dialogue_3,level_3_dialogue_4
 
+
+def level_4_dialogue(player_icon,final_boss_icon):
+    level_4_dialogue_1=[
+        ("You are here! We can defeat Anes once he arrives!",player_icon,"You"),
+        ("Very good, there is alot of potential in you!",final_boss_icon,"Wizard"),
+        ("What?",player_icon,"You"),
+        ("This was a test to see if you were fit to fight for my land. I am Anes",final_boss_icon,"Anes"),
+        ("What? You're Anes? How?",player_icon,"You"),
+        ("Who else would be more powerful to rule this land of simpletons? Join me and we will conqueror our neigbours!",final_boss_icon,"Anes"),
+        ("Never! You were the one who destroyed this land! I refuse to fight for you!",player_icon,"You"),
+        ("Then you will sieze to exist....",final_boss_icon,"Anes"),
+        ("Let me be the judge of that!",player_icon,"You")
+    ]
+
+
+def level_4_dialogue_walk_up(player_icon,abyss_icon):
+    level_4_dialogue_walk_up_1=[
+        ("",player_icon,""),
+        ("Wait, what are you doing here?",player_icon,"You"),
+        ("I must oversee the ceremony! Anes is coming soon you must be prepared!",abyss_icon,"The Abyss"),
+        ("Why, didn't you tell me about this ceremony in the first place?",player_icon,"You"),
+        ("Your traning was a must! We knew you would eventually find a way to Anes.",abyss_icon,"The Abyss"),
+        ("Ok, whatever.... What should I do before meeting Anes? Can you help me in the battle?"),
+        ("If I were to help you he would destory me in a matter of seconds, you must do this on your own..... His men are north defeat them before he comes.",abyss_icon,"The Abyss"),
+        ("Sounds good, I will do my best",player_icon,"You")
+
+    ]
+
+
        

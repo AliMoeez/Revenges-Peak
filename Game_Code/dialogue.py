@@ -10,7 +10,7 @@ class Dialouge:
     def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
                  level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win):
         People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2) 
-        EnemyTwo.__init__(self,level_1,enemy_2_rects,reset_locations,player_control,level_2,level_3)
+        EnemyTwo.__init__(self,level_1,enemy_2_rects,reset_locations,player_control,level_2,level_3,level_4)
         FrostBoss.__init__(self,level_2,level_2_boss_talk,reset_locations)
         self.dialogue_condition=dialogue_condition ; self.object_rect=object_rect ; self.camera_x_y=camera_x_y ; self.player_rect=player_rect ; self.level_1=level_1 ; self.mouse_button_blit_list=mouse_button_blit_list
         self.dialogue_click_list=dialogue_click_list ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.WHITE=(255,55,55) ; self.dialouge_list=dialouge_list ; self.dialogue_story_condition=dialogue_story_condition

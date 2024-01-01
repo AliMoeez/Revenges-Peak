@@ -7,23 +7,33 @@ from Game_Code.control_test import ControlTest
 from Game_Code.lose import Lose
 
 class EnemyThree:
-    def __init__(self,level_3,player_control,reset_locations) -> None:
+    def __init__(self,level_3,player_control,reset_locations,level_4) -> None:
         Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3)
         self.enemy_three_idle_number=enemy_three_idle_number ; self.enemy_three_move_number=enemy_three_move_number ; self.enemy_three_fall_number=enemy_three_fall_number ; self.enemy_three_attack_number=enemy_three_attack_number ; self.player_control_index=player_control_index
-        self.level_3=level_3 ; self.enemy_3_health=enemy_3_health ; self.enemy_3_x_movement=enemy_3_x_movement ; self.enemy_3_y_movement=enemy_3_y_movement ; self.player_control_cooldown=player_control_cooldown
+        self.level_3=level_3 ; self.enemy_3_health=enemy_3_health ; self.enemy_3_x_movement=enemy_3_x_movement ; self.enemy_3_y_movement=enemy_3_y_movement ; self.player_control_cooldown=player_control_cooldown ; self.enemy_3_level_4_arrow_rect=enemy_3_level_4_arrow_rect
         self.player_control=player_control ; self.player_rect=player_rect ; self.camera_x_y=camera_x_y ; self.enemy_three_fall_type=enemy_three_fall_type ; self.player_health=player_health ; self.enemy_3_x_movement_control=enemy_3_x_movement_control
         self.enemy_3_y_movement_control=enemy_3_y_movement_control ; self.enemy_3_arrow_x_movement=enemy_3_arrow_x_movement ; self.enemy_3_arrow_y_movement=enemy_3_arrow_y_movement ; self.enemy_3_level_3_arrow_rect=enemy_3_level_3_arrow_rect
         self.enemy_three_arrow_list=enemy_three_arrow_list ; self.enemy_three_arrow_list_flip=enemy_three_arrow_list_flip ; self.enemy_three_arrow_number=enemy_three_arrow_number ; self.player_last_position=player_last_position ; self.player_health=player_health
-        self.font=r"Assets\Misc\Fonts\Pixellari.ttf" ; self.red=(178,34,34) ; self.player_attack_number=player_attack_number ; self.player_key=player_key ; self.reset_locations=reset_locations
+        self.font=r"Assets\Misc\Fonts\Pixellari.ttf" ; self.red=(178,34,34) ; self.player_attack_number=player_attack_number ; self.player_key=player_key ; self.reset_locations=reset_locations ; self.level_4=level_4
 
         self.enemy_three_level_3_x=enemy_three_level_3_x
         self.enemy_three_level_3_y=enemy_three_level_3_y
 
+        self.enemy_three_level_4_x=enemy_three_level_4_x
+        self.enemy_three_level_4_y=enemy_three_level_4_y
+
         if self.level_3:
             self.tile_rect=level_3_tile_set_rect
             self.enemy_rect=enemy_3_level_3_rect
+            self.arrow_rect=self.enemy_3_level_3_arrow_rect
         
-        if self.level_3:
+        if self.level_4:
+            self.tile_rect=level_4_tile_set_rect
+            self.enemy_rect=enemy_3_level_4_rect
+            self.arrow_rect=self.enemy_3_level_4_arrow_rect
+
+        
+        if any([self.level_3,self.level_4]):
             for idx,enemy in enumerate(self.enemy_rect):
                 self.enemy_three_idle_number.append(0) ; self.enemy_three_move_number.append(0) ; self.enemy_three_fall_number.append(0) ; self.enemy_three_attack_number.append(0) ; self.enemy_3_health.append(100) ; self.enemy_3_x_movement.append(0) 
                 self.enemy_3_y_movement.append(0) ; self.enemy_three_fall_type.append(0) ; self.enemy_3_arrow_x_movement.append(0) ; self.enemy_3_arrow_y_movement.append(0) ; self.enemy_three_arrow_number.append(0)
@@ -32,23 +42,23 @@ class EnemyThree:
                     del self.enemy_three_fall_number[-1],self.enemy_three_attack_number[-1],self.enemy_three_fall_type[-1], self.enemy_3_arrow_x_movement[-1], self.enemy_3_arrow_y_movement[-1]
 
     def distance(self):
-        if any([self.level_3]):
+        if any([self.level_3,self.level_4]):
             self.distance=EnemyGeneralFunctions.distance(self,self.enemy_rect)
             return self.distance
         
     def iscontrolled(self):
-        if any([self.level_3]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_1":
+        if any([self.level_3,self.level_4]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_1":
             return self.player_control_index[0][0]
     
     def enemy_index(self):
-        if any([self.level_3]):
+        if any([self.level_3,self.level_4]):
             for idx,range_attacker in enumerate(self.enemy_rect):
                   if idx==self.player_control_index[0][0] and self.player_control_index[0][1]=="Enemy_3":
                       return range_attacker
 
     def idle(self):
         self.enemy_three_idle_list=enemy_three_idle_list ; self.enemy_three_idle_list_flip=enemy_three_idle_list_flip
-        if any([self.level_3]):
+        if any([self.level_3,self.level_4]):
             self.distance=EnemyThree.distance(self)
             
             if EnemyThree.enemy_index(self) not in self.enemy_rect:
@@ -67,7 +77,7 @@ class EnemyThree:
                                 
     def move(self):
         self.enemy_three_move_list=enemy_three_move_list ; self.enemy_three_move_list_flip=enemy_three_move_list_flip
-        if any([self.level_3]):
+        if any([self.level_3,self.level_4]):
             self.distance=EnemyThree.distance(self)
             
             if EnemyThree.enemy_index(self) not in self.enemy_rect:
@@ -87,7 +97,7 @@ class EnemyThree:
 
     
     def player_hit(self):
-        if any([self.level_3]):
+        if any([self.level_3,self.level_4]):
             self.distance_list=EnemyThree.distance(self)
             EnemyGeneralFunctions.player_hit(self,self.font,self.red,self.distance_list,self.player_attack_number,self.enemy_3_health,self.enemy_rect,self.player_key,25)
 
@@ -100,7 +110,7 @@ class EnemyThree:
         
     def arrow_distance(self):
         self.arrow_player_distance_list=[]
-        for idx,arrow in enumerate(self.enemy_3_level_3_arrow_rect):
+        for idx,arrow in enumerate(self.arrow_rect):
             self.player_last_position.append((self.player_rect.x,self.player_rect.y))
 
             self.arrow_player_distance=math.hypot(self.player_last_position[0][0]-arrow.x,self.player_last_position[0][1]-arrow.y)
@@ -115,8 +125,8 @@ class EnemyThree:
 
     def arrow_angle(self):
         self.angle_list=[]
-        for idx,arrow in enumerate(self.enemy_3_level_3_arrow_rect):
-            self.dx,self.dy=self.player_last_position[0][0]-self.enemy_3_level_3_arrow_rect[idx].x, self.player_last_position[0][1]-self.enemy_3_level_3_arrow_rect[idx].y            
+        for idx,arrow in enumerate(self.arrow_rect):
+            self.dx,self.dy=self.player_last_position[0][0]-self.arrow_rect[idx].x, self.player_last_position[0][1]-self.arrow_rect[idx].y            
             self.angle=(math.degrees(math.atan2(-self.dy,self.dx))-180)/360
             self.angle_list.append(self.angle)
         return self.angle_list
@@ -151,23 +161,23 @@ class EnemyThree:
         self.angle=EnemyThree.arrow_angle(self)
         for idx,enemy in enumerate(self.enemy_rect):
             
-            pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(self.enemy_3_level_3_arrow_rect[idx].x-self.camera_x_y[0],self.enemy_3_level_3_arrow_rect[idx].y-self.camera_x_y[1],24,5),width=1)
+            pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(self.arrow_rect[idx].x-self.camera_x_y[0],self.arrow_rect[idx].y-self.camera_x_y[1],24,5),width=1)
           
             if self.player_last_position[0][0]>enemy.x:
-                SCREEN.blit(self.enemy_three_arrow_list[0],(self.enemy_3_level_3_arrow_rect[idx].x-self.camera_x_y[0],self.enemy_3_level_3_arrow_rect[idx].y-self.camera_x_y[1]))    
+                SCREEN.blit(self.enemy_three_arrow_list[0],(self.arrow_rect[idx].x-self.camera_x_y[0],self.arrow_rect[idx].y-self.camera_x_y[1]))    
             if self.player_last_position[0][0]<=enemy.x:
-                SCREEN.blit(self.enemy_three_arrow_list_flip[0],(self.enemy_3_level_3_arrow_rect[idx].x-self.camera_x_y[0],self.enemy_3_level_3_arrow_rect[idx].y-self.camera_x_y[1]))
+                SCREEN.blit(self.enemy_three_arrow_list_flip[0],(self.arrow_rect[idx].x-self.camera_x_y[0],self.arrow_rect[idx].y-self.camera_x_y[1]))
 
             
             EnemyThree.arrow_movement(self,self.player_last_position[0][0],self.player_last_position[0][1],self.enemy_rect,
                                       self.enemy_3_arrow_x_movement,self.enemy_3_arrow_y_movement)
             
  
-            self.enemy_3_level_3_arrow_rect[idx].x+=self.enemy_3_arrow_x_movement[idx]*2
-            self.enemy_3_level_3_arrow_rect[idx].y+=self.enemy_3_arrow_y_movement[idx]/4
+            self.arrow_rect[idx].x+=self.enemy_3_arrow_x_movement[idx]*2
+            self.arrow_rect[idx].y+=self.enemy_3_arrow_y_movement[idx]/4
 
     def arrow_total_logic(self):
-        if any([self.level_3]):
+        if any([self.level_3,self.level_4]):
             self.distance_list=EnemyThree.arrow_distance(self)
             self.angle=EnemyThree.arrow_angle(self)
             for idx,distance in enumerate(self.distance_list):
@@ -176,15 +186,15 @@ class EnemyThree:
                         EnemyThree.arrow_logic(self)
                     if self.distance_list[idx]<=50 or self.distance_list[idx]>400:
                         self.enemy_three_attack_number[idx]=0
-                        self.enemy_3_level_3_arrow_rect[idx].x=self.enemy_rect[idx].x
-                        self.enemy_3_level_3_arrow_rect[idx].y=self.enemy_rect[idx].y
+                        self.arrow_rect[idx].x=self.enemy_rect[idx].x
+                        self.arrow_rect[idx].y=self.enemy_rect[idx].y
                     if self.distance_list[idx]<=50:
                         self.player_health[0]-=100
 
                 
     def attack(self):
         self.enemy_three_attack_list=enemy_three_attack_list ; self.enemy_three_attack_list_flip=enemy_three_attack_list_flip
-        if any([self.level_3]):
+        if any([self.level_3,self.level_4]):
             self.distance=EnemyThree.distance(self)
 
             if EnemyThree.enemy_index(self) not in self.enemy_rect:
@@ -220,13 +230,13 @@ class EnemyThree:
 
     def fall(self):
         self.enemy_three_fall_list=enemy_three_fall_list ; self.enemy_three_fall_list_flip=enemy_three_fall_list_flip
-        if any([self.level_3]):
+        if any([self.level_3,self.level_4]):
             self.distance=EnemyThree.distance(self)
             EnemyGeneralFunctions.fall(self,self.enemy_rect,self.enemy_three_fall_type,self.enemy_three_fall_list,self.enemy_three_fall_list_flip,self.enemy_three_fall_number,
                                        self.enemy_3_health,0.50,11,0,0,self.enemy_3_x_movement,self.enemy_3_y_movement)
 
     def collision_with_object(self):
-        if any([self.level_3]):
+        if any([self.level_3,self.level_4]):
             if EnemyThree.enemy_index(self) not in self.enemy_rect:
                 return EnemyGeneralFunctions.collision_with_object(self,self.tile_rect,self.enemy_rect,self.enemy_3_x_movement,self.enemy_3_y_movement)
             if not EnemyThree.enemy_index(self) not in self.enemy_rect:
@@ -235,7 +245,7 @@ class EnemyThree:
 
 
     def collision_with_object_logic(self):
-        if any([self.level_3]):
+        if any([self.level_3,self.level_4]):
             if EnemyThree.enemy_index(self) not in self.enemy_rect:
                 self.collision=EnemyThree.collision_with_object(self)
                 EnemyGeneralFunctions.collision_with_object_logic(self,self.enemy_rect,self.enemy_3_x_movement,self.enemy_3_y_movement,self.collision)
@@ -246,27 +256,27 @@ class EnemyThree:
             
 
     def control_run(self,key):
-        if any([self.level_3]) and self.player_control and self.player_control_cooldown[0]>0 and not key[pygame.K_e] and self.player_control_index[0][1]=="Enemy_3":
+        if any([self.level_3,self.level_4]) and self.player_control and self.player_control_cooldown[0]>0 and not key[pygame.K_e] and self.player_control_index[0][1]=="Enemy_3":
             if EnemyThree.enemy_index(self)  in self.enemy_rect:
                 self.enemy_3_rects_control=[i for i in self.enemy_rect if i==EnemyThree.enemy_index(self)]
                 ControlTest.mechanic_walk(self,key,self.enemy_three_move_list,self.enemy_3_rects_control[0],self.enemy_3_x_movement_control,self.enemy_3_y_movement_control,
                         self.enemy_three_move_list_flip,self.enemy_three_move_number,self.enemy_three_idle_list,self.enemy_three_idle_number,self.enemy_three_idle_list_flip)
 
     def control_attack(self,key):
-        if any([self.level_3]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_3":
+        if any([self.level_3,self.level_4]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_3":
             if EnemyThree.enemy_index(self) in self.enemy_rect:
                 self.enemy_3_rects_control=[i for i in self.enemy_rect if i==EnemyThree.enemy_index(self)]
                 ControlTest.mechanic_attack(self,key,self.enemy_three_attack_list,self.enemy_3_rects_control[0],self.enemy_three_attack_list_flip,
                                         self.enemy_three_attack_number,self.enemy_3_x_movement_control,self.enemy_3_y_movement_control)
 
     def control_collision(self):
-        if any([self.level_3]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_3":
+        if any([self.level_3,self.level_4]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_3":
             if EnemyThree.enemy_index(self) in self.enemy_rect:
                 self.enemy_3_rects_control=[i for i in self.enemy_rect if i==EnemyThree.enemy_index(self)]
                 ControlTest.mechanic_collision(self,self.tile_rect,self.enemy_3_rects_control[0])
 
     def control_collision_object_logic(self):
-        if any([self.level_3]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_3":
+        if any([self.level_3,self.level_4]) and self.player_control and self.player_control_cooldown[0]>0  and self.player_control_index[0][1]=="Enemy_3":
             if EnemyThree.enemy_index(self)  in self.enemy_rect:
                 self.enemy_3_rects_control=[i for i in self.enemy_1_rects if i==EnemyThree.enemy_index(self)]
                 ControlTest.mechanic_collision_logic(self,self.tile_rect,self.enemy_3_rects_control[0],self.enemy_3_x_movement_control,self.enemy_3_y_movement_control,)       

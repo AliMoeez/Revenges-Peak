@@ -47,9 +47,11 @@ enemy_1_level_2_x=[1900,1920,1970,1990] ; enemy_1_level_2_y=[1550,1590,1570,1590
 
 enemy_1_level_3_x=[3853,3964,4743,3454,3364] ; enemy_1_level_3_y=[725,983,1046,1043,13404]
 
+enemy_1_level_4_x=[770,790,812] ; enemy_1_level_4_y=[300,295,315]
+
 enemy_1_x_movement=[] ; enemy_1_y_movement=[]
 
-enemy_1_level_1_rect=[] ; enemy_1_level_2_rect=[] ; enemy_1_level_3_rect=[]
+enemy_1_level_1_rect=[] ; enemy_1_level_2_rect=[] ; enemy_1_level_3_rect=[] ; enemy_1_level_4_rect=[]
 
 enemy_1_health=[] ; enemy_1_fall_type=[]
 
@@ -58,6 +60,7 @@ enemy_1_x_control_movement=[0] ; enemy_1_y_control_movement=[0]
 for i,num in enumerate(enemy_1_level_1_x): enemy_1_level_1_rect.append(pygame.Rect(enemy_1_level_1_x[i],enemy_1_level_1_y[i],40,70))
 for i,num in enumerate(enemy_1_level_2_x): enemy_1_level_2_rect.append(pygame.Rect(enemy_1_level_2_x[i],enemy_1_level_2_y[i],40,70))
 for i,num in enumerate(enemy_1_level_3_x): enemy_1_level_3_rect.append(pygame.Rect(enemy_1_level_3_x[i],enemy_1_level_3_y[i],40,70))
+for i,num in enumerate(enemy_1_level_4_x): enemy_1_level_4_rect.append(pygame.Rect(enemy_1_level_4_x[i],enemy_1_level_4_y[i],40,70))
 
 brute_1_icon=pygame.image.load(r"Assets\Enemies\Brute_Enemy\Brute_Assets\imp_red\icon.png")
 brute_1_icon=pygame.transform.scale(brute_1_icon,(150,100))
@@ -111,9 +114,11 @@ enemy_2_level_2_x=[1700,1800,1827,1900] ; enemy_2_level_2_y=[1500,1550,1570,1580
 
 enemy_2_level_3_x=[3830,3763,3773,3604,3833] ; enemy_2_level_3_y=[725,520,1276,1073,1326] #1700,1500
 
+enemy_2_level_4_x=[817,847,892] ; enemy_2_level_4_y=[312,317,354]
+
 enemy_2_x_movement=[] ; enemy_2_y_movement=[]
 
-enemy_2_rects=[] ; enemy_2_fall_type=[]  ; enemy_2_health=[] ; enemy_2_level_2_rects=[] ; enemy_2_level_3_rects=[]
+enemy_2_rects=[] ; enemy_2_fall_type=[]  ; enemy_2_health=[] ; enemy_2_level_2_rects=[] ; enemy_2_level_3_rects=[] ; enemy_2_level_4_rects=[]
 
 enemy_run_number=[0] ; enemy_idle_number=[0] ; enemy_attack_number=[0] ; enemy_x_movement=[0] ; enemy_y_movement=[0]
 
@@ -122,6 +127,7 @@ enemy_2_x_control_movement=[0] ; enemy_2_y_control_movement=[0]
 for i,y in enumerate(enemy_2_level_1_x): enemy_2_rects.append(pygame.Rect(enemy_2_level_1_x[i],enemy_2_level_1_y[i],40,70))
 for i,y in enumerate(enemy_2_level_2_x): enemy_2_level_2_rects.append(pygame.Rect(enemy_2_level_2_x[i],enemy_2_level_2_y[i],40,70))
 for i,y in enumerate(enemy_2_level_3_x): enemy_2_level_3_rects.append(pygame.Rect(enemy_2_level_3_x[i],enemy_2_level_3_y[i],40,70))
+for i,y in enumerate(enemy_2_level_4_x): enemy_2_level_4_rects.append(pygame.Rect(enemy_2_level_4_x[i],enemy_2_level_4_y[i],40,70))
 
 enemy_three_idle_image=pygame.image.load(r"Assets\Enemies\Arrow Enemy\Sprites\Character\Idle.png")
 enemy_three_move_image=pygame.image.load(r"Assets\Enemies\Arrow Enemy\Sprites\Character\Run.png")
@@ -185,10 +191,18 @@ for idx,num in enumerate(enemy_three_arrow_list[:]): enemy_three_arrow_list_flip
 enemy_three_level_3_x=[2992,2902,3867,3356,3853] #700
 enemy_three_level_3_y=[996,1806,1306,1412,1900] #2000
 
+
+enemy_three_level_4_x=[770,892,925] #700
+enemy_three_level_4_y=[290,317,319] #2000
+
+
 enemy_three_fall_type=[]
 
 enemy_3_level_3_rect=[]
 enemy_3_level_3_arrow_rect=[]
+enemy_3_level_4_rect=[]
+enemy_3_level_4_arrow_rect=[]
+
 enemy_3_health=[]
 player_last_position=[]
 
@@ -202,5 +216,22 @@ enemy_3_x_movement_control=[0]
 enemy_3_y_movement_control=[0]
 
 for idx,enemy_three in enumerate(enemy_three_level_3_x): enemy_3_level_3_rect.append(pygame.Rect(enemy_three_level_3_x[idx],enemy_three_level_3_y[idx],30,30))
+for idx,enemy_three in enumerate(enemy_three_level_4_x): enemy_3_level_4_rect.append(pygame.Rect(enemy_three_level_4_x[idx],enemy_three_level_4_y[idx],30,30))
+
 for idx,arrow in enumerate(enemy_three_level_3_x): enemy_3_level_3_arrow_rect.append(pygame.Rect(enemy_three_level_3_x[idx],enemy_three_level_3_y[idx],25,5))
+for idx,arrow in enumerate(enemy_three_level_4_x): enemy_3_level_4_arrow_rect.append(pygame.Rect(enemy_three_level_4_x[idx],enemy_three_level_4_y[idx],25,5))
+
+
+final_boss_support_x=[]
+final_boss_support_y=[] 
+
+final_boss_support_fall_type=[]
+
+final_boss_support_health=[]
+
+final_boss_support_x_movement=[]
+final_boss_support_y_movement=[]
+
+
+final_boss_support_rect=[]
 
