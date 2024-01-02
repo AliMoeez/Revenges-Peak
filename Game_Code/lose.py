@@ -3,7 +3,7 @@ import pygame
 from Game_Asset_Code import *
 
 class Lose:
-    def __init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3):
+    def __init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3,level_4):
         self.level_1=level_1 
         self.reset_locations=reset_locations
         self.player_health=player_health ; self.player_lose_condition=player_lose_condition
@@ -13,6 +13,7 @@ class Lose:
         self.reset_length=reset_length
         self.level_2=level_2
         self.level_3=level_3
+        self.level_4=level_4
         
     def condition(self):
         if any([self.level_1,self.level_2,self.level_3]):

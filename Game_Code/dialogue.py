@@ -7,8 +7,9 @@ from .enemies import EnemyTwo
 from .bosses.frost_boss import FrostBoss
 
 class Dialouge:
-    def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
-                 level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win):
+    def __init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk, level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
+                 level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win,
+                 level_4,level_4_player_talk_1,level_4_player_talk_2,level_4_player_lose,level_4_player_win):
         People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2) 
         EnemyTwo.__init__(self,level_1,enemy_2_rects,reset_locations,player_control,level_2,level_3,level_4)
         FrostBoss.__init__(self,level_2,level_2_boss_talk,reset_locations)
@@ -41,6 +42,12 @@ class Dialouge:
         self.player_health=player_health
         self.general_boss_health=general_boss_health
 
+        self.level_4=level_4
+        self.level_4_player_talk_1=level_4_player_talk_1
+        self.level_4_player_talk_2=level_4_player_talk_2
+        self.level_4_player_lose=level_4_player_lose
+        self.level_4_player_win=level_4_player_win
+
     def distance_level_object(self):
         self.tile_interact_rect_distance=[]
         for idx,tile in enumerate(self.object_rect):
@@ -52,10 +59,10 @@ class Dialouge:
         if not self.level_3:
             self.left_mouse_button_icon=left_mouse_button_icon
             offset_x=15 ; offset_y=100
-        if self.level_3:
+        if self.level_3 or self.level_4:
             self.left_mouse_button_icon=left_mouse_button_icon_miniture
-            offset_x=5 ; offset_y=40
-        if any([self.level_1,self.level_2,self.level_3]):
+            offset_x=-20 ; offset_y=45
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             self.mouse_button_blit_list.clear()
             for idx,distance in enumerate(self.tile_interact_rect_distance):
                 if self.tile_interact_rect_distance[idx]<100: 
@@ -65,7 +72,7 @@ class Dialouge:
                     return self.object_rect[idx]
     
     def level_dialogue_condition(self,event,event_list):
-        if any([self.level_1,self.level_2,self.level_3]):
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             if event.type==pygame.MOUSEBUTTONDOWN and len(self.mouse_button_blit_list)>0:
                 return True 
   
@@ -77,6 +84,12 @@ class Dialouge:
         if self.level_3:
             self.test_level_1_dialogue=level_3_dialogue_walk_up(self.player_icon,self.general_boss_icon)[0]
             self.test_level_2_dialogue=level_3_dialogue_walk_up(self.player_icon,self.general_boss_icon)[1]
+        if self.level_4:
+            if self.dialogue_objective_list[0]==1:
+                self.test_level_1_dialogue=level_4_dialogue_walk_up(self.player_icon,self.abyss_icon)[0]
+            if self.dialogue_objective_list[0]==2:
+                self.test_level_1_dialogue=level_4_dialogue_walk_up(self.player_icon,self.abyss_icon)[1]
+
 
     def get_index_object(self):
         if self.dialogue_condition:
@@ -113,7 +126,15 @@ class Dialouge:
                 elif self.object_index==0:
                     self.diaglogue_click=self.test_level_2_dialogue
                     self.dialouge_list[0]=len(self.diaglogue_click)
-                    return self.diaglogue_click,self.dialouge_list       
+                    return self.diaglogue_click,self.dialouge_list  
+
+            elif self.level_4:
+                Dialouge.text(self)
+                self.object_index=Dialouge.get_index_object(self)
+                if self.object_index==0:
+                    self.diaglogue_click=self.test_level_1_dialogue
+                    self.dialouge_list[0]=len(self.diaglogue_click)
+                    return self.diaglogue_click,self.dialouge_list
         else:
             self.diaglogue_click="None"
         
@@ -150,10 +171,13 @@ class Dialouge:
                 self.distance_talk=Dialouge.distance_level_object(self)
             else:
                 self.distance_talk=EnemyTwo.distance(self)
+        if self.level_4:
+            self.distance_talk=EnemyTwo.distance(self)
             
+
     def level_dialogue_story(self,event,event_list):
         Dialouge.dialogue_condition_distance(self)
-        if any([self.level_1,self.level_2,self.level_3]):
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             for idx,distance in enumerate(self.distance_talk):
                 if distance<200:
                     if self.level_1:

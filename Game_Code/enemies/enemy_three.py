@@ -8,7 +8,7 @@ from Game_Code.lose import Lose
 
 class EnemyThree:
     def __init__(self,level_3,player_control,reset_locations,level_4) -> None:
-        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3)
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3,level_4)
         self.enemy_three_idle_number=enemy_three_idle_number ; self.enemy_three_move_number=enemy_three_move_number ; self.enemy_three_fall_number=enemy_three_fall_number ; self.enemy_three_attack_number=enemy_three_attack_number ; self.player_control_index=player_control_index
         self.level_3=level_3 ; self.enemy_3_health=enemy_3_health ; self.enemy_3_x_movement=enemy_3_x_movement ; self.enemy_3_y_movement=enemy_3_y_movement ; self.player_control_cooldown=player_control_cooldown ; self.enemy_3_level_4_arrow_rect=enemy_3_level_4_arrow_rect
         self.player_control=player_control ; self.player_rect=player_rect ; self.camera_x_y=camera_x_y ; self.enemy_three_fall_type=enemy_three_fall_type ; self.player_health=player_health ; self.enemy_3_x_movement_control=enemy_3_x_movement_control

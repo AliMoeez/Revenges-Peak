@@ -8,10 +8,11 @@ from .dialogue import Dialouge
 class Objectives:
     def __init__(self,level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,
                  dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk,
-                 level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3):
+                 level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3,
+                 level_4,level_4_player_talk_1,level_4_player_talk_2,level_4_player_lose,level_4_player_win):
         People.__init__(self,level_1,level_1_wizard_talk,reset_locations,level_2)
         Dialouge.__init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
-                          level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win)
+                          level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win,level_4,level_4_player_talk_1,level_4_player_talk_2,level_4_player_lose,level_4_player_win)
         self.level_1=level_1 ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.RED=(255,55,55) ; self.level_1_wizard_talk=level_1_wizard_talk
         self.player_rect=player_rect ; self.people_level_1_rect=people_level_1_rect ; self.camera_x_y=camera_x_y ; self.red_arrow_icon=red_arrow_icon
         self.WHITE=(255,255,255) ; self.talk_to_abyss_level_one=talk_to_abyss_level_one ; self.investigate_object_level_one=investigate_object_level_one
@@ -31,9 +32,15 @@ class Objectives:
         self.level_3_player_talk_4=level_3_player_talk_4
         self.enemy_3_health=enemy_3_health
         self.object_rect=object_rect
+        
+        self.level_4=level_4
+        self.level_4_player_talk_1=level_4_player_talk_1
+        self.level_4_player_talk_2=level_4_player_talk_2
+        self.level_4_player_lose=level_4_player_lose
+        self.level_4_player_win=level_4_player_win
 
     def distance(self,place_x:int,place_y:int):
-        if any([self.level_1,self.level_2,self.level_3]):
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             self.player_objective_distance_list=[]
             self.player_objective_distance=math.hypot(self.player_rect.x-place_x,self.player_rect.y-place_y)
             self.player_objective_distance_list.append(self.player_objective_distance)
@@ -101,14 +108,23 @@ class Objectives:
                 if self.objectives_distance[0]<200:
                     self.dialogue_objective_list[0]=3
                 return self.objectives_distance[0],288,225
+           
+    def level_four_objectives(self):
+        if self.level_4:
+            if self.level_4_player_talk_1:
+                self.objectives_distance=Objectives.distance(self,690,1520)
+                if self.objectives_distance[0]<200:
+                    self.dialogue_objective_list[0]=1
+                return self.objectives_distance[0],690,1520
 
     def define_level(self):
         if self.level_1: self.level_objectives=Objectives.level_one_objectives(self)
         if self.level_2: self.level_objectives=Objectives.level_two_objectives(self)
         if self.level_3: self.level_objectives=Objectives.level_three_objectives(self)
+        if self.level_4: self.level_objectives=Objectives.level_four_objectives(self)
 
     def rotation_angle(self):
-        if any([self.level_1,self.level_2,self.level_3]):
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             if self.level_objectives is not None:
                 self.interact_x,self.interact_y=self.level_objectives[1],self.level_objectives[2]
                 self.dx,self.dy=self.interact_x-self.player_rect.x, self.interact_y-self.player_rect.y            
@@ -120,7 +136,7 @@ class Objectives:
         self.objectives_backgruond=SCREEN.blit(self.objectives_backgruond,(SCREEN_WIDTH//2-30,SCREEN_HEIGHT-790))
 
     def show_objectives(self):
-        if any([self.level_1,self.level_2,self.level_3]):
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             if self.level_objectives is not None:
                 Objectives.background(self)
                 self.font_title=pygame.font.Font(self.font,24) 

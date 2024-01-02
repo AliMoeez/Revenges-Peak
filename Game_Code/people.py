@@ -6,7 +6,7 @@ from .lose import Lose
 
 class People:
     def __init__(self,level_1,level_1_wizard_talk,reset_locations,level_2):
-        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3)
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3,level_4)
         self.level_1=level_1 ; self.people_level_1_rect=people_level_1_rect ; self.player_rect=player_rect
         self.people_level_x_movement=people_level_x_movement ; self.people_level_y_movement=people_level_y_movement
         self.camera_x_y=camera_x_y ; self.elder_idle_number=elder_idle_number ; self.elder_run_number=elder_run_number

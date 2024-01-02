@@ -9,7 +9,7 @@ from Game_Code.control_test import ControlTest
 class EnemyTwo:
     def __init__(self,level_1,enemy_2_rects,reset_locations,player_control,level_2,level_3,level_4):
         EnemyGeneralFunctions.__init__(self)
-        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3)
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3,level_4)
         self.level_1=level_1 ; self.camera_x_y=camera_x_y ; self.brute_1_idle_number=brute_1_idle_number ; self.brute_1_run_number=brute_1_run_number
         self.player_rect=player_rect ; self.player_control_index=player_control_index ; self.enemy_2_level_1_rects=enemy_2_rects ; self.brute_1_attack_number=brute_1_attack_number
         self.enemy_2_level_1_x=enemy_2_level_1_x ; self.enemy_2_level_1_y=enemy_2_level_1_y ; self.enemy_2_x_movement=enemy_2_x_movement ; self.enemy_2_y_movement=enemy_2_y_movement

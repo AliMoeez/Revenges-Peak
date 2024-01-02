@@ -9,7 +9,7 @@ from Game_Code.lose import Lose
 
 class GeneralBoss:
     def __init__(self,level_3,level_3_player_talk_4,level_3_player_talk_3,reset_locations):
-        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3)
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3,level_4)
         self.level_3=level_3
         self.level_3_player_talk_4=level_3_player_talk_4
         self.level_3_player_talk_3=level_3_player_talk_3

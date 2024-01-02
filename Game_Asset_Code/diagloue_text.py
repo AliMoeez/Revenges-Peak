@@ -128,6 +128,7 @@ def level_4_dialogue(player_icon,final_boss_icon):
         ("Then you will sieze to exist....",final_boss_icon,"Anes"),
         ("Let me be the judge of that!",player_icon,"You")
     ]
+    return level_4_dialogue_1
 
 
 def level_4_dialogue_walk_up(player_icon,abyss_icon):
@@ -137,11 +138,17 @@ def level_4_dialogue_walk_up(player_icon,abyss_icon):
         ("I must oversee the ceremony! Anes is coming soon you must be prepared!",abyss_icon,"The Abyss"),
         ("Why, didn't you tell me about this ceremony in the first place?",player_icon,"You"),
         ("Your traning was a must! We knew you would eventually find a way to Anes.",abyss_icon,"The Abyss"),
-        ("Ok, whatever.... What should I do before meeting Anes? Can you help me in the battle?"),
+        ("Ok, whatever.... What should I do before meeting Anes? Can you help me in the battle?",player_icon,"You"),
         ("If I were to help you he would destory me in a matter of seconds, you must do this on your own..... His men are north defeat them before he comes.",abyss_icon,"The Abyss"),
         ("Sounds good, I will do my best",player_icon,"You")
 
+    ],
+    level_4_dialogue_walk_up_2=[
+        ("",abyss_icon,""),
+        ("What are you doing you must fight!",abyss_icon,"The Abyss"),
+        ("Alright!",player_icon,"You")
     ]
+    return level_4_dialogue_walk_up_1,level_4_dialogue_walk_up_2
 
 
        

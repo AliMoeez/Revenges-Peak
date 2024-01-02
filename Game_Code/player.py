@@ -9,7 +9,7 @@ class Player:
     def __init__(self,player_x,player_y,player_width,player_height,player_rect,level_1,player_control,dialogue_condition,
                  dialogue_story_condition,reset_locations,tutorial_one,tutorial_two,
                  level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2,level_3,level_4):
-        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3)
+        Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3,level_4)
         Win.__init__(self,level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_3,level_3_player_talk_4)
         self.player_x=player_x ; self.player_y=player_y ; self.player_width=player_width ; self.player_height=player_height ; self.player_rect=player_rect ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement
         self.camera_x_y=camera_x_y  ; self.level_1=level_1 ;  self.level_screen=level_screen ; self.player_key=player_key ; self.player_attack_cooldown=player_attack_cooldown ; self.level_1_tile_set_rect=level_1_tile_set_rect ; self.player_health=player_health

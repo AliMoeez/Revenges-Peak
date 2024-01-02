@@ -9,7 +9,9 @@ from Game_Asset_Code import *
 from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,LevelFour,Player,EnemyOne,EnemyTwo,EnemyThree,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,GeneralBoss,FinalBoss,HealingPlayer
 
 while run:
-    print(player_rect.x,player_rect.y)
+  #  print(player_rect.x,player_rect.y)
+  #  print(object_rect)
+    print(dialogue_objective_list[0])
     level_1_tile_set_rect.clear()
     level_2_tile_set_rect.clear()
     level_3_tile_set_rect.clear()
@@ -37,11 +39,13 @@ while run:
     frostboss=FrostBoss(level_2,level_2_boss_talk,reset_locations)
     generalboss=GeneralBoss(level_3,level_3_player_talk_4,level_3_player_talk_3,reset_locations)
     finalboss=FinalBoss(level_4)
-
+    
     healingplayer=HealingPlayer(level_1,level_2,reset_locations,level_3)
+    
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
-                      level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win)
-    lose=Lose(level_1,player_lose_condition,reset_locations,level_2,level_3)
+                      level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win,level_4,level_4_player_talk_1,level_4_player_talk_2,level_4_player_lose,level_4_player_win)
+    
+    lose=Lose(level_1,player_lose_condition,reset_locations,level_2,level_3,level_4)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_3,level_3_player_talk_4)
 
@@ -74,6 +78,8 @@ while run:
                 if dialogue_objective_list[0]==3: level_3_player_talk_4=False
                 if dialogue_objective_list[0]==4: level_3_player_lose=True
                 if dialogue_objective_list[0]==5: level_3_player_win=True
+            if level_4:
+                if dialogue_objective_list[0]==1: level_4_player_talk_1=False
     
         if event.type==pygame.QUIT:
             pygame.quit() ; sys.exit()
@@ -314,11 +320,13 @@ while run:
 
     objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,
                           dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk,
-                          level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3,)
+                          level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3,
+                          level_4,level_4_player_talk_1,level_4_player_talk_2,level_4_player_lose,level_4_player_win)
     objectives.define_level()
     objectives.level_one_objectives()
     objectives.level_two_objectives()
     objectives.level_three_objectives()
+    objectives.level_four_objectives()
     objectives.show_objectives()
     
     dialogue.level_object_interaction()
