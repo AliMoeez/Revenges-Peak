@@ -85,10 +85,10 @@ class Dialouge:
             self.test_level_1_dialogue=level_3_dialogue_walk_up(self.player_icon,self.general_boss_icon)[0]
             self.test_level_2_dialogue=level_3_dialogue_walk_up(self.player_icon,self.general_boss_icon)[1]
         if self.level_4:
-            if self.dialogue_objective_list[0]==1:
-                self.test_level_1_dialogue=level_4_dialogue_walk_up(self.player_icon,self.abyss_icon)[0]
-            if self.dialogue_objective_list[0]==2:
-                self.test_level_1_dialogue=level_4_dialogue_walk_up(self.player_icon,self.abyss_icon)[1]
+            if self.dialogue_objective_list[0]<1:
+                self.test_level_1_dialogue=level_4_dialogue_walk_up(self.player_icon,self.abyss_icon)[0][0]
+            if self.dialogue_objective_list[0]>=1:
+              self.test_level_1_dialogue=level_4_dialogue_walk_up(self.player_icon,self.abyss_icon)[1]
 
 
     def get_index_object(self):

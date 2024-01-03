@@ -11,7 +11,7 @@ from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,LevelFour,Player,EnemyOn
 while run:
   #  print(player_rect.x,player_rect.y)
   #  print(object_rect)
-    print(dialogue_objective_list[0])
+  #  print(dialogue_objective_list[0])
     level_1_tile_set_rect.clear()
     level_2_tile_set_rect.clear()
     level_3_tile_set_rect.clear()
@@ -50,6 +50,8 @@ while run:
     win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_3,level_3_player_talk_4)
 
     for event in event_list:
+
+        print(player_rect.x,player_rect.y)
 
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True ; dialogue_story_condition=False

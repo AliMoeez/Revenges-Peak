@@ -38,6 +38,8 @@ class Objectives:
         self.level_4_player_talk_2=level_4_player_talk_2
         self.level_4_player_lose=level_4_player_lose
         self.level_4_player_win=level_4_player_win
+        self.dialogue_click_list=dialogue_click_list
+        self.enemy_2_level_4_rects=enemy_2_level_4_rects
 
     def distance(self,place_x:int,place_y:int):
         if any([self.level_1,self.level_2,self.level_3,self.level_4]):
@@ -113,10 +115,21 @@ class Objectives:
         if self.level_4:
             if self.level_4_player_talk_1:
                 self.objectives_distance=Objectives.distance(self,690,1520)
-                if self.objectives_distance[0]<200:
+                if self.objectives_distance[0]<200 and self.dialogue_click_list[0]>=7:
                     self.dialogue_objective_list[0]=1
                 return self.objectives_distance[0],690,1520
+            if not self.level_4_player_talk_1 and self.level_4_player_talk_2 and all(i>0 for i in self.enemy_1_health) and all(i>0 for i in self.enemy_2_health) and all(i>0 for i in self.enemy_3_health):
+                self.objectives_distance=Objectives.distance(self,self.enemy_2_level_4_rects[0].x,self.enemy_2_level_4_rects[0].y)
+                if self.objectives_distance[0]<200:
+                    self.dialogue_objective_list[0]=2
+                return self.objectives_distance[0],self.enemy_2_level_4_rects[0].x,self.enemy_2_level_4_rects[0].y
+            if not self.level_4_player_talk_1 and self.level_4_player_talk_2 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health):
+                self.objectives_distance=Objectives.distance(self,3310,842)
+                if self.objectives_distance[0]<200:
+                    self.dialogue_objective_list[0]=3
+                return self.objectives_distance[0],3250,730
 
+                
     def define_level(self):
         if self.level_1: self.level_objectives=Objectives.level_one_objectives(self)
         if self.level_2: self.level_objectives=Objectives.level_two_objectives(self)
