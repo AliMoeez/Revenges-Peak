@@ -72,12 +72,13 @@ elder_boss_attack_cooldown=[10]
 
 elder_boss_fall_type=[0]
 
-
-final_boss_x=[900]
-final_boss_y=[2000]
+final_boss_x=[4700]
+final_boss_y=[730]
 
 final_boss_x_movement=[0]
 final_boss_y_movement=[0]
+
+final_boss_player_stop=[0]
 
 final_boss_rect=pygame.Rect(final_boss_x[0],final_boss_y[0],65,35)
 

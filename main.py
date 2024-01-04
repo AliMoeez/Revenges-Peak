@@ -38,7 +38,7 @@ while run:
     
     frostboss=FrostBoss(level_2,level_2_boss_talk,reset_locations)
     generalboss=GeneralBoss(level_3,level_3_player_talk_4,level_3_player_talk_3,reset_locations)
-    finalboss=FinalBoss(level_4)
+    finalboss=FinalBoss(level_4,level_4_player_talk_2)
     
     healingplayer=HealingPlayer(level_1,level_2,reset_locations,level_3)
     
@@ -51,8 +51,7 @@ while run:
 
     for event in event_list:
 
-        print(player_rect.x,player_rect.y)
-
+        #print(player_rect.x,player_rect.y)w
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True ; dialogue_story_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN : dialogue_click_list[0]+=1 ; text_position[0]=0
@@ -299,7 +298,9 @@ while run:
     generalboss.collision_with_object()
     generalboss.collision_with_object_logic()
 
-    finalboss.idle()
+
+    finalboss.distance()
+    finalboss.initial_state()
     finalboss.move()
     finalboss.attack_logic()
     finalboss.attack()
