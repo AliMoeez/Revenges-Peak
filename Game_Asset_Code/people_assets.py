@@ -79,6 +79,7 @@ final_boss_x_movement=[0]
 final_boss_y_movement=[0]
 
 final_boss_player_stop=[0]
+player_boss_talk=[0]
 
 final_boss_rect=pygame.Rect(final_boss_x[0],final_boss_y[0],65,35)
 

@@ -26,6 +26,9 @@ class FinalBoss:
         self.elder_attack_poison_effect=elder_attack_poison_effect
         self.level_4_player_talk_2=level_4_player_talk_2
         self.final_boss_player_stop=final_boss_player_stop
+        self.player_boss_talk=player_boss_talk
+        self.dialogue_click_list=dialogue_click_list
+        self.dialogue_objective_list=dialogue_objective_list
 
         """        self.final_boss_support_x=final_boss_support_x
                 self.final_boss_support_y=final_boss_support_y
@@ -71,6 +74,10 @@ class FinalBoss:
                 self.final_boss_x_movement[0]=0 ; self.final_boss_y_movement[0]=0
                 BossGeneralFunctions.idle(self,self.final_boss_rect,self.elder_idle_list_flip,self.elder_idle_list,self.elder_idle_number_level_4,65,35,7,0.15,
                                       self.final_boss_health,self.player_health)
+                """                if self.dialogue_click_list[0]<=8:
+                    self.dialogue_objective_list[0]=3
+                else:
+                    self.dialogue_objective_list[0]=4"""
 
 
     def move(self):

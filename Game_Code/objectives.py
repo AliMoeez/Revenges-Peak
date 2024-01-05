@@ -127,7 +127,11 @@ class Objectives:
                 self.objectives_distance=Objectives.distance(self,3310,842)
                 if self.objectives_distance[0]<200:
                     self.dialogue_objective_list[0]=3
-                return self.objectives_distance[0],3250,730
+            if not self.level_4_player_talk_1 and self.level_4_player_talk_2 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health) and self.dialogue_objective_list[0]==3:
+                self.objectives_distance=Objectives.distance(self,self.final_boss_rect.x,self.final_boss_rect.y)
+                if self.objectives_distance[0]<100:
+                    self.dialogue_objective_list[0]=4
+                return self.objectives_distance[0],self.final_boss_rect.x,self.final_boss_rect.y
 
                 
     def define_level(self):
