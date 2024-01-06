@@ -61,24 +61,20 @@ class FinalBoss:
         self.elder_idle_list=elder_idle_list ; self.elder_idle_list_flip=elder_idle_list_flip ; self.elder_idle_number_level_4=elder_idle_number_level_4
         self.elder_run_list=elder_run_list ; self.elder_run_list_flip=elder_run_list_flip ; self.elder_run_number_level_4=elder_run_number_level_4
         if self.level_4 and self.level_4_player_talk_2 and self.dialogue_distance<200:
-            self.final_boss_player_stop[0]=1
 
-            if self.distance>700: self.boss_x_movement=10
+            if self.distance>700: self.boss_x_movement=100
             elif self.distance<=700 and self.distance>100: self.boss_x_movement=2
             else: self.boss_x_movement=0
 
             if self.distance>100:
                 BossGeneralFunctions.move(self,self.final_boss_rect,self.elder_run_list_flip,self.elder_run_list,self.elder_run_number_level_4,65,35,9,0.25,
                                       self.final_boss_x_movement,self.final_boss_y_movement,self.boss_x_movement,2,self.elder_attack_number_level_4,self.final_boss_health,self.player_health)
+                self.final_boss_player_stop[0]=1
             else:
                 self.final_boss_x_movement[0]=0 ; self.final_boss_y_movement[0]=0
                 BossGeneralFunctions.idle(self,self.final_boss_rect,self.elder_idle_list_flip,self.elder_idle_list,self.elder_idle_number_level_4,65,35,7,0.15,
                                       self.final_boss_health,self.player_health)
-                """                if self.dialogue_click_list[0]<=8:
-                    self.dialogue_objective_list[0]=3
-                else:
-                    self.dialogue_objective_list[0]=4"""
-
+                self.final_boss_player_stop[0]=0
 
     def move(self):
         self.distance=FinalBoss.distance(self)

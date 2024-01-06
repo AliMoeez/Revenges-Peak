@@ -51,6 +51,8 @@ class Dialouge:
         self.level_4_player_lose=level_4_player_lose
         self.level_4_player_win=level_4_player_win
 
+        self.distance_talk=[FinalBoss.distance(self)]
+
     def distance_level_object(self):
         self.tile_interact_rect_distance=[]
         for idx,tile in enumerate(self.object_rect):
@@ -142,7 +144,7 @@ class Dialouge:
             self.diaglogue_click="None"
         
     def beginning_condition(self):
-        self.distance_talk=[FinalBoss.distance(self)]
+    #    print(self.distance_talk)
         if self.level_2 and self.level_2_player_talk:
             return True
         if self.level_3 and self.level_3_player_talk_1:
@@ -155,8 +157,8 @@ class Dialouge:
         if self.level_3 and not self.level_3_player_talk_4 and self.general_boss_health[0]<=0 and not self.level_3_player_win:
             self.dialogue_objective_list[0]=5
             return True
-      #  if self.level_4 and not self.level_4_player_talk_1 and self.level_4_player_talk_2 and self.distance_talk[0]<=100:
-      #      return True
+        if  self.level_4_player_talk_2 and not self.level_4_player_talk_1 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health) and self.dialogue_objective_list[0]>=3:
+                return True
         
     def dialogue_condition_distance(self):
         if self.level_1:
@@ -200,10 +202,12 @@ class Dialouge:
                         else:
                           return False
                     if self.level_4:
-                        if  self.level_4_player_talk_2 and not self.level_4_player_talk_1 :
-                            return True
-                        else:
-                            return False
+                        pass
+                      #  if  self.level_4_player_talk_2 and not self.level_4_player_talk_1 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health):
+                      ##      print("HERHEHRHEHRHERERBHERGE")
+                       #     return True
+                       # else:
+                       #     return False
 
               
     def text_story(self):

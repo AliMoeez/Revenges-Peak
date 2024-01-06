@@ -123,13 +123,15 @@ class Objectives:
                 if self.objectives_distance[0]<200:
                     self.dialogue_objective_list[0]=2
                 return self.objectives_distance[0],self.enemy_2_level_4_rects[0].x,self.enemy_2_level_4_rects[0].y
-            if not self.level_4_player_talk_1 and self.level_4_player_talk_2 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health):
+            if not self.level_4_player_talk_1 and self.level_4_player_talk_2 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health) and self.dialogue_objective_list[0]<3:
                 self.objectives_distance=Objectives.distance(self,3310,842)
-                if self.objectives_distance[0]<200:
+                if self.objectives_distance[0]<300:
                     self.dialogue_objective_list[0]=3
-            if not self.level_4_player_talk_1 and self.level_4_player_talk_2 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health) and self.dialogue_objective_list[0]==3:
+                return self.objectives_distance[0],3310,842
+            if not self.level_4_player_talk_1 and self.level_4_player_talk_2 :
                 self.objectives_distance=Objectives.distance(self,self.final_boss_rect.x,self.final_boss_rect.y)
-                if self.objectives_distance[0]<100:
+                if self.objectives_distance[0]<200:
+
                     self.dialogue_objective_list[0]=4
                 return self.objectives_distance[0],self.final_boss_rect.x,self.final_boss_rect.y
 
@@ -155,6 +157,7 @@ class Objectives:
     def show_objectives(self):
         if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             if self.level_objectives is not None:
+            #    print(self.level_objectives)
                 Objectives.background(self)
                 self.font_title=pygame.font.Font(self.font,24) 
                 self.font_title_render=self.font_title.render(f"{round(self.level_objectives[0],1)}m",True,self.RED) 

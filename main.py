@@ -53,10 +53,12 @@ while run:
 
         #print(player_rect.x,player_rect.y)w
         if dialogue.level_dialogue_condition(event,event_list):
+            print("OTHER SOTRY")
             dialogue_condition=True ; dialogue_story_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN : dialogue_click_list[0]+=1 ; text_position[0]=0
         
         if dialogue.level_dialogue_story(event,event_list) or dialogue.beginning_condition():
+            print("STORRYRYRYRYRYRY")
             mouse_button_blit_list.clear() ; dialogue_story_condition=True ; dialogue_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN: dialogue_click_list[0]+=1 ; text_position[0]=0
         
@@ -80,9 +82,10 @@ while run:
                 if dialogue_objective_list[0]==4: level_3_player_lose=True
                 if dialogue_objective_list[0]==5: level_3_player_win=True
             if level_4:
-                print(dialogue_objective_list[0])
+              # print(dialogue_objective_list[0])
                 if dialogue_objective_list[0]==1: level_4_player_talk_1=False
                 if dialogue_objective_list[0]==4: level_4_player_talk_2=False
+            
     
         if event.type==pygame.QUIT:
             pygame.quit() ; sys.exit()
