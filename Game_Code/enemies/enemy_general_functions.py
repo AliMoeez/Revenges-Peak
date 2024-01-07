@@ -22,7 +22,6 @@ class EnemyGeneralFunctions:
                         enemy_x_movement[idx]=0 
                         enemy_y_movement[idx]=0
                         SCREEN.blit(enemy_idle_right[int(enemy_idle_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_right,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_right))
-                        pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
                         enemy_idle_number[idx]+=idle_increase
                         if enemy_idle_number[idx]>idle_max_number:
                             enemy_idle_number[idx]=0
@@ -32,7 +31,6 @@ class EnemyGeneralFunctions:
              offset_x_left:int,offset_y_left:int,min_distance:int,max_distance:int):
             for idx,distance in enumerate(distance_list):
                 if distance>=min_distance and distance<=max_distance and enemy_health[idx]>0:
-                    pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
                     if self.player_rect.x>=enemy_rects[idx].x: SCREEN.blit(enemy_run_right[int(enemy_run_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_right,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_right))
                     else: SCREEN.blit(enemy_run_left[int(enemy_run_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0]-offset_x_left,enemy_rects[idx].y-self.camera_x_y[1]-offset_y_left))
                     enemy_run_number[idx]+=enemy_run_increment
@@ -51,7 +49,6 @@ class EnemyGeneralFunctions:
                offset_x_right:int,offset_x_left:int,offset_y_right:int,offset_y_left:int,player_health:list,health_reduction:int,max_distance:int):
                 for idx,distance in enumerate(distance_list):
                     if distance<max_distance and enemy_health[idx]>0:
-                        pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
                         enemy_x_movement[idx]=0 
                         enemy_y_movement[idx]=0
                         if self.player_rect.x>=enemy_rects[idx].x:
@@ -122,7 +119,6 @@ class EnemyGeneralFunctions:
                 enemy_x_movement[idx]=0 
                 enemy_y_movement[idx]=0
                 SCREEN.blit(enemy_idle_right[int(enemy_idle_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1]))
-                pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
                 enemy_idle_number[idx]+=idle_increase
                 if enemy_idle_number[idx]>idle_max_number:
                     enemy_idle_number[idx]=0
@@ -131,7 +127,6 @@ class EnemyGeneralFunctions:
              enemy_x_movement:list,enemy_y_movement:list,enemy_run_increment:int,enemy_run_max:int):
         for idx,distance in enumerate(distance_list):
             if distance>=100 and distance<=400 and enemy_health[idx]>0:
-                pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
                 if self.player_rect.x>=enemy_rects[idx].x: SCREEN.blit(enemy_run_right[int(enemy_run_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1]))
                 else: SCREEN.blit(enemy_run_left[int(enemy_run_number[idx])//2],(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1]))
                 enemy_run_number[idx]+=enemy_run_increment
@@ -150,7 +145,6 @@ class EnemyGeneralFunctions:
                offset_x_right:int,offset_x_left:int,offset_y_right:int,offset_y_left:int,player_health:list,health_reduction:int):
         for idx,distance in enumerate(distance_list):
             if distance<100 and enemy_health[idx]>0:
-                pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(enemy_rects[idx].x-self.camera_x_y[0],enemy_rects[idx].y-self.camera_x_y[1],45,55),width=1)
                 enemy_x_movement[idx]=0 
                 enemy_y_movement[idx]=0
                 if self.player_rect.x>=enemy_rects[idx].x:

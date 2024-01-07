@@ -160,9 +160,7 @@ class EnemyThree:
     def arrow_logic(self):
         self.angle=EnemyThree.arrow_angle(self)
         for idx,enemy in enumerate(self.enemy_rect):
-            
-            pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(self.arrow_rect[idx].x-self.camera_x_y[0],self.arrow_rect[idx].y-self.camera_x_y[1],24,5),width=1)
-          
+                      
             if self.player_last_position[0][0]>enemy.x:
                 SCREEN.blit(self.enemy_three_arrow_list[0],(self.arrow_rect[idx].x-self.camera_x_y[0],self.arrow_rect[idx].y-self.camera_x_y[1]))    
             if self.player_last_position[0][0]<=enemy.x:
@@ -204,9 +202,7 @@ class EnemyThree:
                 for idx,distance in enumerate(self.enemy_3_distance_control):
                     
                     if distance<400 and self.enemy_3_health[idx]>0:
-                        
-                        pygame.draw.rect(SCREEN,(100,100,100),pygame.Rect(self.enemy_rect[idx].x-self.camera_x_y[0],self.enemy_rect[idx].y-self.camera_x_y[1],45,55),width=1)
-                        
+                                                
                         self.enemy_3_x_movement[idx]=0 
                         self.enemy_3_y_movement[idx]=0
                         

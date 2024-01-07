@@ -53,12 +53,10 @@ while run:
 
         #print(player_rect.x,player_rect.y)w
         if dialogue.level_dialogue_condition(event,event_list):
-            print("OTHER SOTRY")
             dialogue_condition=True ; dialogue_story_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN : dialogue_click_list[0]+=1 ; text_position[0]=0
         
         if dialogue.level_dialogue_story(event,event_list) or dialogue.beginning_condition():
-            print("STORRYRYRYRYRYRY")
             mouse_button_blit_list.clear() ; dialogue_story_condition=True ; dialogue_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN: dialogue_click_list[0]+=1 ; text_position[0]=0
         
@@ -297,18 +295,18 @@ while run:
     generalboss.move()
     generalboss.attack()
     generalboss.fall()
-    generalboss.health()
     generalboss.reset_position()
     generalboss.player_hit(key)
     generalboss.collision_with_object()
     generalboss.collision_with_object_logic()
-
 
     finalboss.distance()
     finalboss.initial_state()
     finalboss.move()
     finalboss.attack_logic()
     finalboss.attack()
+    finalboss.player_hit(key)
+    finalboss.fall()
     finalboss.poison_effect()
     finalboss.collision_with_object()
     finalboss.collision_with_object_logic()
@@ -325,7 +323,8 @@ while run:
 
     player.health_power_cooldown_icons()
     frostboss.health()
-
+    generalboss.health()
+    finalboss.health()
     objectives=Objectives(level_1,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,
                           dialogue_objective_list,level_2_guard_talk,level_2_boss_talk,level_2,level_2_player_talk,level_2_enemy_talk,
                           level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3,

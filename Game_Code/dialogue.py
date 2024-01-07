@@ -144,7 +144,6 @@ class Dialouge:
             self.diaglogue_click="None"
         
     def beginning_condition(self):
-    #    print(self.distance_talk)
         if self.level_2 and self.level_2_player_talk:
             return True
         if self.level_3 and self.level_3_player_talk_1:
@@ -201,14 +200,6 @@ class Dialouge:
                             return True
                         else:
                           return False
-                    if self.level_4:
-                        pass
-                      #  if  self.level_4_player_talk_2 and not self.level_4_player_talk_1 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health):
-                      ##      print("HERHEHRHEHRHERERBHERGE")
-                       #     return True
-                       # else:
-                       #     return False
-
               
     def text_story(self):
         if self.level_1:
