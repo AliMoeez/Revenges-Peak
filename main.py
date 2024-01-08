@@ -30,7 +30,7 @@ while run:
                   player_control,dialogue_condition,dialogue_story_condition,
                   reset_locations,tutorial_one,tutorial_two,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_2,level_3,level_4)
     
-    enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2,level_3,level_4)
+    enemy_one=EnemyOne(level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2,level_3,level_4,level_4_player_talk_2)
     enemy_two=EnemyTwo(level_1,enemy_2_rects,reset_locations,player_control,level_2,level_3,level_4)
     enemy_three=EnemyThree(level_3,player_control,reset_locations,level_4)
     
@@ -306,6 +306,7 @@ while run:
     finalboss.attack_logic()
     finalboss.attack()
     finalboss.player_hit(key)
+    finalboss.support_logic()
     finalboss.fall()
     finalboss.poison_effect()
     finalboss.collision_with_object()

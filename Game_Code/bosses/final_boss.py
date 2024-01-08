@@ -14,29 +14,18 @@ class FinalBoss:
         self.elder_attack_poison_effect=elder_attack_poison_effect ; self.level_4_player_talk_2=level_4_player_talk_2 ; self.final_boss_player_stop=final_boss_player_stop ; self.player_boss_talk=player_boss_talk ; self.dialogue_click_list=dialogue_click_list ; self.dialogue_objective_list=dialogue_objective_list ; self.health_icon=health_icon
         self.health_bar_colour=(70,0,33) ; self.player_attack_number=player_attack_number
 
-        self.enemy_1_level_4_rect=enemy_1_level_4_rect
-        self.enemy_1_health=enemy_1_health
+        self.enemy_1_level_4_rect=enemy_1_level_4_rect ; self.enemy_1_health=enemy_1_health ; self.enemy_1_x_movemnt=enemy_1_x_movement ; self.enemy_1_y_movement=enemy_1_y_movement
 
+        self.enemy_1_append_length=enemy_1_append_length
 
         if self.level_4 and self.final_boss_health[0]<=500 and not self.level_4_player_talk_2:
-            print(self.enemy_1_level_4_rect)
-            self.enemy_1_level_4_rect.append(pygame.Rect(3100,842,40,70))
-            self.enemy_1_health.append(100)
 
-        """        self.final_boss_support_x=final_boss_support_x
-                self.final_boss_support_y=final_boss_support_y
-                self.final_boss_support_fall_type=final_boss_support_fall_type
+            for i in range(self.enemy_1_append_length[0]):
+                self.enemy_1_append_length[0]-=1 ; self.enemy_1_level_4_rect.append(pygame.Rect(random.randint(self.player_rect.x+590,self.player_rect.x+800),random.randint(self.player_rect.y-200,self.player_rect.y+200),40,70))
+                self.enemy_1_health.append(100) ; self.enemy_1_x_movemnt.append(0) ; self.enemy_1_y_movement.append(0)
+            
 
 
-        final_boss_support_fall_type=[]
-
-        final_boss_support_health=[]
-
-        final_boss_support_x_movement=[]
-        final_boss_support_y_movement=[]
-
-
-        final_boss_support_rect=[]"""
 
 
     def distance(self):
@@ -111,15 +100,11 @@ class FinalBoss:
         else: 
             self.elder_attack_poison_effect[0]=10
 
-    def support_list(self):
+    def support_logic(self):
         if self.level_4 and self.final_boss_health[0]<=500:
-            pass
-
-
-    def call_support(self):
-        if self.level_4 and self.final_boss_health[0]<=500:
-            pass
-
+            print("HERE")
+        if  any([i>=0 for i in self.enemy_1_health]):
+            print("WOROKS")
 
     def health(self):
         if self.level_4 and not self.level_4_player_talk_2:
@@ -128,7 +113,7 @@ class FinalBoss:
     def player_hit(self,key):
         self.distance=FinalBoss.distance(self)
         if self.level_4 and self.distance<200 and not self.level_4_player_talk_2:
-            BossGeneralFunctions.player_hit(self,self.final_boss_health,self.player_attack_number,50,key)   
+            BossGeneralFunctions.player_hit(self,self.final_boss_health,self.player_attack_number,100,key)   
  
     def fall(self):
         self.elder_fall_list=elder_fall_list ; self.elder_fall_list_flip=elder_fall_list_flip ; self.elder_fall_number_level_4=elder_fall_number_level_4

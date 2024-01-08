@@ -7,7 +7,7 @@ from .enemy_general_functions import EnemyGeneralFunctions
 from Game_Code.control_test import ControlTest
 
 class EnemyOne:
-    def __init__(self,level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2,level_3,level_4):
+    def __init__(self,level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2,level_3,level_4,level_4_player_talk_2):
         EnemyGeneralFunctions.__init__(self)
         Lose.__init__(self,level_1,player_lose_condition,reset_locations,level_2,level_3,level_4)
         self.level_1=level_1 ; self.camera_x_y=camera_x_y ; self.enemy_1_level_1_rect=enemy_1_level_1_rect ; self.skeleton_idle_number=skeleton_idle_number
@@ -17,7 +17,7 @@ class EnemyOne:
         self.red=(178,34,34) ; self.player_key=player_key ; self.player_health=player_health ; self.reset_locations=reset_locations ; self.skeleton_fall_number=skeleton_fall_number
         self.enemy_1_health=enemy_1_health ; self.enemy_1_fall_type=enemy_1_fall_type ; self.player_control=player_control ; self.player_control_cooldown=player_control_cooldown
         self.enemy_1_x_control_movement=enemy_1_x_control_movement ; self.enemy_1_y_control_movement=enemy_1_y_control_movement ; self.level_3_tile_set_rect=level_3_tile_set_rect
-        self.enemy_2_rects=enemy_2_rects ; self.level_2=level_2 ; self.level_2_tile_set_rect=level_2_tile_set_rect ; self.level_3=level_3 ; self.level_4=level_4
+        self.enemy_2_rects=enemy_2_rects ; self.level_2=level_2 ; self.level_2_tile_set_rect=level_2_tile_set_rect ; self.level_3=level_3 ; self.level_4=level_4 ; self.level_4_player_talk_2=level_4_player_talk_2
         self.level_4_tile_set_rect=level_4_tile_set_rect
 
         self.enemy_1_level_1_x=enemy_1_level_1_x ; self.enemy_1_level_1_y=enemy_1_level_1_y
@@ -65,28 +65,38 @@ class EnemyOne:
         self.enemy_1_distance=EnemyOne.distance(self)
         self.skeleton_idle=skeleton_idle; self.skeleton_idle_flip=skeleton_idle_flip
 
-        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
-                
-                if EnemyOne.enemy_index(self) not in self.enemy_1_rects:
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):  
+                if self.level_4_player_talk_2:
 
-                    self.enemy_1_rects_control=self.enemy_1_rects
-                    self.enemy_1_distance_control=self.enemy_1_distance
-                    
-                    EnemyGeneralFunctions.idle(self,self.enemy_1_distance,self.player_control_index,self.enemy_1_health,self.enemy_1_x_movement,self.enemy_1_y_movement,
-                                self.skeleton_idle,self.skeleton_idle_flip,self.skeleton_idle_number,self.enemy_1_rects,0.10,4,0,0,400)
-                    
-                if EnemyOne.enemy_index(self) in self.enemy_1_rects:
-                    self.enemy_1_rects_control=[i for i in self.enemy_1_rects if i!=EnemyOne.enemy_index(self)]
-                    self.enemy_1_distance_control=[i for idx, i in enumerate(self.enemy_1_distance) if idx!=self.player_control_index[0][0]]
-                    
-                    EnemyGeneralFunctions.idle_control(self,self.enemy_1_distance_control,self.player_control_index,self.enemy_1_health,self.enemy_1_x_movement,self.enemy_1_y_movement,
-                                self.skeleton_idle,self.skeleton_idle_flip,self.skeleton_idle_number,self.enemy_1_rects_control,0.10,4)
+                    if EnemyOne.enemy_index(self) not in self.enemy_1_rects:
+
+                        self.enemy_1_rects_control=self.enemy_1_rects
+                        self.enemy_1_distance_control=self.enemy_1_distance
+                        
+                        EnemyGeneralFunctions.idle(self,self.enemy_1_distance,self.player_control_index,self.enemy_1_health,self.enemy_1_x_movement,self.enemy_1_y_movement,
+                                    self.skeleton_idle,self.skeleton_idle_flip,self.skeleton_idle_number,self.enemy_1_rects,0.10,4,0,0,400)
+                        
+                    if EnemyOne.enemy_index(self) in self.enemy_1_rects:
+                        self.enemy_1_rects_control=[i for i in self.enemy_1_rects if i!=EnemyOne.enemy_index(self)]
+                        self.enemy_1_distance_control=[i for idx, i in enumerate(self.enemy_1_distance) if idx!=self.player_control_index[0][0]]
+                        
+                        EnemyGeneralFunctions.idle_control(self,self.enemy_1_distance_control,self.player_control_index,self.enemy_1_health,self.enemy_1_x_movement,self.enemy_1_y_movement,
+                                    self.skeleton_idle,self.skeleton_idle_flip,self.skeleton_idle_number,self.enemy_1_rects_control,0.10,4)
 
     def run(self,key):
         self.enemy_1_distance=EnemyOne.distance(self)
         self.skeleton_run=skeleton_run; self.skeleton_run_flip=skeleton_run_flip
 
         if any([self.level_1,self.level_2,self.level_3,self.level_4]):
+
+            if self.level_4_player_talk_2:
+                self.min_distance=100
+                self.max_distance=400
+
+            if not self.level_4_player_talk_2:
+                self.min_distance=100
+                self.max_distance=100000
+
 
             if EnemyOne.enemy_index(self) not in self.enemy_1_rects:
                     self.enemy_1_rects_control=self.enemy_1_rects
@@ -95,7 +105,7 @@ class EnemyOne:
 
                     EnemyGeneralFunctions.move(self,self.enemy_1_distance,self.player_control_index,
                         self.enemy_1_health,self.enemy_1_rects,self.skeleton_run,self.skeleton_run_flip,self.skeleton_run_number,
-                        self.enemy_1_x_movement,self.enemy_1_y_movement,0.10,7,0,0,0,0,100,400)
+                        self.enemy_1_x_movement,self.enemy_1_y_movement,0.10,7,0,0,0,0,self.min_distance,self.max_distance)
                     
 
             if EnemyOne.enemy_index(self)  in self.enemy_1_rects:

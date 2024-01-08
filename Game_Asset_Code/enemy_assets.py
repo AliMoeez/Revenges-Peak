@@ -57,6 +57,8 @@ enemy_1_health=[] ; enemy_1_fall_type=[]
 
 enemy_1_x_control_movement=[0] ; enemy_1_y_control_movement=[0]
 
+enemy_1_append_length=[10]
+
 for i,num in enumerate(enemy_1_level_1_x): enemy_1_level_1_rect.append(pygame.Rect(enemy_1_level_1_x[i],enemy_1_level_1_y[i],40,70))
 for i,num in enumerate(enemy_1_level_2_x): enemy_1_level_2_rect.append(pygame.Rect(enemy_1_level_2_x[i],enemy_1_level_2_y[i],40,70))
 for i,num in enumerate(enemy_1_level_3_x): enemy_1_level_3_rect.append(pygame.Rect(enemy_1_level_3_x[i],enemy_1_level_3_y[i],40,70))

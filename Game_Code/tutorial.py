@@ -9,7 +9,7 @@ class Tutorial:
     def __init__(self,level_1,tutorial_one,tutorial_two):
         Dialouge.__init__(self,level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
                           level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win,level_4,level_4_player_talk_1,level_4_player_talk_2,level_4_player_lose,level_4_player_win)
-        EnemyOne.__init__(self,level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2,level_3,level_4)
+        EnemyOne.__init__(self,level_1,enemy_1_level_1_rect,reset_locations,player_control,level_2,level_3,level_4,level_4_player_talk_2)
         self.tutorial_one=tutorial_one ; self.tutorial_two=tutorial_two 
         self.level_1=level_1 ; self.player_rect=self.player_rect ; self.font=r"Assets\Misc\Fonts\Pixellari.ttf"  ; self.WHITE=(255,55,55) 
         self.text_position=text_position ; self.player_x_movement=player_x_movement ; self.player_y_movement=player_y_movement ; self.tutorial_two_list=tutorial_two_list
