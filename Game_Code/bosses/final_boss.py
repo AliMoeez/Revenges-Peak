@@ -59,11 +59,30 @@ class FinalBoss:
         if not self.level_4_player_talk_2:
             self.final_boss_player_stop[0]=0
 
+    def support_logic(self,distance):
+        if distance<400:
+            self.boss_x_movement=-2 ;  self.boss_y_movement=-2
+            BossGeneralFunctions.move(self,self.final_boss_rect,self.elder_run_list,self.elder_run_list_flip,self.elder_run_number_level_4,65,35,9,0.25,
+                self.final_boss_x_movement,self.final_boss_y_movement,self.boss_x_movement,self.boss_y_movement,self.elder_attack_number_level_4,self.final_boss_health,self.player_health)
+        else:
+            self.final_boss_health[0]+=5
+            self.final_boss_x_movement[0]=0 ; self.final_boss_y_movement[0]=0
+            BossGeneralFunctions.idle(self,self.final_boss_rect,self.elder_idle_list_flip,self.elder_idle_list,self.elder_idle_number_level_4,65,35,7,0.15,
+                self.final_boss_health,self.player_health)
+
+
+
     def move(self):
         self.distance=FinalBoss.distance(self)
-        if self.level_4 and self.distance>100 and not self.level_4_player_talk_2:
-            BossGeneralFunctions.move(self,self.final_boss_rect,self.elder_run_list_flip,self.elder_run_list,self.elder_run_number_level_4,65,35,9,0.25,
-                                      self.final_boss_x_movement,self.final_boss_y_movement,2,2,self.elder_attack_number_level_4,self.final_boss_health,self.player_health)
+        if self.final_boss_health[0]<=500 and any([i>=0 for i in self.enemy_1_health]):
+            FinalBoss.support_logic(self,self.distance)
+            
+        else:
+            if self.level_4 and self.distance>100 and not self.level_4_player_talk_2:
+                self.boss_x_movement=2
+                self.boss_y_movement=2
+                BossGeneralFunctions.move(self,self.final_boss_rect,self.elder_run_list_flip,self.elder_run_list,self.elder_run_number_level_4,65,35,9,0.25,
+                                        self.final_boss_x_movement,self.final_boss_y_movement,self.boss_x_movement,self.boss_y_movement,self.elder_attack_number_level_4,self.final_boss_health,self.player_health)
 
     def attack_logic(self):
         self.elder_attacks_1_list=elder_attacks_1_list ; self.elder_attacks_1_list_flip=elder_attacks_1_list_flip ; self.elder_attacks_1_number_level_4=elder_attacks_1_number_level_4
@@ -83,12 +102,16 @@ class FinalBoss:
 
     def attack(self):
         self.distance=FinalBoss.distance(self)
-        if self.level_4 and self.distance<=100 and self.elder_boss_attack_cooldown[0]==10 and not self.level_4_player_talk_2:
-            BossGeneralFunctions.attack(self,self.final_boss_rect,self.elder_attack_list_flip,self.elder_attack_list,self.elder_attack_number,65,35,self.elder_max_attack_list[0],
-                                        0.25,self.final_boss_x_movement,self.final_boss_y_movement,self.elder_boss_fall_type,self.final_boss_health,self.player_health,self.damage)
-        if self.level_4 and self.distance<=100 and self.elder_boss_attack_cooldown[0]<10 and not self.level_4_player_talk_2:
-            BossGeneralFunctions.idle(self,self.final_boss_rect,self.elder_idle_list_flip,self.elder_idle_list,self.elder_idle_number_level_4,65,35,7,0.15,
-                                      self.final_boss_health,self.player_health)
+
+        if not self.final_boss_health[0]<=500 and not any([i>=0 for i in self.enemy_1_health]):
+            print("HERHEHRHE")
+            if self.level_4 and self.distance<=100 and self.elder_boss_attack_cooldown[0]==10 and not self.level_4_player_talk_2:
+                BossGeneralFunctions.attack(self,self.final_boss_rect,self.elder_attack_list_flip,self.elder_attack_list,self.elder_attack_number,65,35,self.elder_max_attack_list[0],
+                                            0.25,self.final_boss_x_movement,self.final_boss_y_movement,self.elder_boss_fall_type,self.final_boss_health,self.player_health,self.damage)
+            
+            if self.level_4 and self.distance<=100 and self.elder_boss_attack_cooldown[0]<10 and not self.level_4_player_talk_2:
+                BossGeneralFunctions.idle(self,self.final_boss_rect,self.elder_idle_list_flip,self.elder_idle_list,self.elder_idle_number_level_4,65,35,7,0.15,
+                                        self.final_boss_health,self.player_health)
         
 
     def poison_effect(self):
@@ -100,11 +123,7 @@ class FinalBoss:
         else: 
             self.elder_attack_poison_effect[0]=10
 
-    def support_logic(self):
-        if self.level_4 and self.final_boss_health[0]<=500:
-            print("HERE")
-        if  any([i>=0 for i in self.enemy_1_health]):
-            print("WOROKS")
+
 
     def health(self):
         if self.level_4 and not self.level_4_player_talk_2:
@@ -113,7 +132,7 @@ class FinalBoss:
     def player_hit(self,key):
         self.distance=FinalBoss.distance(self)
         if self.level_4 and self.distance<200 and not self.level_4_player_talk_2:
-            BossGeneralFunctions.player_hit(self,self.final_boss_health,self.player_attack_number,100,key)   
+            BossGeneralFunctions.player_hit(self,self.final_boss_health,self.player_attack_number,25,key)   
  
     def fall(self):
         self.elder_fall_list=elder_fall_list ; self.elder_fall_list_flip=elder_fall_list_flip ; self.elder_fall_number_level_4=elder_fall_number_level_4

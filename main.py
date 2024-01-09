@@ -306,7 +306,6 @@ while run:
     finalboss.attack_logic()
     finalboss.attack()
     finalboss.player_hit(key)
-    finalboss.support_logic()
     finalboss.fall()
     finalboss.poison_effect()
     finalboss.collision_with_object()
