@@ -12,7 +12,7 @@ class FinalBoss:
         self.level_4=level_4 ; self.final_boss_rect=final_boss_rect ;self.camera_x_y=camera_x_y ;self.final_boss_health=final_boss_health ; self.player_health=player_health ; self.player_rect=player_rect ; self.final_boss_x_movement=final_boss_x_movement
         self.final_boss_y_movement=final_boss_y_movement ; self.elder_attack_number_level_4=elder_attack_number_level_4 ; self.elder_max_attack_list=elder_max_attack_list ; self.elder_boss_fall_type=elder_boss_fall_type ; self.elder_attack_list_type=elder_attack_list_type ; self.elder_boss_attack_cooldown=elder_boss_attack_cooldown ; self.level_4_tile_set_rect=level_4_tile_set_rect
         self.elder_attack_poison_effect=elder_attack_poison_effect ; self.level_4_player_talk_2=level_4_player_talk_2 ; self.final_boss_player_stop=final_boss_player_stop ; self.player_boss_talk=player_boss_talk ; self.dialogue_click_list=dialogue_click_list ; self.dialogue_objective_list=dialogue_objective_list ; self.health_icon=health_icon
-        self.health_bar_colour=(70,0,33) ; self.player_attack_number=player_attack_number
+        self.health_bar_colour=(216,36,41) ; self.player_attack_number=player_attack_number
 
         self.enemy_1_level_4_rect=enemy_1_level_4_rect ; self.enemy_1_health=enemy_1_health ; self.enemy_1_x_movemnt=enemy_1_x_movement ; self.enemy_1_y_movement=enemy_1_y_movement
 
@@ -103,8 +103,7 @@ class FinalBoss:
     def attack(self):
         self.distance=FinalBoss.distance(self)
 
-        if not self.final_boss_health[0]<=500 and not any([i>=0 for i in self.enemy_1_health]):
-            print("HERHEHRHE")
+        if not self.final_boss_health[0]<=500 or not any([i>=0 for i in self.enemy_1_health]):
             if self.level_4 and self.distance<=100 and self.elder_boss_attack_cooldown[0]==10 and not self.level_4_player_talk_2:
                 BossGeneralFunctions.attack(self,self.final_boss_rect,self.elder_attack_list_flip,self.elder_attack_list,self.elder_attack_number,65,35,self.elder_max_attack_list[0],
                                             0.25,self.final_boss_x_movement,self.final_boss_y_movement,self.elder_boss_fall_type,self.final_boss_health,self.player_health,self.damage)

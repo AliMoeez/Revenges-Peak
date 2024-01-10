@@ -44,6 +44,7 @@ class Dialouge:
         self.enemy_3_health=enemy_3_health
         self.player_health=player_health
         self.general_boss_health=general_boss_health
+        self.final_boss_health=final_boss_health
 
         self.level_4=level_4
         self.level_4_player_talk_1=level_4_player_talk_1
@@ -91,7 +92,7 @@ class Dialouge:
             self.test_level_2_dialogue=level_3_dialogue_walk_up(self.player_icon,self.general_boss_icon)[1]
         if self.level_4:
             if self.dialogue_objective_list[0]<1:
-                self.test_level_1_dialogue=level_4_dialogue_walk_up(self.player_icon,self.abyss_icon)[0][0]
+                self.test_level_1_dialogue=level_4_dialogue_walk_up(self.player_icon,self.abyss_icon)[0]
             if self.dialogue_objective_list[0]>=1:
               self.test_level_1_dialogue=level_4_dialogue_walk_up(self.player_icon,self.abyss_icon)[1]
 
@@ -157,7 +158,14 @@ class Dialouge:
             self.dialogue_objective_list[0]=5
             return True
         if  self.level_4_player_talk_2 and not self.level_4_player_talk_1 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health) and self.dialogue_objective_list[0]>=3:
-                return True
+            return True
+        if self.level_4 and not self.level_4_player_lose and self.player_health[0]<=0:
+            self.dialogue_objective_list[0]=5
+            return True
+        if self.level_4 and not self.level_4_player_win and self.final_boss_health[0]<=0:
+            self.dialogue_objective_list[0]=6
+            return True
+       
         
     def dialogue_condition_distance(self):
         if self.level_1:
@@ -215,7 +223,10 @@ class Dialouge:
             self.test_level_3_dialogue=level_3_dialogue(self.player_icon,self.general_boss_icon)[2]
             self.test_level_4_dialogue=level_3_dialogue(self.player_icon,self.general_boss_icon)[3]
         if self.level_4:
-            self.test_level_1_dialogue=level_4_dialogue(self.player_icon,self.elder_icon)
+            self.test_level_1_dialogue=level_4_dialogue(self.player_icon,self.elder_icon)[0]
+            print(self.test_level_1_dialogue)
+            self.test_level_2_dialogue=level_4_dialogue(self.player_icon,self.elder_icon)[1]
+            self.test_level_3_dialogue=level_4_dialogue(self.player_icon,self.elder_icon)[2]
 
     def text_type_story(self):
         if self.dialogue_story_condition:
@@ -267,7 +278,17 @@ class Dialouge:
                 self.dialogue_show=self.test_level_1_dialogue
                 self.dialouge_list[0]=len(self.dialogue_show)
                 return self.dialogue_show,self.dialouge_list
-                           
+            
+            if self.level_4 and self.player_health[0]<=0 and not self.level_4_player_lose:
+                self.dialogue_show=self.test_level_2_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+
+            if self.level_4 and self.final_boss_health[0]<=0 and not self.level_4_player_win:
+                self.dialogue_show=self.test_level_3_dialogue
+                self.dialouge_list[0]=len(self.dialogue_show)
+                return self.dialogue_show,self.dialouge_list
+            
         else:
             self.dialogue_show="None"
                
@@ -278,8 +299,12 @@ class Dialouge:
         if self.dialogue_story_condition:
             self.shown=self.dialogue_show
         if (self.dialogue_condition or self.dialogue_story_condition) and self.shown!="None":
+            print(self.shown)
             for idx,dialouge in enumerate(self.shown):
                 if self.dialogue_click_list[0]==idx:
+                    print(self.shown,self.dialogue_click_list,idx)
+                    print(self.shown[0])
+                  #  print(self.shown[0][0])
                     if self.text_position[0]<self.message_speed*len(self.shown[idx][0]):
                         self.text_position[0]+=4 #0.75
                     

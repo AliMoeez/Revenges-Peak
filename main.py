@@ -83,6 +83,8 @@ while run:
               # print(dialogue_objective_list[0])
                 if dialogue_objective_list[0]==1: level_4_player_talk_1=False
                 if dialogue_objective_list[0]==4: level_4_player_talk_2=False
+                if dialogue_objective_list[0]==5: level_4_player_lose=True
+                if dialogue_objective_list[0]==6: level_4_player_win=True
             
     
         if event.type==pygame.QUIT:
