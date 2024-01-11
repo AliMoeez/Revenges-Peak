@@ -47,7 +47,7 @@ enemy_1_level_2_x=[1900,1920,1970,1990] ; enemy_1_level_2_y=[1550,1590,1570,1590
 
 enemy_1_level_3_x=[3853,3964,4743,3454,3364] ; enemy_1_level_3_y=[725,983,1046,1043,13404]
 
-enemy_1_level_4_x=[770,890,912] ; enemy_1_level_4_y=[300,195,315]
+enemy_1_level_4_x=[770,890] ; enemy_1_level_4_y=[300,195]
 
 enemy_1_x_movement=[] ; enemy_1_y_movement=[]
 
@@ -116,7 +116,7 @@ enemy_2_level_2_x=[1700,1800,1827,1900] ; enemy_2_level_2_y=[1500,1550,1570,1580
 
 enemy_2_level_3_x=[3830,3763,3773,3604,3833] ; enemy_2_level_3_y=[725,520,1276,1073,1326] #1700,1500
 
-enemy_2_level_4_x=[817,947,992] ; enemy_2_level_4_y=[112,217,354]
+enemy_2_level_4_x=[817,947] ; enemy_2_level_4_y=[112,217]
 
 enemy_2_x_movement=[] ; enemy_2_y_movement=[]
 
@@ -194,8 +194,8 @@ enemy_three_level_3_x=[2992,2902,3867,3356,3853] #700
 enemy_three_level_3_y=[996,1806,1306,1412,1900] #2000
 
 
-enemy_three_level_4_x=[870,992,1025] #700
-enemy_three_level_4_y=[230,327,359] #2000
+enemy_three_level_4_x=[870] #700
+enemy_three_level_4_y=[230] #2000
 
 
 enemy_three_fall_type=[]

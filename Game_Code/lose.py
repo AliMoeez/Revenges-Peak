@@ -16,7 +16,7 @@ class Lose:
         self.level_4=level_4
         
     def condition(self):
-        if any([self.level_1,self.level_2,self.level_3]):
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             if self.player_health[0]<=0:
                 return True
             
@@ -57,7 +57,6 @@ class Lose:
             Lose.buttons(self)
             if event.type==pygame.MOUSEBUTTONDOWN and self.retry_blit.collidepoint(pygame.mouse.get_pos()):
                 self.player_health[0]=1000
-                print("RETEY")
                 return True
 
     def back_to_menu(self,event):
@@ -66,7 +65,6 @@ class Lose:
             Lose.buttons(self)
             if event.type==pygame.MOUSEBUTTONDOWN and self.main_menu_blit.collidepoint(pygame.mouse.get_pos()):
                 self.player_health[0]=1000
-                print("MANI MENU")
                 return True
 
     def reset_positions(self,object,x_pos:int,y_pos:int):

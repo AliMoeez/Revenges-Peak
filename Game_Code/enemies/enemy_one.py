@@ -159,8 +159,11 @@ class EnemyOne:
                 Lose.reset_positions_multiple(self,self.enemy_1_rects,self.enemy_1_level_2_x,self.enemy_1_level_2_y,self.enemy_1_health,100)
                 return True
             if self.level_3:
-              #  print("ENEMY ONE RESET")
                 Lose.reset_positions_multiple(self,self.enemy_1_rects,self.enemy_1_level_3_x,self.enemy_1_level_3_y,self.enemy_1_health,100)
+                return True
+            if self.level_4:
+                print("ENEMY ONE RESRET")
+                Lose.reset_positions_multiple(self,self.enemy_1_rects,self.enemy_1_level_4_x,self.enemy_1_level_4_y,self.enemy_1_health,100)
                 return True
 
 

@@ -4,10 +4,11 @@ import math
 from Game_Asset_Code import *
 
 class HealingPlayer:
-    def __init__(self,level_1,level_2,reset_locations,level_3) -> None:
+    def __init__(self,level_1,level_2,reset_locations,level_3,level_4) -> None:
         self.level_1=level_1
         self.level_2=level_2
         self.level_3=level_3
+        self.level_4=level_4
         self.player_health=player_health
         self.player_rect=player_rect
         self.camera_x_y=camera_x_y
@@ -20,16 +21,19 @@ class HealingPlayer:
         self.level_3_health_potion_rect=level_3_health_potion_rect
         self.level_3_health_potion_x=level_3_health_potion_x
         self.level_3_health_potion_y=level_3_health_potion_y
+        self.level_4_health_potion_rect=level_4_health_potion_rect
 
         if self.level_1:
             self.level_health_potion_rect=[] ; self.level_health_potion_x=[] ; self.level_health_potion_y=[]
         if self.level_2:
             self.level_health_potion_rect=self.level_2_health_potion_rect ; self.level_health_potion_x=level_2_health_potion_x ;  self.level_health_potion_y=level_2_health_potion_y
         if self.level_3:
-            self.level_health_potion_rect=self.level_3_health_potion_rect ; self.level_health_potion_x=level_3_health_potion_x ;  self.level_health_potion_y=level_3_health_potion_y           
+            self.level_health_potion_rect=self.level_3_health_potion_rect ; self.level_health_potion_x=level_3_health_potion_x ;  self.level_health_potion_y=level_3_health_potion_y  
+        if self.level_4:
+            self.level_health_potion_rect=self.level_4_health_potion_rect ; self.level_health_potion_x=level_4_health_potion_x; self.level_health_potion_y=level_4_health_potion_y         
             
     def distance(self):
-        if any({self.level_1,self.level_2,self.level_3}):
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             self.distance_player_health=[]
             for idx,health in enumerate(self.level_health_potion_rect):
                 self.distance=math.hypot(self.player_rect.x-self.level_health_potion_rect[idx].x,self.player_rect.y-self.level_health_potion_rect[idx].y)
@@ -37,7 +41,7 @@ class HealingPlayer:
             return self.distance_player_health    
             
     def blit(self):
-        if any([self.level_2,self.level_2,self.level_3]):
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             for idx,health in enumerate(self.level_health_potion_rect):
                 SCREEN.blit(self.health_potion_image,(self.level_health_potion_rect[idx].x-self.camera_x_y[0],self.level_health_potion_rect[idx].y-self.camera_x_y[1]))
 
@@ -47,7 +51,7 @@ class HealingPlayer:
         return self.font_health_render
 
     def interaction(self):
-        if any([self.level_1,self.level_2,self.level_3]):
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             self.distance_player_health=HealingPlayer.distance(self)
             self.health_text=HealingPlayer.text(self)
             for idx,distance in enumerate(self.distance_player_health):
@@ -56,7 +60,7 @@ class HealingPlayer:
                     SCREEN.blit(self.health_text,(self.level_health_potion_rect[idx].x-self.camera_x_y[0],self.level_health_potion_rect[idx].y-self.camera_x_y[1]-25))
 
     def healing_condition(self,event):
-        if any([self.level_1,self.level_2,self.level_3]):
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]):
             self.distance_player_health=HealingPlayer.distance(self)
             for idx,distance in enumerate(self.distance_player_health):
                 if distance<100 and event.type==pygame.MOUSEBUTTONDOWN:
@@ -64,7 +68,7 @@ class HealingPlayer:
                     return True
         
     def reset_position(self):
-        if any([self.level_1,self.level_2,self.level_3]) and self.reset_locations:
+        if any([self.level_1,self.level_2,self.level_3,self.level_4]) and self.reset_locations:
              for idx,health in enumerate(self.level_health_potion_rect):
                 self.level_health_potion_rect[idx].x=self.level_health_potion_x[idx]
                 self.level_health_potion_rect[idx].y=self.level_health_potion_y[idx]

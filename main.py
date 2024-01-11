@@ -9,9 +9,6 @@ from Game_Asset_Code import *
 from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,LevelFour,Player,EnemyOne,EnemyTwo,EnemyThree,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,GeneralBoss,FinalBoss,HealingPlayer
 
 while run:
-  #  print(player_rect.x,player_rect.y)
-  #  print(object_rect)
-  #  print(dialogue_objective_list[0])
     level_1_tile_set_rect.clear()
     level_2_tile_set_rect.clear()
     level_3_tile_set_rect.clear()
@@ -38,9 +35,9 @@ while run:
     
     frostboss=FrostBoss(level_2,level_2_boss_talk,reset_locations)
     generalboss=GeneralBoss(level_3,level_3_player_talk_4,level_3_player_talk_3,reset_locations)
-    finalboss=FinalBoss(level_4,level_4_player_talk_2)
+    finalboss=FinalBoss(level_4,reset_locations,level_4_player_talk_2)
     
-    healingplayer=HealingPlayer(level_1,level_2,reset_locations,level_3)
+    healingplayer=HealingPlayer(level_1,level_2,reset_locations,level_3,level_4)
     
     dialogue=Dialouge(level_1,dialogue_condition,dialogue_story_condition,level_1_wizard_talk,level_2,level_2_guard_talk,level_2_boss_talk,level_2_player_talk,level_2_enemy_talk,
                       level_3,level_3_player_talk_1,level_3_player_talk_2,level_3_player_talk_3,level_3_player_talk_4,level_3_player_lose,level_3_player_win,level_4,level_4_player_talk_1,level_4_player_talk_2,level_4_player_lose,level_4_player_win)
@@ -80,7 +77,6 @@ while run:
                 if dialogue_objective_list[0]==4: level_3_player_lose=True
                 if dialogue_objective_list[0]==5: level_3_player_win=True
             if level_4:
-              # print(dialogue_objective_list[0])
                 if dialogue_objective_list[0]==1: level_4_player_talk_1=False
                 if dialogue_objective_list[0]==4: level_4_player_talk_2=False
                 if dialogue_objective_list[0]==5: level_4_player_lose=True
@@ -135,6 +131,8 @@ while run:
                 level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True
             if level_3:
                 camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_3_player_talk_1=True ; level_3_player_talk_2=True ; level_3_player_talk_3=True ; level_3_player_talk_4=True
+            if level_4:
+                camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_4_player_talk_1=True ; level_4_player_talk_2=True ; level_4_player_lose=False ; level_4_player_win=False
 
             player_lose_condition=False ; reset_locations=True ;dialogue_objective_list[0]=0 
 
@@ -144,6 +142,8 @@ while run:
                 level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True
             if level_3:
                level_3_player_talk_1=True ; level_3_player_talk_2=True ; level_3_player_talk_3=True ; level_3_player_talk_4=True
+            if level_4:
+                camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_4_player_talk_1=True ; level_4_player_talk_2=True ; level_4_player_lose=False ; level_4_player_win=False
         
         if win.back_to_menu(event):
             level_1_wizard_talk=True ; talk_to_abyss_level_one=True ; investigate_object_level_one=True
@@ -152,7 +152,7 @@ while run:
                 level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True 
             if level_3:
                 camera_x_y[0]=0 ; camera_x_y[1]=0  ; level_3_player_talk_1=True ; level_3_player_talk_2=True ; level_3_player_talk_3=True ; level_3_player_talk_4=True ; level_3_player_lose=False ; level_3_player_win=False
-            level_1=False ; level_2=False ; level_3=False
+            level_1=False ; level_2=False ; level_3=False ; level_4=False
         
         if win.next_level(event):
             if level_1:
@@ -190,12 +190,16 @@ while run:
             general_boss_player_slow_down_number[0]=0
             camera_x_y[0]=0 ; camera_x_y[1]=0
             reset_locations=False
-
+    if level_4:
+        if player.reset_position() and enemy_one.reset_position() and enemy_two.reset_position()  and enemy_three.reset_position() and finalboss.reset_position():
+            print("DONE")
+            camera_x_y[0]=0 ; camera_x_y[1]=0
+            reset_locations=False
 
     if level_3:
         if all(i<=0 for i in enemy_1_health) and all(i<=0 for i in enemy_2_health) and all(i<=0 for i in enemy_3_health):
             level_3_all_enemies=True
-
+        
     menu.main_menu()
     menu.main_menu_buttons()
     menu.level_screen_blit_background()
@@ -304,9 +308,11 @@ while run:
 
     finalboss.distance()
     finalboss.initial_state()
+    finalboss.idle()
     finalboss.move()
     finalboss.attack_logic()
     finalboss.attack()
+    finalboss.reset_position()
     finalboss.player_hit(key)
     finalboss.fall()
     finalboss.poison_effect()

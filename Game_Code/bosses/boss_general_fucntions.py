@@ -50,7 +50,7 @@ class BossGeneralFunctions:
                 SCREEN.blit(attack_list_flip[int(attack_list_number[0])//2],(boss_rect.x-self.camera_x_y[0]-offset_x,boss_rect.y-self.camera_x_y[1]-offset_y))
                 boss_fall_type[0]="left"
             attack_list_number[0]+=attack_increase
-            if attack_list_number[0]>attack_max_length:
+            if attack_list_number[0]>attack_max_length-1:
                 attack_list_number[0]=-2
                 player_health[0]-=player_health_fall
 

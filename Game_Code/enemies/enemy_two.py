@@ -144,8 +144,11 @@ class EnemyTwo:
                 Lose.reset_positions_multiple(self,self.enemy_2_rect,self.enemy_2_level_2_x,self.enemy_2_level_2_y,self.enemy_2_health,100)
                 return True
             if self.level_3:
-             #   print("ENEMY TWO RESET")
                 Lose.reset_positions_multiple(self,self.enemy_2_rect,self.enemy_2_level_3_x,self.enemy_2_level_3_y,self.enemy_2_health,100)
+                return True
+            if self.level_4:
+                print("ENEMY TWO RESET")
+                Lose.reset_positions_multiple(self,self.enemy_2_rect,self.enemy_2_level_4_x,self.enemy_2_level_4_y,self.enemy_2_health,100)
                 return True
 
     def collision_with_object(self):
