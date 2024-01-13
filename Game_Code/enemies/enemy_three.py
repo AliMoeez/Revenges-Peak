@@ -107,7 +107,7 @@ class EnemyThree:
                 Lose.reset_positions_multiple(self,self.enemy_rect,self.enemy_three_level_3_x,self.enemy_three_level_3_y,self.enemy_3_health,100)
                 return True
             if self.level_4:
-                print("RENEMY THREE RESET")
+           #     print("RENEMY THREE RESET")
                 Lose.reset_positions_multiple(self,self.enemy_rect,self.enemy_three_level_4_x,self.enemy_three_level_4_y,self.enemy_3_health,100)
                 return True
         

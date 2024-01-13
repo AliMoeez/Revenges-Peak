@@ -159,7 +159,7 @@ class Dialouge:
             return True
         if  self.level_4_player_talk_2 and not self.level_4_player_talk_1 and all(i<=0 for i in self.enemy_1_health) and all(i<=0 for i in self.enemy_2_health) and all(i<=0 for i in self.enemy_3_health) and self.dialogue_objective_list[0]>=3:
             return True
-        if self.level_4 and not self.level_4_player_lose and self.player_health[0]<=0:
+        if self.level_4 and not self.level_4_player_lose and self.player_health[0]<=0 and not self.level_4_player_talk_2:
             self.dialogue_objective_list[0]=5
             return True
         if self.level_4 and not self.level_4_player_win and self.final_boss_health[0]<=0:

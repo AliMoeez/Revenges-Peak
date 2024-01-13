@@ -5,6 +5,11 @@ from pytmx.util_pygame import load_pygame
 
 pygame.init()
 
+pygame.display.set_caption("Revenge's Peak")
+
+pygame.mixer.music.load(r"Assets\Misc\Music\BeepBox-Song.wav")
+pygame.mixer.music.play(-1)
+
 from Game_Asset_Code import *
 from Game_Code import Menu,LevelOne,LevelTwo,LevelThree,LevelFour,Player,EnemyOne,EnemyTwo,EnemyThree,Dialouge,People,Objectives,Lose,Tutorial,Win,FrostBoss,GeneralBoss,FinalBoss,HealingPlayer
 
@@ -16,8 +21,9 @@ while run:
     object_rect.clear()
     key=pygame.key.get_pressed()
     event_list=pygame.event.get()
+    
 
-    menu=Menu(level_screen,level_1,level_2)
+    menu=Menu(level_screen,music_state,level_1,level_2)
     levelone=LevelOne(camera_x_y,level_1,level_screen,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one)
     leveltwo=LevelTwo(level_2,level_screen)
     levelthree=LevelThree(level_3,level_3_player_talk_3,level_3_player_talk_4)
@@ -44,11 +50,10 @@ while run:
     
     lose=Lose(level_1,player_lose_condition,reset_locations,level_2,level_3,level_4)
     tutorial=Tutorial(level_1,tutorial_one,tutorial_two)
-    win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_3,level_3_player_talk_4)
+    win=Win(level_1,level_2,level_1_wizard_talk,talk_to_abyss_level_one,investigate_object_level_one,level_3,level_3_player_talk_4,level_4)
 
     for event in event_list:
 
-        #print(player_rect.x,player_rect.y)w
         if dialogue.level_dialogue_condition(event,event_list):
             dialogue_condition=True ; dialogue_story_condition=False
             if event.type==pygame.MOUSEBUTTONDOWN : dialogue_click_list[0]+=1 ; text_position[0]=0
@@ -85,9 +90,13 @@ while run:
     
         if event.type==pygame.QUIT:
             pygame.quit() ; sys.exit()
+        
         if not level_screen and not any([level_1,level_2]):
-            if event.type==pygame.MOUSEBUTTONDOWN and menu.main_menu_buttons().collidepoint(event.pos):
+            if event.type==pygame.MOUSEBUTTONDOWN and menu.main_menu_buttons()[0].collidepoint(event.pos):
                 level_screen= not level_screen
+            if event.type==pygame.MOUSEBUTTONDOWN and menu.main_menu_buttons()[1].collidepoint(event.pos):
+                music_state = not music_state
+        
         if level_screen:
             if key[pygame.K_q]:level_screen=False
             if menu.level_screen_blit_background() is not None:
@@ -137,7 +146,7 @@ while run:
             player_lose_condition=False ; reset_locations=True ;dialogue_objective_list[0]=0 
 
         if lose.back_to_menu(event):
-            player_lose_condition=False ; reset_locations=True ; level_1=False ; level_2=False ; level_3=False
+            player_lose_condition=False ; reset_locations=True ; level_1=False ; level_2=False ; level_3=False ; level_4=False
             if level_2:
                 level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True
             if level_3:
@@ -152,6 +161,8 @@ while run:
                 level_2_player_talk=True ; level_2_guard_talk=True ;level_2_enemy_talk=True ; level_2_boss_talk=True 
             if level_3:
                 camera_x_y[0]=0 ; camera_x_y[1]=0  ; level_3_player_talk_1=True ; level_3_player_talk_2=True ; level_3_player_talk_3=True ; level_3_player_talk_4=True ; level_3_player_lose=False ; level_3_player_win=False
+            if level_4:
+                camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_4_player_talk_1=True ; level_4_player_talk_2=True ; level_4_player_lose=False ; level_4_player_win=False
             level_1=False ; level_2=False ; level_3=False ; level_4=False
         
         if win.next_level(event):
@@ -163,6 +174,8 @@ while run:
             if level_3:
                 level_3=False; level_4=True
                 camera_x_y[0]=0 ; camera_x_y[1]=0  ; level_3_player_talk_1=True ; level_3_player_talk_2=True ; level_3_player_talk_3=True ; level_3_player_talk_4=True ; level_3_player_lose=False ; level_3_player_win=False
+            if level_4:
+                camera_x_y[0]=0 ; camera_x_y[1]=0 ; level_4_player_talk_1=True ; level_4_player_talk_2=True ; level_4_player_lose=False ; level_4_player_win=False
             reset_locations=True
 
         if healingplayer.healing_condition(event):

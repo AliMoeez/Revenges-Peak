@@ -11,6 +11,7 @@ class LevelFour:
         self.camera_x_y=camera_x_y
         self.level_screen=level_screen
         self.object_rect=object_rect
+        self.final_boss_health=final_boss_health
 
     def border(self):
         self.player_control=player_control ; self.player_control_cooldown=player_control_cooldown ; self.enemy_rects=enemy_1_level_1_rect+enemy_2_rects  ; self.player_control_index=player_control_index
@@ -50,6 +51,12 @@ class LevelFour:
                         x_val=tile[0]*32 ; y_val=tile[1]*32
                         SCREEN.blit(tile[2],(x_val-self.camera_x_y[0],y_val-self.camera_x_y[1]))
                         append_list.append(pygame.Rect(x_val,y_val,32,32))
+
+    
+    def win_condition(self):
+        if self.level_4 and self.final_boss_health[0]<=0:
+            return True
+        return False
     
     def ground_layer(self):
         LevelFour.tile_general_function(self,"Tile Layer 1")

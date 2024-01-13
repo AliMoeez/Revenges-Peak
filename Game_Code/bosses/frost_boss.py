@@ -82,7 +82,7 @@ class FrostBoss:
         if self.level_2 and not self.level_2_boss_talk:
             for distance in self.distance_player_boss:
                 if distance<=100: #boss health decreasw was 10 before
-                    BossGeneralFunctions.player_hit(self,self.frost_boss_health,self.player_attack_number,100,pygame.key.get_pressed())
+                    BossGeneralFunctions.player_hit(self,self.frost_boss_health,self.player_attack_number,1000,pygame.key.get_pressed())
 
     def fall(self):
         self.frost_boss_fall=frost_boss_fall ; self.frost_boss_fall_flip=frost_boss_fall_flip ; self.frost_boss_fall_number=frost_boss_fall_number

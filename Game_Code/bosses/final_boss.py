@@ -130,7 +130,7 @@ class FinalBoss:
     def reset_position(self):
         if self.reset_locations:
             if self.level_4:
-                print("FINAL BOSS RESTE DONE")
+           #     print("FINAL BOSS RESTE DONE")
                 Lose.reset_positions(self,self.final_boss_rect,self.final_boss_x[0],self.final_boss_y[0])
                 return True 
 

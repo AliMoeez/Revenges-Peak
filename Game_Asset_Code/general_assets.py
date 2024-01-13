@@ -47,6 +47,8 @@ dialogue_click_list=[0] ; dialouge_list=[0] ; text_position=[0] ; dialogue_offse
 
 dialogue_objective_list=[0]
 
+music_state=True
+
 player_lose_condition=False ; reset_locations=False ; reset_length=[0]
 
 tutorial_one=True
