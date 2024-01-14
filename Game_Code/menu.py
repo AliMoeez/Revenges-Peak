@@ -28,13 +28,15 @@ class Menu:
 
             if self.music_state is True:
                 self.music_state_on_off="Music: On"
+                pygame.mixer.music.unpause()
             if self.music_state is False:
                 self.music_state_on_off="Music: Off"
+                pygame.mixer.music.pause()
 
 
             self.font_music=pygame.font.Font(self.font,34) ; self.font_music_render=self.font_music.render(self.music_state_on_off,True,self.WHITE)
-            self.font_music_surface=pygame.Surface((80,50)) ; self.font_music_surface.set_alpha(85) ; self.font_music_surface.fill(self.LIGHT_BROWN)
-            self.font_music_surface_blit=SCREEN.blit(self.font_music_surface,(SCREEN_WIDTH//2+210,SCREEN_HEIGHT-407)) ; SCREEN.blit(self.font_music_render,(SCREEN_WIDTH//2+200,SCREEN_HEIGHT-400))
+            self.font_music_surface=pygame.Surface((157,50)) ; self.font_music_surface.set_alpha(85) ; self.font_music_surface.fill(self.LIGHT_BROWN)
+            self.font_music_surface_blit=SCREEN.blit(self.font_music_surface,(SCREEN_WIDTH//2+200,SCREEN_HEIGHT-407)) ; SCREEN.blit(self.font_music_render,(SCREEN_WIDTH//2+200,SCREEN_HEIGHT-400))
             
             
             return self.font_play_surface_blit,self.font_music_surface_blit
