@@ -2,8 +2,17 @@
 
 Revenge's Peak Is a Game Where you must defeat the evil Anes! Below are images of some gameplay and credits.
 
+![image](https://github.com/AliMoeez/Top_Down_Game/assets/77748153/a9d31c76-e485-4121-9302-7df0f4787aa8)
 
 
+![image](https://github.com/AliMoeez/Top_Down_Game/assets/77748153/2954da89-e791-4e15-b7e9-b4c0654e195b)
+
+
+![image](https://github.com/AliMoeez/Top_Down_Game/assets/77748153/6bb404ea-65e3-49d9-a6e0-2859c3c72165)
+
+![image](https://github.com/AliMoeez/Top_Down_Game/assets/77748153/c38de618-99fa-4304-9854-f5e6025b7459)
+
+![image](https://github.com/AliMoeez/Top_Down_Game/assets/77748153/d0753c3d-0401-4c7e-8b85-216d3de3ca2b)
 
 
 Tileset : 
